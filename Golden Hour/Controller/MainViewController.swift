@@ -98,8 +98,6 @@ class MainViewController: UIViewController {
     
 }
 
-
-
 //MARK: - CLLocationManagerDelegate
 extension MainViewController: CLLocationManagerDelegate {
 
@@ -118,8 +116,9 @@ extension MainViewController: CLLocationManagerDelegate {
             let GMT = Double(TimeZone.current.secondsFromGMT()) / 3600
             
             // Request SunPosition
-            var sunModel: Spa_data = Spa_data(date, GMT, longitude: lon, latitude: lat)
-            spa_calculate(spa: &sunModel)
+            let sunModel = SunPositionModel(date, GMT, longitude: lon, latitude: lat)
+            let error_check = sunModel.spa_calculate()
+            if(error_check > 0) {print("Error code: \(error_check)")}
             buttomLabel.text = String(format: "%2.2f", sunModel.declination)
 
         }
