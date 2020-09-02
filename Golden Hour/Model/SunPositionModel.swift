@@ -129,17 +129,19 @@ struct Spa_data {
     var sunrise: Double = 0      //local sunrise time (+/- 30 seconds) [fractional hour]
     var sunset: Double = 0       //local sunset time (+/- 30 seconds) [fractional hour]
     
-    init(_ year: Int,_ month: Int,_ day: Int,_ hour: Int,_ minute: Int,_ second: Double, _ timezone: Double, longitude: Double, latitude: Double)
+    init(_ date: Date, _ timezone: Double, longitude: Double, latitude: Double)
     {
-        self.year = year
-        self.month = month
-        self.day = day
-        self.hour = hour
-        self.minute = minute
-        self.second = second
+        let calendar = Calendar.current
+        self.year = calendar.component(.year, from: date)
+        self.month = calendar.component(.month, from: date)
+        self.day = calendar.component(.day, from: date)
+        self.hour = calendar.component(.hour, from: date)
+        self.minute = calendar.component(.minute, from: date)
+        self.second = Double(calendar.component(.second, from: date))
         self.timezone = timezone
         self.longitude = longitude
         self.latitude = latitude
+        print("\(year)-\(month)-\(day), \(hour):\(minute):\(second) GMT\(timezone)")
     }
 }
 

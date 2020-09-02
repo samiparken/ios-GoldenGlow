@@ -109,23 +109,16 @@ extension MainViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {  // last is more accurate
-            let lat = location.coordinate.latitude
+            // Get longitude & latitude
             let lon = location.coordinate.longitude
+            let lat = location.coordinate.latitude
 
             // Get current date & time
             let date = Date()
-            print(date)
-            let calendar = Calendar.current
-            let year = calendar.component(.year, from: date)
-            let month = calendar.component(.month, from: date)
-            let day = calendar.component(.day, from: date)
-            let hour = calendar.component(.hour, from: date)
-            let minute = calendar.component(.minute, from: date)
-            let second = Double(calendar.component(.second, from: date))
             let GMT = Double(TimeZone.current.secondsFromGMT()) / 3600
-            print("\(year)-\(month)-\(day), \(hour):\(minute):\(second) GMT\(GMT)")
             
-            var sunModel: Spa_data = Spa_data(year, month, day, hour, minute, Double(second), GMT, longitude: lon, latitude: lat)
+            // Request SunPosition
+            var sunModel: Spa_data = Spa_data(date, GMT, longitude: lon, latitude: lat)
             spa_calculate(spa: &sunModel)
             buttomLabel.text = String(format: "%2.2f", sunModel.declination)
 
