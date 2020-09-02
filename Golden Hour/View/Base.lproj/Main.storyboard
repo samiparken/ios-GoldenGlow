@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="Golden_Hour" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BGBasic" translatesAutoresizingMaskIntoConstraints="NO" id="sGu-b0-jHB">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1yl-2E-Vuh" userLabel="Top Bar">
+                                <rect key="frame" x="15" y="54" width="345" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R4E-p5-wJT" userLabel="Search Button">
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                        <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="1"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="KZm-Sj-diw"/>
+                                            <constraint firstAttribute="height" constant="30" id="RzT-ZD-Hau"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="iconSearch">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="searchButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mLh-vC-Q94"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NXX-xC-vpT">
+                                        <rect key="frame" x="40" y="0.0" width="265" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="City Name" image="location.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="currentLocationButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xmj-RN-QD1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qrr-cJ-sOE" userLabel="Settings Button">
+                                        <rect key="frame" x="315" y="0.0" width="30" height="30"/>
+                                        <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="1"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="POb-M5-aMC"/>
+                                            <constraint firstAttribute="height" constant="30" id="uJI-nk-ZPg"/>
+                                        </constraints>
+                                        <state key="normal" image="iconSettings">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="settingsButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LPG-5n-udO"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="-7" translatesAutoresizingMaskIntoConstraints="NO" id="nxP-fM-g3E" userLabel="Center Label">
+                                <rect key="frame" x="85.666666666666686" y="335.66666666666669" width="204" height="140.66666666666669"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ends in" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKl-5E-s07" userLabel="centerTopLabel">
+                                        <rect key="frame" x="49.666666666666664" y="0.0" width="104.66666666666669" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="30"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Lne-fc-b8Q" userLabel="Timer Label">
+                                        <rect key="frame" x="0.0" y="29.000000000000007" width="204" height="95.666666666666686"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I20-ap-qlG" userLabel="timeDigitMin">
+                                                <rect key="frame" x="0.0" y="0.0" width="92.333333333333329" height="95.666666666666671"/>
+                                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="80"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=":" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2le-aO-8fy" userLabel="timeSaperator">
+                                                <rect key="frame" x="92.333333333333329" y="0.0" width="19.333333333333329" height="95.666666666666671"/>
+                                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="80"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pFL-AU-VSp" userLabel="timeDigitSec">
+                                                <rect key="frame" x="111.66666666666669" y="0.0" width="92.333333333333314" height="95.666666666666671"/>
+                                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="80"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="2le-aO-8fy" firstAttribute="centerX" secondItem="Lne-fc-b8Q" secondAttribute="centerX" id="2Qv-RD-iJV"/>
+                                            <constraint firstItem="2le-aO-8fy" firstAttribute="centerY" secondItem="Lne-fc-b8Q" secondAttribute="centerY" id="zI1-lE-vPq"/>
+                                        </constraints>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ends at 20:05" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uJE-xl-R9t" userLabel="centerButtomLabel">
+                                        <rect key="frame" x="41.000000000000007" y="117.66666666666663" width="121.66666666666669" height="23"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Golden Hour" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I9I-Nz-0ln" userLabel="buttomLabel">
+                                <rect key="frame" x="100.00000000000001" y="706" width="175.33333333333337" height="36"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="sGu-b0-jHB" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="9Oj-JA-ncQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1yl-2E-Vuh" secondAttribute="trailing" constant="15" id="DEg-sm-gCA"/>
+                            <constraint firstItem="1yl-2E-Vuh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="Eye-j8-x67"/>
+                            <constraint firstAttribute="bottom" secondItem="I9I-Nz-0ln" secondAttribute="bottom" constant="70" id="SWQ-tG-GRg"/>
+                            <constraint firstItem="1yl-2E-Vuh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="XY6-I4-Lwz"/>
+                            <constraint firstItem="nxP-fM-g3E" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="bUc-s1-Odu"/>
+                            <constraint firstItem="nxP-fM-g3E" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iB1-u3-52j"/>
+                            <constraint firstAttribute="bottom" secondItem="sGu-b0-jHB" secondAttribute="bottom" id="nzG-s7-K6C"/>
+                            <constraint firstItem="sGu-b0-jHB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="u4x-JO-aB7"/>
+                            <constraint firstItem="I9I-Nz-0ln" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wQW-zj-dqr"/>
+                            <constraint firstItem="sGu-b0-jHB" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="yW0-Cu-rgd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="buttomLabel" destination="I9I-Nz-0ln" id="iQQ-mm-6eF"/>
+                        <outlet property="centerButtomLabel" destination="uJE-xl-R9t" id="29a-fG-4dI"/>
+                        <outlet property="centerTopLabel" destination="GKl-5E-s07" id="kWL-OW-fJd"/>
+                        <outlet property="currentLocationOutlet" destination="NXX-xC-vpT" id="bFn-K0-0RB"/>
+                        <outlet property="timeDigitMin" destination="I20-ap-qlG" id="dB2-KZ-PfF"/>
+                        <outlet property="timeDigitSec" destination="pFL-AU-VSp" id="Sf7-f1-M5r"/>
+                        <outlet property="timeSaperator" destination="2le-aO-8fy" id="ygG-la-jW1"/>
+                        <segue destination="sFO-AU-rzG" kind="presentation" identifier="goToSearch" id="4PU-yt-Bu3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="126.35467980295567"/>
+        </scene>
+        <!--Search View Controller-->
+        <scene sceneID="wMv-6u-xHd">
+            <objects>
+                <viewController id="sFO-AU-rzG" customClass="SearchViewController" customModule="Golden_Hour" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JQo-Ay-EqH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="2bd-tG-jW1"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rkf-sj-ZwR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="887" y="127"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="BGBasic" width="1875" height="4060"/>
+        <image name="iconSearch" width="150" height="150"/>
+        <image name="iconSettings" width="160" height="165"/>
+        <image name="location.fill" catalog="system" width="128" height="115"/>
+    </resources>
+</document>
