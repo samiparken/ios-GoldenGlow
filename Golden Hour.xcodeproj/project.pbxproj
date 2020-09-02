@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2271B2942500240F00DCB915 /* SunPositionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271B2932500240F00DCB915 /* SunPositionManager.swift */; };
 		22777B0524FAA36800834DDB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22777B0424FAA36800834DDB /* SearchViewController.swift */; };
 		22793BA524F81C2800BEBF8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22793BA424F81C2800BEBF8E /* AppDelegate.swift */; };
 		22793BA724F81C2800BEBF8E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22793BA624F81C2800BEBF8E /* SceneDelegate.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2271B2932500240F00DCB915 /* SunPositionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunPositionManager.swift; sourceTree = "<group>"; };
 		22777B0424FAA36800834DDB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		22793BA124F81C2800BEBF8E /* Golden Hour.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Golden Hour.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22793BA424F81C2800BEBF8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +59,7 @@
 		222ED47E24F851B5007D7E8D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2271B2932500240F00DCB915 /* SunPositionManager.swift */,
 				22E4FD4324FE83C200C845E1 /* SunPositionModel.swift */,
 				22E4FD4724FE8D3600C845E1 /* SunPositionConstants.swift */,
 			);
@@ -175,6 +178,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22E4FD4424FE83C200C845E1 /* SunPositionModel.swift in Sources */,
+				2271B2942500240F00DCB915 /* SunPositionManager.swift in Sources */,
 				22793BA924F81C2800BEBF8E /* MainViewController.swift in Sources */,
 				22793BA524F81C2800BEBF8E /* AppDelegate.swift in Sources */,
 				22777B0524FAA36800834DDB /* SearchViewController.swift in Sources */,

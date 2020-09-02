@@ -1,3 +1,5 @@
+import Foundation
+
 let SPA_ZA = 0,           //calculate zenith and azimuth
     SPA_ZA_INC = 1,      //calculate zenith, azimuth, and incidence
     SPA_ZA_RTS = 2,      //calculate zenith, azimuth, and sun rise/transit/set values
