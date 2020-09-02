@@ -129,7 +129,7 @@ struct Spa_data {
     var sunrise: Double = 0      //local sunrise time (+/- 30 seconds) [fractional hour]
     var sunset: Double = 0       //local sunset time (+/- 30 seconds) [fractional hour]
     
-    init(_ year: Int,_ month: Int,_ day: Int,_ hour: Int,_ minute: Int,_ second: Double, timezone: Double, longitude: Double, latitude: Double)
+    init(_ year: Int,_ month: Int,_ day: Int,_ hour: Int,_ minute: Int,_ second: Double, _ timezone: Double, longitude: Double, latitude: Double)
     {
         self.year = year
         self.month = month

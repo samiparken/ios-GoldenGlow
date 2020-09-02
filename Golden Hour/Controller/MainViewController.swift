@@ -37,30 +37,18 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Try Timer
-        remainingTime = 1 * 60 + 30
-        startTimer()
-        
         // Register Location Manager Delegate
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()  //ask location data permission
         locationManager.requestLocation()
         
-        // Get current date & time
-        let date = Date()
-        let calendar = Calendar.current
-        let year = calendar.component(.year, from: date)
-        let month = calendar.component(.month, from: date)
-        let day = calendar.component(.day, from: date)
-        let hour = calendar.component(.hour, from: date)
-        let minute = calendar.component(.minute, from: date)
-        let second = calendar.component(.second, from: date)
-        
-        var sunModel: Spa_data = Spa_data(year, month, day, hour, minute, Double(second), timezone: 2, longitude: 11.9746, latitude: 57.7089)
-        spa_calculate(spa: &sunModel)
-        buttomLabel.text = String(format: "%2.2f", sunModel.declination)
+        // Try Timer
+        remainingTime = 1 * 60 + 30
+        startTimer()
+
         
     }
+    
     
     func startTimer() {
         countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
@@ -82,16 +70,16 @@ class MainViewController: UIViewController {
     }
     
     
-    
-    
+    @IBAction func currentLocationButtonPressed(_ sender: UIButton) {
+        //self.performSegue(withIdentifier: "goToSearch", sender: self)
+        locationManager.requestLocation()
+    }
     
     @IBAction func searchButtonPressed(_ sender: UIButton) {
         self.performSegue(withIdentifier: "goToSearch", sender: self)
     }
     
-    @IBAction func currentLocationButtonPressed(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "goToSearch", sender: self)
-    }
+
     
     // Prepare for Switching Screen
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -103,8 +91,7 @@ class MainViewController: UIViewController {
         }
     }
     
-    
-    
+
     @IBAction func settingsButtonPressed(_ sender: UIButton) {
         
     }
@@ -115,11 +102,7 @@ class MainViewController: UIViewController {
 
 //MARK: - CLLocationManagerDelegate
 extension MainViewController: CLLocationManagerDelegate {
-    
-    @IBAction func currentLocationPressed(_ sender: UIButton) {
-        locationManager.requestLocation()
-    }
-    
+
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
     }
@@ -128,7 +111,24 @@ extension MainViewController: CLLocationManagerDelegate {
         if let location = locations.last {  // last is more accurate
             let lat = location.coordinate.latitude
             let lon = location.coordinate.longitude
+
+            // Get current date & time
+            let date = Date()
+            print(date)
+            let calendar = Calendar.current
+            let year = calendar.component(.year, from: date)
+            let month = calendar.component(.month, from: date)
+            let day = calendar.component(.day, from: date)
+            let hour = calendar.component(.hour, from: date)
+            let minute = calendar.component(.minute, from: date)
+            let second = Double(calendar.component(.second, from: date))
+            let GMT = Double(TimeZone.current.secondsFromGMT()) / 3600
+            print("\(year)-\(month)-\(day), \(hour):\(minute):\(second) GMT\(GMT)")
             
+            var sunModel: Spa_data = Spa_data(year, month, day, hour, minute, Double(second), GMT, longitude: lon, latitude: lat)
+            spa_calculate(spa: &sunModel)
+            buttomLabel.text = String(format: "%2.2f", sunModel.declination)
+
         }
     }
 }
