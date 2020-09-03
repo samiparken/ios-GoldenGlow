@@ -17,6 +17,8 @@ import CoreLocation
 class MainViewController: UIViewController {
     
     @IBOutlet weak var currentLocationOutlet: UIButton!
+
+    @IBOutlet weak var BGImageView: UIImageView!
     
     @IBOutlet weak var centerTopLabel: UILabel!
     @IBOutlet weak var timeDigitMin: UILabel!
@@ -34,21 +36,22 @@ class MainViewController: UIViewController {
     // For Location
     var locationManager = CLLocationManager()
     
+    // For Sun Position
+    var sunPositionManager = SunPositionManager()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Register Location Manager Delegate
+        // Delegates
         locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()  //ask location data permission
-        locationManager.requestLocation()
-        
-        // Try Timer
-        remainingTime = 1 * 60 + 30
-        startTimer()
+        sunPositionManager.delegate = self
 
+        locationManager.requestWhenInUseAuthorization()  //Ask user location data Permission
+        locationManager.requestLocation()                //Get location
+        
         
     }
-    
     
     func startTimer() {
         countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
@@ -60,6 +63,14 @@ class MainViewController: UIViewController {
         
         timeDigitMin.text = String(format: "%02d", minutes)
         timeDigitSec.text = String(format: "%02d", seconds)
+
+        // update every 5 seconds
+        if (remainingTime % 5 == 0)
+        {
+            sunPositionManager.updateCurrentAltitude()
+            let sunAltitude = sunPositionManager.getCurrentAltitude()
+            buttomLabel.text = String(format: "%2.2f", sunAltitude)
+        }
         
         if remainingTime > 0 { remainingTime -= 1 }
         else { endTimer() }
@@ -69,18 +80,52 @@ class MainViewController: UIViewController {
         countdownTimer.invalidate()
     }
     
-    
-    @IBAction func currentLocationButtonPressed(_ sender: UIButton) {
-        //self.performSegue(withIdentifier: "goToSearch", sender: self)
-        locationManager.requestLocation()
-    }
-    
-    @IBAction func searchButtonPressed(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "goToSearch", sender: self)
+    func calculateSunPosition()
+    {
+        // current Sun Altitude
+        let currentAltitude = sunPositionManager.getCurrentAltitude()
+        buttomLabel.text = String(format: "%2.2f", currentAltitude)
+        
+        if (sunPositionManager.isGoldenHour())
+        {
+            print("Golden Hour")
+            BGImageView.image = UIImage(named: "BG_Golden")
+        }
+        else
+        {
+            print("Not Golden Hour")
+            BGImageView.image = UIImage(named: "BG_Day")
+        }
+        
+//        let endDate = sunPositionManager.getNextEnd(0)
+//
+//        let calendar = Calendar.current
+//        let year = calendar.component(.year, from: endDate)
+//        let month = calendar.component(.month, from: endDate)
+//        let day = calendar.component(.day, from: endDate)
+//        let hour = calendar.component(.hour, from: endDate)
+//        let minute = calendar.component(.minute, from: endDate)
+//        let second = Double(calendar.component(.second, from: endDate))
+//        let result = "\(year)-\(month)-\(day), \(hour):\(minute):\(second)"
+//
+//        print("Golden Hour Ends at \(result)")
+        
     }
     
 
     
+    
+    @IBAction func currentLocationButtonPressed(_ sender: UIButton) {
+        //self.performSegue(withIdentifier: "goToSearch", sender: self)
+        //locationManager.requestLocation()
+    }
+    @IBAction func searchButtonPressed(_ sender: UIButton) {
+        //self.performSegue(withIdentifier: "goToSearch", sender: self)
+    }
+    @IBAction func settingsButtonPressed(_ sender: UIButton) {
+        
+    }
+        
     // Prepare for Switching Screen
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToSearch" {
@@ -90,13 +135,16 @@ class MainViewController: UIViewController {
             //            destinationVC.tipPct = calculatorBrain.getTipPct()
         }
     }
-    
+}
 
-    @IBAction func settingsButtonPressed(_ sender: UIButton) {
-        
-    }
+//MARK: - SunPositionManagerDelegate
+extension MainViewController: SunPositionManagerDelegate {
+    
+    
+    
     
 }
+
 
 //MARK: - CLLocationManagerDelegate
 extension MainViewController: CLLocationManagerDelegate {
@@ -107,20 +155,19 @@ extension MainViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {  // last is more accurate
-            // Get longitude & latitude
-            let lon = location.coordinate.longitude
-            let lat = location.coordinate.latitude
 
-            // Get current date & time
-            let date = Date()
-            let GMT = Double(TimeZone.current.secondsFromGMT()) / 3600
+            // + Update when the city name has changed
             
-            // Request SunPosition
-            let sunModel = SunPositionModel(date, GMT, longitude: lon, latitude: lat)
-            let error_check = sunModel.spa_calculate()
-            if(error_check > 0) {print("Error code: \(error_check)")}
-            buttomLabel.text = String(format: "%2.2f", sunModel.declination)
+            // Get longitude & latitude
+            sunPositionManager.currentData.Longitude = location.coordinate.longitude
+            sunPositionManager.currentData.Latitude = location.coordinate.latitude
 
+            // Start Calculating
+            sunPositionManager.updateCurrentAltitude()
+
+            // Try Timer
+            remainingTime = 3 * 60 + 30
+            startTimer()
         }
     }
 }

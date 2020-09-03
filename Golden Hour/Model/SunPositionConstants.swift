@@ -1,9 +1,13 @@
 import Foundation
 
-let SPA_ZA = 0,           //calculate zenith and azimuth
+// Golden Hour Altitude Range  (10.00 ~ 12.99)
+let UPPERLIMIT: Double = 13.00
+let LOWERLIMIT: Double = 10.00
+
+let SPA_ZA = 0,          //calculate zenith and azimuth
     SPA_ZA_INC = 1,      //calculate zenith, azimuth, and incidence
     SPA_ZA_RTS = 2,      //calculate zenith, azimuth, and sun rise/transit/set values
-    SPA_ALL = 3         //calculate all SPA output values
+    SPA_ALL = 3          //calculate all SPA output values
 
 let PI = 3.1415926535897932384626433832795028841971
 let SUN_RADIUS = 0.26667

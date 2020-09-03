@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BGBasic" translatesAutoresizingMaskIntoConstraints="NO" id="sGu-b0-jHB">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BG_Day" translatesAutoresizingMaskIntoConstraints="NO" id="sGu-b0-jHB" userLabel="BG">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1yl-2E-Vuh" userLabel="Top Bar">
@@ -133,6 +133,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="BGImageView" destination="sGu-b0-jHB" id="gYM-Y3-DxO"/>
                         <outlet property="buttomLabel" destination="I9I-Nz-0ln" id="iQQ-mm-6eF"/>
                         <outlet property="centerButtomLabel" destination="uJE-xl-R9t" id="29a-fG-4dI"/>
                         <outlet property="centerTopLabel" destination="GKl-5E-s07" id="kWL-OW-fJd"/>
@@ -164,7 +165,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BGBasic" width="1875" height="4060"/>
+        <image name="BG_Day" width="1875" height="4060"/>
         <image name="iconSearch" width="150" height="150"/>
         <image name="iconSettings" width="160" height="165"/>
         <image name="location.fill" catalog="system" width="128" height="115"/>

@@ -11,12 +11,13 @@ import Foundation
 class SunPositionModel {
     //----------------------INPUT VALUES------------------------
     
-    var year: Int            // 4-digit year,      valid range: -2000 to 6000, error code: 1
-    var month: Int           // 2-digit month,         valid range: 1 to  12,  error code: 2
-    var day: Int             // 2-digit day,           valid range: 1 to  31,  error code: 3
-    var hour: Int            // Observer local hour,   valid range: 0 to  24,  error code: 4
-    var minute: Int          // Observer local minute, valid range: 0 to  59,  error code: 5
-    var second: Double       // Observer local second, valid range: 0 to <60,  error code: 6
+    var date: Date
+    var year: Int = 0           // 4-digit year,      valid range: -2000 to 6000, error code: 1
+    var month: Int = 0          // 2-digit month,         valid range: 1 to  12,  error code: 2
+    var day: Int = 0            // 2-digit day,           valid range: 1 to  31,  error code: 3
+    var hour: Int = 0           // Observer local hour,   valid range: 0 to  24,  error code: 4
+    var minute: Int = 0         // Observer local minute, valid range: 0 to  59,  error code: 5
+    var second: Double = 0      // Observer local second, valid range: 0 to <60,  error code: 6
     
     var delta_ut1: Double = 0    // Fractional second difference between UTC and UT which is used
     // to adjust UTC for earth's irregular rotation rate and is derived
@@ -131,20 +132,24 @@ class SunPositionModel {
     
     init(_ date: Date, _ timezone: Double, longitude: Double, latitude: Double)
     {
-        let calendar = Calendar.current
-        self.year = calendar.component(.year, from: date)
-        self.month = calendar.component(.month, from: date)
-        self.day = calendar.component(.day, from: date)
-        self.hour = calendar.component(.hour, from: date)
-        self.minute = calendar.component(.minute, from: date)
-        self.second = Double(calendar.component(.second, from: date))
+        self.date = date
         self.timezone = timezone
         self.longitude = longitude
         self.latitude = latitude
-        print("\(year)-\(month)-\(day), \(hour):\(minute):\(second) GMT\(timezone)")
     }
     
-    
+    func parseDate()
+    {
+        let calendar = Calendar.current
+        self.year = calendar.component(.year, from: self.date)
+        self.month = calendar.component(.month, from: self.date)
+        self.day = calendar.component(.day, from: self.date)
+        self.hour = calendar.component(.hour, from: self.date)
+        self.minute = calendar.component(.minute, from: self.date)
+        self.second = Double(calendar.component(.second, from: self.date))
+        //print("\(year)-\(month)-\(day), \(hour):\(minute):\(second) GMT\(timezone)")
+    }
+        
     func rad2deg(_ radians: Double) -> Double {
         return (180.0 / PI) * radians
     }
@@ -203,7 +208,7 @@ class SunPositionModel {
         return ( ( a * x + b ) * x + c) * x + d
     }
     
-    ///////////////////////////////////////////////////////////////////////////////////////////////
+    // ------------------------------------------------------------------
     func validate_inputs() -> Int
     {
         if ((self.year        < -2000) || (self.year        > 6000)) { return 1 }
@@ -233,7 +238,8 @@ class SunPositionModel {
         
         return 0
     }
-    ///////////////////////////////////////////////////////////////////////////////////////////////
+    
+    // ---------------------------------------------------------------------
     func julian_day() -> Double
     {
         var year_temp = self.year
@@ -595,8 +601,9 @@ class SunPositionModel {
     // Calculate all SPA parameters and put into structure
     // Note: All inputs values (listed in header file) must already be in structure
     ///////////////////////////////////////////////////////////////////////////////////////////
-    func spa_calculate() -> Int
+    func spa_calculate()
     {
+        parseDate()
         let result: Int = validate_inputs()
         
         if (result == 0)
@@ -632,8 +639,10 @@ class SunPositionModel {
 //            calculate_eot_and_sun_rise_transit_set(spa: &spa)
 //        }
         }
-        
-        return result
+        else
+        {
+            print("Error Code : \(result)")
+        }
     }
     ///////////////////////////////////////////////////////////////////////////////////////////
        
