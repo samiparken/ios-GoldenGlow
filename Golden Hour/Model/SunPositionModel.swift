@@ -146,20 +146,16 @@ class SunPositionModel {
     
     
     func rad2deg(_ radians: Double) -> Double {
-        return (180.0/PI)*radians
+        return (180.0 / PI) * radians
     }
     
     func deg2rad(_ degrees: Double) -> Double {
-        return (PI/180.0)*degrees
-    }
-    
-    func integer(_ value: Double) -> Int {
-        return Int(value)
+        return (PI / 180.0) * degrees
     }
     
     func limit_degrees(_ degrees: Double) -> Double {
         let tempDegrees = degrees / 360.0
-        var limited: Double = 360.0 * ( tempDegrees - floor(tempDegrees))
+        var limited: Double = 360.0 * ( tempDegrees - round(tempDegrees))
         
         if (limited < 0) { limited += 360.0 }
         return limited
@@ -167,7 +163,7 @@ class SunPositionModel {
     
     func limit_degrees180pm(_ degrees: Double) -> Double {
         let tempDegrees = degrees / 360.0
-        var limited = 360.0*(tempDegrees-floor(tempDegrees))
+        var limited = 360.0 * ( tempDegrees - round(tempDegrees) )
         if      (limited < -180.0) { limited += 360.0 }
         else if (limited >  180.0) { limited -= 360.0 }
         
@@ -176,14 +172,14 @@ class SunPositionModel {
     
     func limit_degrees180(_ degrees: Double) -> Double {
         let tempDegrees = degrees / 180.0
-        var limited = 180.0*(tempDegrees-floor(tempDegrees))
+        var limited = 180.0 * ( tempDegrees - round(tempDegrees) )
         if (limited < 0) { limited += 180.0 }
         
         return limited
     }
     
     func limit_zero2one(_ value: Double) -> Double {
-        var limited = value - floor(value)
+        var limited = value - round(value)
         if (limited < 0) { limited += 1.0 }
         
         return limited
@@ -191,7 +187,6 @@ class SunPositionModel {
     
     func limit_minutes(_ minutes: Double) -> Double {
         var limited = minutes
-        
         if      (limited < -20.0) { limited += 1440.0 }
         else if (limited >  20.0) { limited -= 1440.0 }
         
@@ -200,12 +195,12 @@ class SunPositionModel {
     
     func dayfrac_to_local_hr(_ dayfrac: Double, _ timezone: Double) -> Double
     {
-        return 24.0 * limit_zero2one(dayfrac + timezone/24.0)
+        return 24.0 * limit_zero2one(dayfrac + timezone / 24.0)
     }
     
     func third_order_polynomial(_ a: Double, _ b: Double, _ c: Double, _ d: Double, _ x: Double) -> Double
     {
-        return ((a*x + b)*x + c)*x + d
+        return ( ( a * x + b ) * x + c) * x + d
     }
     
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -239,15 +234,15 @@ class SunPositionModel {
         return 0
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
-    func julian_day (_ year: Int, _ month: Int, _ day: Int, _ hour: Int, _ minute: Int, _ second: Double, _ dut1: Double, _ tz: Double) -> Double
+    func julian_day() -> Double
     {
-        var year_temp = year
-        var month_temp = month
-        let temp = Double(minute) + ((second + dut1) / 60.0)
-        let temp2 = (Double(hour) - tz + temp / 60.0) / 24.0
-        let day_decimal = Double(day) + temp2
+        var year_temp = self.year
+        var month_temp = self.month
+        let temp = Double(self.minute) + ((self.second + self.delta_ut1) / 60.0)
+        let temp2 = (Double(self.hour) - self.timezone + temp / 60.0) / 24.0
+        let day_decimal = Double(self.day) + temp2
         
-        if ( month < 3 )
+        if ( month_temp < 3 )
         {
             month_temp += 12
             year_temp -= 1
@@ -255,134 +250,134 @@ class SunPositionModel {
         
         let julian_day_temp1: Int = Int(365.25 * (Double(year_temp) + 4716.0))
         let julian_day_temp2: Int = Int(30.6001 * Double((month_temp + 1)))
-        var julian_day_temp = Double(julian_day_temp1) + Double(julian_day_temp2) + day_decimal - 1524.5
+        var julian_day_result = Double(julian_day_temp1) + Double(julian_day_temp2) + day_decimal - 1524.5
         
-        if (julian_day_temp > 2299160.0) {
+        if (julian_day_result > 2299160.0) {
             let a_temp = Int(year_temp/100)
-            julian_day_temp += Double((2 - a_temp + Int(a_temp/4)))
+            julian_day_result += Double((2 - a_temp + Int(a_temp/4)))
         }
         
-        return julian_day_temp
+        return julian_day_result
     }
     
-    func julian_century(_ jd: Double) -> Double
+    func julian_century() -> Double
     {
-        return (jd-2451545.0)/36525.0
+        return ( self.jd - 2451545.0 ) / 36525.0
     }
     
-    func julian_ephemeris_day(_ jd: Double, _ delta_t: Double) -> Double
+    func julian_ephemeris_day() -> Double
     {
-        return jd+delta_t/86400.0
+        return self.jd + self.delta_t / 86400.0
     }
     
-    func julian_ephemeris_century(_ jde: Double) -> Double
+    func julian_ephemeris_century() -> Double
     {
-        return (jde - 2451545.0)/36525.0
+        return (self.jde - 2451545.0)/36525.0
     }
     
-    func julian_ephemeris_millennium(_ jce: Double) -> Double
+    func julian_ephemeris_millennium() -> Double
     {
-        return (jce/10.0)
+        return (self.jce / 10.0)
     }
     
-    func earth_periodic_term_summation( terms: [[Double]], count: Int, jme: Double) -> Double
+    func earth_periodic_term_summation( terms: [[Double]], count: Int) -> Double
     {
         var sum: Double = 0
         
         for i in 0..<count
         {
-            sum += terms[i][TERM_A] * cos(terms[i][TERM_B] + terms[i][TERM_C] * jme)
+            sum += terms[i][TERM_A] * cos(terms[i][TERM_B] + terms[i][TERM_C] * self.jme)
         }
         
         return sum
     }
     
-    func earth_values(term_sum: [Double], count: Int, jme: Double) -> Double
+    func earth_values(term_sum: [Double], count: Int) -> Double
     {
         var sum: Double = 0
         
         for i in 0 ..< count
-        {    sum += term_sum[i] * pow(jme, Double(i)) }
+        {    sum += term_sum[i] * pow(self.jme, Double(i)) }
         
         sum /= 1.0e8
         
         return sum
     }
     
-    func earth_heliocentric_longitude(_ jme: Double) -> Double
+    func earth_heliocentric_longitude() -> Double
     {
         var sum: [Double] = []
         
         for i in 0 ..< L_COUNT
         {
-            sum.append( earth_periodic_term_summation(terms: L_TERMS[i], count: l_subcount[i], jme: jme) )
+            sum.append( earth_periodic_term_summation(terms: L_TERMS[i], count: l_subcount[i]) )
         }
-        return limit_degrees(rad2deg(earth_values(term_sum: sum, count: L_COUNT, jme: jme)))
+        return limit_degrees(rad2deg(earth_values(term_sum: sum, count: L_COUNT)))
     }
     
-    func earth_heliocentric_latitude(_ jme: Double) -> Double
+    func earth_heliocentric_latitude() -> Double
     {
         var sum: [Double] = []
         for i in 0 ..< B_COUNT
         {
-            sum.append( earth_periodic_term_summation(terms: B_TERMS[i], count: b_subcount[i], jme: jme) )
+            sum.append( earth_periodic_term_summation(terms: B_TERMS[i], count: b_subcount[i]) )
         }
         
-        return rad2deg(earth_values(term_sum: sum, count: B_COUNT, jme: jme))
+        return rad2deg(earth_values(term_sum: sum, count: B_COUNT))
     }
     
-    func earth_radius_vector(_ jme: Double) -> Double
+    func earth_radius_vector() -> Double
     {
         var sum:[Double] = []
         
         for i in 0 ..< R_COUNT
         {
-            sum.append( earth_periodic_term_summation(terms: R_TERMS[i], count: r_subcount[i], jme: jme) )
+            sum.append( earth_periodic_term_summation(terms: R_TERMS[i], count: r_subcount[i]) )
         }
         
-        return earth_values(term_sum: sum, count: R_COUNT, jme: jme)
+        return earth_values(term_sum: sum, count: R_COUNT)
     }
     
-    func geocentric_longitude(_ l: Double) -> Double
+    func geocentric_longitude() -> Double
     {
-        var theta: Double = l + 180.0
+        var theta: Double = self.l + 180.0
         
         if (theta >= 360.0) {theta -= 360.0}
         
         return theta
     }
     
-    func geocentric_latitude(_ b: Double) -> Double
+    func geocentric_latitude() -> Double
     {
-        return -b
+        return -self.b
     }
     
-    func mean_elongation_moon_sun(_ jce: Double) -> Double
+    func mean_elongation_moon_sun() -> Double
     {
-        return third_order_polynomial(1.0/189474.0, -0.0019142, 445267.11148, 297.85036, jce)
+        return third_order_polynomial(1.0/189474.0, -0.0019142, 445267.11148, 297.85036, self.jce)
     }
     
-    func mean_anomaly_sun(_ jce: Double) -> Double
+    func mean_anomaly_sun() -> Double
     {
-        return third_order_polynomial(-1.0/300000.0, -0.0001603, 35999.05034, 357.52772, jce)
+        return third_order_polynomial(-1.0/300000.0, -0.0001603, 35999.05034, 357.52772, self.jce)
     }
     
-    func mean_anomaly_moon(_ jce:Double) -> Double
+    func mean_anomaly_moon() -> Double
     {
-        return third_order_polynomial(1.0/56250.0, 0.0086972, 477198.867398, 134.96298, jce)
+        return third_order_polynomial(1.0/56250.0, 0.0086972, 477198.867398, 134.96298, self.jce)
     }
     
-    func argument_latitude_moon(_ jce: Double) -> Double
+    func argument_latitude_moon() -> Double
     {
-        return third_order_polynomial(1.0/327270.0, -0.0036825, 483202.017538, 93.27191, jce)
+        return third_order_polynomial(1.0/327270.0, -0.0036825, 483202.017538, 93.27191, self.jce)
     }
     
-    func ascending_longitude_moon(_ jce: Double) -> Double
+    func ascending_longitude_moon() -> Double
     {
-        return third_order_polynomial(1.0/450000.0, 0.0020708, -1934.136261, 125.04452, jce)
+        return third_order_polynomial(1.0/450000.0, 0.0020708, -1934.136261, 125.04452, self.jce)
     }
     
-    func xy_term_summation( i: Int, x: [Double]) -> Double
+    func xy_term_summation(_ i: Int,_ x: [Double]) -> Double
     {
         var sum: Double = 0
         
@@ -394,219 +389,162 @@ class SunPositionModel {
         return sum
     }
     
-    func nutation_longitude_and_obliquity(_ jce: Double, _ x: [Double], _ del_psi: inout Double, _ del_epsilon: inout Double)
+    func nutation_longitude_and_obliquity(_ x: [Double])
     {
         var xy_term_sum: Double, sum_psi: Double = 0, sum_epsilon: Double = 0
         
         for i in 0 ..< Y_COUNT
         {
-            xy_term_sum  = deg2rad(xy_term_summation(i:i, x:x))
-            sum_psi     += (PE_TERMS[i][TERM_PSI_A] + jce*PE_TERMS[i][TERM_PSI_B])*sin(xy_term_sum)
-            sum_epsilon += (PE_TERMS[i][TERM_EPS_C] + jce*PE_TERMS[i][TERM_EPS_D])*cos(xy_term_sum)
+            xy_term_sum  = deg2rad(xy_term_summation(i, x))
+            sum_psi     += (PE_TERMS[i][TERM_PSI_A] + jce * PE_TERMS[i][TERM_PSI_B]) * sin(xy_term_sum)
+            sum_epsilon += (PE_TERMS[i][TERM_EPS_C] + jce * PE_TERMS[i][TERM_EPS_D]) * cos(xy_term_sum)
         }
         
-        del_psi     = sum_psi     / 36000000.0
-        del_epsilon = sum_epsilon / 36000000.0
+        self.del_psi     = sum_psi     / 36000000.0
+        self.del_epsilon = sum_epsilon / 36000000.0
     }
     
-    func ecliptic_mean_obliquity(_ jme: Double) -> Double
+    func ecliptic_mean_obliquity() -> Double
     {
-        let u: Double = jme/10.0
+        let u: Double = self.jme / 10.0
         
         return 84381.448 + u*(-4680.93 + u*(-1.55 + u*(1999.25 + u*(-51.38 + u*(-249.67 +
             u*(  -39.05 + u*( 7.12 + u*(  27.87 + u*(  5.79 + u*2.45)))))))))
     }
     
-    func ecliptic_true_obliquity(_ delta_epsilon: Double, _ epsilon0: Double) -> Double
+    func ecliptic_true_obliquity() -> Double
     {
-        return delta_epsilon + epsilon0/3600.0;
+        return self.del_epsilon + self.epsilon0/3600.0;
     }
     
-    func aberration_correction(_ r: Double) -> Double
+    func aberration_correction() -> Double
     {
-        return -20.4898 / (3600.0*r)
+        return -20.4898 / (3600.0 * self.r)
     }
     
-    func apparent_sun_longitude(_ theta: Double, _ delta_psi: Double, _ delta_tau: Double) -> Double
+    func apparent_sun_longitude() -> Double
     {
-        return theta + delta_psi + delta_tau
+        return self.theta + self.del_psi + self.del_tau
     }
     
-    func greenwich_mean_sidereal_time (_ jd: Double, _ jc: Double) -> Double
+    func greenwich_mean_sidereal_time () -> Double
     {
-        return limit_degrees(280.46061837 + 360.98564736629 * (jd - 2451545.0) +
-            jc*jc*(0.000387933 - jc/38710000.0))
+        return limit_degrees(280.46061837 + 360.98564736629 * (self.jd - 2451545.0) + self.jc * self.jc * (0.000387933 - jc/38710000.0))
     }
     
-    func greenwich_sidereal_time (_ nu0: Double, _ delta_psi: Double, _ epsilon: Double) -> Double
+    func greenwich_sidereal_time () -> Double
     {
-        return nu0 + delta_psi * cos(deg2rad(epsilon))
+        return self.nu0 + self.del_psi * cos(deg2rad(self.epsilon))
     }
     
-    func geocentric_right_ascension(_ lamda: Double, _ epsilon: Double, _ beta: Double) -> Double
+    func geocentric_right_ascension() -> Double
     {
-        let lamda_rad: Double = deg2rad(lamda)
-        let epsilon_rad: Double = deg2rad(epsilon)
+        let lamda_rad: Double = deg2rad(self.lamda)
+        let epsilon_rad: Double = deg2rad(self.epsilon)
         
-        return limit_degrees(rad2deg(atan2(sin(lamda_rad)*cos(epsilon_rad) -
-            tan(deg2rad(beta))*sin(epsilon_rad), cos(lamda_rad))))
+        return limit_degrees(rad2deg(atan2(sin(lamda_rad)*cos(epsilon_rad) - tan(deg2rad(self.beta))*sin(epsilon_rad), cos(lamda_rad))))
     }
     
-    func geocentric_declination(_ beta: Double, _ epsilon: Double, _ lamda: Double) -> Double
+    func geocentric_declination() -> Double
     {
-        let beta_rad: Double = deg2rad(beta)
-        let epsilon_rad: Double = deg2rad(epsilon)
+        let beta_rad: Double = deg2rad(self.beta)
+        let epsilon_rad: Double = deg2rad(self.epsilon)
         
-        return rad2deg(asin(sin(beta_rad)*cos(epsilon_rad) +
-            cos(beta_rad)*sin(epsilon_rad)*sin(deg2rad(lamda))))
+        return rad2deg(asin(sin(beta_rad) * cos(epsilon_rad) + cos(beta_rad) * sin(epsilon_rad) * sin(deg2rad(self.lamda))))
     }
     
-    func observer_hour_angle(_ nu: Double, _ longitude: Double, _ alpha_deg: Double) -> Double
+    func observer_hour_angle() -> Double
     {
-        return limit_degrees(nu + longitude - alpha_deg)
+        return limit_degrees(self.nu + self.longitude - self.alpha)
     }
     
-    func sun_equatorial_horizontal_parallax(r: Double) -> Double
+    func sun_equatorial_horizontal_parallax() -> Double
     {
-        return 8.794 / (3600.0 * r)
+        return 8.794 / (3600.0 * self.r)
     }
     
-    func right_ascension_parallax_and_topocentric_dec(_ latitude: Double, _ elevation: Double,_ xi: Double,_ h: Double,_ delta: Double,_ delta_alpha: inout Double,_ delta_prime: inout Double)
+    func right_ascension_parallax_and_topocentric_dec()
     {
-        let lat_rad: Double   = deg2rad(latitude)
-        let xi_rad: Double    = deg2rad(xi)
-        let h_rad: Double     = deg2rad(h)
-        let delta_rad: Double = deg2rad(delta)
+        let lat_rad: Double   = deg2rad(self.latitude)
+        let xi_rad: Double    = deg2rad(self.xi)
+        let h_rad: Double     = deg2rad(self.h)
+        let delta_rad: Double = deg2rad(self.delta)
         let u: Double = atan(0.99664719 * tan(lat_rad))
         let y: Double = 0.99664719 * sin(u) + elevation*sin(lat_rad)/6378140.0
         let x: Double =              cos(u) + elevation*cos(lat_rad)/6378140.0
         
         let delta_alpha_rad: Double = atan2( -(x * sin(xi_rad) * sin(h_rad)), cos(delta_rad) - x * sin(xi_rad) * cos(h_rad))
-        delta_prime = rad2deg(atan2((sin(delta_rad) - y*sin(xi_rad))*cos(delta_alpha_rad),cos(delta_rad) - x*sin(xi_rad) * cos(h_rad)))
-        delta_alpha = rad2deg(delta_alpha_rad)
+        self.delta_prime = rad2deg(atan2((sin(delta_rad) - y*sin(xi_rad))*cos(delta_alpha_rad),cos(delta_rad) - x*sin(xi_rad) * cos(h_rad)))
+        self.del_alpha = rad2deg(delta_alpha_rad)
     }
     
-    func topocentric_right_ascension(_ alpha_deg: Double,_ delta_alpha: Double) -> Double
+    func topocentric_right_ascension() -> Double
     {
-        return alpha_deg + delta_alpha
+        return self.alpha + self.del_alpha
     }
     
-    func topocentric_local_hour_angle(_ h: Double, _ delta_alpha: Double) -> Double
+    func topocentric_local_hour_angle() -> Double
     {
-        return h - delta_alpha
+        return self.h - self.del_alpha
     }
     
-    func topocentric_elevation_angle(_ latitude: Double,_ delta_prime: Double,_ h_prime: Double) -> Double
+    func topocentric_elevation_angle() -> Double
     {
-        let lat_rad: Double         = deg2rad(latitude)
-        let delta_prime_rad: Double = deg2rad(delta_prime)
+        let lat_rad: Double         = deg2rad(self.latitude)
+        let delta_prime_rad: Double = deg2rad(self.delta_prime)
         
-        return rad2deg(asin(sin(lat_rad)*sin(delta_prime_rad) + cos(lat_rad)*cos(delta_prime_rad) * cos(deg2rad(h_prime))))
+        return rad2deg(asin(sin(lat_rad)*sin(delta_prime_rad) + cos(lat_rad)*cos(delta_prime_rad) * cos(deg2rad(self.h_prime))))
     }
     
-    func atmospheric_refraction_correction(_ pressure: Double,_ temperature: Double,_ atmos_refract: Double,_ e0: Double) -> Double
+    func atmospheric_refraction_correction() -> Double
     {
         var del_e: Double = 0
         
-        if ( e0 >= ( -1 * (SUN_RADIUS + atmos_refract)) )
+        if ( self.e0 >= ( -1 * (SUN_RADIUS + self.atmos_refract)) )
         {
-            del_e = (pressure / 1010.0) * (283.0 / (273.0 + temperature)) * 1.02 / (60.0 * tan(deg2rad(e0 + 10.3/(e0 + 5.11))))
+            del_e = (self.pressure / 1010.0) * (283.0 / (273.0 + self.temperature)) * 1.02 / (60.0 * tan(deg2rad(self.e0 + 10.3/(self.e0 + 5.11))))
         }
         return del_e
     }
     
-    func topocentric_elevation_angle_corrected(_ e0: Double,_ delta_e: Double) -> Double
+    func topocentric_elevation_angle_corrected() -> Double
     {
-        return e0 + delta_e
+        return self.e0 + self.del_e
     }
     
-    func topocentric_zenith_angle(_ e: Double) -> Double
+    func topocentric_zenith_angle() -> Double
     {
-        return 90.0 - e
+        return 90.0 - self.e
     }
     
-    func topocentric_azimuth_angle_astro(_ h_prime: Double, _ latitude: Double, _ delta_prime: Double) -> Double
+    func topocentric_azimuth_angle_astro() -> Double
     {
-        let h_prime_rad: Double = deg2rad(h_prime)
-        let lat_rad: Double = deg2rad(latitude)
+        let h_prime_rad: Double = deg2rad(self.h_prime)
+        let lat_rad: Double = deg2rad(self.latitude)
         
-        return limit_degrees(rad2deg(atan2(sin(h_prime_rad), cos(h_prime_rad)*sin(lat_rad) - tan(deg2rad(delta_prime))*cos(lat_rad))))
+        return limit_degrees(rad2deg(atan2(sin(h_prime_rad), cos(h_prime_rad)*sin(lat_rad) - tan(deg2rad(self.delta_prime))*cos(lat_rad))))
     }
     
-    func topocentric_azimuth_angle(_ azimuth_astro: Double) -> Double
+    func topocentric_azimuth_angle() -> Double
     {
-        return limit_degrees(azimuth_astro + 180.0)
+        return limit_degrees(self.azimuth_astro + 180.0)
     }
     
-    func surface_incidence_angle(_ zenith: Double, _ azimuth_astro: Double,_ azm_rotation: Double,_ slope: Double) -> Double
+    func surface_incidence_angle() -> Double
     {
-        let zenith_rad: Double = deg2rad(zenith)
-        let slope_rad: Double = deg2rad(slope)
+        let zenith_rad: Double = deg2rad(self.zenith)
+        let slope_rad: Double = deg2rad(self.slope)
         
-        return rad2deg(acos(cos(zenith_rad)*cos(slope_rad) + sin(slope_rad) * sin(zenith_rad) * cos(deg2rad(azimuth_astro - azm_rotation))))
+        return rad2deg(acos(cos(zenith_rad)*cos(slope_rad) + sin(slope_rad) * sin(zenith_rad) * cos(deg2rad(self.azimuth_astro - self.azm_rotation))))
     }
     
-    func sun_mean_longitude(_ jme: Double) -> Double
+    func surface_declination_angle() -> Double
     {
-        return limit_degrees(280.4664567 + jme*(360007.6982779 + jme*(0.03032028 + jme*(1/49931.0   + jme*(-1/15300.0     + jme*(-1/2000000.0))))))
+        return 90 - self.incidence
     }
-    
-    func eot(_ m: Double, _ alpha: Double, _ del_psi: Double, _ epsilon: Double) -> Double
-    {
-        return limit_minutes(4.0*(m - 0.0057183 - alpha + del_psi*cos(deg2rad(epsilon))))
-    }
-    
-    func approx_sun_transit_time(_ alpha_zero: Double,_ longitude: Double,_ nu: Double) -> Double
-    {
-        return (alpha_zero - longitude - nu) / 360.0
-    }
-    
-    func sun_hour_angle_at_rise_set(_ latitude: Double, _ delta_zero: Double,_ h0_prime: Double) -> Double
-    {
-        var h0: Double             = -99999
-        let latitude_rad: Double   = deg2rad(latitude)
-        let delta_zero_rad: Double = deg2rad(delta_zero)
-        let argument: Double = (sin(deg2rad(h0_prime)) - sin(latitude_rad) * sin(delta_zero_rad)) / (cos(latitude_rad) * cos(delta_zero_rad))
-        
-        if (fabs(argument) <= 1) { h0 = limit_degrees180(rad2deg(acos(argument))) }
-        
-        return h0
-    }
-    
-    func approx_sun_rise_and_set(_ m_rts: inout [Double], h0: Double)
-    {
-        let h0_dfrac: Double = h0/360.0
-        
-        m_rts[SUN_RISE]    = limit_zero2one(m_rts[SUN_TRANSIT] - h0_dfrac)
-        m_rts[SUN_SET]     = limit_zero2one(m_rts[SUN_TRANSIT] + h0_dfrac)
-        m_rts[SUN_TRANSIT] = limit_zero2one(m_rts[SUN_TRANSIT])
-    }
-    
-    func rts_alpha_delta_prime(ad: inout [Double], n: Double) -> Double
-    {
-        var a: Double = ad[JD_ZERO] - ad[JD_MINUS]
-        var b: Double = ad[JD_PLUS] - ad[JD_ZERO]
-        
-        if (fabs(a) >= 2.0) { a = limit_zero2one(a) }
-        if (fabs(b) >= 2.0) { b = limit_zero2one(b) }
-        
-        return ad[JD_ZERO] + n * (a + b + (b-a) * n) / 2.0
-    }
-    
-    func rts_sun_altitude(_ latitude: Double, _ delta_prime: Double, _ h_prime: Double) -> Double
-    {
-        let latitude_rad: Double    = deg2rad(latitude)
-        let delta_prime_rad: Double = deg2rad(delta_prime)
-        
-        return rad2deg(asin(sin(latitude_rad)*sin(delta_prime_rad) + cos(latitude_rad)*cos(delta_prime_rad)*cos(deg2rad(h_prime))))
-    }
-    
-    func sun_rise_and_set(_ m_rts: inout [Double],_ h_rts: inout [Double],_ delta_prime: inout [Double], _ latitude: Double, _ h_prime: inout [Double],_ h0_prime: Double,_ sun: Int) -> Double
-    {
-        return m_rts[sun] + (h_rts[sun] - h0_prime) / (360.0 * cos(deg2rad(delta_prime[sun])) * cos(deg2rad(latitude)) * sin(deg2rad(h_prime[sun])))
-    }
-    
-    ////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+    //MARK: - Calculate SPA Parameters
+    ///////////////////////////////////////////////////////////////////////////////////////////////
     // Calculate required SPA parameters to get the right ascension (alpha) and declination (delta)
     // Note: JD must be already calculated and in structure
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -614,24 +552,24 @@ class SunPositionModel {
     {
         var x:[Double] = [] //double x[TERM_X_COUNT]
         
-        self.jc = julian_century(self.jd)
+        self.jc = julian_century()
         
-        self.jde = julian_ephemeris_day(self.jd, self.delta_t)
-        self.jce = julian_ephemeris_century(self.jde)
-        self.jme = julian_ephemeris_millennium(self.jce)
+        self.jde = julian_ephemeris_day()
+        self.jce = julian_ephemeris_century()
+        self.jme = julian_ephemeris_millennium()
         
-        self.l = earth_heliocentric_longitude(self.jme)
-        self.b = earth_heliocentric_latitude(self.jme)
-        self.r = earth_radius_vector(self.jme)
+        self.l = earth_heliocentric_longitude()
+        self.b = earth_heliocentric_latitude()
+        self.r = earth_radius_vector()
         
-        self.theta = geocentric_longitude(self.l)
-        self.beta  = geocentric_latitude(self.b)
+        self.theta = geocentric_longitude()
+        self.beta  = geocentric_latitude()
         
-        self.x0 = mean_elongation_moon_sun(self.jce)
-        self.x1 = mean_anomaly_sun(self.jce)
-        self.x2 = mean_anomaly_moon(self.jce)
-        self.x3 = argument_latitude_moon(self.jce)
-        self.x4 = ascending_longitude_moon(self.jce)
+        self.x0 = mean_elongation_moon_sun()
+        self.x1 = mean_anomaly_sun()
+        self.x2 = mean_anomaly_moon()
+        self.x3 = argument_latitude_moon()
+        self.x4 = ascending_longitude_moon()
         
         x.append( self.x0 )
         x.append( self.x1 )
@@ -639,20 +577,127 @@ class SunPositionModel {
         x.append( self.x3 )
         x.append( self.x4 )
         
+        nutation_longitude_and_obliquity(x)
         
-        nutation_longitude_and_obliquity(self.jce, x, &self.del_psi, &self.del_epsilon)
+        self.epsilon0 = ecliptic_mean_obliquity()
+        self.epsilon  = ecliptic_true_obliquity()
         
-        self.epsilon0 = ecliptic_mean_obliquity(self.jme)
-        self.epsilon  = ecliptic_true_obliquity(self.del_epsilon, self.epsilon0)
+        self.del_tau   = aberration_correction()
+        self.lamda     = apparent_sun_longitude()
+        self.nu0       = greenwich_mean_sidereal_time()
+        self.nu        = greenwich_sidereal_time()
         
-        self.del_tau   = aberration_correction(self.r)
-        self.lamda     = apparent_sun_longitude(self.theta, self.del_psi, self.del_tau)
-        self.nu0       = greenwich_mean_sidereal_time (self.jd, self.jc)
-        self.nu        = greenwich_sidereal_time (self.nu0, self.del_psi, self.epsilon)
-        
-        self.alpha = geocentric_right_ascension(self.lamda, self.epsilon, self.beta)
-        self.delta = geocentric_declination(self.beta, self.epsilon, self.lamda)
+        self.alpha = geocentric_right_ascension()
+        self.delta = geocentric_declination()
     }
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    // Calculate all SPA parameters and put into structure
+    // Note: All inputs values (listed in header file) must already be in structure
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    func spa_calculate() -> Int
+    {
+        let result: Int = validate_inputs()
+        
+        if (result == 0)
+        {
+            self.jd = julian_day()
+            
+            calculate_geocentric_sun_right_ascension_and_declination()
+            
+            self.h  = observer_hour_angle()
+            self.xi = sun_equatorial_horizontal_parallax()
+            
+            right_ascension_parallax_and_topocentric_dec()
+            
+            self.alpha_prime = topocentric_right_ascension()
+            self.h_prime     = topocentric_local_hour_angle()
+            
+            self.e0      = topocentric_elevation_angle()
+            self.del_e   = atmospheric_refraction_correction()
+            self.e       = topocentric_elevation_angle_corrected()
+            
+            self.zenith        = topocentric_zenith_angle()
+            self.azimuth_astro = topocentric_azimuth_angle_astro()
+            self.azimuth       = topocentric_azimuth_angle()
+            
+            if ((self.function == SPA_ZA_INC) || (self.function == SPA_ALL))
+            {
+                self.incidence  = surface_incidence_angle()
+                self.declination = surface_declination_angle()
+            }
+            
+//        if ((spa.function == SPA_ZA_RTS) || (spa.function == SPA_ALL))
+//        {
+//            calculate_eot_and_sun_rise_transit_set(spa: &spa)
+//        }
+        }
+        
+        return result
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////
+       
+    /*  SPA_ZA_RTS : Sun Rise/Transit/Set values */
+    /*    func sun_mean_longitude(_ jme: Double) -> Double
+        {
+            return limit_degrees(280.4664567 + jme*(360007.6982779 + jme*(0.03032028 + jme*(1/49931.0   + jme*(-1/15300.0     + jme*(-1/2000000.0))))))
+        }
+        
+        func eot(_ m: Double, _ alpha: Double, _ del_psi: Double, _ epsilon: Double) -> Double
+        {
+            return limit_minutes(4.0*(m - 0.0057183 - alpha + del_psi*cos(deg2rad(epsilon))))
+        }
+        
+        func approx_sun_transit_time(_ alpha_zero: Double,_ longitude: Double,_ nu: Double) -> Double
+        {
+            return (alpha_zero - longitude - nu) / 360.0
+        }
+        
+        func sun_hour_angle_at_rise_set(_ latitude: Double, _ delta_zero: Double,_ h0_prime: Double) -> Double
+        {
+            var h0: Double             = -99999
+            let latitude_rad: Double   = deg2rad(latitude)
+            let delta_zero_rad: Double = deg2rad(delta_zero)
+            let argument: Double = (sin(deg2rad(h0_prime)) - sin(latitude_rad) * sin(delta_zero_rad)) / (cos(latitude_rad) * cos(delta_zero_rad))
+            
+            if (fabs(argument) <= 1) { h0 = limit_degrees180(rad2deg(acos(argument))) }
+            
+            return h0
+        }
+        
+        func approx_sun_rise_and_set(_ m_rts: inout [Double], h0: Double)
+        {
+            let h0_dfrac: Double = h0/360.0
+            
+            m_rts[SUN_RISE]    = limit_zero2one(m_rts[SUN_TRANSIT] - h0_dfrac)
+            m_rts[SUN_SET]     = limit_zero2one(m_rts[SUN_TRANSIT] + h0_dfrac)
+            m_rts[SUN_TRANSIT] = limit_zero2one(m_rts[SUN_TRANSIT])
+        }
+        
+        func rts_alpha_delta_prime(ad: inout [Double], n: Double) -> Double
+        {
+            var a: Double = ad[JD_ZERO] - ad[JD_MINUS]
+            var b: Double = ad[JD_PLUS] - ad[JD_ZERO]
+            
+            if (fabs(a) >= 2.0) { a = limit_zero2one(a) }
+            if (fabs(b) >= 2.0) { b = limit_zero2one(b) }
+            
+            return ad[JD_ZERO] + n * (a + b + (b-a) * n) / 2.0
+        }
+        
+        func rts_sun_altitude(_ latitude: Double, _ delta_prime: Double, _ h_prime: Double) -> Double
+        {
+            let latitude_rad: Double    = deg2rad(latitude)
+            let delta_prime_rad: Double = deg2rad(delta_prime)
+            
+            return rad2deg(asin(sin(latitude_rad)*sin(delta_prime_rad) + cos(latitude_rad)*cos(delta_prime_rad)*cos(deg2rad(h_prime))))
+        }
+        
+        func sun_rise_and_set(_ m_rts: inout [Double],_ h_rts: inout [Double],_ delta_prime: inout [Double], _ latitude: Double, _ h_prime: inout [Double],_ h0_prime: Double,_ sun: Int) -> Double
+        {
+            return m_rts[sun] + (h_rts[sun] - h0_prime) / (360.0 * cos(deg2rad(delta_prime[sun])) * cos(deg2rad(latitude)) * sin(deg2rad(h_prime[sun])))
+        }
+        */
     
     ////////////////////////////////////////////////////////////////////////
     // Calculate Equation of Time (EOT) and Sun Rise, Transit, & Set (RTS)
@@ -736,51 +781,4 @@ class SunPositionModel {
      
      }
      */
-    
-    ///////////////////////////////////////////////////////////////////////////////////////////
-    // Calculate all SPA parameters and put into structure
-    // Note: All inputs values (listed in header file) must already be in structure
-    ///////////////////////////////////////////////////////////////////////////////////////////
-    func spa_calculate() -> Int
-    {
-        let result: Int = validate_inputs()
-        
-        if (result == 0)
-        {
-            self.jd = julian_day (self.year, self.month, self.day, self.hour, self.minute, self.second, self.delta_ut1, self.timezone)
-            
-            calculate_geocentric_sun_right_ascension_and_declination()
-            
-            self.h  = observer_hour_angle(self.nu, self.longitude, self.alpha)
-            self.xi = sun_equatorial_horizontal_parallax(r: self.r)
-            
-            right_ascension_parallax_and_topocentric_dec(self.latitude, self.elevation, self.xi, self.h, self.delta, &self.del_alpha, &self.delta_prime)
-            
-            self.alpha_prime = topocentric_right_ascension(self.alpha, self.del_alpha)
-            self.h_prime     = topocentric_local_hour_angle(self.h, self.del_alpha)
-            
-            self.e0      = topocentric_elevation_angle(self.latitude, self.delta_prime, self.h_prime)
-            self.del_e   = atmospheric_refraction_correction(self.pressure, self.temperature,
-                                                            self.atmos_refract, self.e0)
-            self.e       = topocentric_elevation_angle_corrected(self.e0, self.del_e)
-            
-            self.zenith        = topocentric_zenith_angle(self.e)
-            self.azimuth_astro = topocentric_azimuth_angle_astro(self.h_prime, self.latitude,self.delta_prime)
-            self.azimuth       = topocentric_azimuth_angle(self.azimuth_astro)
-            
-            if ((self.function == SPA_ZA_INC) || (self.function == SPA_ALL))
-            {
-                self.incidence  = surface_incidence_angle(self.zenith, self.azimuth_astro, self.azm_rotation, self.slope)
-                self.declination = 90 - self.incidence
-            }
-            
-//        if ((spa.function == SPA_ZA_RTS) || (spa.function == SPA_ALL))
-//        {
-//            calculate_eot_and_sun_rise_transit_set(spa: &spa)
-//        }
-        }
-        
-        return result
-    }
-    ///////////////////////////////////////////////////////////////////////////////////////////
 }
