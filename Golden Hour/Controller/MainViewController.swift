@@ -12,12 +12,11 @@
 // + API : Show City Name based on Location
 
 import UIKit
-import CoreLocation
 
 class MainViewController: UIViewController {
     
     @IBOutlet weak var currentLocationOutlet: UIButton!
-
+    
     @IBOutlet weak var BGImageView: UIImageView!
     
     @IBOutlet weak var centerTopLabel: UILabel!
@@ -34,7 +33,7 @@ class MainViewController: UIViewController {
     var remainingTime: Int = 0
     
     // For Location
-    var locationManager = CLLocationManager()
+    var locationManager = LocationManager()
     
     // For Sun Position
     var sunPositionManager = SunPositionManager()
@@ -47,10 +46,20 @@ class MainViewController: UIViewController {
         sunPositionManager.delegate = self
         locationManager.delegate = self
         
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()  //Ask user location data Permission
-        locationManager.requestLocation()                //Get location
+        guard let exposedLocation = self.locationManager.exposedLocation else {
+            print("*** Error in \(#function): exposedLocation is nil")
+            return
+        }
         
+        self.locationManager.getPlace(for: exposedLocation) { placemark in
+            guard let placemark = placemark else { return }
+            
+            var  output = "City Name"
+            if let town = placemark.locality {
+                output = town
+            }
+            self.currentLocationOutlet.setTitle(output, for: .normal)
+        }
         
     }
     
@@ -64,7 +73,7 @@ class MainViewController: UIViewController {
         
         timeDigitMin.text = String(format: "%02d", minutes)
         timeDigitSec.text = String(format: "%02d", seconds)
-
+        
         // update SunAltitude every 5 seconds
         if (remainingTime % 5 == 0)
         {
@@ -81,7 +90,7 @@ class MainViewController: UIViewController {
         countdownTimer.invalidate()
         sunPositionManager.updateScreen()
     }
-
+    
     
     
     @IBAction func currentLocationButtonPressed(_ sender: UIButton) {
@@ -94,7 +103,7 @@ class MainViewController: UIViewController {
     @IBAction func settingsButtonPressed(_ sender: UIButton) {
         
     }
-        
+    
     // Prepare for Switching Screen
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToSearch" {
@@ -130,14 +139,15 @@ extension MainViewController: SunPositionManagerDelegate {
     func didUpdateNextGoldenHour(_ next: [Date]) {
         let start = next[0]
         let end = next[1]
-
+        
         centerTopLabel.text = "Lasts for"
         let last = Int( end.timeIntervalSince1970 - start.timeIntervalSince1970 )
         let lastMin: Int = (last / 60) % 60
         let lastSec: Int = last % 60
         timeDigitMin.text = String(format: "%02d", lastMin)
+        timeSaperator.text = ":"
         timeDigitSec.text = String(format: "%02d", lastSec)
-
+        
         let calendar = Calendar.current
         let hour = calendar.component(.hour, from: start)
         let minute = calendar.component(.minute, from: start)
@@ -154,36 +164,14 @@ extension MainViewController: SunPositionManagerDelegate {
     
 }
 
-
-//MARK: - CLLocationManagerDelegate
-extension MainViewController: CLLocationManagerDelegate {
-
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
-    }
+//MARK: - LocationManagerDelegate
+extension MainViewController: LocationManagerDelegate {
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        switch status {
-        case .notDetermined         : print("notDetermined")        // location permission not asked for yet
-        case .authorizedWhenInUse   : print("authorizedWhenInUse")  // location authorized
-        case .authorizedAlways      : print("authorizedAlways")     // location authorized
-        case .restricted            : print("restricted")           // TODO: handle
-        case .denied                : print("denied")               // TODO: handle
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {  // last is more accurate
-
-            // + Update when the city name has changed
-            
-            // Get longitude & latitude
-            sunPositionManager.currentData.Longitude = location.coordinate.longitude
-            sunPositionManager.currentData.Latitude = location.coordinate.latitude
-
-            // Start Calculating
-            sunPositionManager.startSunPositionSystem()
-
-        }
+    func didUpdateLocation(_ locationData: [Double]) {
+        sunPositionManager.currentData.Longitude = locationData[0]
+        sunPositionManager.currentData.Latitude = locationData[1]
+        
+        // Start Calculating
+        sunPositionManager.startSunPositionSystem()
     }
 }
