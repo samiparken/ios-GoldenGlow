@@ -17,9 +17,7 @@ protocol SunPositionManagerDelegate {
 }
 
 class SunPositionManager {
-    
     var delegate: SunPositionManagerDelegate?
-    
     var currentData = CurrentData()
     
     func isGoldenHour() -> Bool
@@ -72,7 +70,6 @@ class SunPositionManager {
             currentData.SunAltitude = sun1.declination
             currentData.SunAltitudeChange = sun2.declination - sun1.declination
         }
-        
         updateScreen()
     }
     

@@ -9,11 +9,11 @@
 import Foundation
 import CoreLocation
 protocol LocationManagerDelegate {
-    func didUpdateLocation(_ location: [Double])
+    func didUpdateLocation(_ locationData: [Double])
+    func didUpdateCityName(_ cityname: String)
 }
 
 class LocationManager: NSObject {
-    
     var delegate: LocationManagerDelegate?
     
     let locationManager = CLLocationManager()
@@ -22,7 +22,7 @@ class LocationManager: NSObject {
     public var exposedLocation: CLLocation? {
         return self.locationManager.location
     }
-        
+    
     override init() {
         super.init()
         self.locationManager.delegate = self
@@ -82,12 +82,22 @@ extension LocationManager: CLLocationManagerDelegate {
             
             // + Update when the city name has changed
             
+            getPlace(for: location) { placemark in
+                guard let placemark = placemark else { return }
+                
+                var  output = "City Name"
+                if let town = placemark.locality {
+                    output = town
+                }
+                self.delegate?.didUpdateCityName(output)
+            }
+            
             // Get longitude & latitude
             var locationData:[Double] = []
             locationData.append(location.coordinate.longitude)
             locationData.append(location.coordinate.latitude)
-            
             self.delegate?.didUpdateLocation(locationData)
         }
+        
     }
 }

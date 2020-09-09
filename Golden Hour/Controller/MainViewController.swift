@@ -27,71 +27,20 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var buttomLabel: UILabel!
     
-    
-    // For Timer
-    var countdownTimer: Timer!
-    var remainingTime: Int = 0
-    
-    // For Location
-    var locationManager = LocationManager()
-    
-    // For Sun Position
+    // Managers
     var sunPositionManager = SunPositionManager()
-    
+    var locationManager = LocationManager()
+    var timerManager = TimerManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Delegates
         sunPositionManager.delegate = self
         locationManager.delegate = self
-        
-        guard let exposedLocation = self.locationManager.exposedLocation else {
-            print("*** Error in \(#function): exposedLocation is nil")
-            return
-        }
-        
-        self.locationManager.getPlace(for: exposedLocation) { placemark in
-            guard let placemark = placemark else { return }
-            
-            var  output = "City Name"
-            if let town = placemark.locality {
-                output = town
-            }
-            self.currentLocationOutlet.setTitle(output, for: .normal)
-        }
+        timerManager.delegate = self
         
     }
-    
-    func startTimer() {
-        countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-    }
-    
-    @objc func updateTime() {
-        let minutes: Int = (remainingTime / 60) % 60
-        let seconds: Int = remainingTime % 60
-        
-        timeDigitMin.text = String(format: "%02d", minutes)
-        timeDigitSec.text = String(format: "%02d", seconds)
-        
-        // update SunAltitude every 5 seconds
-        if (remainingTime % 5 == 0)
-        {
-            sunPositionManager.updateCurrentAltitude()
-            let sunAltitude = sunPositionManager.getCurrentAltitude()
-            buttomLabel.text = String(format: "%2.2f", sunAltitude)
-        }
-        
-        if remainingTime > 0 { remainingTime -= 1 }
-        else { endTimer() }
-    }
-    
-    func endTimer() {
-        countdownTimer.invalidate()
-        sunPositionManager.updateScreen()
-    }
-    
-    
     
     @IBAction func currentLocationButtonPressed(_ sender: UIButton) {
         //self.performSegue(withIdentifier: "goToSearch", sender: self)
@@ -155,11 +104,10 @@ extension MainViewController: SunPositionManagerDelegate {
         centerButtomLabel.text = "Starts at " + String(format: "%02d:%02d", hour, minute)
     }
     
-    
     func didUpdateRemainingTime(_ time: Int) {
         // Try Timer
-        remainingTime = time
-        startTimer()
+        timerManager.remainingTime = time
+        timerManager.startTimer()
     }
     
 }
@@ -173,5 +121,33 @@ extension MainViewController: LocationManagerDelegate {
         
         // Start Calculating
         sunPositionManager.startSunPositionSystem()
+    }
+    
+    func didUpdateCityName(_ cityname: String) {
+        self.currentLocationOutlet.setTitle(cityname, for: .normal)
+    }
+}
+
+//MARK: - TimerManagerDelegate
+extension MainViewController: TimerManagerDelegate {
+    
+    func didUpdateTimer(_ min: Int, _ sec: Int) {
+        let minString: String = String(format: "%02d", min)
+        let secString: String = String(format: "%02d", sec)
+        
+        timeDigitMin.text = minString
+        timeDigitSec.text = secString
+        
+        // update SunAltitude every 5 seconds
+        if (sec % 5 == 0)
+        {
+            sunPositionManager.updateCurrentAltitude()
+            let sunAltitude = sunPositionManager.getCurrentAltitude()
+            buttomLabel.text = String(format: "%2.2f", sunAltitude)
+        }
+    }
+    
+    func didEndTimer() {
+        sunPositionManager.updateScreen()
     }
 }

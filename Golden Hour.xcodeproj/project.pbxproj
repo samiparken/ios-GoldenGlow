@@ -17,6 +17,7 @@
 		22793BAE24F81C2C00BEBF8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22793BAD24F81C2C00BEBF8E /* Assets.xcassets */; };
 		22793BB124F81C2C00BEBF8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22793BAF24F81C2C00BEBF8E /* LaunchScreen.storyboard */; };
 		22C5D01B25090A350077F7E2 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5D01A25090A350077F7E2 /* LocationManager.swift */; };
+		22C5D01D25091BC10077F7E2 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5D01C25091BC10077F7E2 /* TimerManager.swift */; };
 		22E4FD4424FE83C200C845E1 /* SunPositionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E4FD4324FE83C200C845E1 /* SunPositionModel.swift */; };
 		22E4FD4624FE884F00C845E1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E4FD4524FE884F00C845E1 /* Constants.swift */; };
 		22E4FD4824FE8D3600C845E1 /* SunPositionConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E4FD4724FE8D3600C845E1 /* SunPositionConstants.swift */; };
@@ -35,6 +36,7 @@
 		22793BB024F81C2C00BEBF8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		22793BB224F81C2C00BEBF8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22C5D01A25090A350077F7E2 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		22C5D01C25091BC10077F7E2 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		22E4FD4324FE83C200C845E1 /* SunPositionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunPositionModel.swift; sourceTree = "<group>"; };
 		22E4FD4524FE884F00C845E1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		22E4FD4724FE8D3600C845E1 /* SunPositionConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunPositionConstants.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				22E4FD4324FE83C200C845E1 /* SunPositionModel.swift */,
 				2271B2932500240F00DCB915 /* SunPositionManager.swift */,
 				22C5D01A25090A350077F7E2 /* LocationManager.swift */,
+				22C5D01C25091BC10077F7E2 /* TimerManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 			files = (
 				22E4FD4424FE83C200C845E1 /* SunPositionModel.swift in Sources */,
 				2271B2942500240F00DCB915 /* SunPositionManager.swift in Sources */,
+				22C5D01D25091BC10077F7E2 /* TimerManager.swift in Sources */,
 				22C5D01B25090A350077F7E2 /* LocationManager.swift in Sources */,
 				22793BA924F81C2800BEBF8E /* MainViewController.swift in Sources */,
 				22793BA524F81C2800BEBF8E /* AppDelegate.swift in Sources */,
