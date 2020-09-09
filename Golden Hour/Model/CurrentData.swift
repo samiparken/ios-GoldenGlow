@@ -14,6 +14,6 @@ struct CurrentData {
     var Longitude: Double?
     var Latitude: Double?
     var SunAltitude: Double?
-    var SunAltitudeChange: Double?
+    var SunAltitudeChange: Double?   //Rate of Change
     
 }

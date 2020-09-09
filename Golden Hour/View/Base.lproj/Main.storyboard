@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BG_Day" translatesAutoresizingMaskIntoConstraints="NO" id="sGu-b0-jHB" userLabel="BG">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BG_Start" translatesAutoresizingMaskIntoConstraints="NO" id="sGu-b0-jHB" userLabel="BG">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1yl-2E-Vuh" userLabel="Top Bar">
@@ -65,10 +65,10 @@
                                 <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="-7" translatesAutoresizingMaskIntoConstraints="NO" id="nxP-fM-g3E" userLabel="Center Label">
-                                <rect key="frame" x="85.666666666666686" y="335.66666666666669" width="204" height="140.66666666666669"/>
+                                <rect key="frame" x="85.666666666666686" y="347.33333333333331" width="204" height="117.66666666666669"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ends in" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKl-5E-s07" userLabel="centerTopLabel">
-                                        <rect key="frame" x="49.666666666666664" y="0.0" width="104.66666666666669" height="36"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calculating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKl-5E-s07" userLabel="centerTopLabel">
+                                        <rect key="frame" x="18.666666666666657" y="0.0" width="166.66666666666666" height="36"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -76,7 +76,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Lne-fc-b8Q" userLabel="Timer Label">
                                         <rect key="frame" x="0.0" y="29.000000000000007" width="204" height="95.666666666666686"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I20-ap-qlG" userLabel="timeDigitMin">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="right" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I20-ap-qlG" userLabel="timeDigitMin">
                                                 <rect key="frame" x="0.0" y="0.0" width="92.333333333333329" height="95.666666666666671"/>
                                                 <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="80"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -100,16 +100,16 @@
                                             <constraint firstItem="2le-aO-8fy" firstAttribute="centerY" secondItem="Lne-fc-b8Q" secondAttribute="centerY" id="zI1-lE-vPq"/>
                                         </constraints>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ends at 20:05" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uJE-xl-R9t" userLabel="centerButtomLabel">
-                                        <rect key="frame" x="41.000000000000007" y="117.66666666666663" width="121.66666666666669" height="23"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uJE-xl-R9t" userLabel="centerButtomLabel">
+                                        <rect key="frame" x="101.99999999999999" y="117.66666666666669" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Golden Hour" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I9I-Nz-0ln" userLabel="buttomLabel">
-                                <rect key="frame" x="100.00000000000001" y="706" width="175.33333333333337" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I9I-Nz-0ln" userLabel="buttomLabel">
+                                <rect key="frame" x="187.66666666666666" y="742" width="0.0" height="0.0"/>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -165,7 +165,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BG_Day" width="1875" height="4060"/>
+        <image name="BG_Start" width="1875" height="4060"/>
         <image name="iconSearch" width="150" height="150"/>
         <image name="iconSettings" width="160" height="165"/>
         <image name="location.fill" catalog="system" width="128" height="115"/>

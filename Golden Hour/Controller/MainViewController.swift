@@ -44,9 +44,10 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         // Delegates
-        locationManager.delegate = self
         sunPositionManager.delegate = self
-
+        locationManager.delegate = self
+        
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()  //Ask user location data Permission
         locationManager.requestLocation()                //Get location
         
@@ -64,7 +65,7 @@ class MainViewController: UIViewController {
         timeDigitMin.text = String(format: "%02d", minutes)
         timeDigitSec.text = String(format: "%02d", seconds)
 
-        // update every 5 seconds
+        // update SunAltitude every 5 seconds
         if (remainingTime % 5 == 0)
         {
             sunPositionManager.updateCurrentAltitude()
@@ -78,40 +79,8 @@ class MainViewController: UIViewController {
     
     func endTimer() {
         countdownTimer.invalidate()
+        sunPositionManager.updateScreen()
     }
-    
-    func calculateSunPosition()
-    {
-        // current Sun Altitude
-        let currentAltitude = sunPositionManager.getCurrentAltitude()
-        buttomLabel.text = String(format: "%2.2f", currentAltitude)
-        
-        if (sunPositionManager.isGoldenHour())
-        {
-            print("Golden Hour")
-            BGImageView.image = UIImage(named: "BG_Golden")
-        }
-        else
-        {
-            print("Not Golden Hour")
-            BGImageView.image = UIImage(named: "BG_Day")
-        }
-        
-//        let endDate = sunPositionManager.getNextEnd(0)
-//
-//        let calendar = Calendar.current
-//        let year = calendar.component(.year, from: endDate)
-//        let month = calendar.component(.month, from: endDate)
-//        let day = calendar.component(.day, from: endDate)
-//        let hour = calendar.component(.hour, from: endDate)
-//        let minute = calendar.component(.minute, from: endDate)
-//        let second = Double(calendar.component(.second, from: endDate))
-//        let result = "\(year)-\(month)-\(day), \(hour):\(minute):\(second)"
-//
-//        print("Golden Hour Ends at \(result)")
-        
-    }
-    
 
     
     
@@ -140,8 +109,48 @@ class MainViewController: UIViewController {
 //MARK: - SunPositionManagerDelegate
 extension MainViewController: SunPositionManagerDelegate {
     
+    // -1:Night / 0:Golden / 1:Day
+    func didUpdateStatus(_ status: Int) {
+        switch status {
+        case -1: BGImageView.image = UIImage(named: "BG_Night")
+        case 0:  BGImageView.image = UIImage(named: "BG_Golden")
+        case 1:  BGImageView.image = UIImage(named: "BG_Day")
+        default: BGImageView.image = UIImage(named: "BG_Start")
+        }
+    }
+    
+    func didUpdateEndGoldenHour(_ endtime: Date) {
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: endtime)
+        let minute = calendar.component(.minute, from: endtime)
+        centerTopLabel.text = "Ends in"
+        centerButtomLabel.text = "Ends at " + String(format: "%02d:%02d", hour, minute)
+    }
+    
+    func didUpdateNextGoldenHour(_ next: [Date]) {
+        let start = next[0]
+        let end = next[1]
+
+        centerTopLabel.text = "Lasts for"
+        let last = Int( end.timeIntervalSince1970 - start.timeIntervalSince1970 )
+        let lastMin: Int = (last / 60) % 60
+        let lastSec: Int = last % 60
+        timeDigitMin.text = String(format: "%02d", lastMin)
+        timeDigitSec.text = String(format: "%02d", lastSec)
+
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: start)
+        let minute = calendar.component(.minute, from: start)
+        
+        centerButtomLabel.text = "Starts at " + String(format: "%02d:%02d", hour, minute)
+    }
     
     
+    func didUpdateRemainingTime(_ time: Int) {
+        // Try Timer
+        remainingTime = time
+        startTimer()
+    }
     
 }
 
@@ -151,6 +160,16 @@ extension MainViewController: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .notDetermined         : print("notDetermined")        // location permission not asked for yet
+        case .authorizedWhenInUse   : print("authorizedWhenInUse")  // location authorized
+        case .authorizedAlways      : print("authorizedAlways")     // location authorized
+        case .restricted            : print("restricted")           // TODO: handle
+        case .denied                : print("denied")               // TODO: handle
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -163,11 +182,8 @@ extension MainViewController: CLLocationManagerDelegate {
             sunPositionManager.currentData.Latitude = location.coordinate.latitude
 
             // Start Calculating
-            sunPositionManager.updateCurrentAltitude()
+            sunPositionManager.startSunPositionSystem()
 
-            // Try Timer
-            remainingTime = 3 * 60 + 30
-            startTimer()
         }
     }
 }
