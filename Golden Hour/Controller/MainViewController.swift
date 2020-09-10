@@ -91,7 +91,7 @@ extension MainViewController: SunPositionManagerDelegate {
         
         centerTopLabel.text = "Lasts for"
         let last = Int( end.timeIntervalSince1970 - start.timeIntervalSince1970 )
-        let lastMin: Int = (last / 60) % 60
+        let lastMin: Int = last / 60
         let lastSec: Int = last % 60
         timeDigitMin.text = String(format: "%02d", lastMin)
         timeSaperator.text = ":"
@@ -136,6 +136,7 @@ extension MainViewController: TimerManagerDelegate {
         let secString: String = String(format: "%02d", sec)
         
         timeDigitMin.text = minString
+        timeSaperator.text = ":"
         timeDigitSec.text = secString
         
         // update SunAltitude every 5 seconds

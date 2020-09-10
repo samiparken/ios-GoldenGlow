@@ -1,8 +1,8 @@
 import Foundation
 
 // Golden Hour Altitude Range  (-4.00 ~ 6.00)
-let UPPERLIMIT: Double = 6.00
-let LOWERLIMIT: Double = -4.00
+let UPPERLIMIT: Double = 6
+let LOWERLIMIT: Double = -4
 
 let SPA_ZA = 0,          //calculate zenith and azimuth
     SPA_ZA_INC = 1,      //calculate zenith, azimuth, and incidence

@@ -170,7 +170,7 @@ class SunPositionManager {
                     result.append(sun.date)
                     break
                 }
-                print(i)
+                print(" \(i), \(sun.declination)")
             }
         }
         else if ( currentData.SunAltitude! <= LOWERLIMIT )
