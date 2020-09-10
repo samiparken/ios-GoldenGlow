@@ -60,7 +60,7 @@ class SunPositionModel {
     var atmos_refract: Double = 0.5667 // Atmospheric refraction at sunrise and sunset (0.5667 deg is typical)
     // valid range: -5   to   5 degrees, error code: 16
     
-    var function: Int = 1        // Switch to choose functions for desired output (from enumeration)
+    //var function: Int = 1        // Switch to choose functions for desired output (from enumeration)
     //    A list of function
     //    SPA_ZA = 0,           //calculate zenith and azimuth
     //    SPA_ZA_INC = 1,      //calculate zenith, azimuth, and incidence
@@ -149,7 +149,7 @@ class SunPositionModel {
         self.second = Double(calendar.component(.second, from: self.date))
         //print("\(year)-\(month)-\(day), \(hour):\(minute):\(second) GMT\(timezone)")
     }
-        
+    
     func rad2deg(_ radians: Double) -> Double {
         return (180.0 / PI) * radians
     }
@@ -198,9 +198,9 @@ class SunPositionModel {
         return limited
     }
     
-    func dayfrac_to_local_hr(_ dayfrac: Double, _ timezone: Double) -> Double
+    func dayfrac_to_local_hr(_ dayfrac: Double) -> Double
     {
-        return 24.0 * limit_zero2one(dayfrac + timezone / 24.0)
+        return 24.0 * limit_zero2one(dayfrac + self.timezone / 24.0)
     }
     
     func third_order_polynomial(_ a: Double, _ b: Double, _ c: Double, _ d: Double, _ x: Double) -> Double
@@ -230,11 +230,11 @@ class SunPositionModel {
         if (fabs(self.atmos_refract) > 5       ) { return 16 }
         if (     self.elevation      < -6500000) { return 11 }
         
-        if ((self.function == SPA_ZA_INC) || (self.function == SPA_ALL))
-        {
-            if (fabs(self.slope)         > 360) { return 14 }
-            if (fabs(self.azm_rotation)  > 360) { return 15 }
-        }
+//        if ((self.function == SPA_ZA_INC) || (self.function == SPA_ALL))
+//        {
+//            if (fabs(self.slope)         > 360) { return 14 }
+//            if (fabs(self.azm_rotation)  > 360) { return 15 }
+//        }
         
         return 0
     }
@@ -548,7 +548,7 @@ class SunPositionModel {
     {
         return 90 - self.incidence
     }
- 
+    
     //MARK: - Calculate SPA Parameters
     ///////////////////////////////////////////////////////////////////////////////////////////////
     // Calculate required SPA parameters to get the right ascension (alpha) and declination (delta)
@@ -596,12 +596,12 @@ class SunPositionModel {
         self.alpha = geocentric_right_ascension()
         self.delta = geocentric_declination()
     }
-    
+
     ///////////////////////////////////////////////////////////////////////////////////////////
     // Calculate all SPA parameters and put into structure
     // Note: All inputs values (listed in header file) must already be in structure
     ///////////////////////////////////////////////////////////////////////////////////////////
-    func spa_calculate()
+    func spa_calculate(_ function: Int)
     {
         parseDate()
         let result: Int = validate_inputs()
@@ -628,166 +628,161 @@ class SunPositionModel {
             self.azimuth_astro = topocentric_azimuth_angle_astro()
             self.azimuth       = topocentric_azimuth_angle()
             
-            if ((self.function == SPA_ZA_INC) || (self.function == SPA_ALL))
+            if ((function == SPA_ZA_INC) || (function == SPA_ALL))
             {
                 self.incidence  = surface_incidence_angle()
                 self.declination = surface_declination_angle()
             }
             
-//        if ((spa.function == SPA_ZA_RTS) || (spa.function == SPA_ALL))
-//        {
-//            calculate_eot_and_sun_rise_transit_set(spa: &spa)
-//        }
+//            if ((function == SPA_ZA_RTS) || (function == SPA_ALL))
+//            {
+//                calculate_eot_and_sun_rise_transit_set()
+//            }
         }
         else
         {
             print("Error Code : \(result)")
         }
     }
+    
+    /*
     ///////////////////////////////////////////////////////////////////////////////////////////
-       
     /*  SPA_ZA_RTS : Sun Rise/Transit/Set values */
-    /*    func sun_mean_longitude(_ jme: Double) -> Double
-        {
-            return limit_degrees(280.4664567 + jme*(360007.6982779 + jme*(0.03032028 + jme*(1/49931.0   + jme*(-1/15300.0     + jme*(-1/2000000.0))))))
-        }
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    func sun_mean_longitude() -> Double
+    {
+        return limit_degrees(280.4664567 + self.jme*(360007.6982779 + self.jme*(0.03032028 + self.jme*(1/49931.0 + self.jme * (-1/15300.0     + self.jme*(-1/2000000.0))))))
+    }
+    
+    func equation_of_time(_ m: Double) -> Double
+    {
+        return limit_minutes(4.0*(m - 0.0057183 - self.alpha + self.del_psi * cos(deg2rad(self.epsilon))))
+    }
+    
+    func approx_sun_transit_time(_ alpha_zero: Double) -> Double
+    {
+        return (alpha_zero - self.longitude - self.nu) / 360.0
+    }
+    
+    func sun_hour_angle_at_rise_set(_ delta_zero: Double,_ h0_prime: Double) -> Double
+    {
+        var h0: Double             = -99999
+        let latitude_rad: Double   = deg2rad(self.latitude)
+        let delta_zero_rad: Double = deg2rad(delta_zero)
+        let argument: Double = (sin(deg2rad(h0_prime)) - sin(latitude_rad) * sin(delta_zero_rad)) / (cos(latitude_rad) * cos(delta_zero_rad))
         
-        func eot(_ m: Double, _ alpha: Double, _ del_psi: Double, _ epsilon: Double) -> Double
-        {
-            return limit_minutes(4.0*(m - 0.0057183 - alpha + del_psi*cos(deg2rad(epsilon))))
-        }
+        if (fabs(argument) <= 1) { h0 = limit_degrees180(rad2deg(acos(argument))) }
         
-        func approx_sun_transit_time(_ alpha_zero: Double,_ longitude: Double,_ nu: Double) -> Double
-        {
-            return (alpha_zero - longitude - nu) / 360.0
-        }
+        return h0
+    }
+    
+    func approx_sun_rise_and_set(_ m_rts: inout [Double], h0: Double)
+    {
+        let h0_dfrac: Double = h0/360.0
         
-        func sun_hour_angle_at_rise_set(_ latitude: Double, _ delta_zero: Double,_ h0_prime: Double) -> Double
-        {
-            var h0: Double             = -99999
-            let latitude_rad: Double   = deg2rad(latitude)
-            let delta_zero_rad: Double = deg2rad(delta_zero)
-            let argument: Double = (sin(deg2rad(h0_prime)) - sin(latitude_rad) * sin(delta_zero_rad)) / (cos(latitude_rad) * cos(delta_zero_rad))
-            
-            if (fabs(argument) <= 1) { h0 = limit_degrees180(rad2deg(acos(argument))) }
-            
-            return h0
-        }
+        m_rts.append(limit_zero2one(m_rts[SUN_TRANSIT] - h0_dfrac))  //SUN_RISE
+        m_rts.append(limit_zero2one(m_rts[SUN_TRANSIT] + h0_dfrac))  //SUN_SET
+        m_rts.append(limit_zero2one(m_rts[SUN_TRANSIT]))  //SUN_TRANSIT
+    }
+    
+    func rts_alpha_delta_prime(ad: inout [Double], n: Double) -> Double
+    {
+        var a: Double = ad[JD_ZERO] - ad[JD_MINUS]
+        var b: Double = ad[JD_PLUS] - ad[JD_ZERO]
         
-        func approx_sun_rise_and_set(_ m_rts: inout [Double], h0: Double)
-        {
-            let h0_dfrac: Double = h0/360.0
-            
-            m_rts[SUN_RISE]    = limit_zero2one(m_rts[SUN_TRANSIT] - h0_dfrac)
-            m_rts[SUN_SET]     = limit_zero2one(m_rts[SUN_TRANSIT] + h0_dfrac)
-            m_rts[SUN_TRANSIT] = limit_zero2one(m_rts[SUN_TRANSIT])
-        }
+        if (fabs(a) >= 2.0) { a = limit_zero2one(a) }
+        if (fabs(b) >= 2.0) { b = limit_zero2one(b) }
         
-        func rts_alpha_delta_prime(ad: inout [Double], n: Double) -> Double
-        {
-            var a: Double = ad[JD_ZERO] - ad[JD_MINUS]
-            var b: Double = ad[JD_PLUS] - ad[JD_ZERO]
-            
-            if (fabs(a) >= 2.0) { a = limit_zero2one(a) }
-            if (fabs(b) >= 2.0) { b = limit_zero2one(b) }
-            
-            return ad[JD_ZERO] + n * (a + b + (b-a) * n) / 2.0
-        }
+        return ad[JD_ZERO] + n * (a + b + (b-a) * n) / 2.0
+    }
+    
+    func rts_sun_altitude( _ delta_prime: Double, _ h_prime: Double) -> Double
+    {
+        let latitude_rad: Double    = deg2rad(self.latitude)
+        let delta_prime_rad: Double = deg2rad(delta_prime)
         
-        func rts_sun_altitude(_ latitude: Double, _ delta_prime: Double, _ h_prime: Double) -> Double
-        {
-            let latitude_rad: Double    = deg2rad(latitude)
-            let delta_prime_rad: Double = deg2rad(delta_prime)
-            
-            return rad2deg(asin(sin(latitude_rad)*sin(delta_prime_rad) + cos(latitude_rad)*cos(delta_prime_rad)*cos(deg2rad(h_prime))))
-        }
-        
-        func sun_rise_and_set(_ m_rts: inout [Double],_ h_rts: inout [Double],_ delta_prime: inout [Double], _ latitude: Double, _ h_prime: inout [Double],_ h0_prime: Double,_ sun: Int) -> Double
-        {
-            return m_rts[sun] + (h_rts[sun] - h0_prime) / (360.0 * cos(deg2rad(delta_prime[sun])) * cos(deg2rad(latitude)) * sin(deg2rad(h_prime[sun])))
-        }
-        */
+        return rad2deg(asin(sin(latitude_rad)*sin(delta_prime_rad) + cos(latitude_rad)*cos(delta_prime_rad)*cos(deg2rad(h_prime))))
+    }
+    
+    func sun_rise_and_set(_ m_rts: inout [Double],_ h_rts: inout [Double],_ delta_prime: inout [Double], _ h_prime: inout [Double],_ h0_prime: Double,_ sun: Int) -> Double
+    {
+        return m_rts[sun] + (h_rts[sun] - h0_prime) / (360.0 * cos(deg2rad(delta_prime[sun])) * cos(deg2rad(self.latitude)) * sin(deg2rad(h_prime[sun])))
+    }
+    
     
     ////////////////////////////////////////////////////////////////////////
     // Calculate Equation of Time (EOT) and Sun Rise, Transit, & Set (RTS)
     ////////////////////////////////////////////////////////////////////////
-    /*
-     func calculate_eot_and_sun_rise_transit_set(spa: inout Spa_data)
-     {
-     var sun_rts: Spa_data
-     var alpha: [Double] = [], delta: [Double] = []
-     //double alpha[JD_COUNT], delta[JD_COUNT]
-     var m_rts: [Double] = [], nu_rts: [Double] = [], h_rts: [Double] = []
-     //double m_rts[SUN_COUNT], nu_rts[SUN_COUNT], h_rts[SUN_COUNT];
-     var alpha_prime: [Double] = [], delta_prime: [Double] = [], h_prime: [Double] = []
-     //double alpha_prime[SUN_COUNT], delta_prime[SUN_COUNT], h_prime[SUN_COUNT]
-     let h0_prime: Double = -1 * (SUN_RADIUS + spa.atmos_refract)
-     
-     sun_rts  = spa  //sun_rts  = *spa
-     let m = sun_mean_longitude(spa.jme)
-     spa.eot = eot(m, spa.alpha, spa.del_psi, spa.epsilon)
-     
-     sun_rts.hour = 0
-     sun_rts.minute = 0
-     sun_rts.second = 0
-     sun_rts.delta_ut1 = 0.0
-     sun_rts.timezone = 0.0
-     
-     sun_rts.jd = julian_day (sun_rts.year, sun_rts.month, sun_rts.day, sun_rts.hour, sun_rts.minute, sun_rts.second, sun_rts.delta_ut1, sun_rts.timezone)
-     
-     calculate_geocentric_sun_right_ascension_and_declination(spa: &sun_rts)
-     let nu = sun_rts.nu
-     
-     sun_rts.delta_t = 0
-     sun_rts.jd -= 1
-     for i in 0 ..< JD_COUNT
-     {
-     calculate_geocentric_sun_right_ascension_and_declination(spa: &sun_rts)
-     alpha[i] = sun_rts.alpha
-     delta[i] = sun_rts.delta
-     sun_rts.jd += 1
-     }
-     
-     m_rts[SUN_TRANSIT] = approx_sun_transit_time(alpha[JD_ZERO], spa.longitude, nu)
-     let h0 = sun_hour_angle_at_rise_set(spa.latitude, delta[JD_ZERO], h0_prime)
-     
-     if (h0 >= 0) {
-     
-     approx_sun_rise_and_set(&m_rts, h0: h0)
-     
-     for i in 0 ..< SUN_COUNT
-     {
-     nu_rts[i]      = nu + 360.985647 * m_rts[i]
-     
-     let n              = m_rts[i] + spa.delta_t / 86400.0
-     alpha_prime[i] = rts_alpha_delta_prime(ad: &alpha, n: n)
-     delta_prime[i] = rts_alpha_delta_prime(ad: &delta, n: n)
-     
-     h_prime[i]     = limit_degrees180pm(nu_rts[i] + spa.longitude - alpha_prime[i])
-     
-     h_rts[i]       = rts_sun_altitude(spa.latitude, delta_prime[i], h_prime[i])
-     }
-     
-     spa.srha = h_prime[SUN_RISE]
-     spa.ssha = h_prime[SUN_SET]
-     spa.sta  = h_rts[SUN_TRANSIT]
-     
-     spa.suntransit = dayfrac_to_local_hr(m_rts[SUN_TRANSIT] - h_prime[SUN_TRANSIT] / 360.0, spa.timezone)
-     
-     spa.sunrise = dayfrac_to_local_hr( sun_rise_and_set(&m_rts, &h_rts, &delta_prime, spa.latitude, &h_prime, h0_prime, SUN_RISE), spa.timezone)
-     
-     spa.sunset  = dayfrac_to_local_hr(sun_rise_and_set(&m_rts, &h_rts, &delta_prime, spa.latitude, &h_prime, h0_prime, SUN_SET),  spa.timezone)
-     
-     } else
-     {
-     spa.srha = -99999
-     spa.ssha = -99999
-     spa.sta = -99999
-     spa.suntransit = -99999
-     spa.sunrise = -99999
-     spa.sunset = -99999
-     }
-     
-     }
-     */
+    func calculate_eot_and_sun_rise_transit_set()
+    {
+        var alpha: [Double] = [], delta: [Double] = []
+        var m_rts: [Double] = [], nu_rts: [Double] = [], h_rts: [Double] = []
+        var alpha_prime: [Double] = [], delta_prime: [Double] = [], h_prime: [Double] = []
+        let h0_prime: Double = -1 * (SUN_RADIUS + self.atmos_refract)
+        
+        let m = sun_mean_longitude()
+        self.eot = equation_of_time(m)
+        
+        self.hour = 0
+        self.minute = 0
+        self.second = 0
+        self.delta_ut1 = 0
+        self.timezone = 0
+        self.jd = julian_day()
+        
+        calculate_geocentric_sun_right_ascension_and_declination()
+        
+        self.delta_t = 0
+        self.jd -= 1
+        for i in 0 ..< JD_COUNT
+        {
+            calculate_geocentric_sun_right_ascension_and_declination()
+            alpha.append(self.alpha)
+            delta.append(self.delta)
+            self.jd += 1
+        }
+        
+        m_rts.append(approx_sun_transit_time(alpha[JD_ZERO]))   //SUN_TRANSIT
+        let h0 = sun_hour_angle_at_rise_set(delta[JD_ZERO], h0_prime)
+        
+        if (h0 >= 0) {
+            
+            approx_sun_rise_and_set(&m_rts, h0: h0)
+            
+            for i in 0 ..< SUN_COUNT
+            {
+                nu_rts.append(self.nu + 360.985647 * m_rts[i])
+                
+                let n              = m_rts[i] + self.delta_t / 86400.0
+                alpha_prime.append(rts_alpha_delta_prime(ad: &alpha, n: n))
+                delta_prime.append(rts_alpha_delta_prime(ad: &delta, n: n))
+                
+                h_prime.append(limit_degrees180pm(nu_rts[i] + self.longitude - alpha_prime[i]))
+                
+                h_rts.append(rts_sun_altitude(delta_prime[i], h_prime[i]))
+            }
+            
+            self.srha = h_prime[SUN_RISE]
+            self.ssha = h_prime[SUN_SET]
+            self.sta  = h_rts[SUN_TRANSIT]
+            
+            self.suntransit = dayfrac_to_local_hr(m_rts[SUN_TRANSIT] - h_prime[SUN_TRANSIT] / 360.0)
+            
+            self.sunrise = dayfrac_to_local_hr(sun_rise_and_set(&m_rts, &h_rts, &delta_prime, &h_prime, h0_prime, SUN_RISE))
+            
+            self.sunset  = dayfrac_to_local_hr(sun_rise_and_set(&m_rts, &h_rts, &delta_prime, &h_prime, h0_prime, SUN_SET))
+            
+        }
+        else
+        {
+            self.srha = -99999
+            self.ssha = -99999
+            self.sta = -99999
+            self.suntransit = -99999
+            self.sunrise = -99999
+            self.sunset = -99999
+        }
+        
+    }
+    */
 }

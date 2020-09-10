@@ -69,8 +69,8 @@ class SunPositionManager {
             let lat = currentData.Latitude!
             let sun1 = SunPositionModel(now, GMT, longitude: lon, latitude: lat)
             let sun2 = SunPositionModel(now2, GMT, longitude: lon, latitude: lat)
-            sun1.spa_calculate()
-            sun2.spa_calculate()
+            sun1.spa_calculate(SPA_ZA_INC)
+            sun2.spa_calculate(SPA_ZA_INC)
             
             currentData.SunAltitude = sun1.declination
             currentData.SunAltitudeChange = sun2.declination - sun1.declination
@@ -115,7 +115,7 @@ class SunPositionManager {
         {
             let lat = currentData.Latitude!
             let sun = SunPositionModel(now, GMT, longitude: lon, latitude: lat)
-            sun.spa_calculate()
+            sun.spa_calculate(SPA_ZA_INC)
             
             if let sunAltitude = currentData.SunAltitude //if not first try
             {
@@ -140,7 +140,7 @@ class SunPositionManager {
         for _ in 0 ... 86400
         {
             sun.date += 1
-            sun.spa_calculate()
+            sun.spa_calculate(SPA_ZA_INC)
             if ((sun.declination <= LOWERLIMIT) || ( UPPERLIMIT <= sun.declination ))
             {
                 break
@@ -166,7 +166,7 @@ class SunPositionManager {
             for i in 0 ... 17280
             {
                 sun.date += 5 //increase
-                sun.spa_calculate()
+                sun.spa_calculate(SPA_ZA_INC)
                 if( (result.count == 0) && (sun.declination <= UPPERLIMIT) )
                 {
                     result.append(sun.date)
@@ -184,7 +184,7 @@ class SunPositionManager {
             for i in 0 ... 17280
             {
                 sun.date += 5 //increase
-                sun.spa_calculate()
+                sun.spa_calculate(SPA_ZA_INC)
                 if( (result.count == 0) && (sun.declination >= LOWERLIMIT) )
                 {
                     result.append(sun.date)

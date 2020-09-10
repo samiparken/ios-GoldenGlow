@@ -81,11 +81,10 @@ extension LocationManager: CLLocationManagerDelegate {
         if let location = locations.last {  // last is more accurate
             
             // + Update when the city name has changed
-            
             getPlace(for: location) { placemark in
                 guard let placemark = placemark else { return }
                 
-                var  output = "City Name"
+                var  output = ""
                 if let town = placemark.locality {
                     output = town
                 }
