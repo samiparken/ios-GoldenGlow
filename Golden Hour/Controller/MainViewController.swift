@@ -67,12 +67,13 @@ class MainViewController: UIViewController {
 //MARK: - SunPositionManagerDelegate
 extension MainViewController: SunPositionManagerDelegate {
     
-    // -1:Night / 0:Golden / 1:Day
+    // -2:Night / -1:Golden- / 1:Golden+ / 2:Day
     func didUpdateStatus(_ status: Int) {
         switch status {
-        case -1: BGImageView.image = UIImage(named: "BG_Night")
-        case 0:  BGImageView.image = UIImage(named: "BG_Golden")
-        case 1:  BGImageView.image = UIImage(named: "BG_Day")
+        case -2: BGImageView.image = UIImage(named: "BG_Night")
+        case -1:  BGImageView.image = UIImage(named: "BG_Golden-")
+        case 1:  BGImageView.image = UIImage(named: "BG_Golden-")
+        case 2:  BGImageView.image = UIImage(named: "BG_Day")
         default: BGImageView.image = UIImage(named: "BG_Start")
         }
     }

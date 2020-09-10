@@ -23,8 +23,13 @@ class SunPositionManager {
     func isGoldenHour() -> Bool
     {
         let sun = currentData.SunAltitude!
-        if ( ( LOWERLIMIT <= sun ) && ( sun <= UPPERLIMIT ) ) { return true }
-        else { return false }
+        return ( LOWERLIMIT <= sun ) && ( sun <= UPPERLIMIT ) ? true : false
+    }
+    
+    func isAboveHorizon() -> Bool
+    {
+        let sun = currentData.SunAltitude!
+        return sun > 0 ? true : false
     }
     
     func isAboveGoldenHour() -> Bool
@@ -77,7 +82,8 @@ class SunPositionManager {
     {
         if( isGoldenHour() )
         {
-            self.delegate?.didUpdateStatus(0)
+            if ( isAboveHorizon() ) { self.delegate?.didUpdateStatus(1)}
+            else { self.delegate?.didUpdateStatus(-1) }
             
             let now = Date()
             let endTime: Date = getEndTimeGoldenHour()
@@ -90,9 +96,9 @@ class SunPositionManager {
         else
         {
             if( isAboveGoldenHour() )
-            { self.delegate?.didUpdateStatus(1) }
+            { self.delegate?.didUpdateStatus(2) }
             else if( isBelowGoldenHour() )
-            { self.delegate?.didUpdateStatus(-1)}
+            { self.delegate?.didUpdateStatus(-2)}
             
             let nextTime: [Date] = getTimesForNextGoldenHour()
             self.delegate?.didUpdateNextGoldenHour(nextTime)
