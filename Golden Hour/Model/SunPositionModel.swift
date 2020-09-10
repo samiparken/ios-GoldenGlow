@@ -60,7 +60,7 @@ class SunPositionModel {
     var atmos_refract: Double = 0.5667 // Atmospheric refraction at sunrise and sunset (0.5667 deg is typical)
     // valid range: -5   to   5 degrees, error code: 16
     
-    //var function: Int = 1        // Switch to choose functions for desired output (from enumeration)
+    var function: Int = 1        // Switch to choose functions for desired output (from enumeration)
     //    A list of function
     //    SPA_ZA = 0,           //calculate zenith and azimuth
     //    SPA_ZA_INC = 1,      //calculate zenith, azimuth, and incidence
@@ -601,7 +601,7 @@ class SunPositionModel {
     // Calculate all SPA parameters and put into structure
     // Note: All inputs values (listed in header file) must already be in structure
     ///////////////////////////////////////////////////////////////////////////////////////////
-    func spa_calculate(_ function: Int)
+    func spa_calculate()
     {
         parseDate()
         let result: Int = validate_inputs()
@@ -628,7 +628,7 @@ class SunPositionModel {
             self.azimuth_astro = topocentric_azimuth_angle_astro()
             self.azimuth       = topocentric_azimuth_angle()
             
-            if ((function == SPA_ZA_INC) || (function == SPA_ALL))
+            if ((self.function == SPA_ZA_INC) || (self.function == SPA_ALL))
             {
                 self.incidence  = surface_incidence_angle()
                 self.declination = surface_declination_angle()

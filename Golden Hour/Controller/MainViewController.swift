@@ -78,15 +78,21 @@ extension MainViewController: SunPositionManagerDelegate {
         }
     }
     
-    func didUpdateEndGoldenHour(_ endtime: Date) {
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: endtime)
-        let minute = calendar.component(.minute, from: endtime)
-        centerTopLabel.text = "Ends in"
-        centerButtomLabel.text = "Ends at " + String(format: "%02d:%02d", hour, minute)
+    func didUpdateRemainingTime(_ time: Int) {
+        // Try Timer
+        timerManager.remainingTime = time
+        timerManager.startTimer()
     }
     
-    func didUpdateNextGoldenHour(_ next: [Date]) {
+//    func didUpdateEndGoldenHour(_ endtime: Date) {
+//        let calendar = Calendar.current
+//        let hour = calendar.component(.hour, from: endtime)
+//        let minute = calendar.component(.minute, from: endtime)
+//        centerTopLabel.text = "Ends in"
+//        centerButtomLabel.text = "Ends at " + String(format: "%02d:%02d", hour, minute)
+//    }
+    
+    func didUpdateGoldenHour(_ next: [Date]) {
         let start = next[0]
         let end = next[1]
         
@@ -105,10 +111,18 @@ extension MainViewController: SunPositionManagerDelegate {
         centerButtomLabel.text = "Starts at " + String(format: "%02d:%02d", hour, minute)
     }
     
-    func didUpdateRemainingTime(_ time: Int) {
-        // Try Timer
-        timerManager.remainingTime = time
-        timerManager.startTimer()
+    func didUpdateSunsetTime(_ sunset: Date) {
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: sunset)
+        let minute = calendar.component(.minute, from: sunset)
+        print("Sunset : \(hour):\(minute)")
+    }
+    
+    func didUpdateSunriseTime(_ sunrise: Date) {
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: sunrise)
+        let minute = calendar.component(.minute, from: sunrise)
+        print("Sunrise : \(hour):\(minute)")
     }
     
 }
