@@ -24,9 +24,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var timeSaperator: UILabel!
     @IBOutlet weak var timeDigitSec: UILabel!
     @IBOutlet weak var centerButtomLabel: UILabel!
-    
-    @IBOutlet weak var buttomLabel: UILabel!
-    
+        
     // Managers
     var sunPositionManager = SunPositionManager()
     var locationManager = LocationManager()
@@ -67,12 +65,13 @@ class MainViewController: UIViewController {
 //MARK: - SunPositionManagerDelegate
 extension MainViewController: SunPositionManagerDelegate {
     
+    // + Update According to Sun's Altitude
     // -2:Night / -1:Golden- / 1:Golden+ / 2:Day
     func didUpdateStatus(_ status: Int) {
         switch status {
         case -2: BGImageView.image = UIImage(named: "BG_Night")
         case -1:  BGImageView.image = UIImage(named: "BG_Golden-")
-        case 1:  BGImageView.image = UIImage(named: "BG_Golden-")
+        case 1:  BGImageView.image = UIImage(named: "BG_Golden+")
         case 2:  BGImageView.image = UIImage(named: "BG_Day")
         default: BGImageView.image = UIImage(named: "BG_Start")
         }
@@ -159,7 +158,7 @@ extension MainViewController: TimerManagerDelegate {
         {
             sunPositionManager.updateCurrentAltitude()
             let sunAltitude = sunPositionManager.getCurrentAltitude()
-            buttomLabel.text = String(format: "%2.2f", sunAltitude)
+            print("SunAltitude: \(String(format: "%2.2f", sunAltitude))")
         }
     }
     
