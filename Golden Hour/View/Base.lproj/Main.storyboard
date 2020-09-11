@@ -67,8 +67,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RU9-2X-HjL" userLabel="Progress View">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="progress" translatesAutoresizingMaskIntoConstraints="NO" id="Dtx-zz-iCK">
-                                        <rect key="frame" x="30" y="-387" width="354" height="1550"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Progress100" translatesAutoresizingMaskIntoConstraints="NO" id="Dtx-zz-iCK" userLabel="Progress">
+                                        <rect key="frame" x="30" y="-77" width="354" height="930"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -146,6 +146,7 @@
                         <outlet property="centerButtomLabel" destination="uJE-xl-R9t" id="29a-fG-4dI"/>
                         <outlet property="centerTopLabel" destination="GKl-5E-s07" id="kWL-OW-fJd"/>
                         <outlet property="currentLocationOutlet" destination="NXX-xC-vpT" id="bFn-K0-0RB"/>
+                        <outlet property="progressBarView" destination="Dtx-zz-iCK" id="ZYy-zQ-mcw"/>
                         <outlet property="timeDigitMin" destination="I20-ap-qlG" id="dB2-KZ-PfF"/>
                         <outlet property="timeDigitSec" destination="pFL-AU-VSp" id="Sf7-f1-M5r"/>
                         <outlet property="timeSaperator" destination="2le-aO-8fy" id="ygG-la-jW1"/>
@@ -174,9 +175,9 @@
     </scenes>
     <resources>
         <image name="BG_Start" width="1875" height="4060"/>
+        <image name="Progress100" width="930" height="930"/>
         <image name="iconSearch" width="150" height="150"/>
         <image name="iconSettings" width="160" height="165"/>
         <image name="location.fill" catalog="system" width="128" height="115"/>
-        <image name="progress" width="1550" height="1550"/>
     </resources>
 </document>

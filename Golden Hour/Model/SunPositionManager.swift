@@ -11,7 +11,7 @@ import Foundation
 protocol SunPositionManagerDelegate {
     func didUpdateStatus(_ status: Int)   // -1:Night / 0:Golden / 1:Day
     func didUpdateGoldenHour(_ next: [Date])
-    func didUpdateRemainingTime(_ time: Int)
+    func didUpdateRemainingTime(_ remain: Int, _ total: Int)
     func didUpdateSunsetTime(_ sunset: Date)
     func didUpdateSunriseTime(_ sunrise: Date)
 }
@@ -94,7 +94,8 @@ class SunPositionManager {
             self.delegate?.didUpdateGoldenHour(thisTime)
             
             let remainingTime = Int(endTime.timeIntervalSince1970 - now.timeIntervalSince1970)
-            self.delegate?.didUpdateRemainingTime(remainingTime)
+            let totalTime = Int(endTime.timeIntervalSince1970 - startTime.timeIntervalSince1970)
+            self.delegate?.didUpdateRemainingTime(remainingTime, totalTime)
             
         }
         else

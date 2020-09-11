@@ -19,6 +19,9 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var BGImageView: UIImageView!
     
+    
+    @IBOutlet weak var progressBarView: UIImageView!
+    
     @IBOutlet weak var centerTopLabel: UILabel!
     @IBOutlet weak var timeDigitMin: UILabel!
     @IBOutlet weak var timeSaperator: UILabel!
@@ -70,16 +73,17 @@ extension MainViewController: SunPositionManagerDelegate {
     func didUpdateStatus(_ status: Int) {
         switch status {
         case -2: BGImageView.image = UIImage(named: "BG_Night")
-        case -1:  BGImageView.image = UIImage(named: "BG_Golden-")
+        case -1: BGImageView.image = UIImage(named: "BG_Golden-")
         case 1:  BGImageView.image = UIImage(named: "BG_Golden+")
         case 2:  BGImageView.image = UIImage(named: "BG_Day")
         default: BGImageView.image = UIImage(named: "BG_Start")
         }
     }
     
-    func didUpdateRemainingTime(_ time: Int) {
+    func didUpdateRemainingTime(_ remain: Int, _ total: Int) {
         // Try Timer
-        timerManager.remainingTime = time
+        timerManager.remainingTime = remain
+        timerManager.totalTime = total
         timerManager.startTimer()
     }
     
@@ -160,6 +164,13 @@ extension MainViewController: TimerManagerDelegate {
             let sunAltitude = sunPositionManager.getCurrentAltitude()
             print("SunAltitude: \(String(format: "%2.2f", sunAltitude))")
         }
+    }
+    
+    func didUpdateProgressBar(_ percent: Int) {
+     
+        let progress = Int(Double(percent) / 5) * 5 + 5  // 100 95 90 ...
+        let progressID: String = "Progress\(progress)"
+        progressBarView.image = UIImage(named: progressID)
     }
     
     func didEndTimer() {
