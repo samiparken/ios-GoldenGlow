@@ -60,7 +60,7 @@ class SunPositionManager {
     {
         // Get current date & time
         let now = Date()
-        let now2 = Date() + 5
+        let now2 = Date() + 1
         let GMT = currentData.GMT
         
         // First Update Sun Altitude
@@ -86,17 +86,12 @@ class SunPositionManager {
             else { self.delegate?.didUpdateStatus(-1) }
             
             let now = Date()
-            var thisTime: [Date] = []
-            let startTime: Date = getStartTimeThisGoldenHour()
-            let endTime: Date = getEndTimeThisGoldenHour()
-            thisTime.append(startTime)
-            thisTime.append(endTime)
+            let thisTime: [Date] = getTimesForThisGoldenHour()
             self.delegate?.didUpdateGoldenHour(thisTime)
             
-            let remainingTime = Int(endTime.timeIntervalSince1970 - now.timeIntervalSince1970)
-            let totalTime = Int(endTime.timeIntervalSince1970 - startTime.timeIntervalSince1970)
+            let remainingTime = Int(thisTime[1].timeIntervalSince1970 - now.timeIntervalSince1970)
+            let totalTime = Int(thisTime[1].timeIntervalSince1970 - thisTime[0].timeIntervalSince1970)
             self.delegate?.didUpdateRemainingTime(remainingTime, totalTime)
-            
         }
         else
         {
@@ -109,7 +104,6 @@ class SunPositionManager {
             self.delegate?.didUpdateGoldenHour(nextTime)
         }
     }
-    
     
     func updateCurrentAltitude()
     {
@@ -137,85 +131,42 @@ class SunPositionManager {
     func getTimesForThisGoldenHour() -> [Date]
     {
         var result: [Date] = []
-        result.append(getStartTimeThisGoldenHour())
-        result.append(getEndTimeThisGoldenHour())
+        let GMT = currentData.GMT
+        let lon = currentData.Longitude!
+        let lat = currentData.Latitude!
+        let sun = SunPositionModel(Date(), GMT, longitude: lon, latitude: lat)
+        
+        var currentState = self.isAboveHorizon()
+        var passingHorizon: Bool = false
+        
+        for _ in 0 ... 86400
+        {
+            sun.date = result.count==0 ? sun.date - 1 : sun.date + 1
+            sun.spa_calculate()
+            
+            if ((sun.declination <= LOWERLIMIT) || ( UPPERLIMIT <= sun.declination ))
+            {
+                result.append(sun.date)
+                sun.date = Date()           //reset Time
+                if( result.count == 2 ) { break }    //End Loop
+            }
+            // Checking if passing Horizon
+            else if ( !passingHorizon && (currentState ^ (sun.declination > 0)))
+            {
+                passingHorizon = true
+                currentState = result.count==0 ? !currentState : currentState
+                if(currentState)
+                {
+                    self.delegate?.didUpdateSunsetTime(sun.date) //sunset
+                }
+                else
+                {
+                    self.delegate?.didUpdateSunriseTime(sun.date) //sunrise
+                }
+            }
+        }
         return result
     }
-    
-    func getStartTimeThisGoldenHour() -> Date
-    {
-        let time = Date()
-        let GMT = currentData.GMT
-        let lon = currentData.Longitude!
-        let lat = currentData.Latitude!
-        let sun = SunPositionModel(time, GMT, longitude: lon, latitude: lat)
-        
-        var currentState = self.isAboveHorizon()
-        
-        for _ in 0 ... 86400
-        {
-            sun.date -= 1
-            sun.spa_calculate()
-            if ((sun.declination <= LOWERLIMIT) || ( UPPERLIMIT <= sun.declination ))
-            {
-                break
-            }
-            // Checking if passing Horizon
-            else if ( currentState ^ (sun.declination > 0))
-            {
-                if(currentState)
-                {
-                    //sunrise
-                    self.delegate?.didUpdateSunriseTime(sun.date)
-                }
-                else
-                {
-                    //sunset
-                    self.delegate?.didUpdateSunsetTime(sun.date)
-                }
-                currentState = !currentState
-            }
-        }
-        return sun.date
-    }
-    
-    func getEndTimeThisGoldenHour() -> Date
-    {
-        let time = Date()
-        let GMT = currentData.GMT
-        let lon = currentData.Longitude!
-        let lat = currentData.Latitude!
-        let sun = SunPositionModel(time, GMT, longitude: lon, latitude: lat)
-        
-        var currentState = self.isAboveHorizon()
-        
-        for _ in 0 ... 86400
-        {
-            sun.date += 1
-            sun.spa_calculate()
-            if ((sun.declination <= LOWERLIMIT) || ( UPPERLIMIT <= sun.declination ))
-            {
-                break
-            }
-            // Checking if passing Horizon
-            else if ( currentState ^ (sun.declination > 0))
-            {
-                if(currentState)
-                {
-                    //sunset
-                    self.delegate?.didUpdateSunsetTime(sun.date)
-                }
-                else
-                {
-                    //sunrise
-                    self.delegate?.didUpdateSunriseTime(sun.date)
-                }
-                currentState = !currentState
-            }
-        }
-        return sun.date
-    }
-    
     
     func getTimesForNextGoldenHour() -> [Date]
     {
@@ -239,7 +190,7 @@ class SunPositionManager {
                 {
                     result.append(sun.date)
                 }
-                    // Checking if passing Horizon
+                // Checking if passing Horizon
                 else if ( currentState ^ (sun.declination > 0))
                 {
                     if(currentState)
@@ -271,6 +222,20 @@ class SunPositionManager {
                 if( (result.count == 0) && (sun.declination >= LOWERLIMIT) )
                 {
                     result.append(sun.date)
+                }
+                else if ( currentState ^ (sun.declination > 0))
+                {
+                    if(currentState)
+                    {
+                        //sunset
+                        self.delegate?.didUpdateSunsetTime(sun.date)
+                    }
+                    else
+                    {
+                        //sunrise
+                        self.delegate?.didUpdateSunriseTime(sun.date)
+                    }
+                    currentState = !currentState
                 }
                 else if( (result.count == 1) && ((UPPERLIMIT <= sun.declination) || (sun.declination <= LOWERLIMIT)) )
                 {

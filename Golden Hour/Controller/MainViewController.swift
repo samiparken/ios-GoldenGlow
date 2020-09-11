@@ -14,11 +14,9 @@
 import UIKit
 
 class MainViewController: UIViewController {
-    
-    @IBOutlet weak var currentLocationOutlet: UIButton!
-    
+
     @IBOutlet weak var BGImageView: UIImageView!
-    
+    @IBOutlet weak var currentLocationOutlet: UIButton!
     
     @IBOutlet weak var progressBarView: UIImageView!
     
@@ -26,8 +24,17 @@ class MainViewController: UIViewController {
     @IBOutlet weak var timeDigitMin: UILabel!
     @IBOutlet weak var timeSaperator: UILabel!
     @IBOutlet weak var timeDigitSec: UILabel!
-    @IBOutlet weak var centerButtomLabel: UILabel!
         
+    @IBOutlet weak var startTimeLabel: UILabel!
+    
+    @IBOutlet weak var sunsetImageView: UIImageView!
+    @IBOutlet weak var sunsetTimeLabel: UILabel!
+    @IBOutlet weak var endTimeLabel: UILabel!
+    
+    @IBOutlet weak var weatherImageView: UIImageView!
+    @IBOutlet weak var summaryLabel: UILabel!
+    
+    
     // Managers
     var sunPositionManager = SunPositionManager()
     var locationManager = LocationManager()
@@ -108,24 +115,30 @@ extension MainViewController: SunPositionManagerDelegate {
         timeDigitSec.text = String(format: "%02d", lastSec)
         
         let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: start)
-        let minute = calendar.component(.minute, from: start)
+        let hour1 = calendar.component(.hour, from: start)
+        let minute1 = calendar.component(.minute, from: start)
+        startTimeLabel.text = String(format: "%02d:%02d", hour1, minute1)
         
-        centerButtomLabel.text = "Starts at " + String(format: "%02d:%02d", hour, minute)
+        let hour2 = calendar.component(.hour, from: end)
+        let minute2 = calendar.component(.minute, from: end)
+        endTimeLabel.text = String(format: "%02d:%02d", hour2, minute2)
+
     }
     
     func didUpdateSunsetTime(_ sunset: Date) {
         let calendar = Calendar.current
         let hour = calendar.component(.hour, from: sunset)
         let minute = calendar.component(.minute, from: sunset)
-        print("Sunset : \(hour):\(minute)")
+        sunsetImageView.image = UIImage(systemName: "sunset.fill")
+        sunsetTimeLabel.text = String(format: "%02d:%02d", hour, minute)
     }
     
     func didUpdateSunriseTime(_ sunrise: Date) {
         let calendar = Calendar.current
         let hour = calendar.component(.hour, from: sunrise)
         let minute = calendar.component(.minute, from: sunrise)
-        print("Sunrise : \(hour):\(minute)")
+        sunsetImageView.image = UIImage(systemName: "sunrise.fill")
+        sunsetTimeLabel.text = String(format: "%02d:%02d", hour, minute)
     }
     
 }
