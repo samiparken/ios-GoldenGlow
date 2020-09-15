@@ -151,7 +151,8 @@ extension MainViewController: LocationManagerDelegate {
         sunPositionManager.currentData.Latitude = locationData[1]
         
         // Start Calculating
-        sunPositionManager.startSunPositionSystem()
+        if let _ = sunPositionManager.currentData.SunAltitudeChange {}
+        else { sunPositionManager.startSunPositionSystem() }
     }
     
     func didUpdateCityName(_ cityname: String) {

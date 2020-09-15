@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BG_Start" translatesAutoresizingMaskIntoConstraints="NO" id="sGu-b0-jHB" userLabel="BG">
+                            <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BG_Start" translatesAutoresizingMaskIntoConstraints="NO" id="sGu-b0-jHB" userLabel="BG">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1yl-2E-Vuh" userLabel="Top Bar">
@@ -42,7 +42,7 @@
                                         <rect key="frame" x="40" y="0.0" width="265" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="City Name" image="location.fill" catalog="system"/>
+                                        <state key="normal" title="City Name"/>
                                         <connections>
                                             <action selector="currentLocationButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xmj-RN-QD1"/>
                                         </connections>
@@ -68,7 +68,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Progress100" translatesAutoresizingMaskIntoConstraints="NO" id="Dtx-zz-iCK" userLabel="Progress">
-                                        <rect key="frame" x="30" y="-119" width="315" height="930"/>
+                                        <rect key="frame" x="30" y="-95" width="315" height="882"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -79,16 +79,16 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="-7" translatesAutoresizingMaskIntoConstraints="NO" id="nxP-fM-g3E" userLabel="Center Label">
-                                <rect key="frame" x="66.000000000000014" y="280.66666666666669" width="243.33333333333337" height="130.66666666666669"/>
+                                <rect key="frame" x="66.000000000000014" y="283.66666666666669" width="243.33333333333337" height="124.66666666666669"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calculating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKl-5E-s07" userLabel="centerTopLabel">
-                                        <rect key="frame" x="34" y="0.0" width="175" height="42"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="35"/>
+                                        <rect key="frame" x="51" y="0.0" width="141.33333333333334" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Lne-fc-b8Q" userLabel="Timer Label">
-                                        <rect key="frame" x="0.0" y="35.000000000000007" width="243.33333333333334" height="95.666666666666686"/>
+                                        <rect key="frame" x="0.0" y="29.000000000000007" width="243.33333333333334" height="95.666666666666686"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I20-ap-qlG" userLabel="timeDigitMin">
                                                 <rect key="frame" x="0.0" y="23" width="93" height="50"/>
@@ -127,13 +127,13 @@
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="START" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="luf-5n-AhD">
                                                         <rect key="frame" x="0.0" y="0.0" width="98.333333333333329" height="15.666666666666666"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FMi-zy-nzj" userLabel="startTimeLabel">
                                                         <rect key="frame" x="0.0" y="15.666666666666629" width="98.333333333333329" height="30"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="25"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -151,7 +151,7 @@
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71A-CB-n8U" userLabel="sunsetTimeLabel">
                                                         <rect key="frame" x="0.0" y="20.333333333333371" width="98.333333333333329" height="30"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="25"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -166,13 +166,13 @@
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="END" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afA-s2-H6H">
                                                         <rect key="frame" x="0.0" y="0.0" width="98.333333333333329" height="15.666666666666666"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y4x-eE-b99" userLabel="endTimeLabel">
                                                         <rect key="frame" x="0.0" y="15.666666666666629" width="98.333333333333329" height="30"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="25"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -206,7 +206,7 @@
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50% chance of experiencing Golden Hour. It depends on the weather." lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Js5-I5-4Q9" userLabel="summaryLabel">
                                                 <rect key="frame" x="75" y="0.0" width="230" height="50"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -284,16 +284,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rkf-sj-ZwR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="887" y="127"/>
+            <point key="canvasLocation" x="885.60000000000002" y="126.35467980295567"/>
         </scene>
     </scenes>
     <resources>
         <image name="BG_Start" width="1875" height="4060"/>
-        <image name="Progress100" width="930" height="930"/>
+        <image name="Progress100" width="882" height="882"/>
         <image name="cloud.sun.fill" catalog="system" width="128" height="88"/>
         <image name="iconSearch" width="150" height="150"/>
         <image name="iconSettings" width="160" height="165"/>
-        <image name="location.fill" catalog="system" width="128" height="115"/>
         <image name="sunset.fill" catalog="system" width="128" height="97"/>
     </resources>
 </document>

@@ -85,10 +85,10 @@ class SunPositionManager {
             if ( isAboveHorizon() ) { self.delegate?.didUpdateStatus(1)}
             else { self.delegate?.didUpdateStatus(-1) }
             
-            let now = Date()
             let thisTime: [Date] = getTimesForThisGoldenHour()
             self.delegate?.didUpdateGoldenHour(thisTime)
-            
+
+            let now = Date()
             let remainingTime = Int(thisTime[1].timeIntervalSince1970 - now.timeIntervalSince1970)
             let totalTime = Int(thisTime[1].timeIntervalSince1970 - thisTime[0].timeIntervalSince1970)
             self.delegate?.didUpdateRemainingTime(remainingTime, totalTime)
@@ -147,22 +147,16 @@ class SunPositionManager {
             if ((sun.declination <= LOWERLIMIT) || ( UPPERLIMIT <= sun.declination ))
             {
                 result.append(sun.date)
-                sun.date = Date()           //reset Time
-                if( result.count == 2 ) { break }    //End Loop
+                sun.date = Date()           //Reset Time
+                if( result.count == 2 ) { break }  //End Loop
             }
-            // Checking if passing Horizon
+                // Checking if passing Horizon
             else if ( !passingHorizon && (currentState ^ (sun.declination > 0)))
             {
                 passingHorizon = true
-                currentState = result.count==0 ? !currentState : currentState
-                if(currentState)
-                {
-                    self.delegate?.didUpdateSunsetTime(sun.date) //sunset
-                }
-                else
-                {
-                    self.delegate?.didUpdateSunriseTime(sun.date) //sunrise
-                }
+                currentState = result.count==0 ? !currentState : currentState //adjust for backwards time
+                if(currentState) { self.delegate?.didUpdateSunsetTime(sun.date) } //sunset
+                else { self.delegate?.didUpdateSunriseTime(sun.date) } //sunrise
             }
         }
         return result
@@ -172,85 +166,40 @@ class SunPositionManager {
     {
         var result: [Date] = []
         
-        let time = Date()
         let GMT = currentData.GMT
         let lon = currentData.Longitude!
         let lat = currentData.Latitude!
-        let sun = SunPositionModel(time, GMT, longitude: lon, latitude: lat)
+        let sun = SunPositionModel(Date(), GMT, longitude: lon, latitude: lat)
         
         var currentState = self.isAboveHorizon()
         
-        if( currentData.SunAltitude! >= UPPERLIMIT )
+        for i in 0 ... 17280
         {
-            for i in 0 ... 17280
+            sun.date += 5 //increase
+            sun.spa_calculate()
+            if( (result.count == 0) && (LOWERLIMIT <= sun.declination) && (sun.declination <= UPPERLIMIT))
             {
-                sun.date += 5 //increase
-                sun.spa_calculate()
-                if( (result.count == 0) && (sun.declination <= UPPERLIMIT) )
-                {
-                    result.append(sun.date)
-                }
-                // Checking if passing Horizon
-                else if ( currentState ^ (sun.declination > 0))
-                {
-                    if(currentState)
-                    {
-                        //sunset
-                        self.delegate?.didUpdateSunsetTime(sun.date)
-                    }
-                    else
-                    {
-                        //sunrise
-                        self.delegate?.didUpdateSunriseTime(sun.date)
-                    }
-                    currentState = !currentState
-                }
-                else if( (result.count == 1) && ((sun.declination <= LOWERLIMIT) || ( UPPERLIMIT <= sun.declination )) )
-                {
-                    result.append(sun.date)
-                    break
-                }
-                print(" \(i), \(sun.declination)")
+                result.append(sun.date)
             }
-        }
-        else if ( currentData.SunAltitude! <= LOWERLIMIT )
-        {
-            for i in 0 ... 17280
+            // Checking if passing Horizon
+            else if ( currentState ^ (sun.declination > 0))
             {
-                sun.date += 5 //increase
-                sun.spa_calculate()
-                if( (result.count == 0) && (sun.declination >= LOWERLIMIT) )
-                {
-                    result.append(sun.date)
-                }
-                else if ( currentState ^ (sun.declination > 0))
-                {
-                    if(currentState)
-                    {
-                        //sunset
-                        self.delegate?.didUpdateSunsetTime(sun.date)
-                    }
-                    else
-                    {
-                        //sunrise
-                        self.delegate?.didUpdateSunriseTime(sun.date)
-                    }
-                    currentState = !currentState
-                }
-                else if( (result.count == 1) && ((UPPERLIMIT <= sun.declination) || (sun.declination <= LOWERLIMIT)) )
-                {
-                    result.append(sun.date)
-                    break
-                }
-                print(" \(i), \(sun.declination)")
+                if(currentState) { self.delegate?.didUpdateSunsetTime(sun.date) } //sunset
+                else { self.delegate?.didUpdateSunriseTime(sun.date) } //sunrise
+                currentState = !currentState
             }
+            else if( (result.count == 1) && ((sun.declination <= LOWERLIMIT) || ( UPPERLIMIT <= sun.declination )) )
+            {
+                result.append(sun.date)
+                break
+            }
+            print(" \(i), \(sun.declination)")
         }
         
         return result
     }
     
 }
-
 
 // XOR operation for Bool
 extension Bool {
