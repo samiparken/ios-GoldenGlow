@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NV3-4U-HHo">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Sky View Controller-->
+        <scene sceneID="jXp-37-EaL">
+            <objects>
+                <viewController id="NV3-4U-HHo" customClass="SkyViewController" customModule="Golden_Hour" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XXZ-JR-Y5O">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BG_Night" translatesAutoresizingMaskIntoConstraints="NO" id="m7n-jY-lav" userLabel="BG">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="5PY-AW-rul" userLabel="Top Bar">
+                                <rect key="frame" x="15" y="54" width="384" height="36"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cik-jz-MQA" userLabel="Search Button">
+                                        <rect key="frame" x="0.0" y="0.0" width="109.5" height="36"/>
+                                        <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="1"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="iconSearch">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="searchButtonPressed:" destination="NV3-4U-HHo" eventType="touchUpInside" id="6qW-J0-ZKf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J0C-JA-0kO">
+                                        <rect key="frame" x="109.5" y="0.0" width="165" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="-"/>
+                                        <connections>
+                                            <action selector="currentLocationButtonPressed:" destination="NV3-4U-HHo" eventType="touchUpInside" id="oIK-30-3qg"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aUL-9v-eIm" userLabel="Notification Button">
+                                        <rect key="frame" x="274.5" y="0.0" width="109.5" height="36"/>
+                                        <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="1"/>
+                                        <state key="normal" image="iconNotification">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="settingsButtonPressed:" destination="NV3-4U-HHo" eventType="touchUpInside" id="xNs-1A-tDS"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
+                            </stackView>
+                            <scrollView clipsSubviews="YES" contentMode="top" preservesSuperviewLayoutMargins="YES" bounces="NO" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2y-RU-Aj0">
+                                <rect key="frame" x="0.0" y="105" width="414" height="708"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="GZo-WS-xhY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="m7n-jY-lav" secondAttribute="bottom" id="9vG-JP-W9Q"/>
+                            <constraint firstItem="GZo-WS-xhY" firstAttribute="bottom" secondItem="f2y-RU-Aj0" secondAttribute="bottom" id="B8d-ZG-j4z"/>
+                            <constraint firstItem="GZo-WS-xhY" firstAttribute="trailing" secondItem="5PY-AW-rul" secondAttribute="trailing" constant="15" id="KVd-2H-BsR"/>
+                            <constraint firstItem="5PY-AW-rul" firstAttribute="leading" secondItem="GZo-WS-xhY" secondAttribute="leading" constant="15" id="OWL-MR-cKF"/>
+                            <constraint firstItem="f2y-RU-Aj0" firstAttribute="leading" secondItem="GZo-WS-xhY" secondAttribute="leading" id="Txy-0W-lnv"/>
+                            <constraint firstItem="m7n-jY-lav" firstAttribute="trailing" secondItem="XXZ-JR-Y5O" secondAttribute="trailing" id="WOM-ZG-lgw"/>
+                            <constraint firstItem="5PY-AW-rul" firstAttribute="top" secondItem="GZo-WS-xhY" secondAttribute="top" constant="10" id="avT-Jb-2B2"/>
+                            <constraint firstItem="f2y-RU-Aj0" firstAttribute="top" secondItem="5PY-AW-rul" secondAttribute="bottom" constant="15" id="uJH-es-LUK"/>
+                            <constraint firstItem="m7n-jY-lav" firstAttribute="top" secondItem="XXZ-JR-Y5O" secondAttribute="top" id="usy-Wp-a4n"/>
+                            <constraint firstItem="f2y-RU-Aj0" firstAttribute="trailing" secondItem="GZo-WS-xhY" secondAttribute="trailing" id="vQn-RW-9SX"/>
+                            <constraint firstItem="m7n-jY-lav" firstAttribute="leading" secondItem="XXZ-JR-Y5O" secondAttribute="leading" id="zRy-EI-UK9"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="iconSunglow" id="nFU-IJ-YN9"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="BGImageView" destination="m7n-jY-lav" id="qhr-nn-8F7"/>
+                        <outlet property="currentLocationOutlet" destination="J0C-JA-0kO" id="PCK-PY-Cq3"/>
+                        <outlet property="scrollView" destination="f2y-RU-Aj0" id="lQQ-qH-YGS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IEy-sF-FqQ" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="135.19999999999999" y="125.61576354679804"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="BG_Night" width="1875" height="4060"/>
+        <image name="iconNotification" width="20" height="22"/>
+        <image name="iconSearch" width="20" height="20"/>
+        <image name="iconSunglow" width="24" height="25"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

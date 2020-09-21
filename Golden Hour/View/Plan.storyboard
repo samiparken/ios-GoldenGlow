@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="StU-e6-k9S">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Plan View Controller-->
+        <scene sceneID="ebb-rf-ZcU">
+            <objects>
+                <viewController id="StU-e6-k9S" customClass="PlanViewController" customModule="Golden_Hour" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0oj-ib-CUX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BG_Start" translatesAutoresizingMaskIntoConstraints="NO" id="4HC-93-k6J" userLabel="BG">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="ZP2-Lf-tya" userLabel="Top Bar">
+                                <rect key="frame" x="15" y="54" width="384" height="36"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fsp-Bh-ACB" userLabel="Search Button">
+                                        <rect key="frame" x="0.0" y="0.0" width="109.5" height="36"/>
+                                        <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="1"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="iconSearch">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iP8-iE-5N3">
+                                        <rect key="frame" x="109.5" y="0.0" width="165" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="-"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QX0-Vp-uTe" userLabel="Notification Button">
+                                        <rect key="frame" x="274.5" y="0.0" width="109.5" height="36"/>
+                                        <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="1"/>
+                                        <state key="normal" image="iconNotification">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Cfe-k2-Dyu"/>
+                        <constraints>
+                            <constraint firstItem="4HC-93-k6J" firstAttribute="trailing" secondItem="Cfe-k2-Dyu" secondAttribute="trailing" id="79I-KP-BMu"/>
+                            <constraint firstItem="ZP2-Lf-tya" firstAttribute="leading" secondItem="Cfe-k2-Dyu" secondAttribute="leading" constant="15" id="IwB-Za-2zC"/>
+                            <constraint firstItem="4HC-93-k6J" firstAttribute="bottom" secondItem="Cfe-k2-Dyu" secondAttribute="bottom" id="Ys0-YV-plk"/>
+                            <constraint firstItem="Cfe-k2-Dyu" firstAttribute="trailing" secondItem="ZP2-Lf-tya" secondAttribute="trailing" constant="15" id="fQ5-cF-LwB"/>
+                            <constraint firstItem="4HC-93-k6J" firstAttribute="top" secondItem="0oj-ib-CUX" secondAttribute="top" id="fSc-rt-bA7"/>
+                            <constraint firstItem="ZP2-Lf-tya" firstAttribute="top" secondItem="Cfe-k2-Dyu" secondAttribute="top" constant="10" id="lTA-xq-6tc"/>
+                            <constraint firstItem="4HC-93-k6J" firstAttribute="leading" secondItem="Cfe-k2-Dyu" secondAttribute="leading" id="v3Y-kY-vWA"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="iconCalendar" id="taG-FJ-d0e"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="BGImageView" destination="4HC-93-k6J" id="v3j-qt-Ffh"/>
+                        <outlet property="currentLocationOutlet" destination="iP8-iE-5N3" id="okD-HH-ez8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j03-Zk-HTn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="163.768115942029" y="123.88392857142857"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="BG_Start" width="1875" height="4060"/>
+        <image name="iconCalendar" width="26" height="24"/>
+        <image name="iconNotification" width="20" height="22"/>
+        <image name="iconSearch" width="20" height="20"/>
+    </resources>
+</document>

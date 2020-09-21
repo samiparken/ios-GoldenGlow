@@ -7,15 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		224FCA2E25190D0500CC4EE4 /* Sky.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224FCA2D25190D0500CC4EE4 /* Sky.storyboard */; };
+		224FCA3125190D3300CC4EE4 /* Plan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224FCA3025190D3300CC4EE4 /* Plan.storyboard */; };
+		224FCA3525190D8600CC4EE4 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224FCA3425190D8600CC4EE4 /* Setting.storyboard */; };
+		224FCA3925190E1E00CC4EE4 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FCA3825190E1E00CC4EE4 /* TabBarController.swift */; };
+		224FCA3D25190E5900CC4EE4 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FCA3C25190E5900CC4EE4 /* SettingViewController.swift */; };
 		2271B2942500240F00DCB915 /* SunPositionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271B2932500240F00DCB915 /* SunPositionManager.swift */; };
-		22777B0524FAA36800834DDB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22777B0424FAA36800834DDB /* SearchViewController.swift */; };
+		22777B0524FAA36800834DDB /* PlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22777B0424FAA36800834DDB /* PlanViewController.swift */; };
 		2278250A250143260000794E /* CurrentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22782509250143260000794E /* CurrentData.swift */; };
 		22793BA524F81C2800BEBF8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22793BA424F81C2800BEBF8E /* AppDelegate.swift */; };
 		22793BA724F81C2800BEBF8E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22793BA624F81C2800BEBF8E /* SceneDelegate.swift */; };
-		22793BA924F81C2800BEBF8E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22793BA824F81C2800BEBF8E /* MainViewController.swift */; };
+		22793BA924F81C2800BEBF8E /* SkyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22793BA824F81C2800BEBF8E /* SkyViewController.swift */; };
 		22793BAC24F81C2800BEBF8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22793BAA24F81C2800BEBF8E /* Main.storyboard */; };
 		22793BAE24F81C2C00BEBF8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22793BAD24F81C2C00BEBF8E /* Assets.xcassets */; };
 		22793BB124F81C2C00BEBF8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22793BAF24F81C2C00BEBF8E /* LaunchScreen.storyboard */; };
+		22BF85EB25110946001E03E5 /* ScrollViewPage1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF85EA25110946001E03E5 /* ScrollViewPage1.swift */; };
+		22BF85ED25110958001E03E5 /* ScrollViewPage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF85EC25110958001E03E5 /* ScrollViewPage2.swift */; };
+		22BF85EF2511096B001E03E5 /* ScrollViewPage1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22BF85EE2511096B001E03E5 /* ScrollViewPage1.xib */; };
+		22BF85F125110977001E03E5 /* ScrollViewPage2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22BF85F025110977001E03E5 /* ScrollViewPage2.xib */; };
 		22C5D01B25090A350077F7E2 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5D01A25090A350077F7E2 /* LocationManager.swift */; };
 		22C5D01D25091BC10077F7E2 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5D01C25091BC10077F7E2 /* TimerManager.swift */; };
 		22E4FD4424FE83C200C845E1 /* SunPositionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E4FD4324FE83C200C845E1 /* SunPositionModel.swift */; };
@@ -24,17 +33,26 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		224FCA2D25190D0500CC4EE4 /* Sky.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Sky.storyboard; sourceTree = "<group>"; };
+		224FCA3025190D3300CC4EE4 /* Plan.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Plan.storyboard; sourceTree = "<group>"; };
+		224FCA3425190D8600CC4EE4 /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
+		224FCA3825190E1E00CC4EE4 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		224FCA3C25190E5900CC4EE4 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		2271B2932500240F00DCB915 /* SunPositionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunPositionManager.swift; sourceTree = "<group>"; };
-		22777B0424FAA36800834DDB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		22777B0424FAA36800834DDB /* PlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanViewController.swift; sourceTree = "<group>"; };
 		22782509250143260000794E /* CurrentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentData.swift; sourceTree = "<group>"; };
 		22793BA124F81C2800BEBF8E /* Golden Hour.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Golden Hour.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22793BA424F81C2800BEBF8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22793BA624F81C2800BEBF8E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		22793BA824F81C2800BEBF8E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		22793BA824F81C2800BEBF8E /* SkyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyViewController.swift; sourceTree = "<group>"; };
 		22793BAB24F81C2800BEBF8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		22793BAD24F81C2C00BEBF8E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22793BB024F81C2C00BEBF8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		22793BB224F81C2C00BEBF8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22BF85EA25110946001E03E5 /* ScrollViewPage1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewPage1.swift; sourceTree = "<group>"; };
+		22BF85EC25110958001E03E5 /* ScrollViewPage2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewPage2.swift; sourceTree = "<group>"; };
+		22BF85EE2511096B001E03E5 /* ScrollViewPage1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScrollViewPage1.xib; sourceTree = "<group>"; };
+		22BF85F025110977001E03E5 /* ScrollViewPage2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScrollViewPage2.xib; sourceTree = "<group>"; };
 		22C5D01A25090A350077F7E2 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		22C5D01C25091BC10077F7E2 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		22E4FD4324FE83C200C845E1 /* SunPositionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunPositionModel.swift; sourceTree = "<group>"; };
@@ -56,8 +74,12 @@
 		222ED47D24F8519B007D7E8D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				22793BA824F81C2800BEBF8E /* MainViewController.swift */,
-				22777B0424FAA36800834DDB /* SearchViewController.swift */,
+				224FCA3825190E1E00CC4EE4 /* TabBarController.swift */,
+				22793BA824F81C2800BEBF8E /* SkyViewController.swift */,
+				22777B0424FAA36800834DDB /* PlanViewController.swift */,
+				224FCA3C25190E5900CC4EE4 /* SettingViewController.swift */,
+				22BF85EA25110946001E03E5 /* ScrollViewPage1.swift */,
+				22BF85EC25110958001E03E5 /* ScrollViewPage2.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -79,6 +101,11 @@
 			isa = PBXGroup;
 			children = (
 				22793BAA24F81C2800BEBF8E /* Main.storyboard */,
+				224FCA2D25190D0500CC4EE4 /* Sky.storyboard */,
+				224FCA3025190D3300CC4EE4 /* Plan.storyboard */,
+				224FCA3425190D8600CC4EE4 /* Setting.storyboard */,
+				22BF85EE2511096B001E03E5 /* ScrollViewPage1.xib */,
+				22BF85F025110977001E03E5 /* ScrollViewPage2.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -173,9 +200,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22BF85EF2511096B001E03E5 /* ScrollViewPage1.xib in Resources */,
 				22793BB124F81C2C00BEBF8E /* LaunchScreen.storyboard in Resources */,
+				224FCA3125190D3300CC4EE4 /* Plan.storyboard in Resources */,
+				224FCA2E25190D0500CC4EE4 /* Sky.storyboard in Resources */,
 				22793BAE24F81C2C00BEBF8E /* Assets.xcassets in Resources */,
+				22BF85F125110977001E03E5 /* ScrollViewPage2.xib in Resources */,
 				22793BAC24F81C2800BEBF8E /* Main.storyboard in Resources */,
+				224FCA3525190D8600CC4EE4 /* Setting.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,15 +218,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22BF85EB25110946001E03E5 /* ScrollViewPage1.swift in Sources */,
 				22E4FD4424FE83C200C845E1 /* SunPositionModel.swift in Sources */,
 				2271B2942500240F00DCB915 /* SunPositionManager.swift in Sources */,
 				22C5D01D25091BC10077F7E2 /* TimerManager.swift in Sources */,
 				22C5D01B25090A350077F7E2 /* LocationManager.swift in Sources */,
-				22793BA924F81C2800BEBF8E /* MainViewController.swift in Sources */,
+				224FCA3D25190E5900CC4EE4 /* SettingViewController.swift in Sources */,
+				22793BA924F81C2800BEBF8E /* SkyViewController.swift in Sources */,
 				22793BA524F81C2800BEBF8E /* AppDelegate.swift in Sources */,
+				22BF85ED25110958001E03E5 /* ScrollViewPage2.swift in Sources */,
 				2278250A250143260000794E /* CurrentData.swift in Sources */,
-				22777B0524FAA36800834DDB /* SearchViewController.swift in Sources */,
+				22777B0524FAA36800834DDB /* PlanViewController.swift in Sources */,
 				22793BA724F81C2800BEBF8E /* SceneDelegate.swift in Sources */,
+				224FCA3925190E1E00CC4EE4 /* TabBarController.swift in Sources */,
 				22E4FD4624FE884F00C845E1 /* Constants.swift in Sources */,
 				22E4FD4824FE8D3600C845E1 /* SunPositionConstants.swift in Sources */,
 			);

@@ -139,9 +139,9 @@ class SunPositionManager {
         var currentState = self.isAboveHorizon()
         var passingHorizon: Bool = false
         
-        for _ in 0 ... 86400
+        for _ in 0 ... 1440
         {
-            sun.date = result.count==0 ? sun.date - 1 : sun.date + 1
+            sun.date = result.count==0 ? sun.date - 60 : sun.date + 60
             sun.spa_calculate()
             
             if ((sun.declination <= LOWERLIMIT) || ( UPPERLIMIT <= sun.declination ))
@@ -173,9 +173,9 @@ class SunPositionManager {
         
         var currentState = self.isAboveHorizon()
         
-        for i in 0 ... 17280
+        for i in 0 ... 1440
         {
-            sun.date += 5 //increase
+            sun.date += 60 //increase
             sun.spa_calculate()
             if( (result.count == 0) && (LOWERLIMIT <= sun.declination) && (sun.declination <= UPPERLIMIT))
             {
