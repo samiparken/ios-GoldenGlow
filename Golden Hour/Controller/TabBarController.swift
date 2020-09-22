@@ -9,17 +9,24 @@
 import UIKit
 
 class TabBarController: UITabBarController {
-
-    var BGImageViewName: String = ""
-    var currentLocation: String = ""
-    
     
     static let singletonTabBar = TabBarController()
+    
+    // for Sharing Data Btw View Controllers
+    var BGImageViewName: String = ""
+    var currentLocation: String = ""
+
+
+//    let skyViewController = SkyViewController()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        
+
+        
+        
     }
 
     

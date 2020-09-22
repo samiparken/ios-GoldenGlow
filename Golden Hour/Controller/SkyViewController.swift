@@ -21,24 +21,26 @@ class SkyViewController: UIViewController {
 
     let myTabBar = TabBarController.singletonTabBar
     
-    // Initial UISliders
-    var sunSlider = UISlider(frame:CGRect(x: 0, y: 0, width: 100, height: 20))
-    var groundSlider = UISlider(frame:CGRect(x: 0, y: 0, width: 100, height: 20))
-    
     // Managers
     var sunPositionManager = SunPositionManager()
     var locationManager = LocationManager()
     var timerManager = TimerManager()
+    
 
+    // Initial UISliders
+    var sunSlider = UISlider(frame:CGRect(x: 0, y: 0, width: 100, height: 20))
+    var groundSlider = UISlider(frame:CGRect(x: 0, y: 0, width: 100, height: 20))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Delegates
-        scrollView.delegate = self
         sunPositionManager.delegate = self
         locationManager.delegate = self
         timerManager.delegate = self
-
+        scrollView.delegate = self
+        
+        
         setupSunSlider()
         setupGroundSlider()
         setupScrollView(w: 5)
@@ -49,7 +51,8 @@ class SkyViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         print("SkyView: viewDidAppear")
-    
+        currentLocationOutlet.setTitle(myTabBar.currentLocation, for: .normal)
+        BGImageView.image = UIImage(named: myTabBar.BGImageViewName)        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -130,7 +133,6 @@ class SkyViewController: UIViewController {
 //    }
 }
 
-
 //MARK: - SunPositionManagerDelegate
 extension SkyViewController: SunPositionManagerDelegate {
     
@@ -138,16 +140,13 @@ extension SkyViewController: SunPositionManagerDelegate {
     // -2:Night / -1:Golden- / 1:Golden+ / 2:Day
     func didUpdateStatus(_ status: Int) {
         switch status {
-        case -2: BGImageView.image = UIImage(named: "BG_Night")
-                 myTabBar.BGImageViewName = "BG_Night"
-        case -1: BGImageView.image = UIImage(named: "BG_Golden-")
-                 myTabBar.BGImageViewName = "BG_Golden-"
-        case 1:  BGImageView.image = UIImage(named: "BG_Golden+")
-                 myTabBar.BGImageViewName = "BG_Golden+"
-        case 2:  BGImageView.image = UIImage(named: "BG_Day")
-                 myTabBar.BGImageViewName =  "BG_Day"
-        default: BGImageView.image = UIImage(named: "BG_Start")
+        case -2: myTabBar.BGImageViewName = "BG_Night"
+        case -1: myTabBar.BGImageViewName = "BG_Golden-"
+        case 1:  myTabBar.BGImageViewName = "BG_Golden+"
+        case 2:  myTabBar.BGImageViewName = "BG_Day"
+        default: myTabBar.BGImageViewName = "BG_Start"
         }
+        BGImageView.image = UIImage(named: myTabBar.BGImageViewName)
     }
     
     func didUpdateRemainingTime(_ remain: Int, _ total: Int) {
@@ -220,8 +219,9 @@ extension SkyViewController: LocationManagerDelegate {
     }
     
     func didUpdateCityName(_ cityname: String) {
-        self.currentLocationOutlet.setTitle(cityname, for: .normal)
         myTabBar.currentLocation = cityname
+        currentLocationOutlet.setTitle(myTabBar.currentLocation, for: .normal)
+        
     }
 }
 
@@ -244,19 +244,11 @@ extension SkyViewController: TimerManagerDelegate {
             print("SunAltitude: \(String(format: "%2.2f", sunAltitude))")
         }
     }
-    
-    func didUpdateProgressBar(_ percent: Int) {
-     
-        let progress = Int(Double(percent) / 5) * 5 + 5  // 100 95 90 ...
-        let progressID: String = "Progress\(progress)"
-//        progressBarView.image = UIImage(named: progressID)
-    }
-    
+        
     func didEndTimer() {
         sunPositionManager.updateScreen()
     }
 }
-
 
 //MARK: - UIScrollViewDelegate
 extension SkyViewController: UIScrollViewDelegate {
@@ -274,3 +266,4 @@ extension SkyViewController: UIScrollViewDelegate {
 //            print(groundSlider.value)
         }
 }
+
