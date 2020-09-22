@@ -20,33 +20,31 @@ class SkyViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
 
     let myTabBar = TabBarController.singletonTabBar
-    
-    // Managers
-    var sunPositionManager = SunPositionManager()
-    var locationManager = LocationManager()
-    var timerManager = TimerManager()
-    
 
     // Initial UISliders
     var sunSlider = UISlider(frame:CGRect(x: 0, y: 0, width: 100, height: 20))
     var groundSlider = UISlider(frame:CGRect(x: 0, y: 0, width: 100, height: 20))
     
+        
+    // Deallocate Notification Observer
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Delegates
-        sunPositionManager.delegate = self
-        locationManager.delegate = self
-        timerManager.delegate = self
         scrollView.delegate = self
-        
-        
+
+        // Initialize
+        registerObservers()
         setupSunSlider()
         setupGroundSlider()
-        setupScrollView(w: 5)
+        setupScrollView(w: 10)
 
+        // Screen Organize
         view.bringSubviewToFront(scrollView)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -131,124 +129,29 @@ class SkyViewController: UIViewController {
 //            //            destinationVC.tipPct = calculatorBrain.getTipPct()
 //        }
 //    }
-}
-
-//MARK: - SunPositionManagerDelegate
-extension SkyViewController: SunPositionManagerDelegate {
     
-    // + Update According to Sun's Altitude
-    // -2:Night / -1:Golden- / 1:Golden+ / 2:Day
-    func didUpdateStatus(_ status: Int) {
-        switch status {
-        case -2: myTabBar.BGImageViewName = "BG_Night"
-        case -1: myTabBar.BGImageViewName = "BG_Golden-"
-        case 1:  myTabBar.BGImageViewName = "BG_Golden+"
-        case 2:  myTabBar.BGImageViewName = "BG_Day"
-        default: myTabBar.BGImageViewName = "BG_Start"
-        }
+    
+//MARK: - For Notification Observers
+
+    // for Notification Observers
+    let keyForCityName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
+    let keyForBGImage = Notification.Name(rawValue: BGImageUpdateNotificationKey)
+
+    // Register Observers for updates
+    func registerObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateCityName(notification:)), name: keyForCityName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateBGImage(notification:)), name: keyForBGImage, object: nil)
+    }
+
+    @objc func updateCityName(notification: NSNotification) {
+        currentLocationOutlet.setTitle(myTabBar.currentLocation, for: .normal)
+    }
+    
+    @objc func updateBGImage(notification: NSNotification) {
         BGImageView.image = UIImage(named: myTabBar.BGImageViewName)
     }
-    
-    func didUpdateRemainingTime(_ remain: Int, _ total: Int) {
-        // Try Timer
-        timerManager.remainingTime = remain
-        timerManager.totalTime = total
-        timerManager.startTimer()
-    }
-    
-//    func didUpdateEndGoldenHour(_ endtime: Date) {
-//        let calendar = Calendar.current
-//        let hour = calendar.component(.hour, from: endtime)
-//        let minute = calendar.component(.minute, from: endtime)
-//        centerTopLabel.text = "Ends in"
-//        centerButtomLabel.text = "Ends at " + String(format: "%02d:%02d", hour, minute)
-//    }
-    
-    func didUpdateGoldenHour(_ next: [Date]) {
-        let start = next[0]
-        let end = next[1]
-        
-//        centerTopLabel.text = "Lasts for"
-        let last = Int( end.timeIntervalSince1970 - start.timeIntervalSince1970 )
-        let lastMin: Int = last / 60
-        let lastSec: Int = last % 60
-//        timeDigitMin.text = String(format: "%02d", lastMin)
-//        timeSaperator.text = ":"
-//        timeDigitSec.text = String(format: "%02d", lastSec)
-        
-        let calendar = Calendar.current
-        let hour1 = calendar.component(.hour, from: start)
-        let minute1 = calendar.component(.minute, from: start)
-//        page2.setGoldenHourTimeLabel(String(format: "%02d:%02d", hour1, minute1))
-        
-        let hour2 = calendar.component(.hour, from: end)
-        let minute2 = calendar.component(.minute, from: end)
-//        page2.setEndTimeLabel(String(format: "%02d:%02d", hour2, minute2))
-
-    }
-    
-    func didUpdateSunsetTime(_ sunset: Date) {
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: sunset)
-        let minute = calendar.component(.minute, from: sunset)
-//        page2.setSunsetMode()
-//        page2.setSetriseTimelabel(String(format: "%02d:%02d", hour, minute))
-        
-    }
-    
-    func didUpdateSunriseTime(_ sunrise: Date) {
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: sunrise)
-        let minute = calendar.component(.minute, from: sunrise)
-//        page2.setSunriseMode()
-//        page2.setSetriseTimelabel(String(format: "%02d:%02d", hour, minute))
-    }
-    
 }
 
-//MARK: - LocationManagerDelegate
-extension SkyViewController: LocationManagerDelegate {
-    
-    func didUpdateLocation(_ locationData: [Double]) {
-        sunPositionManager.currentData.Longitude = locationData[0]
-        sunPositionManager.currentData.Latitude = locationData[1]
-        
-        // Start Calculating
-        if let _ = sunPositionManager.currentData.SunAltitudeChange {}
-        else { sunPositionManager.startSunPositionSystem() }
-    }
-    
-    func didUpdateCityName(_ cityname: String) {
-        myTabBar.currentLocation = cityname
-        currentLocationOutlet.setTitle(myTabBar.currentLocation, for: .normal)
-        
-    }
-}
-
-//MARK: - TimerManagerDelegate
-extension SkyViewController: TimerManagerDelegate {
-    
-    func didUpdateTimer(_ min: Int, _ sec: Int) {
-        let minString: String = String(format: "%02d", min)
-        let secString: String = String(format: "%02d", sec)
-        
-//        timeDigitMin.text = minString
-//        timeSaperator.text = ":"
-//        timeDigitSec.text = secString
-        
-        // update SunAltitude every 5 seconds
-        if (sec % 5 == 0)
-        {
-            sunPositionManager.updateCurrentAltitude()
-            let sunAltitude = sunPositionManager.getCurrentAltitude()
-            print("SunAltitude: \(String(format: "%2.2f", sunAltitude))")
-        }
-    }
-        
-    func didEndTimer() {
-        sunPositionManager.updateScreen()
-    }
-}
 
 //MARK: - UIScrollViewDelegate
 extension SkyViewController: UIScrollViewDelegate {
@@ -261,8 +164,8 @@ extension SkyViewController: UIScrollViewDelegate {
             }
             
             // Change Sun Slider
-            sunSlider.value = Float(scrollView.contentOffset.x/view.frame.width * 25)
-            groundSlider.value = Float(scrollView.contentOffset.x/view.frame.width * 25)
+            sunSlider.value = Float(scrollView.contentOffset.x/view.frame.width * 10)
+            groundSlider.value = Float(scrollView.contentOffset.x/view.frame.width * 10)
 //            print(groundSlider.value)
         }
 }
