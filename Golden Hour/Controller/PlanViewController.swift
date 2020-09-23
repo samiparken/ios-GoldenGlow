@@ -15,26 +15,24 @@ class PlanViewController: UIViewController {
 
     @IBOutlet weak var mainContentView: UIView!
 
+    @IBOutlet weak var selectorBar: UIImageView!
     
-    
-    // Line
-    
-    @IBOutlet weak var line1Left: UIView!
-    @IBOutlet weak var line1Right: UIView!
-    
-    
+    // Bottom Buttons
+    @IBOutlet weak var morningButton: UIButton!
+    @IBOutlet weak var eveningButton: UIButton!
     
     // for Sharing Data
     let myTabBar = TabBarController.singletonTabBar
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupMainContentView()
         registerObservers()
+
         
-        
-        
+    
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -49,7 +47,6 @@ class PlanViewController: UIViewController {
     }
     
     func setupMainContentView() {
-        
         let contentBGView : UIView = UIView()
         contentBGView.frame = CGRect(x:0, y: view.frame.height / 7, width:view.frame.width, height: view.frame.height / 7 * 6)
         contentBGView.layer.backgroundColor = UIColor.black.cgColor
@@ -59,12 +56,35 @@ class PlanViewController: UIViewController {
         
         view.addSubview(contentBGView)
         view.bringSubviewToFront(mainContentView)
-                
-//        line1Left.layer.backgroundColor = UIColor.white.cgColor
-//        view.addSubview(line1Left)
-//        view.bringSubviewToFront(line1Left)
+
     }
     
+    
+    
+    @IBAction func morningButtonPressed(_ sender: Any) {
+        
+        morningButton.setTitleColor(UIColor.white, for: .normal)
+        eveningButton.setTitleColor(UIColor.darkGray, for: .normal)
+        
+        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: .curveEaseOut) {
+            self.selectorBar.transform = CGAffineTransform(translationX: 0, y: 0)
+        } completion: { (_) in
+            // For second animation
+        }
+    }
+    
+    
+    @IBAction func eveningButtonPressed(_ sender: Any) {
+
+        morningButton.setTitleColor(UIColor.darkGray, for: .normal)
+        eveningButton.setTitleColor(UIColor.white, for: .normal)
+        
+        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: .curveEaseOut) {
+            self.selectorBar.transform = CGAffineTransform(translationX: self.selectorBar.frame.width, y: 0)
+        } completion: { (_) in
+            // For second animation
+        }
+    }
     
     
     
