@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class PlanViewController: UIViewController {
     
@@ -15,21 +16,42 @@ class PlanViewController: UIViewController {
 
     @IBOutlet weak var mainContentView: UIView!
 
-    @IBOutlet weak var selectorBar: UIImageView!
     
-    // Bottom Buttons
+    // Content Cells
+    
+    
+    @IBOutlet weak var lowSunView: UIView!
+    @IBOutlet weak var goldenHourView: UIView!
+    @IBOutlet weak var blueHourView: UIView!
+    @IBOutlet weak var contentListStack: UIStackView!
+    @IBOutlet weak var lowSunLabelBox: UIStackView!
+    @IBOutlet weak var goldenHourLabelBox: UIStackView!
+    @IBOutlet weak var blueHourLabelBox: UIStackView!
+    
+    
+    
+    
+    
+    // Bottom Selector Bar & Buttons
     @IBOutlet weak var morningButton: UIButton!
     @IBOutlet weak var eveningButton: UIButton!
+    @IBOutlet weak var selectorBar: UIImageView!
+
+    
     
     // for Sharing Data
     let myTabBar = TabBarController.singletonTabBar
     
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupMainContentView()
         registerObservers()
+
+        setupMainContentViewBG()
+        setupContentCells()
+        
 
         
     
@@ -46,15 +68,52 @@ class PlanViewController: UIViewController {
         print(myTabBar.BGImageViewName)
     }
     
-    func setupMainContentView() {
+    func setupContentCells() {
+                
+        // Low Sun View
+        var gradColor = setGradient(color1: 0x7698F0, color2: 0xD9C545)
+        lowSunView.layer.addSublayer(gradColor)
+        contentListStack.addSubview(lowSunView)
+        lowSunView.bringSubviewToFront(lowSunLabelBox)
+        
+        // Golden Hour View
+        gradColor = setGradient(color1: 0xD9C545, color2: 0xD85E52, color3: 0x4849C3)
+        goldenHourView.layer.addSublayer(gradColor)
+        contentListStack.addSubview(goldenHourView)
+        goldenHourView.bringSubviewToFront(goldenHourLabelBox)
+        
+        // Blue Hour View
+        gradColor = setGradient(color1: 0x4849C3, color2: 0x04015B)
+        blueHourView.layer.addSublayer(gradColor)
+        contentListStack.addSubview(blueHourView)
+        blueHourView.bringSubviewToFront(blueHourLabelBox)
+        
+    }
+    
+    func setGradient(color1: UInt, color2: UInt, color3: UInt = 0) -> CAGradientLayer {
+        let gradient = CAGradientLayer()
+        gradient.type = .axial
+        gradient.colors = ( color3 == 0) ? [UIColor.init(rgb: color1).cgColor, UIColor.init(rgb: color2).cgColor] : [UIColor.init(rgb: color1).cgColor, UIColor.init(rgb: color2).cgColor, UIColor.init(rgb: color3).cgColor]
+        gradient.startPoint = CGPoint(x: 0, y: 0.5)
+        gradient.endPoint = CGPoint(x: 1, y: 0.5)
+//        gradient.locations = [0, 1]
+        
+//        gradient.frame = lowSunView.bounds
+        gradient.frame = CGRect(x:0, y: -lowSunView.frame.height/2, width:view.frame.width - 40, height:lowSunView.frame.height)
+        gradient.cornerRadius = 15
+
+        return gradient
+    }
+    
+    func setupMainContentViewBG() {
         let contentBGView : UIView = UIView()
-        contentBGView.frame = CGRect(x:0, y: view.frame.height / 7, width:view.frame.width, height: view.frame.height / 7 * 6)
+        contentBGView.frame = CGRect(x:0, y: view.frame.height / 9, width:view.frame.width, height: view.frame.height / 9 * 8)
         contentBGView.layer.backgroundColor = UIColor.black.cgColor
-        contentBGView.layer.opacity = 0.3
+        contentBGView.layer.opacity = 0.8
         contentBGView.layer.cornerRadius = 25
         contentBGView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        
         view.addSubview(contentBGView)
+        
         view.bringSubviewToFront(mainContentView)
 
     }
@@ -86,7 +145,7 @@ class PlanViewController: UIViewController {
         }
     }
     
-    
+
     
     //MARK: - For Notification Observers
     
@@ -159,4 +218,13 @@ extension UILabel {
       attributedText = attributedString
     }
   }
+}
+
+//MARK: - For HEX Color Code
+// *Usage*
+// view.backgroundColor = UIColor.init(rgb: 0xF58634)     // + .cgColor
+extension UIColor {
+    convenience init(rgb: UInt) {
+       self.init(red: CGFloat((rgb & 0xFF0000) >> 16) / 255.0, green: CGFloat((rgb & 0x00FF00) >> 8) / 255.0, blue: CGFloat(rgb & 0x0000FF) / 255.0, alpha: CGFloat(1.0))
+    }
 }
