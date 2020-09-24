@@ -136,7 +136,7 @@
                                                         </subviews>
                                                         <constraints>
                                                             <constraint firstAttribute="trailing" secondItem="pIb-rF-yxX" secondAttribute="trailing" constant="15" id="G30-JH-THT"/>
-                                                            <constraint firstItem="pIb-rF-yxX" firstAttribute="centerY" secondItem="ijn-3q-UTW" secondAttribute="centerY" id="cyh-we-Ilv"/>
+                                                            <constraint firstItem="pIb-rF-yxX" firstAttribute="centerY" secondItem="ijn-3q-UTW" secondAttribute="centerY" id="aHl-v2-oGW"/>
                                                             <constraint firstItem="pIb-rF-yxX" firstAttribute="leading" secondItem="ijn-3q-UTW" secondAttribute="leading" constant="15" id="kY4-iz-E6P"/>
                                                         </constraints>
                                                     </view>
@@ -157,7 +157,7 @@
                                                             </view>
                                                         </subviews>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="10" id="snY-nX-pMX"/>
+                                                            <constraint firstAttribute="height" constant="10" id="5jH-aX-ZG0"/>
                                                             <constraint firstItem="5Jg-yv-QCc" firstAttribute="centerX" secondItem="fVD-GI-ltu" secondAttribute="centerX" id="xGa-CT-651"/>
                                                         </constraints>
                                                     </stackView>
@@ -193,7 +193,7 @@
                                                         </subviews>
                                                         <constraints>
                                                             <constraint firstAttribute="trailing" secondItem="J3G-bA-uH3" secondAttribute="trailing" constant="15" id="Obq-41-cZp"/>
-                                                            <constraint firstItem="J3G-bA-uH3" firstAttribute="centerY" secondItem="Yei-iU-YNx" secondAttribute="centerY" id="agD-BL-GVf"/>
+                                                            <constraint firstItem="J3G-bA-uH3" firstAttribute="centerY" secondItem="Yei-iU-YNx" secondAttribute="centerY" id="ovU-J2-Woa"/>
                                                             <constraint firstItem="J3G-bA-uH3" firstAttribute="leading" secondItem="Yei-iU-YNx" secondAttribute="leading" constant="15" id="wMX-iY-eNb"/>
                                                         </constraints>
                                                     </view>
@@ -249,8 +249,8 @@
                                                             </stackView>
                                                         </subviews>
                                                         <constraints>
-                                                            <constraint firstItem="8X1-Sz-YLJ" firstAttribute="centerY" secondItem="duZ-I7-Zga" secondAttribute="centerY" id="4Fl-2P-vZZ"/>
                                                             <constraint firstItem="8X1-Sz-YLJ" firstAttribute="leading" secondItem="duZ-I7-Zga" secondAttribute="leading" constant="15" id="ASh-by-wxo"/>
+                                                            <constraint firstItem="8X1-Sz-YLJ" firstAttribute="centerY" secondItem="duZ-I7-Zga" secondAttribute="centerY" id="Ewi-fU-4Vr"/>
                                                             <constraint firstAttribute="trailing" secondItem="8X1-Sz-YLJ" secondAttribute="trailing" constant="15" id="z7T-Me-iGT"/>
                                                         </constraints>
                                                     </view>
