@@ -16,10 +16,19 @@ class TabBarController: UITabBarController {
     
     static let singletonTabBar = TabBarController()
     
-    // for Sharing Data Btw View Controllers
+    /* for Sharing Data Btw View Controllers */
+
     var BGImageViewName: String = ""
     var currentLocation: String = ""
 
+    // PlanView Time
+    var morningTime: [String] = []   // morningTime.count == 4
+    var eveningTime: [String] = []   // eveningTime.count == 4
+    
+    // PlanView Bottom Button
+    var isEvening: Bool = true
+    var isToday: Bool = true
+    
     // Managers
     var sunPositionManager = SunPositionManager()
     var locationManager = LocationManager()
@@ -33,27 +42,49 @@ class TabBarController: UITabBarController {
         locationManager.delegate = self
         timerManager.delegate = self
         
-        
     }
 }
 
-
 //MARK: - SunPositionManagerDelegate
 extension TabBarController: SunPositionManagerDelegate {
-    
-    // + Update According to Sun's Altitude
-    // -2:Night / -1:Golden- / 1:Golden+ / 2:Day
-    func didUpdateStatus(_ status: Int) {
-        switch status {
-        case -2: BGImageViewName = "BG_Night"
-        case -1: BGImageViewName = "BG_Golden-"
-        case 1:  BGImageViewName = "BG_Golden+"
-        case 2:  BGImageViewName = "BG_Day"
-        default: BGImageViewName = "BG_Start"
+
+    // Set BG & morning/evening
+    func didUpdateCurrentStatus(_ sunAngle: Double, _ isUp: Bool) {
+        
+        switch sunAngle {
+        case -90 ..< -6 : BGImageViewName = "BG_Night";  isEvening = false; isToday = isUp ? true : false
+        case -6  ..< -4 : BGImageViewName = "BG_Blue";   isEvening = isUp ? false : true
+        case -4  ..< 6  : BGImageViewName = "BG_Golden"; isEvening = isUp ? false : true
+        case 6   ..< 10 : BGImageViewName = "BG_LowSun"; isEvening = isUp ? false : true
+        default         : BGImageViewName = "BG_Day";    isEvening = true
         }
+        
+        // Broadcast
         let keyName = Notification.Name(rawValue: BGImageUpdateNotificationKey)
         NotificationCenter.default.post(name: keyName, object: nil)
+    }
+    
+    func didUpdateTodayScan(_ today: [Date]) {
 
+        var dates: [Date] = today
+        var hour: Int
+        var minute: Int
+        let calendar = Calendar.current
+        
+        for _ in 0...3 {
+            hour = calendar.component(.hour, from: dates[0])
+            minute = calendar.component(.minute, from: dates[0])
+            dates.removeFirst(1)
+            morningTime.append(String(format: "%02d:%02d", hour, minute))
+        }
+        
+        for _ in 0...3 {
+            hour = calendar.component(.hour, from: dates[0])
+            minute = calendar.component(.minute, from: dates[0])
+            dates.removeFirst(1)
+            eveningTime.append(String(format: "%02d:%02d", hour, minute))
+        }
+        
     }
     
     func didUpdateRemainingTime(_ remain: Int, _ total: Int) {
@@ -64,24 +95,26 @@ extension TabBarController: SunPositionManagerDelegate {
     }
     
     func didUpdateGoldenHour(_ next: [Date]) {
-        let start = next[0]
-        let end = next[1]
+        let time1 = next[0]
+        let time2 = next[1]
+        let time3 = next[2]
+        let time4 = next[3]
         
 //        centerTopLabel.text = "Lasts for"
-        let last = Int( end.timeIntervalSince1970 - start.timeIntervalSince1970 )
-        let lastMin: Int = last / 60
-        let lastSec: Int = last % 60
+//        let last = Int( end.timeIntervalSince1970 - start.timeIntervalSince1970 )
+//        let lastMin: Int = last / 60
+//        let lastSec: Int = last % 60
 //        timeDigitMin.text = String(format: "%02d", lastMin)
 //        timeSaperator.text = ":"
 //        timeDigitSec.text = String(format: "%02d", lastSec)
         
         let calendar = Calendar.current
-        let hour1 = calendar.component(.hour, from: start)
-        let minute1 = calendar.component(.minute, from: start)
+//        let hour1 = calendar.component(.hour, from: start)
+//        let minute1 = calendar.component(.minute, from: start)
 //        page2.setGoldenHourTimeLabel(String(format: "%02d:%02d", hour1, minute1))
         
-        let hour2 = calendar.component(.hour, from: end)
-        let minute2 = calendar.component(.minute, from: end)
+//        let hour2 = calendar.component(.hour, from: end)
+//        let minute2 = calendar.component(.minute, from: end)
 //        page2.setEndTimeLabel(String(format: "%02d:%02d", hour2, minute2))
 
     }
@@ -120,10 +153,9 @@ extension TabBarController: LocationManagerDelegate {
     func didUpdateCityName(_ cityname: String) {
         currentLocation = cityname
         
-        // Post Notification & Trigger Updates
+        // Braodcast
         let keyName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
         NotificationCenter.default.post(name: keyName, object: nil)
-        
     }
 }
 

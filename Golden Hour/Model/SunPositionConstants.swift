@@ -1,8 +1,10 @@
 import Foundation
 
-// Golden Hour Altitude Range  (-4.00 ~ 6.00)
-let UPPERLIMIT: Double = 6
-let LOWERLIMIT: Double = -4
+// Golden Hour Altitude Range  (-4.00 ~ 10.00)
+let UPPERLIMIT: Double = 10     // Low Sun
+let UPPERGOLDEN: Double = 6     // Golden Hour
+let LOWERGOLDEN: Double = -4    // Blue Hour
+let LOWERLIMIT: Double = -6     // End
 
 let SPA_ZA = 0,          //calculate zenith and azimuth
     SPA_ZA_INC = 1,      //calculate zenith, azimuth, and incidence

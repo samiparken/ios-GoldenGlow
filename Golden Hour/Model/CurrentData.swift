@@ -16,4 +16,6 @@ struct CurrentData {
     var SunAltitude: Double?
     var SunAltitudeChange: Double?   //Rate of Change
     
+    var isMorning: Bool?       // for PlanView
+    
 }

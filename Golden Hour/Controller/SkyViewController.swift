@@ -150,6 +150,8 @@ class SkyViewController: UIViewController {
     @objc func updateBGImage(notification: NSNotification) {
         BGImageView.image = UIImage(named: myTabBar.BGImageViewName)
     }
+    
+    
 }
 
 

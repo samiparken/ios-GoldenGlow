@@ -9,8 +9,8 @@
 import Foundation
 
 protocol SunPositionManagerDelegate {
-    func didUpdateStatus(_ status: Int)   // -1:Night / 0:Golden / 1:Day
-    func didUpdateGoldenHour(_ next: [Date])
+    func didUpdateCurrentStatus(_ sunAngle: Double, _ isUp: Bool)
+    func didUpdateTodayScan(_ today: [Date])
     func didUpdateRemainingTime(_ remain: Int, _ total: Int)
     func didUpdateSunsetTime(_ sunset: Date)
     func didUpdateSunriseTime(_ sunrise: Date)
@@ -20,29 +20,73 @@ class SunPositionManager {
     var delegate: SunPositionManagerDelegate?
     var currentData = CurrentData()
     
+    
+    
+    func isAboveEvent() -> Bool
+    {
+        let sun = currentData.SunAltitude!
+        return sun > UPPERLIMIT ? true : false
+    }
+    func isAboveEvent(_ sun: Double) -> Bool
+    {
+        return sun > UPPERLIMIT ? true : false
+    }
+    
+    
+    func isLowSun() -> Bool
+    {
+        let sun = currentData.SunAltitude!
+        return ( UPPERGOLDEN <= sun ) && ( sun <= UPPERLIMIT ) ? true : false
+    }
+    func isLowSun(_ sun: Double) -> Bool
+    {
+        return ( UPPERGOLDEN <= sun ) && ( sun <= UPPERLIMIT ) ? true : false
+    }
+    
     func isGoldenHour() -> Bool
     {
         let sun = currentData.SunAltitude!
-        return ( LOWERLIMIT <= sun ) && ( sun <= UPPERLIMIT ) ? true : false
+        return ( LOWERGOLDEN <= sun ) && ( sun <= UPPERGOLDEN ) ? true : false
     }
+    func isGoldenHour(_ sun: Double) -> Bool
+    {
+        return ( LOWERGOLDEN <= sun ) && ( sun <= UPPERGOLDEN ) ? true : false
+    }
+    
+    func isBlueHour() -> Bool
+    {
+        let sun = currentData.SunAltitude!
+        return ( LOWERLIMIT <= sun ) && ( sun <= LOWERGOLDEN ) ? true : false
+    }
+    func isBlueHour(_ sun: Double) -> Bool
+    {
+        return ( LOWERLIMIT <= sun ) && ( sun <= LOWERGOLDEN ) ? true : false
+    }
+    
+    
+    func isBelowEvent() -> Bool
+    {
+        let sun = currentData.SunAltitude!
+        return sun < LOWERLIMIT ? true : false
+    }
+    func isBelowEvent(_ sun: Double) -> Bool
+    {
+        return sun < LOWERLIMIT ? true : false
+    }
+
+    
     
     func isAboveHorizon() -> Bool
     {
         let sun = currentData.SunAltitude!
         return sun > 0 ? true : false
     }
-    
-    func isAboveGoldenHour() -> Bool
+    func isAboveHorizon(_ sun: Double) -> Bool
     {
-        let sun = currentData.SunAltitude!
-        return sun > UPPERLIMIT ? true : false
+        return sun > 0 ? true : false
     }
     
-    func isBelowGoldenHour() -> Bool
-    {
-        let sun = currentData.SunAltitude!
-        return sun < LOWERLIMIT ? true : false
-    }
+
     
     func isSunGoingUp() -> Bool
     {
@@ -60,10 +104,10 @@ class SunPositionManager {
     {
         // Get current date & time
         let now = Date()
-        let now2 = Date() + 1
+        let now2 = Date() + 10
         let GMT = currentData.GMT
         
-        // First Update Sun Altitude
+        // First Update Sun Altitude & Change
         if let lon = currentData.Longitude
         {
             let lat = currentData.Latitude!
@@ -76,33 +120,57 @@ class SunPositionManager {
             currentData.SunAltitudeChange = sun2.declination - sun1.declination
         }
         updateScreen()
+        
     }
     
     func updateScreen()
     {
-        if( isGoldenHour() )
-        {
-            if ( isAboveHorizon() ) { self.delegate?.didUpdateStatus(1)}
-            else { self.delegate?.didUpdateStatus(-1) }
-            
-            let thisTime: [Date] = getTimesForThisGoldenHour()
-            self.delegate?.didUpdateGoldenHour(thisTime)
 
-            let now = Date()
-            let remainingTime = Int(thisTime[1].timeIntervalSince1970 - now.timeIntervalSince1970)
-            let totalTime = Int(thisTime[1].timeIntervalSince1970 - thisTime[0].timeIntervalSince1970)
-            self.delegate?.didUpdateRemainingTime(remainingTime, totalTime)
-        }
-        else
-        {
-            if( isAboveGoldenHour() )
-            { self.delegate?.didUpdateStatus(2) }
-            else if( isBelowGoldenHour() )
-            { self.delegate?.didUpdateStatus(-2)}
-            
-            let nextTime: [Date] = getTimesForNextGoldenHour()
-            self.delegate?.didUpdateGoldenHour(nextTime)
-        }
+        // BG & morning/evening
+        self.delegate?.didUpdateCurrentStatus(currentData.SunAltitude!, isSunGoingUp())
+        
+                
+        // Current Scan -> ProgressBar
+        
+
+        let today = Date()
+        let calendar = Calendar.current
+        let yyyy = String(calendar.component(.year, from: today))
+        let mm = String(calendar.component(.month, from: today))
+        let dd = String(calendar.component(.day, from: today))
+
+        let todayScan: [Date] = dailyScan(yyyy,mm,dd)
+        self.delegate?.didUpdateTodayScan(todayScan)
+        
+        
+        
+//
+//        if( isGoldenHour() )
+//        {
+//            // BG
+//            if ( isAboveHorizon() ) { self.delegate?.didUpdateStatus(1)}
+//            else { self.delegate?.didUpdateStatus(-1) }
+//
+//            let thisTime: [Date] = getTimesForThisGoldenHour()
+//            self.delegate?.didUpdateGoldenHour(thisTime)
+//
+//            let now = Date()
+//            let remainingTime = Int(thisTime[1].timeIntervalSince1970 - now.timeIntervalSince1970)
+//            let totalTime = Int(thisTime[1].timeIntervalSince1970 - thisTime[0].timeIntervalSince1970)
+//            self.delegate?.didUpdateRemainingTime(remainingTime, totalTime)
+//        }
+//        else
+//        {
+//            // BG
+//            if( isAboveEvent() )
+//            { self.delegate?.didUpdateStatus(2) }
+//            else if( isBelowEvent() )
+//            { self.delegate?.didUpdateStatus(-2)}
+//
+//            let nextTime: [Date] = getTimesForNextGoldenHour()
+//            self.delegate?.didUpdateGoldenHour(nextTime)
+//        }
+        
     }
     
     func updateCurrentAltitude()
@@ -128,76 +196,71 @@ class SunPositionManager {
     }
     
     
-    func getTimesForThisGoldenHour() -> [Date]
-    {
-        var result: [Date] = []
+    func currentScan() -> [Date] {
+
+        var result: [Date] = []     // result.count == 2
+
         let GMT = currentData.GMT
         let lon = currentData.Longitude!
         let lat = currentData.Latitude!
-        let sun = SunPositionModel(Date(), GMT, longitude: lon, latitude: lat)
+
+        let now = Date()
+        let scanLimitDate = now + 86400 // within 24h
         
-        var currentState = self.isAboveHorizon()
-        var passingHorizon: Bool = false
-        
-        for _ in 0 ... 1440
-        {
-            sun.date = result.count==0 ? sun.date - 60 : sun.date + 60
-            sun.spa_calculate()
-            
-            if ((sun.declination <= LOWERLIMIT) || ( UPPERLIMIT <= sun.declination ))
-            {
-                result.append(sun.date)
-                sun.date = Date()           //Reset Time
-                if( result.count == 2 ) { break }  //End Loop
-            }
-                // Checking if passing Horizon
-            else if ( !passingHorizon && (currentState ^ (sun.declination > 0)))
-            {
-                passingHorizon = true
-                currentState = result.count==0 ? !currentState : currentState //adjust for backwards time
-                if(currentState) { self.delegate?.didUpdateSunsetTime(sun.date) } //sunset
-                else { self.delegate?.didUpdateSunriseTime(sun.date) } //sunrise
-            }
-        }
+        let sun = SunPositionModel(now, GMT, longitude: lon, latitude: lat)
+
         return result
     }
     
-    func getTimesForNextGoldenHour() -> [Date]
-    {
-        var result: [Date] = []
+    
+    func dailyScan(_ year: String, _ month: String, _ day: String) -> [Date] {
         
+        var result: [Date] = []     // result.count == 8
+
         let GMT = currentData.GMT
         let lon = currentData.Longitude!
         let lat = currentData.Latitude!
-        let sun = SunPositionModel(Date(), GMT, longitude: lon, latitude: lat)
+
+        let GMTString = String(format: "%+05d", GMT * 100)
+        let inputDateString = year + "-" + month + "-" + day + " 00:00:00  " + GMTString
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"  //ex) 2020-03-13 13:37:00 +0100
+        let inputDate = dateFormatter.date(from: inputDateString)
+        let scanLimitDate = inputDate! + 86400 // within 24h
         
-        var currentState = self.isAboveHorizon()
+        let sun = SunPositionModel(inputDate!, GMT, longitude: lon, latitude: lat)
         
-        for i in 0 ... 1440
-        {
-            sun.date += 60 //increase
+        repeat {
             sun.spa_calculate()
-            if( (result.count == 0) && (LOWERLIMIT <= sun.declination) && (sun.declination <= UPPERLIMIT))
+            let sunAngle = sun.declination
+            if ( result.count % 2 == 1 )
             {
-                result.append(sun.date)
+                if( isAboveEvent(sunAngle) || isGoldenHour(sunAngle) || isBelowEvent(sunAngle))
+                {
+                    result.append(sun.date)
+                }
             }
-            // Checking if passing Horizon
-            else if ( currentState ^ (sun.declination > 0))
+            else
             {
-                if(currentState) { self.delegate?.didUpdateSunsetTime(sun.date) } //sunset
-                else { self.delegate?.didUpdateSunriseTime(sun.date) } //sunrise
-                currentState = !currentState
+                if( isLowSun(sunAngle) || isBlueHour(sunAngle))
+                {
+                    result.append(sun.date)
+                }
             }
-            else if( (result.count == 1) && ((sun.declination <= LOWERLIMIT) || ( UPPERLIMIT <= sun.declination )) )
-            {
-                result.append(sun.date)
-                break
-            }
-            print(" \(i), \(sun.declination)")
-        }
-        
+
+            sun.date += calculateTimeGap(sunAngle)   // increase timestamp for scanning
+            print("\(year)-\(month)-\(day), \(sunAngle)")
+        } while( (sun.date < scanLimitDate) && ( result.count < 8 ) )
+
         return result
     }
+    
+    func calculateTimeGap(_ sunAngle: Double) -> Double {
+        let absAngle = abs(sunAngle)
+        let temp = (absAngle - 10) * 240   // divide 15, multiply 3600
+        return ( temp > 60 ) ? temp : 60
+    }
+        
     
 }
 

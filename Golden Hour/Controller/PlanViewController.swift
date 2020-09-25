@@ -10,16 +10,15 @@ import UIKit
 import Foundation
 
 class PlanViewController: UIViewController {
-    
-    @IBOutlet weak var BGImageView: UIImageView!
+
+    // Top Bar
     @IBOutlet weak var currentLocationOutlet: UIButton!
 
+    // BG & Layout
+    @IBOutlet weak var BGImageView: UIImageView!
     @IBOutlet weak var mainContentView: UIView!
-
     
     // Content Cells
-    
-    
     @IBOutlet weak var lowSunView: UIView!
     @IBOutlet weak var goldenHourView: UIView!
     @IBOutlet weak var blueHourView: UIView!
@@ -28,39 +27,44 @@ class PlanViewController: UIViewController {
     @IBOutlet weak var goldenHourLabelBox: UIStackView!
     @IBOutlet weak var blueHourLabelBox: UIStackView!
     
-    
-    
-    
+    // Time Labels
+    @IBOutlet weak var timeLabel1: UILabel!
+    @IBOutlet weak var timeLabel2: UILabel!
+    @IBOutlet weak var timeLabel3: UILabel!
+    @IBOutlet weak var timeLabel4: UILabel!
     
     // Bottom Selector Bar & Buttons
     @IBOutlet weak var morningButton: UIButton!
     @IBOutlet weak var eveningButton: UIButton!
     @IBOutlet weak var selectorBar: UIImageView!
 
-    
-    
     // for Sharing Data
     let myTabBar = TabBarController.singletonTabBar
-    
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         registerObservers()
-
         setupMainContentViewBG()
         setupContentCells()
-        
 
         
-    
     }
     
     override func viewDidAppear(_ animated: Bool) {
         print("PlanView: viewDidAppear")
         currentLocationOutlet.setTitle(myTabBar.currentLocation, for: .normal)
         BGImageView.image = UIImage(named: myTabBar.BGImageViewName)
+        
+        if( myTabBar.isEvening )
+        {
+            eveningButtonPressed((Any).self)
+        }
+        else{
+            morningButtonPressed((Any).self)
+        }
+        
+        
         
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -90,6 +94,7 @@ class PlanViewController: UIViewController {
         
     }
     
+    
     func setGradient(color1: UInt, color2: UInt, color3: UInt = 0) -> CAGradientLayer {
         let gradient = CAGradientLayer()
         gradient.type = .axial
@@ -97,11 +102,15 @@ class PlanViewController: UIViewController {
         gradient.startPoint = CGPoint(x: 0, y: 0.5)
         gradient.endPoint = CGPoint(x: 1, y: 0.5)
 //        gradient.locations = [0, 1]
-        
 //        gradient.frame = lowSunView.bounds
-        gradient.frame = CGRect(x:0, y: -lowSunView.frame.height/2, width:view.frame.width - 40, height:lowSunView.frame.height)
-        gradient.cornerRadius = 15
 
+        // Screen Size Adjust (Except for SE, 8)
+        let screenSize = view.frame.height
+        gradient.frame = (screenSize > 700)
+            ? CGRect(x:0, y: -lowSunView.frame.height/2, width:view.frame.width - 40, height: lowSunView.frame.height*4/3)
+            : CGRect(x:0, y: -lowSunView.frame.height/3, width:view.frame.width - 40, height: lowSunView.frame.height)
+        
+        gradient.cornerRadius = 15
         return gradient
     }
     
@@ -130,6 +139,10 @@ class PlanViewController: UIViewController {
         } completion: { (_) in
             // For second animation
         }
+        timeLabel1.text = myTabBar.morningTime[0]
+        timeLabel2.text = myTabBar.morningTime[1]
+        timeLabel3.text = myTabBar.morningTime[2]
+        timeLabel4.text = myTabBar.morningTime[3]
     }
     
     
@@ -143,6 +156,10 @@ class PlanViewController: UIViewController {
         } completion: { (_) in
             // For second animation
         }
+        timeLabel1.text = myTabBar.eveningTime[0]
+        timeLabel2.text = myTabBar.eveningTime[1]
+        timeLabel3.text = myTabBar.eveningTime[2]
+        timeLabel4.text = myTabBar.eveningTime[3]
     }
     
 
