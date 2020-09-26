@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Weather.png",
+      "filename" : "Event_Blue.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Weather@2x.png",
+      "filename" : "Event_Blue@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Weather@3x.png",
+      "filename" : "Event_Blue@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

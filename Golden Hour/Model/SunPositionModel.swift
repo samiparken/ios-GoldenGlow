@@ -138,6 +138,11 @@ class SunPositionModel {
         self.latitude = latitude
     }
     
+    func setDate(_ newDate: Date)
+    {
+        self.date = newDate
+    }
+    
     func parseDate()
     {
         let calendar = Calendar.current

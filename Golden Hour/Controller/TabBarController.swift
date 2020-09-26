@@ -18,12 +18,17 @@ class TabBarController: UITabBarController {
     
     /* for Sharing Data Btw View Controllers */
 
-    var BGImageViewName: String = ""
-    var currentLocation: String = ""
+    var BGImageViewName: String?
+    var currentLocation: String?
 
     // PlanView Time
     var morningTime: [String] = []   // morningTime.count == 4
+    var morningDuration: [Int] = []  // morningDuration.count == 3
     var eveningTime: [String] = []   // eveningTime.count == 4
+    var eveningDuration: [Int] = []  // eveningDuration.count == 3
+    var sunriseTime: String = ""
+    var sunsetTime: String = ""
+    
     
     // PlanView Bottom Button
     var isEvening: Bool = true
@@ -49,7 +54,7 @@ class TabBarController: UITabBarController {
 extension TabBarController: SunPositionManagerDelegate {
 
     // Set BG & morning/evening
-    func didUpdateCurrentStatus(_ sunAngle: Double, _ isUp: Bool) {
+    func didUpdateCurrentState(_ sunAngle: Double, _ isUp: Bool) {
         
         switch sunAngle {
         case -90 ..< -6 : BGImageViewName = "BG_Night";  isEvening = false; isToday = isUp ? true : false
@@ -64,27 +69,69 @@ extension TabBarController: SunPositionManagerDelegate {
         NotificationCenter.default.post(name: keyName, object: nil)
     }
     
+    func didUpdateCurrentScan(from: Date, to: Date, _ nowState: Int, _ nextState: Int) {
+                
+        //TotalDuration
+        let duration = to.timeIntervalSince1970 - from.timeIntervalSince1970
+        
+        //remaining
+        let remaining = to.timeIntervalSince1970 - Date().timeIntervalSince1970
+        
+        //percent
+        let percent = remaining / duration * 100
+        
+        
+    }
+    
     func didUpdateTodayScan(_ today: [Date]) {
-
-        var dates: [Date] = today
+        
+        var dates: [Date] = today   // dates.count == 10
+        let calendar = Calendar.current
         var hour: Int
         var minute: Int
-        let calendar = Calendar.current
+        var end:Double, start: Double
         
-        for _ in 0...3 {
+        for i in 1...4 {
             hour = calendar.component(.hour, from: dates[0])
             minute = calendar.component(.minute, from: dates[0])
-            dates.removeFirst(1)
             morningTime.append(String(format: "%02d:%02d", hour, minute))
+            
+            start = dates[0].timeIntervalSince1970
+            dates.removeFirst(1)
+            if( i == 2)
+            {
+                hour = calendar.component(.hour, from: dates[0])
+                minute = calendar.component(.minute, from: dates[0])
+                sunriseTime = String(format: "%02d:%02d", hour, minute)
+                dates.removeFirst(1)
+            }
+            if ( i != 4)
+            {
+                end = dates[0].timeIntervalSince1970
+                morningDuration.append( Int(end - start) / 60 )
+            }
         }
         
-        for _ in 0...3 {
+        for i in 1...4 {
             hour = calendar.component(.hour, from: dates[0])
             minute = calendar.component(.minute, from: dates[0])
-            dates.removeFirst(1)
             eveningTime.append(String(format: "%02d:%02d", hour, minute))
+            
+            start = dates[0].timeIntervalSince1970
+            dates.removeFirst(1)
+            if ( i == 2 )
+            {
+                hour = calendar.component(.hour, from: dates[0])
+                minute = calendar.component(.minute, from: dates[0])
+                sunsetTime = String(format: "%02d:%02d", hour, minute)
+                dates.removeFirst(1)
+            }
+            if (i != 4)
+            {
+                end = dates[0].timeIntervalSince1970
+                eveningDuration.append( Int(end - start) / 60 )
+            }
         }
-        
     }
     
     func didUpdateRemainingTime(_ remain: Int, _ total: Int) {
@@ -94,58 +141,17 @@ extension TabBarController: SunPositionManagerDelegate {
         timerManager.startTimer()
     }
     
-    func didUpdateGoldenHour(_ next: [Date]) {
-        let time1 = next[0]
-        let time2 = next[1]
-        let time3 = next[2]
-        let time4 = next[3]
-        
-//        centerTopLabel.text = "Lasts for"
-//        let last = Int( end.timeIntervalSince1970 - start.timeIntervalSince1970 )
-//        let lastMin: Int = last / 60
-//        let lastSec: Int = last % 60
-//        timeDigitMin.text = String(format: "%02d", lastMin)
-//        timeSaperator.text = ":"
-//        timeDigitSec.text = String(format: "%02d", lastSec)
-        
-        let calendar = Calendar.current
-//        let hour1 = calendar.component(.hour, from: start)
-//        let minute1 = calendar.component(.minute, from: start)
-//        page2.setGoldenHourTimeLabel(String(format: "%02d:%02d", hour1, minute1))
-        
-//        let hour2 = calendar.component(.hour, from: end)
-//        let minute2 = calendar.component(.minute, from: end)
-//        page2.setEndTimeLabel(String(format: "%02d:%02d", hour2, minute2))
-
-    }
-    
-    func didUpdateSunsetTime(_ sunset: Date) {
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: sunset)
-        let minute = calendar.component(.minute, from: sunset)
-//        page2.setSunsetMode()
-//        page2.setSetriseTimelabel(String(format: "%02d:%02d", hour, minute))
-        
-    }
-    
-    func didUpdateSunriseTime(_ sunrise: Date) {
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: sunrise)
-        let minute = calendar.component(.minute, from: sunrise)
-//        page2.setSunriseMode()
-//        page2.setSetriseTimelabel(String(format: "%02d:%02d", hour, minute))
-    }
-    
 }
 
 //MARK: - LocationManagerDelegate
 extension TabBarController: LocationManagerDelegate {
     
+    // Updated Location
     func didUpdateLocation(_ locationData: [Double]) {
         sunPositionManager.currentData.Longitude = locationData[0]
         sunPositionManager.currentData.Latitude = locationData[1]
         
-        // Start Calculating
+        /* START SUN POSITION SYSTEM */
         if let _ = sunPositionManager.currentData.SunAltitudeChange {}
         else { sunPositionManager.startSunPositionSystem() }
     }
@@ -174,12 +180,88 @@ extension TabBarController: TimerManagerDelegate {
         if (sec % 5 == 0)
         {
             sunPositionManager.updateCurrentAltitude()
-            let sunAltitude = sunPositionManager.getCurrentAltitude()
+            let sunAltitude = sunPositionManager.getAltitude()
             print("SunAltitude: \(String(format: "%2.2f", sunAltitude))")
         }
     }
         
     func didEndTimer() {
         sunPositionManager.updateScreen()
+    }
+}
+
+
+
+
+
+//MARK: - Custom Rounded Border
+extension UIView {
+    func topRoundedCorners(){
+        let maskPath1 = UIBezierPath(roundedRect: bounds,
+            byRoundingCorners: [.topLeft , .topRight],
+            cornerRadii: CGSize(width: 15, height: 15))
+        let maskLayer1 = CAShapeLayer()
+        maskLayer1.frame = bounds
+        maskLayer1.path = maskPath1.cgPath
+        layer.mask = maskLayer1
+    }
+}
+
+
+//MARK: - Custom Side Border
+extension CALayer {
+    func addBorder(edge: UIRectEdge, color: UIColor, thickness: CGFloat) {
+        let border = CALayer()
+        
+        switch edge {
+        case UIRectEdge.top:
+            border.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: thickness)
+            break
+        case UIRectEdge.bottom:
+            border.frame = CGRect(x: 0, y: self.frame.height, width: UIScreen.main.bounds.width, height: thickness)
+            break
+        case UIRectEdge.left:
+            border.frame = CGRect(x: 0, y: 0, width: thickness, height: self.frame.height)
+            break
+        case UIRectEdge.right:
+            border.frame = CGRect(x: self.frame.width, y: 0, width: thickness, height: self.frame.height)
+            break
+        default:
+            break
+        }
+        border.backgroundColor = color.cgColor;
+        self.addSublayer(border)
+    }
+}
+
+
+//MARK:- UILabel Character Spacing
+extension UILabel {
+  func addCharacterSpacing(_ spacing: Double = 1.30) {
+    if let labelText = text, labelText.count > 0 {
+      let attributedString = NSMutableAttributedString(string: labelText)
+        attributedString.addAttribute(NSAttributedString.Key.kern, value: spacing, range: NSRange(location: 0, length: attributedString.length - 1))
+      attributedText = attributedString
+    }
+  }
+}
+
+extension UIButton{
+    func addCharacterSpacing(_ spacing: CGFloat = 1.30) {
+        if let labelText = self.titleLabel?.text!, labelText.count > 0 {
+            print("labelText : \(labelText)")
+            let attributedString = NSMutableAttributedString(string: labelText)
+            attributedString.addAttribute(NSAttributedString.Key.kern, value: spacing, range: NSRange(location: 0, length: attributedString.length - 1 ))
+            self.setAttributedTitle(attributedString, for: .normal)
+        }
+    }
+}
+
+//MARK: - For HEX Color Code
+// *Usage*
+// view.backgroundColor = UIColor.init(rgb: 0xF58634)     // + .cgColor
+extension UIColor {
+    convenience init(rgb: UInt) {
+       self.init(red: CGFloat((rgb & 0xFF0000) >> 16) / 255.0, green: CGFloat((rgb & 0x00FF00) >> 8) / 255.0, blue: CGFloat(rgb & 0x0000FF) / 255.0, alpha: CGFloat(1.0))
     }
 }

@@ -39,7 +39,6 @@
                                         <rect key="frame" x="109.5" y="0.0" width="165" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="-"/>
                                         <connections>
                                             <action selector="currentLocationButtonPressed:" destination="NV3-4U-HHo" eventType="touchUpInside" id="oIK-30-3qg"/>
                                         </connections>
@@ -76,7 +75,7 @@
                             <constraint firstItem="m7n-jY-lav" firstAttribute="leading" secondItem="XXZ-JR-Y5O" secondAttribute="leading" id="zRy-EI-UK9"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="iconSunglow" id="nFU-IJ-YN9"/>
+                    <tabBarItem key="tabBarItem" title="" image="sun.haze" catalog="system" id="nFU-IJ-YN9"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="BGImageView" destination="m7n-jY-lav" id="qhr-nn-8F7"/>
@@ -93,6 +92,6 @@
         <image name="BG_Night" width="1875" height="4060"/>
         <image name="iconNotification" width="20" height="22"/>
         <image name="iconSearch" width="20" height="20"/>
-        <image name="iconSunglow" width="24" height="25"/>
+        <image name="sun.haze" catalog="system" width="128" height="119"/>
     </resources>
 </document>

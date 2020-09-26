@@ -18,20 +18,36 @@ class PlanViewController: UIViewController {
     @IBOutlet weak var BGImageView: UIImageView!
     @IBOutlet weak var mainContentView: UIView!
     
-    // Content Cells
-    @IBOutlet weak var lowSunView: UIView!
-    @IBOutlet weak var goldenHourView: UIView!
-    @IBOutlet weak var blueHourView: UIView!
-    @IBOutlet weak var contentListStack: UIStackView!
-    @IBOutlet weak var lowSunLabelBox: UIStackView!
-    @IBOutlet weak var goldenHourLabelBox: UIStackView!
-    @IBOutlet weak var blueHourLabelBox: UIStackView!
+    // Date Buttons
+    @IBOutlet weak var dateButtonOutlet: UIButton!
+    
+    
+    // Center Weather & Sunset
+    @IBOutlet weak var weatherIcon: UIButton!
+    @IBOutlet weak var weatherLabel: UILabel!
+    @IBOutlet weak var setriseIcon: UIButton!
+    @IBOutlet weak var setriseTime: UILabel!
     
     // Time Labels
     @IBOutlet weak var timeLabel1: UILabel!
     @IBOutlet weak var timeLabel2: UILabel!
     @IBOutlet weak var timeLabel3: UILabel!
     @IBOutlet weak var timeLabel4: UILabel!
+    
+    // Event BG
+    @IBOutlet weak var event1BG: UIImageView!
+    @IBOutlet weak var event2BG: UIImageView!
+    @IBOutlet weak var event3BG: UIImageView!
+    
+    // Event Labels
+    @IBOutlet weak var event1Label: UILabel!
+    @IBOutlet weak var event2Label: UILabel!
+    @IBOutlet weak var event3Label: UILabel!
+  
+    // Event Durations
+    @IBOutlet weak var event1Duration: UILabel!
+    @IBOutlet weak var event2Duration: UILabel!
+    @IBOutlet weak var event3Duration: UILabel!
     
     // Bottom Selector Bar & Buttons
     @IBOutlet weak var morningButton: UIButton!
@@ -46,72 +62,45 @@ class PlanViewController: UIViewController {
         
         registerObservers()
         setupMainContentViewBG()
-        setupContentCells()
+        setupEventBGsRadius()
+        setupFixedLabelSpacing()
 
-        
+
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
         print("PlanView: viewDidAppear")
-        currentLocationOutlet.setTitle(myTabBar.currentLocation, for: .normal)
-        BGImageView.image = UIImage(named: myTabBar.BGImageViewName)
         
-        if( myTabBar.isEvening )
-        {
-            eveningButtonPressed((Any).self)
-        }
-        else{
-            morningButtonPressed((Any).self)
+        if let location = myTabBar.currentLocation {
+            currentLocationOutlet.setTitle(location, for: .normal)
+            currentLocationOutlet.addCharacterSpacing()
         }
         
+        if let imageName = myTabBar.BGImageViewName {
+            BGImageView.image = UIImage(named: imageName)
+        }
+        
+        if( myTabBar.isEvening ) { eveningButtonPressed((Any).self) }
+        else{ morningButtonPressed((Any).self) }
         
         
     }
     override func viewWillDisappear(_ animated: Bool) {
         print("PlanView: viewWillDisappear")
-        print(myTabBar.BGImageViewName)
     }
     
-    func setupContentCells() {
-                
-        // Low Sun View
-        var gradColor = setGradient(color1: 0x7698F0, color2: 0xD9C545)
-        lowSunView.layer.addSublayer(gradColor)
-        contentListStack.addSubview(lowSunView)
-        lowSunView.bringSubviewToFront(lowSunLabelBox)
-        
-        // Golden Hour View
-        gradColor = setGradient(color1: 0xD9C545, color2: 0xD85E52, color3: 0x4849C3)
-        goldenHourView.layer.addSublayer(gradColor)
-        contentListStack.addSubview(goldenHourView)
-        goldenHourView.bringSubviewToFront(goldenHourLabelBox)
-        
-        // Blue Hour View
-        gradColor = setGradient(color1: 0x4849C3, color2: 0x04015B)
-        blueHourView.layer.addSublayer(gradColor)
-        contentListStack.addSubview(blueHourView)
-        blueHourView.bringSubviewToFront(blueHourLabelBox)
-        
+    func setupFixedLabelSpacing() {
+        event1Label.addCharacterSpacing()
+        event2Label.addCharacterSpacing()
+        event3Label.addCharacterSpacing()
+        dateButtonOutlet.addCharacterSpacing()
     }
     
-    
-    func setGradient(color1: UInt, color2: UInt, color3: UInt = 0) -> CAGradientLayer {
-        let gradient = CAGradientLayer()
-        gradient.type = .axial
-        gradient.colors = ( color3 == 0) ? [UIColor.init(rgb: color1).cgColor, UIColor.init(rgb: color2).cgColor] : [UIColor.init(rgb: color1).cgColor, UIColor.init(rgb: color2).cgColor, UIColor.init(rgb: color3).cgColor]
-        gradient.startPoint = CGPoint(x: 0, y: 0.5)
-        gradient.endPoint = CGPoint(x: 1, y: 0.5)
-//        gradient.locations = [0, 1]
-//        gradient.frame = lowSunView.bounds
-
-        // Screen Size Adjust (Except for SE, 8)
-        let screenSize = view.frame.height
-        gradient.frame = (screenSize > 700)
-            ? CGRect(x:0, y: -lowSunView.frame.height/2, width:view.frame.width - 40, height: lowSunView.frame.height*4/3)
-            : CGRect(x:0, y: -lowSunView.frame.height/3, width:view.frame.width - 40, height: lowSunView.frame.height)
-        
-        gradient.cornerRadius = 15
-        return gradient
+    func setupEventBGsRadius() {
+        event1BG.layer.cornerRadius = 15
+        event2BG.layer.cornerRadius = 15
+        event3BG.layer.cornerRadius = 15
     }
     
     func setupMainContentViewBG() {
@@ -131,35 +120,110 @@ class PlanViewController: UIViewController {
     
     @IBAction func morningButtonPressed(_ sender: Any) {
         
+        // Button Color Change
         morningButton.setTitleColor(UIColor.white, for: .normal)
         eveningButton.setTitleColor(UIColor.darkGray, for: .normal)
-        
+
+        // Bar Animation
         UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: .curveEaseOut) {
             self.selectorBar.transform = CGAffineTransform(translationX: 0, y: 0)
         } completion: { (_) in
             // For second animation
         }
-        timeLabel1.text = myTabBar.morningTime[0]
-        timeLabel2.text = myTabBar.morningTime[1]
-        timeLabel3.text = myTabBar.morningTime[2]
-        timeLabel4.text = myTabBar.morningTime[3]
+
+        // Event BG Update
+//        event1BG.image = UIImage(named: "Event_Blue")
+//        event2BG.image = UIImage(named: "Event_Golden")
+//        event3BG.image = UIImage(named: "Event_LowSun")
+        
+        // Event Time Update
+        timeLabel1.text = myTabBar.morningTime[3]
+        timeLabel2.text = myTabBar.morningTime[2]
+        timeLabel3.text = myTabBar.morningTime[1]
+        timeLabel4.text = myTabBar.morningTime[0]
+        timeLabel1.addCharacterSpacing()
+        timeLabel2.addCharacterSpacing()
+        timeLabel3.addCharacterSpacing()
+        timeLabel4.addCharacterSpacing()
+        
+        // Event Duration Update
+        event1Duration.text = String(myTabBar.morningDuration[2]) + " min"
+        event2Duration.text = String(myTabBar.morningDuration[1]) + " min"
+        event3Duration.text = String(myTabBar.morningDuration[0]) + " min"
+        event1Duration.addCharacterSpacing()
+        event2Duration.addCharacterSpacing()
+        event3Duration.addCharacterSpacing()
+        
+        
+        // Event Label Update
+//        event1Label.text = "BLUE HOUR"
+//        event2Label.text = "GOLDEN HOUR"
+//        event3Label.text = "LOW SUN"
+        
+        // Weather Update
+        weatherIcon.setImage(UIImage(systemName: "cloud.sun"), for: .normal)
+        weatherLabel.text = "Fair"
+        weatherLabel.addCharacterSpacing()
+        
+        // Sunrise Update
+        setriseIcon.setImage(UIImage(systemName: "sunrise"), for: .normal)
+        setriseTime.text = myTabBar.sunriseTime
+        setriseTime.addCharacterSpacing()
+
     }
     
     
     @IBAction func eveningButtonPressed(_ sender: Any) {
 
+        // Button Color Change
         morningButton.setTitleColor(UIColor.darkGray, for: .normal)
         eveningButton.setTitleColor(UIColor.white, for: .normal)
-        
+
+        // Bar Animation
         UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: .curveEaseOut) {
             self.selectorBar.transform = CGAffineTransform(translationX: self.selectorBar.frame.width, y: 0)
         } completion: { (_) in
             // For second animation
         }
+        
+        // Event BG Update
+//        event1BG.image = UIImage(named: "Event_LowSun")
+//        event2BG.image = UIImage(named: "Event_Golden")
+//        event3BG.image = UIImage(named: "Event_Blue")
+
+        // Event Time Update
         timeLabel1.text = myTabBar.eveningTime[0]
         timeLabel2.text = myTabBar.eveningTime[1]
         timeLabel3.text = myTabBar.eveningTime[2]
         timeLabel4.text = myTabBar.eveningTime[3]
+        timeLabel1.addCharacterSpacing()
+        timeLabel2.addCharacterSpacing()
+        timeLabel3.addCharacterSpacing()
+        timeLabel4.addCharacterSpacing()
+        
+        // Event Duration Update
+        event1Duration.text = String(myTabBar.eveningDuration[0]) + " min"
+        event2Duration.text = String(myTabBar.eveningDuration[1]) + " min"
+        event3Duration.text = String(myTabBar.eveningDuration[2]) + " min"
+        event1Duration.addCharacterSpacing()
+        event2Duration.addCharacterSpacing()
+        event3Duration.addCharacterSpacing()
+        
+        // Event Label Update
+//        event1Label.text = "LOW SUN"
+//        event2Label.text = "GOLDEN HOUR"
+//        event3Label.text = "BLUE HOUR"
+        
+        // Weather Update
+        weatherIcon.setImage(UIImage(systemName: "sun.max"), for: .normal)
+        weatherLabel.text = "Good"
+        weatherLabel.addCharacterSpacing()
+        
+        // Sunset Update
+        setriseIcon.setImage(UIImage(systemName: "sunset"), for: .normal)
+        setriseTime.text = myTabBar.sunsetTime
+        setriseTime.addCharacterSpacing()
+        
     }
     
 
@@ -178,70 +242,12 @@ class PlanViewController: UIViewController {
     
     @objc func updateCityName(notification: NSNotification) {
         currentLocationOutlet.setTitle(myTabBar.currentLocation, for: .normal)
+        currentLocationOutlet.addCharacterSpacing()
     }
     
     @objc func updateBGImage(notification: NSNotification) {
-        BGImageView.image = UIImage(named: myTabBar.BGImageViewName)
-    }
-}
-
-//MARK: - Custom Rounded Border
-extension UIView {
-    func topRoundedCorners(){
-        let maskPath1 = UIBezierPath(roundedRect: bounds,
-            byRoundingCorners: [.topLeft , .topRight],
-            cornerRadii: CGSize(width: 15, height: 15))
-        let maskLayer1 = CAShapeLayer()
-        maskLayer1.frame = bounds
-        maskLayer1.path = maskPath1.cgPath
-        layer.mask = maskLayer1
+        BGImageView.image = UIImage(named: myTabBar.BGImageViewName!)
     }
 }
 
 
-//MARK: - Custom Side Border
-extension CALayer {
-    func addBorder(edge: UIRectEdge, color: UIColor, thickness: CGFloat) {
-        let border = CALayer()
-        
-        switch edge {
-        case UIRectEdge.top:
-            border.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: thickness)
-            break
-        case UIRectEdge.bottom:
-            border.frame = CGRect(x: 0, y: self.frame.height, width: UIScreen.main.bounds.width, height: thickness)
-            break
-        case UIRectEdge.left:
-            border.frame = CGRect(x: 0, y: 0, width: thickness, height: self.frame.height)
-            break
-        case UIRectEdge.right:
-            border.frame = CGRect(x: self.frame.width, y: 0, width: thickness, height: self.frame.height)
-            break
-        default:
-            break
-        }
-        border.backgroundColor = color.cgColor;
-        self.addSublayer(border)
-    }
-}
-
-
-//MARK:- UILabel Character Spacing
-extension UILabel {
-  func addCharacterSpacing(kernValue: Double = 1.30) {
-    if let labelText = text, labelText.count > 0 {
-      let attributedString = NSMutableAttributedString(string: labelText)
-        attributedString.addAttribute(NSAttributedString.Key.kern, value: kernValue, range: NSRange(location: 0, length: attributedString.length - 1))
-      attributedText = attributedString
-    }
-  }
-}
-
-//MARK: - For HEX Color Code
-// *Usage*
-// view.backgroundColor = UIColor.init(rgb: 0xF58634)     // + .cgColor
-extension UIColor {
-    convenience init(rgb: UInt) {
-       self.init(red: CGFloat((rgb & 0xFF0000) >> 16) / 255.0, green: CGFloat((rgb & 0x00FF00) >> 8) / 255.0, blue: CGFloat(rgb & 0x0000FF) / 255.0, alpha: CGFloat(1.0))
-    }
-}

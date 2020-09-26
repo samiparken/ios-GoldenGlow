@@ -1,6 +1,13 @@
 import Foundation
 
-// Golden Hour Altitude Range  (-4.00 ~ 10.00)
+
+let DAYTIME: Int = 4
+let LOWSUN: Int = 3
+let GOLDENHOUR: Int = 2
+let BLUEHOUR: Int = 1
+let NIGHTTIME: Int = 0
+
+// Golden Hour Altitude Range  (-6.00 ~ 10.00)
 let UPPERLIMIT: Double = 10     // Low Sun
 let UPPERGOLDEN: Double = 6     // Golden Hour
 let LOWERGOLDEN: Double = -4    // Blue Hour

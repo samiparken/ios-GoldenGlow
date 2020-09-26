@@ -49,8 +49,13 @@ class SkyViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         print("SkyView: viewDidAppear")
-        currentLocationOutlet.setTitle(myTabBar.currentLocation, for: .normal)
-        BGImageView.image = UIImage(named: myTabBar.BGImageViewName)        
+        if let location = myTabBar.currentLocation {
+            currentLocationOutlet.setTitle(location, for: .normal)
+            currentLocationOutlet.addCharacterSpacing()
+        }
+        if let imageName = myTabBar.BGImageViewName {
+            BGImageView.image = UIImage(named: imageName)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -145,10 +150,11 @@ class SkyViewController: UIViewController {
 
     @objc func updateCityName(notification: NSNotification) {
         currentLocationOutlet.setTitle(myTabBar.currentLocation, for: .normal)
+        currentLocationOutlet.addCharacterSpacing()
     }
     
     @objc func updateBGImage(notification: NSNotification) {
-        BGImageView.image = UIImage(named: myTabBar.BGImageViewName)
+        BGImageView.image = UIImage(named: myTabBar.BGImageViewName!)
     }
     
     
@@ -171,4 +177,5 @@ extension SkyViewController: UIScrollViewDelegate {
 //            print(groundSlider.value)
         }
 }
+
 

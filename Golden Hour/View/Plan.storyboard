@@ -19,11 +19,11 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BG_Golden+" translatesAutoresizingMaskIntoConstraints="NO" id="4HC-93-k6J" userLabel="BG">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ZP2-Lf-tya" userLabel="Top Bar">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZP2-Lf-tya" userLabel="Top Bar">
                                 <rect key="frame" x="15" y="44" width="345" height="36"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fsp-Bh-ACB" userLabel="Search Button">
-                                        <rect key="frame" x="0.0" y="0.0" width="115" height="36"/>
+                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fsp-Bh-ACB" userLabel="Search Button">
+                                        <rect key="frame" x="0.0" y="6" width="98.666666666666671" height="24"/>
                                         <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="1"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -33,13 +33,13 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iP8-iE-5N3">
-                                        <rect key="frame" x="115" y="0.0" width="115" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <rect key="frame" x="98.666666666666671" y="0.0" width="147.66666666666663" height="36"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="20"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="..."/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QX0-Vp-uTe" userLabel="Notification Button">
-                                        <rect key="frame" x="230" y="0.0" width="115" height="36"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QX0-Vp-uTe" userLabel="Notification Button">
+                                        <rect key="frame" x="246.33333333333329" y="7" width="98.666666666666657" height="22"/>
                                         <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="1"/>
                                         <state key="normal" image="iconNotification">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
@@ -48,17 +48,18 @@
                                 </subviews>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
                                 <constraints>
+                                    <constraint firstItem="iP8-iE-5N3" firstAttribute="centerX" secondItem="ZP2-Lf-tya" secondAttribute="centerX" id="7RS-CA-bRo"/>
                                     <constraint firstAttribute="height" constant="36" id="JTF-er-keb"/>
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sG6-hx-nyS" userLabel="Main Content View">
                                 <rect key="frame" x="0.0" y="115" width="375" height="614"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="9AL-ui-X1V" userLabel="Content Top Bar">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9AL-ui-X1V" userLabel="Content Top Bar">
                                         <rect key="frame" x="40" y="0.0" width="295" height="30"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tCM-GB-qZv" userLabel="leftButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="34.666666666666664" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tCM-GB-qZv" userLabel="leftButton">
+                                                <rect key="frame" x="0.0" y="4" width="34.666666666666664" height="22"/>
                                                 <state key="normal" image="buttonLeft"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AZJ-Ic-crA" userLabel="dateButton">
@@ -68,12 +69,13 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MpV-Oy-2XW" userLabel="rightButton">
-                                                <rect key="frame" x="260.33333333333331" y="0.0" width="34.666666666666686" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MpV-Oy-2XW" userLabel="rightButton">
+                                                <rect key="frame" x="260.33333333333331" y="4" width="34.666666666666686" height="22"/>
                                                 <state key="normal" image="buttonRight"/>
                                             </button>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstItem="AZJ-Ic-crA" firstAttribute="centerX" secondItem="9AL-ui-X1V" secondAttribute="centerX" id="ZYR-fv-coA"/>
                                             <constraint firstAttribute="height" constant="30" id="mK5-S4-v5T"/>
                                         </constraints>
                                     </stackView>
@@ -81,17 +83,18 @@
                                         <rect key="frame" x="0.0" y="30" width="375" height="541"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZMc-wa-3ng" userLabel="Content Center Bar">
-                                                <rect key="frame" x="30" y="40" width="315" height="70"/>
+                                                <rect key="frame" x="30" y="39.999999999999986" width="315" height="183.66666666666663"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="knt-Zb-Rg4" userLabel="Weather Stack">
-                                                        <rect key="frame" x="0.0" y="15.333333333333346" width="105" height="39.333333333333343"/>
+                                                        <rect key="frame" x="0.0" y="72" width="105" height="40"/>
                                                         <subviews>
-                                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Puo-RN-h5R">
-                                                                <rect key="frame" x="0.0" y="0.0" width="105" height="22"/>
-                                                                <state key="normal" image="Weather"/>
+                                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Puo-RN-h5R" userLabel="weatherIcon">
+                                                                <rect key="frame" x="0.0" y="0.0" width="105" height="22.666666666666668"/>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <state key="normal" image="cloud.sun.fill" catalog="system"/>
                                                             </button>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fair" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahJ-x9-HUh">
-                                                                <rect key="frame" x="0.0" y="24.999999999999996" width="105" height="14.333333333333332"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fair" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahJ-x9-HUh" userLabel="weatherLabel">
+                                                                <rect key="frame" x="0.0" y="25.666666666666682" width="105" height="14.333333333333332"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -99,17 +102,18 @@
                                                         </subviews>
                                                     </stackView>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sun" translatesAutoresizingMaskIntoConstraints="NO" id="haw-K6-gkw">
-                                                        <rect key="frame" x="105" y="0.0" width="105" height="70"/>
+                                                        <rect key="frame" x="105" y="57" width="105" height="70"/>
                                                     </imageView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="IrT-wS-ZVP" userLabel="Setrise Stack">
-                                                        <rect key="frame" x="210" y="15.333333333333346" width="105" height="39.333333333333343"/>
+                                                        <rect key="frame" x="210" y="72" width="105" height="40"/>
                                                         <subviews>
-                                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gD-E1-vRO">
-                                                                <rect key="frame" x="0.0" y="0.0" width="105" height="22"/>
-                                                                <state key="normal" image="Sunset"/>
+                                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gD-E1-vRO" userLabel="setriseIcon">
+                                                                <rect key="frame" x="0.0" y="0.0" width="105" height="22.666666666666668"/>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <state key="normal" image="sunset.fill" catalog="system"/>
                                                             </button>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18:33" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GHB-W5-XHz">
-                                                                <rect key="frame" x="0.0" y="24.999999999999996" width="105" height="14.333333333333332"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18:33" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GHB-W5-XHz" userLabel="setriseTime">
+                                                                <rect key="frame" x="0.0" y="25.666666666666682" width="105" height="14.333333333333332"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -118,35 +122,38 @@
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hLM-jb-Sn6" userLabel="Content List Stack">
-                                                <rect key="frame" x="0.0" y="159" width="375" height="342"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hLM-jb-Sn6" userLabel="Content List Stack">
+                                                <rect key="frame" x="0.0" y="263.66666666666669" width="375" height="237.33333333333331"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17:32" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNg-Y5-iOB" userLabel="lowSunTime">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="17:32" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNg-Y5-iOB" userLabel="lowSunTime">
                                                         <rect key="frame" x="173.66666666666666" y="0.0" width="28" height="13.333333333333334"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="11"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ijn-3q-UTW" userLabel="LowSun View">
-                                                        <rect key="frame" x="20" y="36.333333333333314" width="335" height="50"/>
+                                                        <rect key="frame" x="25" y="18.333333333333314" width="325" height="54"/>
                                                         <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Event_LowSun" translatesAutoresizingMaskIntoConstraints="NO" id="qyq-4h-PKI" userLabel="Event1BG">
+                                                                <rect key="frame" x="0.0" y="0.0" width="325" height="54"/>
+                                                            </imageView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="pIb-rF-yxX" userLabel="LowSun Label Box">
-                                                                <rect key="frame" x="15" y="0.0" width="305" height="50"/>
+                                                                <rect key="frame" x="20" y="0.0" width="285" height="54"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOW SUN" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mdi-lO-1Kh" userLabel="lowSunLabel">
-                                                                        <rect key="frame" x="0.0" y="18.333333333333371" width="132.33333333333334" height="13.333333333333336"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOW SUN" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mdi-lO-1Kh" userLabel="Event1Label">
+                                                                        <rect key="frame" x="0.0" y="20.333333333333314" width="123.66666666666667" height="13.333333333333336"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="11"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="29min" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dV-Iv-LqI" userLabel="lowSunDuration">
-                                                                        <rect key="frame" x="139.33333333333337" y="18.333333333333371" width="143.66666666666663" height="13.333333333333336"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="29min" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dV-Iv-LqI" userLabel="Event1Duration">
+                                                                        <rect key="frame" x="130.66666666666663" y="20.333333333333314" width="132.33333333333337" height="13.333333333333336"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="11"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AoZ-8p-CxX" userLabel="lowSunInfoButton">
-                                                                        <rect key="frame" x="290" y="17.666666666666686" width="15" height="15"/>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AoZ-8p-CxX" userLabel="Event1InfoButton">
+                                                                        <rect key="frame" x="270" y="16" width="15" height="22"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="15" id="gln-Y2-qWY"/>
                                                                             <constraint firstAttribute="width" constant="15" id="oHt-nk-rFq"/>
@@ -160,36 +167,43 @@
                                                         <constraints>
                                                             <constraint firstItem="pIb-rF-yxX" firstAttribute="top" secondItem="ijn-3q-UTW" secondAttribute="top" id="CB4-DG-DUU"/>
                                                             <constraint firstAttribute="bottom" secondItem="pIb-rF-yxX" secondAttribute="bottom" id="DQh-YB-5dk"/>
-                                                            <constraint firstAttribute="trailing" secondItem="pIb-rF-yxX" secondAttribute="trailing" constant="15" id="G30-JH-THT"/>
-                                                            <constraint firstItem="pIb-rF-yxX" firstAttribute="leading" secondItem="ijn-3q-UTW" secondAttribute="leading" constant="15" id="kY4-iz-E6P"/>
+                                                            <constraint firstAttribute="trailing" secondItem="pIb-rF-yxX" secondAttribute="trailing" constant="20" id="G30-JH-THT"/>
+                                                            <constraint firstAttribute="bottom" secondItem="qyq-4h-PKI" secondAttribute="bottom" id="hKW-D2-t0k"/>
+                                                            <constraint firstItem="pIb-rF-yxX" firstAttribute="leading" secondItem="ijn-3q-UTW" secondAttribute="leading" constant="20" id="kY4-iz-E6P"/>
+                                                            <constraint firstAttribute="trailing" secondItem="qyq-4h-PKI" secondAttribute="trailing" id="mhC-wz-dQS"/>
+                                                            <constraint firstItem="qyq-4h-PKI" firstAttribute="top" secondItem="ijn-3q-UTW" secondAttribute="top" id="qe1-9U-Xia"/>
+                                                            <constraint firstItem="qyq-4h-PKI" firstAttribute="leading" secondItem="ijn-3q-UTW" secondAttribute="leading" id="v3X-LY-sNG"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18:03" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Jg-yv-QCc" userLabel="goldenHourTime">
-                                                        <rect key="frame" x="173" y="109.66666666666669" width="29" height="13.333333333333329"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="18:03" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Jg-yv-QCc" userLabel="goldenHourTime">
+                                                        <rect key="frame" x="173" y="77.333333333333314" width="29" height="13.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="11"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yei-iU-YNx" userLabel="GoldenHour View">
-                                                        <rect key="frame" x="20" y="146" width="335" height="50"/>
+                                                        <rect key="frame" x="25" y="95.666666666666629" width="325" height="50"/>
                                                         <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Event_Golden" translatesAutoresizingMaskIntoConstraints="NO" id="b3q-wK-BIK" userLabel="Event2BG">
+                                                                <rect key="frame" x="0.0" y="0.0" width="325" height="50"/>
+                                                            </imageView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="J3G-bA-uH3" userLabel="GoldenHour Label Box">
-                                                                <rect key="frame" x="15" y="0.0" width="305" height="50"/>
+                                                                <rect key="frame" x="20" y="0.0" width="285" height="50"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GOLDEN HOUR" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5JY-mN-E4Q" userLabel="goldenHourLabel">
-                                                                        <rect key="frame" x="0.0" y="18.333333333333314" width="168" height="13.333333333333336"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GOLDEN HOUR" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5JY-mN-E4Q" userLabel="Event2Label">
+                                                                        <rect key="frame" x="0.0" y="18.333333333333314" width="157" height="13.333333333333336"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="11"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="57min" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3P-RB-2Dc" userLabel="goldenHourDuration">
-                                                                        <rect key="frame" x="175" y="18.333333333333314" width="108" height="13.333333333333336"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="57min" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3P-RB-2Dc" userLabel="Event2Duration">
+                                                                        <rect key="frame" x="164" y="18.333333333333314" width="99" height="13.333333333333336"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="11"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fn7-Si-jSz" userLabel="goldenHourInfoButton">
-                                                                        <rect key="frame" x="290" y="17.666666666666686" width="15" height="15"/>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fn7-Si-jSz" userLabel="Event2InfoButton">
+                                                                        <rect key="frame" x="270" y="14.000000000000057" width="15" height="22"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="15" id="SRo-3Y-zKc"/>
                                                                             <constraint firstAttribute="height" constant="15" id="VKb-gA-HT0"/>
@@ -201,38 +215,45 @@
                                                             </stackView>
                                                         </subviews>
                                                         <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="b3q-wK-BIK" secondAttribute="trailing" id="4ud-iB-Cjq"/>
                                                             <constraint firstAttribute="bottom" secondItem="J3G-bA-uH3" secondAttribute="bottom" id="Kzx-sz-eVx"/>
-                                                            <constraint firstAttribute="trailing" secondItem="J3G-bA-uH3" secondAttribute="trailing" constant="15" id="Obq-41-cZp"/>
+                                                            <constraint firstAttribute="trailing" secondItem="J3G-bA-uH3" secondAttribute="trailing" constant="20" id="Obq-41-cZp"/>
                                                             <constraint firstItem="J3G-bA-uH3" firstAttribute="top" secondItem="Yei-iU-YNx" secondAttribute="top" id="Tlb-NR-jG7"/>
-                                                            <constraint firstItem="J3G-bA-uH3" firstAttribute="leading" secondItem="Yei-iU-YNx" secondAttribute="leading" constant="15" id="wMX-iY-eNb"/>
+                                                            <constraint firstItem="b3q-wK-BIK" firstAttribute="leading" secondItem="Yei-iU-YNx" secondAttribute="leading" id="j3i-j4-gvO"/>
+                                                            <constraint firstAttribute="bottom" secondItem="b3q-wK-BIK" secondAttribute="bottom" id="npe-hM-a6N"/>
+                                                            <constraint firstItem="b3q-wK-BIK" firstAttribute="top" secondItem="Yei-iU-YNx" secondAttribute="top" id="pow-I4-zqn"/>
+                                                            <constraint firstItem="J3G-bA-uH3" firstAttribute="leading" secondItem="Yei-iU-YNx" secondAttribute="leading" constant="20" id="wMX-iY-eNb"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19:01" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VRt-mv-1nq" userLabel="blueHourTime">
-                                                        <rect key="frame" x="174" y="219" width="27.333333333333343" height="13.333333333333343"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="19:01" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VRt-mv-1nq" userLabel="blueHourTime">
+                                                        <rect key="frame" x="174" y="150.66666666666669" width="27.333333333333343" height="13.333333333333343"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="11"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="duZ-I7-Zga" userLabel="BlueHour View">
-                                                        <rect key="frame" x="20" y="255.66666666666663" width="335" height="50"/>
+                                                        <rect key="frame" x="25" y="168.99999999999994" width="325" height="50"/>
                                                         <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Event_Blue" translatesAutoresizingMaskIntoConstraints="NO" id="zwW-0R-3iP" userLabel="Event3BG">
+                                                                <rect key="frame" x="0.0" y="0.0" width="325" height="50"/>
+                                                            </imageView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="8X1-Sz-YLJ" userLabel="BlueHour Label Box">
-                                                                <rect key="frame" x="15" y="0.0" width="305" height="50"/>
+                                                                <rect key="frame" x="20" y="0.0" width="285" height="50"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BLUE HOUR" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jco-k1-GJb" userLabel="blueHourLabel">
-                                                                        <rect key="frame" x="0.0" y="18.333333333333371" width="148" height="13.333333333333336"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BLUE HOUR" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jco-k1-GJb" userLabel="Event3Label">
+                                                                        <rect key="frame" x="0.0" y="18.333333333333371" width="138.33333333333334" height="13.333333333333336"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="11"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20min" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXc-9N-ZQW" userLabel="blueHourDuration">
-                                                                        <rect key="frame" x="155" y="18.333333333333371" width="128" height="13.333333333333336"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20min" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXc-9N-ZQW" userLabel="Event3Duration">
+                                                                        <rect key="frame" x="145.33333333333334" y="18.333333333333371" width="117.66666666666666" height="13.333333333333336"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="11"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C6d-hb-PsB" userLabel="blueHourInfoButton">
-                                                                        <rect key="frame" x="290" y="17.333333333333371" width="15" height="15"/>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C6d-hb-PsB" userLabel="Event3InfoButton">
+                                                                        <rect key="frame" x="270" y="14" width="15" height="22"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="15" id="7XA-qF-iU2"/>
                                                                             <constraint firstAttribute="height" constant="15" id="YbD-MG-IwT"/>
@@ -244,32 +265,36 @@
                                                             </stackView>
                                                         </subviews>
                                                         <constraints>
-                                                            <constraint firstItem="8X1-Sz-YLJ" firstAttribute="leading" secondItem="duZ-I7-Zga" secondAttribute="leading" constant="15" id="ASh-by-wxo"/>
+                                                            <constraint firstItem="8X1-Sz-YLJ" firstAttribute="leading" secondItem="duZ-I7-Zga" secondAttribute="leading" constant="20" id="ASh-by-wxo"/>
                                                             <constraint firstAttribute="bottom" secondItem="8X1-Sz-YLJ" secondAttribute="bottom" id="CQ9-DG-IpU"/>
+                                                            <constraint firstItem="zwW-0R-3iP" firstAttribute="leading" secondItem="duZ-I7-Zga" secondAttribute="leading" id="EvV-hx-8MF"/>
                                                             <constraint firstItem="8X1-Sz-YLJ" firstAttribute="top" secondItem="duZ-I7-Zga" secondAttribute="top" id="KFV-Al-bjR"/>
-                                                            <constraint firstAttribute="trailing" secondItem="8X1-Sz-YLJ" secondAttribute="trailing" constant="15" id="z7T-Me-iGT"/>
+                                                            <constraint firstItem="zwW-0R-3iP" firstAttribute="top" secondItem="duZ-I7-Zga" secondAttribute="top" id="QIZ-CJ-O9e"/>
+                                                            <constraint firstAttribute="bottom" secondItem="zwW-0R-3iP" secondAttribute="bottom" id="bqH-QA-AZH"/>
+                                                            <constraint firstAttribute="trailing" secondItem="zwW-0R-3iP" secondAttribute="trailing" id="rih-Op-4Xe"/>
+                                                            <constraint firstAttribute="trailing" secondItem="8X1-Sz-YLJ" secondAttribute="trailing" constant="20" id="z7T-Me-iGT"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19:21" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ONY-QC-BrC" userLabel="endTime">
-                                                        <rect key="frame" x="174" y="328.66666666666663" width="27" height="13.333333333333314"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="19:21" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ONY-QC-BrC" userLabel="endTime">
+                                                        <rect key="frame" x="174" y="223.99999999999994" width="27" height="13.333333333333343"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="11"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="ijn-3q-UTW" firstAttribute="leading" secondItem="hLM-jb-Sn6" secondAttribute="leading" constant="20" id="29u-yE-JQ6"/>
-                                                    <constraint firstItem="duZ-I7-Zga" firstAttribute="leading" secondItem="hLM-jb-Sn6" secondAttribute="leading" constant="20" id="933-P4-dL0"/>
-                                                    <constraint firstAttribute="trailing" secondItem="duZ-I7-Zga" secondAttribute="trailing" constant="20" id="CNC-V1-bBU"/>
-                                                    <constraint firstAttribute="trailing" secondItem="ijn-3q-UTW" secondAttribute="trailing" constant="20" id="Ufs-sB-hie"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Yei-iU-YNx" secondAttribute="trailing" constant="20" id="ZJp-N5-jus"/>
-                                                    <constraint firstItem="Yei-iU-YNx" firstAttribute="leading" secondItem="hLM-jb-Sn6" secondAttribute="leading" constant="20" id="w37-nv-1Pu"/>
+                                                    <constraint firstItem="ijn-3q-UTW" firstAttribute="leading" secondItem="hLM-jb-Sn6" secondAttribute="leading" constant="25" id="29u-yE-JQ6"/>
+                                                    <constraint firstItem="duZ-I7-Zga" firstAttribute="leading" secondItem="hLM-jb-Sn6" secondAttribute="leading" constant="25" id="933-P4-dL0"/>
+                                                    <constraint firstAttribute="trailing" secondItem="duZ-I7-Zga" secondAttribute="trailing" constant="25" id="CNC-V1-bBU"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ijn-3q-UTW" secondAttribute="trailing" constant="25" id="Ufs-sB-hie"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Yei-iU-YNx" secondAttribute="trailing" constant="25" id="ZJp-N5-jus"/>
+                                                    <constraint firstItem="Yei-iU-YNx" firstAttribute="leading" secondItem="hLM-jb-Sn6" secondAttribute="leading" constant="25" id="w37-nv-1Pu"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="ZMc-wa-3ng" secondAttribute="trailing" constant="30" id="0cz-R0-Io4"/>
-                                            <constraint firstItem="hLM-jb-Sn6" firstAttribute="top" secondItem="ZMc-wa-3ng" secondAttribute="bottom" constant="49" id="3rT-At-1eu"/>
+                                            <constraint firstItem="hLM-jb-Sn6" firstAttribute="top" secondItem="ZMc-wa-3ng" secondAttribute="bottom" constant="40" id="3rT-At-1eu"/>
                                             <constraint firstItem="ZMc-wa-3ng" firstAttribute="top" secondItem="qJc-Kx-qip" secondAttribute="top" constant="40" id="LpB-CM-vP1"/>
                                             <constraint firstAttribute="trailing" secondItem="hLM-jb-Sn6" secondAttribute="trailing" id="SzE-YU-cq4"/>
                                             <constraint firstAttribute="bottom" secondItem="hLM-jb-Sn6" secondAttribute="bottom" constant="40" id="egs-hr-iK4"/>
@@ -377,26 +402,33 @@
                             <constraint firstItem="4HC-93-k6J" firstAttribute="leading" secondItem="Cfe-k2-Dyu" secondAttribute="leading" id="v3Y-kY-vWA"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="clock.fill" catalog="system" id="taG-FJ-d0e"/>
+                    <tabBarItem key="tabBarItem" title="" image="clock" catalog="system" id="taG-FJ-d0e"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="BGImageView" destination="4HC-93-k6J" id="v3j-qt-Ffh"/>
-                        <outlet property="blueHourLabelBox" destination="8X1-Sz-YLJ" id="63k-1O-dtC"/>
-                        <outlet property="blueHourView" destination="duZ-I7-Zga" id="Taa-pP-nGT"/>
-                        <outlet property="contentListStack" destination="hLM-jb-Sn6" id="NZB-Tm-VUF"/>
                         <outlet property="currentLocationOutlet" destination="iP8-iE-5N3" id="okD-HH-ez8"/>
+                        <outlet property="dateButtonOutlet" destination="AZJ-Ic-crA" id="MoU-AJ-AO8"/>
                         <outlet property="eveningButton" destination="fOa-Ek-MrT" id="YGq-Mp-mZR"/>
-                        <outlet property="goldenHourLabelBox" destination="J3G-bA-uH3" id="G5m-Cf-2Lh"/>
-                        <outlet property="goldenHourView" destination="Yei-iU-YNx" id="PJJ-dQ-RJB"/>
-                        <outlet property="lowSunLabelBox" destination="pIb-rF-yxX" id="J3O-lH-i1g"/>
-                        <outlet property="lowSunView" destination="ijn-3q-UTW" id="RXv-zP-BM9"/>
+                        <outlet property="event1BG" destination="qyq-4h-PKI" id="VCM-JE-bJn"/>
+                        <outlet property="event1Duration" destination="6dV-Iv-LqI" id="TLN-ZL-hdG"/>
+                        <outlet property="event1Label" destination="mdi-lO-1Kh" id="VN6-DM-ws5"/>
+                        <outlet property="event2BG" destination="b3q-wK-BIK" id="0Fu-Fx-l1Z"/>
+                        <outlet property="event2Duration" destination="T3P-RB-2Dc" id="rEP-6R-OPu"/>
+                        <outlet property="event2Label" destination="5JY-mN-E4Q" id="hYW-ci-9Mb"/>
+                        <outlet property="event3BG" destination="zwW-0R-3iP" id="pGN-j8-v1O"/>
+                        <outlet property="event3Duration" destination="TXc-9N-ZQW" id="UIb-yW-Jal"/>
+                        <outlet property="event3Label" destination="Jco-k1-GJb" id="dni-4H-RA1"/>
                         <outlet property="mainContentView" destination="sG6-hx-nyS" id="cbf-VH-JTc"/>
                         <outlet property="morningButton" destination="eO3-S0-KyY" id="7si-pX-80l"/>
                         <outlet property="selectorBar" destination="PYH-nm-BxL" id="SSD-0G-c6d"/>
+                        <outlet property="setriseIcon" destination="0gD-E1-vRO" id="Sbx-C5-fG4"/>
+                        <outlet property="setriseTime" destination="GHB-W5-XHz" id="kFd-qo-Snq"/>
                         <outlet property="timeLabel1" destination="FNg-Y5-iOB" id="cgT-iT-2T2"/>
                         <outlet property="timeLabel2" destination="5Jg-yv-QCc" id="PL3-eg-12X"/>
                         <outlet property="timeLabel3" destination="VRt-mv-1nq" id="4Su-BG-SId"/>
                         <outlet property="timeLabel4" destination="ONY-QC-BrC" id="o8S-4W-mhs"/>
+                        <outlet property="weatherIcon" destination="Puo-RN-h5R" id="hDO-3w-Vbt"/>
+                        <outlet property="weatherLabel" destination="ahJ-x9-HUh" id="q5x-tA-cPe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j03-Zk-HTn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -406,16 +438,19 @@
     </scenes>
     <resources>
         <image name="BG_Golden+" width="375" height="812"/>
+        <image name="Event_Blue" width="343" height="50"/>
+        <image name="Event_Golden" width="343" height="50"/>
+        <image name="Event_LowSun" width="343" height="50"/>
         <image name="Sun" width="70" height="70"/>
-        <image name="Sunset" width="23" height="20"/>
-        <image name="Weather" width="32" height="22"/>
         <image name="blank" width="87" height="22"/>
         <image name="buttonLeft" width="8" height="14"/>
         <image name="buttonRight" width="8" height="14"/>
-        <image name="clock.fill" catalog="system" width="128" height="121"/>
+        <image name="clock" catalog="system" width="128" height="121"/>
+        <image name="cloud.sun.fill" catalog="system" width="128" height="93"/>
         <image name="colorFillWhite" width="140" height="9"/>
         <image name="iconNotification" width="20" height="22"/>
         <image name="iconSearch" width="20" height="20"/>
         <image name="info.circle" catalog="system" width="128" height="121"/>
+        <image name="sunset.fill" catalog="system" width="128" height="97"/>
     </resources>
 </document>
