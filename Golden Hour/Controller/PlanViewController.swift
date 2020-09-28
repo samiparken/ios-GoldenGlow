@@ -57,6 +57,11 @@ class PlanViewController: UIViewController {
     // for Sharing Data
     let myTabBar = TabBarController.singletonTabBar
     
+    // Deallocate Notification Observer
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

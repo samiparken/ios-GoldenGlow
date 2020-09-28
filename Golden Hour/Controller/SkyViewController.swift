@@ -14,18 +14,25 @@
 import UIKit
 
 class SkyViewController: UIViewController {
-
+    let myTabBar = TabBarController.singletonTabBar
+    
     @IBOutlet weak var BGImageView: UIImageView!
     @IBOutlet weak var currentLocationOutlet: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
 
-    let myTabBar = TabBarController.singletonTabBar
+    // Bottom Progress Status
+    @IBOutlet weak var bottomProgressView: UIView!
+    @IBOutlet weak var bottomProgressBG: UIImageView!
+    @IBOutlet weak var eventLabel: UILabel!
+    @IBOutlet weak var nextEventLabel: UILabel!
+    @IBOutlet weak var remainingTime: UILabel!
+    @IBOutlet weak var remainingPercent: UILabel!
+    let progressCover : UIView = UIView()
 
     // Initial UISliders
     var sunSlider = UISlider(frame:CGRect(x: 0, y: 0, width: 100, height: 20))
     var groundSlider = UISlider(frame:CGRect(x: 0, y: 0, width: 100, height: 20))
-    
-        
+            
     // Deallocate Notification Observer
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -42,9 +49,11 @@ class SkyViewController: UIViewController {
         setupSunSlider()
         setupGroundSlider()
         setupScrollView(w: 10)
+        setupBottomProgress()
 
         // Screen Organize
         view.bringSubviewToFront(scrollView)
+        view.bringSubviewToFront(bottomProgressView)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -56,11 +65,28 @@ class SkyViewController: UIViewController {
         if let imageName = myTabBar.BGImageViewName {
             BGImageView.image = UIImage(named: imageName)
         }
+        
+        setProgressPercent(CGFloat.random(in: 0...1))
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         print("SkyView: viewWillDisappear")
 
+    }
+    
+    func setupBottomProgress() {
+    
+        bottomProgressBG.layer.cornerRadius = 15
+
+    }
+    
+    func setProgressPercent(_ rate: CGFloat)
+    {
+        progressCover.frame = CGRect(x:0, y: 0, width: (view.frame.width-50) * rate, height: bottomProgressBG.frame.height)
+        progressCover.layer.backgroundColor = UIColor.black.cgColor
+        progressCover.layer.opacity = 0.5
+
+        bottomProgressBG.addSubview(progressCover)
     }
     
     
