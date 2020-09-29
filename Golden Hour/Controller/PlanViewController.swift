@@ -21,7 +21,6 @@ class PlanViewController: UIViewController {
     // Date Buttons
     @IBOutlet weak var dateButtonOutlet: UIButton!
     
-    
     // Center Weather & Sunset
     @IBOutlet weak var weatherIcon: UIButton!
     @IBOutlet weak var weatherLabel: UILabel!

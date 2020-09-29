@@ -19,14 +19,11 @@
                             <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BG_Night" translatesAutoresizingMaskIntoConstraints="NO" id="m7n-jY-lav" userLabel="BG">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <scrollView clipsSubviews="YES" contentMode="top" preservesSuperviewLayoutMargins="YES" bounces="NO" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2y-RU-Aj0">
-                                <rect key="frame" x="0.0" y="92" width="414" height="721"/>
-                            </scrollView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="5PY-AW-rul" userLabel="Top Bar">
-                                <rect key="frame" x="15" y="44" width="384" height="33"/>
+                                <rect key="frame" x="15" y="44" width="384" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cik-jz-MQA" userLabel="Search Button">
-                                        <rect key="frame" x="0.0" y="0.0" width="109.5" height="33"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="109.5" height="30"/>
                                         <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="1"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -39,7 +36,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J0C-JA-0kO">
-                                        <rect key="frame" x="109.5" y="0.0" width="165" height="33"/>
+                                        <rect key="frame" x="109.5" y="0.0" width="165" height="30"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
@@ -47,7 +44,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aUL-9v-eIm" userLabel="Notification Button">
-                                        <rect key="frame" x="274.5" y="0.0" width="109.5" height="33"/>
+                                        <rect key="frame" x="274.5" y="0.0" width="109.5" height="30"/>
                                         <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="1"/>
                                         <state key="normal" image="iconNotification">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
@@ -58,95 +55,40 @@
                                     </button>
                                 </subviews>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
-                            </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zX2-uI-hJ0" userLabel="Bottom Progress View">
-                                <rect key="frame" x="25" y="743" width="364" height="60"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Event_LowSun" translatesAutoresizingMaskIntoConstraints="NO" id="haY-bj-JoY" userLabel="Bottom Progress BG">
-                                        <rect key="frame" x="0.0" y="0.0" width="364" height="60"/>
-                                    </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3os-lc-Svv">
-                                        <rect key="frame" x="20" y="5" width="324" height="50"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="f98-4E-D7s">
-                                                <rect key="frame" x="0.0" y="9.5" width="162" height="31"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOW SUN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8RC-5Z-8Fo" userLabel="eventLabel">
-                                                        <rect key="frame" x="0.0" y="0.0" width="68.5" height="18"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEXT: GOLDEN HOUR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jM7-Z6-PW9" userLabel="nextEventLabel">
-                                                        <rect key="frame" x="0.0" y="19" width="105.5" height="12"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="10"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="bottom" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="aMM-5S-2qa">
-                                                <rect key="frame" x="162" y="11.5" width="162" height="27.5"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ends in 23m 42s" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FsL-BQ-u7B" userLabel="remainingTime">
-                                                        <rect key="frame" x="69" y="0.0" width="93" height="14.5"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="48%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q0p-OS-VZ8" userLabel="remainngPercent">
-                                                        <rect key="frame" x="139.5" y="15.5" width="22.5" height="12"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="10"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
                                 <constraints>
-                                    <constraint firstItem="haY-bj-JoY" firstAttribute="top" secondItem="zX2-uI-hJ0" secondAttribute="top" id="BM3-oZ-QZy"/>
-                                    <constraint firstAttribute="bottom" secondItem="haY-bj-JoY" secondAttribute="bottom" id="Gb8-nN-mpF"/>
-                                    <constraint firstItem="3os-lc-Svv" firstAttribute="leading" secondItem="zX2-uI-hJ0" secondAttribute="leading" constant="20" id="iAq-LS-zzh"/>
-                                    <constraint firstAttribute="trailing" secondItem="haY-bj-JoY" secondAttribute="trailing" id="iQ8-nM-pic"/>
-                                    <constraint firstItem="3os-lc-Svv" firstAttribute="top" secondItem="zX2-uI-hJ0" secondAttribute="top" constant="5" id="jdt-fq-iSX"/>
-                                    <constraint firstItem="haY-bj-JoY" firstAttribute="leading" secondItem="zX2-uI-hJ0" secondAttribute="leading" id="onK-at-Sux"/>
-                                    <constraint firstAttribute="height" constant="60" id="u9Q-7q-rWf"/>
-                                    <constraint firstAttribute="bottom" secondItem="3os-lc-Svv" secondAttribute="bottom" constant="5" id="vff-DV-sYT"/>
-                                    <constraint firstAttribute="trailing" secondItem="3os-lc-Svv" secondAttribute="trailing" constant="20" id="xtS-Ne-o42"/>
+                                    <constraint firstAttribute="height" constant="30" id="3V3-RC-rRZ"/>
                                 </constraints>
-                            </view>
+                            </stackView>
+                            <scrollView clipsSubviews="YES" contentMode="top" preservesSuperviewLayoutMargins="YES" bounces="NO" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2y-RU-Aj0">
+                                <rect key="frame" x="0.0" y="89" width="414" height="724"/>
+                            </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="V2x-3e-LaR">
+                                <rect key="frame" x="155.5" y="785.5" width="103.5" height="27.5"/>
+                            </pageControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GZo-WS-xhY"/>
                         <constraints>
-                            <constraint firstItem="zX2-uI-hJ0" firstAttribute="leading" secondItem="GZo-WS-xhY" secondAttribute="leading" constant="25" id="8F2-Je-0a8"/>
                             <constraint firstAttribute="bottom" secondItem="m7n-jY-lav" secondAttribute="bottom" id="9vG-JP-W9Q"/>
                             <constraint firstItem="GZo-WS-xhY" firstAttribute="bottom" secondItem="f2y-RU-Aj0" secondAttribute="bottom" id="B8d-ZG-j4z"/>
+                            <constraint firstItem="GZo-WS-xhY" firstAttribute="bottom" secondItem="V2x-3e-LaR" secondAttribute="bottom" id="HWZ-mK-4R6"/>
                             <constraint firstItem="GZo-WS-xhY" firstAttribute="trailing" secondItem="5PY-AW-rul" secondAttribute="trailing" constant="15" id="KVd-2H-BsR"/>
                             <constraint firstItem="5PY-AW-rul" firstAttribute="leading" secondItem="GZo-WS-xhY" secondAttribute="leading" constant="15" id="OWL-MR-cKF"/>
                             <constraint firstItem="f2y-RU-Aj0" firstAttribute="leading" secondItem="GZo-WS-xhY" secondAttribute="leading" id="Txy-0W-lnv"/>
-                            <constraint firstItem="GZo-WS-xhY" firstAttribute="bottom" secondItem="zX2-uI-hJ0" secondAttribute="bottom" constant="10" id="UiC-YV-H70"/>
                             <constraint firstItem="m7n-jY-lav" firstAttribute="trailing" secondItem="XXZ-JR-Y5O" secondAttribute="trailing" id="WOM-ZG-lgw"/>
-                            <constraint firstItem="GZo-WS-xhY" firstAttribute="trailing" secondItem="zX2-uI-hJ0" secondAttribute="trailing" constant="25" id="YJX-rt-Kyf"/>
                             <constraint firstItem="5PY-AW-rul" firstAttribute="top" secondItem="GZo-WS-xhY" secondAttribute="top" id="avT-Jb-2B2"/>
                             <constraint firstItem="f2y-RU-Aj0" firstAttribute="top" secondItem="5PY-AW-rul" secondAttribute="bottom" constant="15" id="uJH-es-LUK"/>
                             <constraint firstItem="m7n-jY-lav" firstAttribute="top" secondItem="XXZ-JR-Y5O" secondAttribute="top" id="usy-Wp-a4n"/>
                             <constraint firstItem="f2y-RU-Aj0" firstAttribute="trailing" secondItem="GZo-WS-xhY" secondAttribute="trailing" id="vQn-RW-9SX"/>
                             <constraint firstItem="m7n-jY-lav" firstAttribute="leading" secondItem="XXZ-JR-Y5O" secondAttribute="leading" id="zRy-EI-UK9"/>
+                            <constraint firstItem="V2x-3e-LaR" firstAttribute="centerX" secondItem="XXZ-JR-Y5O" secondAttribute="centerX" id="zYB-aT-ZZK"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="sun.haze" catalog="system" id="nFU-IJ-YN9"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="BGImageView" destination="m7n-jY-lav" id="qhr-nn-8F7"/>
-                        <outlet property="bottomProgressBG" destination="haY-bj-JoY" id="Wqg-eF-okT"/>
-                        <outlet property="bottomProgressView" destination="zX2-uI-hJ0" id="wJU-IA-iY6"/>
                         <outlet property="currentLocationOutlet" destination="J0C-JA-0kO" id="PCK-PY-Cq3"/>
-                        <outlet property="eventLabel" destination="8RC-5Z-8Fo" id="fkg-Su-2Ad"/>
-                        <outlet property="nextEventLabel" destination="jM7-Z6-PW9" id="aFD-Tp-Ee2"/>
-                        <outlet property="remainingPercent" destination="Q0p-OS-VZ8" id="7zl-sE-Jeb"/>
-                        <outlet property="remainingTime" destination="FsL-BQ-u7B" id="pnl-m2-BNi"/>
+                        <outlet property="pageControl" destination="V2x-3e-LaR" id="bvV-Oj-gTE"/>
                         <outlet property="scrollView" destination="f2y-RU-Aj0" id="lQQ-qH-YGS"/>
                     </connections>
                 </viewController>
@@ -157,7 +99,6 @@
     </scenes>
     <resources>
         <image name="BG_Night" width="1875" height="4060"/>
-        <image name="Event_LowSun" width="343" height="50"/>
         <image name="iconNotification" width="20" height="22"/>
         <image name="iconSearch" width="20" height="20"/>
         <image name="sun.haze" catalog="system" width="128" height="119"/>

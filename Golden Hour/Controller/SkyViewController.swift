@@ -19,16 +19,9 @@ class SkyViewController: UIViewController {
     @IBOutlet weak var BGImageView: UIImageView!
     @IBOutlet weak var currentLocationOutlet: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
-
-    // Bottom Progress Status
-    @IBOutlet weak var bottomProgressView: UIView!
-    @IBOutlet weak var bottomProgressBG: UIImageView!
-    @IBOutlet weak var eventLabel: UILabel!
-    @IBOutlet weak var nextEventLabel: UILabel!
-    @IBOutlet weak var remainingTime: UILabel!
-    @IBOutlet weak var remainingPercent: UILabel!
-    let progressCover : UIView = UIView()
-
+    @IBOutlet weak var pageControl: UIPageControl!
+    
+    
     // Initial UISliders
     var sunSlider = UISlider(frame:CGRect(x: 0, y: 0, width: 100, height: 20))
     var groundSlider = UISlider(frame:CGRect(x: 0, y: 0, width: 100, height: 20))
@@ -48,12 +41,11 @@ class SkyViewController: UIViewController {
         registerObservers()
         setupSunSlider()
         setupGroundSlider()
-        setupScrollView(w: 10)
-        setupBottomProgress()
+        setupScrollView()
+        setupPageControl()
 
         // Screen Organize
         view.bringSubviewToFront(scrollView)
-        view.bringSubviewToFront(bottomProgressView)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -65,8 +57,6 @@ class SkyViewController: UIViewController {
         if let imageName = myTabBar.BGImageViewName {
             BGImageView.image = UIImage(named: imageName)
         }
-        
-        setProgressPercent(CGFloat.random(in: 0...1))
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -74,26 +64,31 @@ class SkyViewController: UIViewController {
 
     }
     
-    func setupBottomProgress() {
     
-        bottomProgressBG.layer.cornerRadius = 15
-
-    }
-    
-    func setProgressPercent(_ rate: CGFloat)
-    {
-        progressCover.frame = CGRect(x:0, y: 0, width: (view.frame.width-50) * rate, height: bottomProgressBG.frame.height)
-        progressCover.layer.backgroundColor = UIColor.black.cgColor
-        progressCover.layer.opacity = 0.5
-
-        bottomProgressBG.addSubview(progressCover)
-    }
-    
-    
-    func setupScrollView(w: CGFloat) {
+    func setupScrollView() {
         // Initialize ScrollView
         scrollView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        scrollView.contentSize = CGSize(width: view.frame.width * w, height: view.frame.height)
+        scrollView.contentSize = CGSize(width: view.frame.width * 2, height: view.frame.height)
+        
+        
+        // Initialize Slides
+        let page1:ScrollViewPage1 = Bundle.main.loadNibNamed("ScrollViewPage1", owner: self, options: nil)?.first as! ScrollViewPage1
+        let page2:ScrollViewPage2 = Bundle.main.loadNibNamed("ScrollViewPage2", owner: self, options: nil)?.first as! ScrollViewPage2
+                
+        // Subview slides
+        page1.frame = CGRect(x: view.frame.width * 0, y: 0, width: view.frame.width, height: view.frame.height)
+        scrollView.addSubview(page1)
+
+        page2.frame = CGRect(x: view.frame.width * 1, y: 0, width: view.frame.width, height: view.frame.height)
+        scrollView.addSubview(page2)
+        
+        
+    }
+    
+    func setupPageControl() {
+        pageControl.numberOfPages = 2
+        pageControl.currentPage = 0
+        view.bringSubviewToFront(pageControl)
     }
     
     func setupGroundSlider() {
@@ -192,15 +187,18 @@ extension SkyViewController: UIScrollViewDelegate {
     
         func scrollViewDidScroll(_ scrollView: UIScrollView) {
                         
+            //Update Page Control
+            let pageIndex = round(scrollView.contentOffset.x/view.frame.width)
+            pageControl.currentPage = Int(pageIndex)
+            
             // Disable Vertical Scrolling
             if scrollView.contentOffset.y > 0 || scrollView.contentOffset.y < 0 {
                scrollView.contentOffset.y = 0
             }
             
             // Change Sun Slider
-            sunSlider.value = Float(scrollView.contentOffset.x/view.frame.width * 10)
-            groundSlider.value = Float(scrollView.contentOffset.x/view.frame.width * 10)
-//            print(groundSlider.value)
+            sunSlider.value = Float(scrollView.contentOffset.x/view.frame.width * 100)
+            groundSlider.value = Float(scrollView.contentOffset.x/view.frame.width * 100)
         }
 }
 
