@@ -47,6 +47,7 @@ class ScrollViewPage2: UIView {
     @IBOutlet weak var eveningButton: UIButton!
     @IBOutlet weak var selectorBar: UIImageView!
     
+    @IBOutlet weak var contentCenterBar: UIStackView!
     
     // for Sharing Data
     let myTabBar = TabBarController.singletonTabBar
@@ -58,7 +59,6 @@ class ScrollViewPage2: UIView {
         setupEventLabelSpacing()
         setupEventBGsRadius()
         
-                
     }
 
 

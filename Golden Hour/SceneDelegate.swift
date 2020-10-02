@@ -19,9 +19,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
 
-        UITabBar.appearance().barTintColor = .black
+//        UITabBar.appearance().barTintColor = .none
         UITabBar.appearance().tintColor = .orange
         UITabBar.appearance().unselectedItemTintColor = .white
+        
+        // Transparent Tabbar
+        UITabBar.appearance().backgroundImage = UIImage()
+        UITabBar.appearance().shadowImage     = UIImage()
+        UITabBar.appearance().clipsToBounds   = true
 
     }
 

@@ -22,45 +22,23 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="5PY-AW-rul" userLabel="Top Bar">
                                 <rect key="frame" x="15" y="44" width="384" height="30"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cik-jz-MQA" userLabel="Search Button">
-                                        <rect key="frame" x="0.0" y="0.0" width="109.5" height="30"/>
-                                        <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="1"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J0C-JA-0kO" userLabel="Current Location Button">
+                                        <rect key="frame" x="0.0" y="0.0" width="384" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="iconSearch">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="searchButtonPressed:" destination="NV3-4U-HHo" eventType="touchUpInside" id="6qW-J0-ZKf"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J0C-JA-0kO">
-                                        <rect key="frame" x="109.5" y="0.0" width="165" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="GOTEBORG"/>
                                         <connections>
                                             <action selector="currentLocationButtonPressed:" destination="NV3-4U-HHo" eventType="touchUpInside" id="oIK-30-3qg"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aUL-9v-eIm" userLabel="Notification Button">
-                                        <rect key="frame" x="274.5" y="0.0" width="109.5" height="30"/>
-                                        <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="1"/>
-                                        <state key="normal" image="iconNotification">
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="settingsButtonPressed:" destination="NV3-4U-HHo" eventType="touchUpInside" id="xNs-1A-tDS"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="3V3-RC-rRZ"/>
+                                    <constraint firstAttribute="height" constant="30" id="V6i-dH-wYa"/>
                                 </constraints>
                             </stackView>
                             <scrollView clipsSubviews="YES" contentMode="top" preservesSuperviewLayoutMargins="YES" bounces="NO" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2y-RU-Aj0">
-                                <rect key="frame" x="0.0" y="89" width="414" height="724"/>
+                                <rect key="frame" x="0.0" y="74" width="414" height="739"/>
                             </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="V2x-3e-LaR">
                                 <rect key="frame" x="155.5" y="785.5" width="103.5" height="27.5"/>
@@ -76,7 +54,7 @@
                             <constraint firstItem="f2y-RU-Aj0" firstAttribute="leading" secondItem="GZo-WS-xhY" secondAttribute="leading" id="Txy-0W-lnv"/>
                             <constraint firstItem="m7n-jY-lav" firstAttribute="trailing" secondItem="XXZ-JR-Y5O" secondAttribute="trailing" id="WOM-ZG-lgw"/>
                             <constraint firstItem="5PY-AW-rul" firstAttribute="top" secondItem="GZo-WS-xhY" secondAttribute="top" id="avT-Jb-2B2"/>
-                            <constraint firstItem="f2y-RU-Aj0" firstAttribute="top" secondItem="5PY-AW-rul" secondAttribute="bottom" constant="15" id="uJH-es-LUK"/>
+                            <constraint firstItem="f2y-RU-Aj0" firstAttribute="top" secondItem="5PY-AW-rul" secondAttribute="bottom" id="uJH-es-LUK"/>
                             <constraint firstItem="m7n-jY-lav" firstAttribute="top" secondItem="XXZ-JR-Y5O" secondAttribute="top" id="usy-Wp-a4n"/>
                             <constraint firstItem="f2y-RU-Aj0" firstAttribute="trailing" secondItem="GZo-WS-xhY" secondAttribute="trailing" id="vQn-RW-9SX"/>
                             <constraint firstItem="m7n-jY-lav" firstAttribute="leading" secondItem="XXZ-JR-Y5O" secondAttribute="leading" id="zRy-EI-UK9"/>
@@ -87,7 +65,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="BGImageView" destination="m7n-jY-lav" id="qhr-nn-8F7"/>
-                        <outlet property="currentLocationOutlet" destination="J0C-JA-0kO" id="PCK-PY-Cq3"/>
+                        <outlet property="currentLocationButton" destination="J0C-JA-0kO" id="PCK-PY-Cq3"/>
                         <outlet property="pageControl" destination="V2x-3e-LaR" id="bvV-Oj-gTE"/>
                         <outlet property="scrollView" destination="f2y-RU-Aj0" id="lQQ-qH-YGS"/>
                     </connections>
@@ -98,9 +76,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BG_Night" width="1875" height="4060"/>
-        <image name="iconNotification" width="20" height="22"/>
-        <image name="iconSearch" width="20" height="20"/>
+        <image name="BG_Night" width="375" height="812"/>
         <image name="sun.haze" catalog="system" width="128" height="119"/>
     </resources>
 </document>

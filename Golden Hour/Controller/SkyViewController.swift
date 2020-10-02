@@ -17,7 +17,7 @@ class SkyViewController: UIViewController {
     let myTabBar = TabBarController.singletonTabBar
     
     @IBOutlet weak var BGImageView: UIImageView!
-    @IBOutlet weak var currentLocationOutlet: UIButton!
+    @IBOutlet weak var currentLocationButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControl: UIPageControl!
     
@@ -39,20 +39,21 @@ class SkyViewController: UIViewController {
 
         // Initialize
         registerObservers()
-        setupSunSlider()
-        setupGroundSlider()
         setupScrollView()
         setupPageControl()
+        setupSunSlider()
+        setupGroundSlider()
 
         // Screen Organize
         view.bringSubviewToFront(scrollView)
     }
     
+    
     override func viewDidAppear(_ animated: Bool) {
         print("SkyView: viewDidAppear")
         if let location = myTabBar.currentLocation {
-            currentLocationOutlet.setTitle(location, for: .normal)
-            currentLocationOutlet.addCharacterSpacing()
+            currentLocationButton.setTitle(location, for: .normal)
+            currentLocationButton.addCharacterSpacing()
         }
         if let imageName = myTabBar.BGImageViewName {
             BGImageView.image = UIImage(named: imageName)
@@ -81,7 +82,6 @@ class SkyViewController: UIViewController {
 
         page2.frame = CGRect(x: view.frame.width * 1, y: 0, width: view.frame.width, height: view.frame.height)
         scrollView.addSubview(page2)
-        
         
     }
     
@@ -120,7 +120,7 @@ class SkyViewController: UIViewController {
         sunSlider.minimumTrackTintColor = UIColor.clear
         sunSlider.maximumTrackTintColor = UIColor.clear
         sunSlider.minimumValue = -20
-        sunSlider.maximumValue = 130
+        sunSlider.maximumValue = 120
         sunSlider.value = 0
         
         // Constraints
@@ -129,8 +129,8 @@ class SkyViewController: UIViewController {
         sunSlider.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 2))  //rotate
         NSLayoutConstraint.activate([
             sunSlider.widthAnchor.constraint(equalTo: scrollView.heightAnchor),      //width from view.height
-            sunSlider.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            sunSlider.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            sunSlider.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
+            sunSlider.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
         ])
     }
     
@@ -170,8 +170,8 @@ class SkyViewController: UIViewController {
     }
 
     @objc func updateCityName(notification: NSNotification) {
-        currentLocationOutlet.setTitle(myTabBar.currentLocation, for: .normal)
-        currentLocationOutlet.addCharacterSpacing()
+        currentLocationButton.setTitle(myTabBar.currentLocation, for: .normal)
+        currentLocationButton.addCharacterSpacing()
     }
     
     @objc func updateBGImage(notification: NSNotification) {

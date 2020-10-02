@@ -39,8 +39,10 @@ class TabBarController: UITabBarController {
     var locationManager = LocationManager()
     var timerManager = TimerManager()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         // Delegates
         sunPositionManager.delegate = self
@@ -157,7 +159,7 @@ extension TabBarController: LocationManagerDelegate {
     }
     
     func didUpdateCityName(_ cityname: String) {
-        currentLocation = cityname
+        currentLocation = cityname.uppercased()
         
         // Braodcast
         let keyName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
@@ -265,3 +267,4 @@ extension UIColor {
        self.init(red: CGFloat((rgb & 0xFF0000) >> 16) / 255.0, green: CGFloat((rgb & 0x00FF00) >> 8) / 255.0, blue: CGFloat(rgb & 0x0000FF) / 255.0, alpha: CGFloat(1.0))
     }
 }
+
