@@ -12,6 +12,7 @@ import UIKit
 class WaveView: UIView {
     
     var waveLength: CGFloat?
+    var waveAmp: CGFloat?       // ~50
 
     // init the view with a rectangular frame
     override init(frame: CGRect) {
@@ -23,10 +24,11 @@ class WaveView: UIView {
         super.init(coder: aDecoder)
     }
     
-    init(frame: CGRect, wLength: CGFloat)
+    init(frame: CGRect, wLength: CGFloat, wAmp: CGFloat)
     {
         super.init(frame: frame)
         self.waveLength = wLength
+        self.waveAmp = wAmp
     }
     
     override func draw(_ rect: CGRect) {
@@ -37,8 +39,8 @@ class WaveView: UIView {
         for i in 1 ... ( Int( rect.width / (waveLength!) ) + 1 ) {
             let x = waveLength! * CGFloat(i)
             path.addCurve(to: CGPoint(x: x, y: 50),
-                          controlPoint1: CGPoint(x: x-(waveLength!/2), y: 30),
-                          controlPoint2: CGPoint(x: x-(waveLength!/2), y: 70))
+                          controlPoint1: CGPoint(x: x-(waveLength!/2), y: 50-waveAmp!),
+                          controlPoint2: CGPoint(x: x-(waveLength!/2), y: 50+waveAmp!))
         }
         path.addLine(to: CGPoint(x: rect.width, y: rect.height))
         path.addLine(to: CGPoint(x: 0, y: rect.height))
@@ -48,8 +50,8 @@ class WaveView: UIView {
         let gradient = CAGradientLayer()
         gradient.type = .axial
         gradient.colors = [
-            UIColor.black.withAlphaComponent(0.5).cgColor,
-            UIColor.black.withAlphaComponent(0.2).cgColor
+            UIColor.black.withAlphaComponent(0.3).cgColor,
+            UIColor.black.withAlphaComponent(0.1).cgColor
         ]
         // Gradient direction
         gradient.startPoint = CGPoint(x: 0.5, y: 0)

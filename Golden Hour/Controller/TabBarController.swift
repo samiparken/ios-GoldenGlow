@@ -61,7 +61,8 @@ extension TabBarController: SunPositionManagerDelegate {
         switch sunAngle {
         case -90 ..< -6 : BGImageViewName = "BG_Night";  isEvening = false; isToday = isUp ? true : false
         case -6  ..< -4 : BGImageViewName = "BG_Blue";   isEvening = isUp ? false : true
-        case -4  ..< 6  : BGImageViewName = "BG_Golden"; isEvening = isUp ? false : true
+        case -4  ..< 0  : BGImageViewName = "BG_Golden-";isEvening = isUp ? false : true
+        case 0   ..< 6  : BGImageViewName = "BG_Golden+";isEvening = isUp ? false : true
         case 6   ..< 10 : BGImageViewName = "BG_LowSun"; isEvening = isUp ? false : true
         default         : BGImageViewName = "BG_Day";    isEvening = true
         }

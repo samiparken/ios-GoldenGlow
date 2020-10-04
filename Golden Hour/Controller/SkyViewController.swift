@@ -22,9 +22,16 @@ class SkyViewController: UIViewController {
     @IBOutlet weak var pageControl: UIPageControl!
     
     var sunPulse: UIImageView!
+    var waveView: UIView!
     var wave1: WaveView!
     var wave2: WaveView!
-
+    var wave3: WaveView!
+    let wave1Length: CGFloat = 250
+    let wave2Length: CGFloat = 230
+    let wave3Length: CGFloat = 200
+    let wave1Amp: CGFloat = 20
+    let wave2Amp: CGFloat = 25
+    let wave3Amp: CGFloat = 30
 
     // Deallocate Notification Observer
     deinit {
@@ -41,11 +48,9 @@ class SkyViewController: UIViewController {
         registerObservers()
         setupScrollView()
         setupPageControl()
-        setupWave1()
-        setupWave2()
+        setupWave()
         setupSunPulse()
         
-
         // Screen Organize
         view.bringSubviewToFront(scrollView)
         
@@ -61,6 +66,9 @@ class SkyViewController: UIViewController {
         if let imageName = myTabBar.BGImageViewName {
             BGImageView.image = UIImage(named: imageName)
         }
+
+        waveAnimation()
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -68,6 +76,51 @@ class SkyViewController: UIViewController {
 
     }
 
+    
+    func setupWave() {
+        
+        waveView = UIView(frame:CGRect(x: 0, y: view.frame.height/2, width: view.frame.width, height: view.frame.height/2))
+        view.addSubview(waveView)
+        
+        wave1 = WaveView(frame: CGRect(x: -wave1Length, y: 14, width: waveView.frame.width * 2, height: waveView.frame.height), wLength: wave1Length, wAmp: wave1Amp)
+        wave1.backgroundColor = .clear
+        waveView.addSubview(wave1)
+        
+        wave2 = WaveView(frame: CGRect(x: -wave2Length, y: 7, width: waveView.frame.width * 2, height: waveView.frame.height), wLength: wave2Length, wAmp: wave2Amp)
+        wave2.backgroundColor = .clear
+        waveView.addSubview(wave2)
+        
+        wave3 = WaveView(frame: CGRect(x: -wave3Length, y: 0, width: waveView.frame.width * 2, height: waveView.frame.height), wLength: wave3Length, wAmp: wave3Amp)
+        wave3.backgroundColor = .clear
+        waveView.addSubview(wave3)
+    }
+    
+    func waveAnimation() {
+        // Animation for wave1
+        UIView.animate(withDuration: 3, delay: 0, options: [.curveLinear, .repeat] ) {
+            self.wave1.frame.origin.x = 0
+        } completion: { (_) in
+            self.wave1.frame.origin.x = -self.wave1Length
+        }
+        
+        // Animation for wave2
+        UIView.animate(withDuration: 5, delay: 0, options: [.curveLinear, .repeat] ) {
+            self.wave2.frame.origin.x = 0
+
+        } completion: { (_) in
+            self.wave2.frame.origin.x = -self.wave2Length
+        }
+        
+        // Animation for wave3
+        UIView.animate(withDuration: 7, delay: 0, options: [.curveLinear, .repeat] ) {
+            self.wave3.frame.origin.x = 0
+
+        } completion: { (_) in
+            self.wave3.frame.origin.x = -self.wave3Length
+        }
+        
+    }
+    
     
     func setupSunPulse() {
         sunPulse = UIImageView(image: UIImage(named: "Sun"))
@@ -82,39 +135,7 @@ class SkyViewController: UIViewController {
         pulse.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         sunPulse.layer.insertSublayer(pulse, below: sunPulse.layer)
     }
-    
-    func setupWave1() {
-        
-        let waveLength:CGFloat = 300
-        
-        wave1 = WaveView(frame: CGRect(x: -CGFloat(waveLength), y: view.frame.height/2 + 5, width: view.frame.width * 2, height: view.frame.height / 2), wLength: waveLength)
-        wave1.backgroundColor = .clear
-        view.addSubview(wave1)
-        
-        // UIView Animation
-        UIView.animate(withDuration: 1, delay: 0, options: [.curveLinear, .repeat] ) {
-            self.wave1.frame.origin.x = 0
-        } completion: { (_) in
-            self.wave1.frame.origin.x = -waveLength
-        }
-    }
-    
-    func setupWave2() {
-        
-        let waveLength:CGFloat = 250
-        
-        wave2 = WaveView(frame: CGRect(x: -waveLength, y: view.frame.height/2, width: view.frame.width * 2, height: view.frame.height / 2), wLength: waveLength)
-        wave2.backgroundColor = .clear
-        view.addSubview(wave2)
-        
-        // UIView Animation
-        UIView.animate(withDuration: 3, delay: 0, options: [.curveLinear, .repeat] ) {
-            self.wave2.frame.origin.x = 0
-        } completion: { (_) in
-            self.wave2.frame.origin.x = -waveLength
-        }
-    }
-    
+
     
     func setupScrollView() {
         // Initialize ScrollView
@@ -201,16 +222,15 @@ extension SkyViewController: UIScrollViewDelegate {
             //Update Page Control
             let pageIndex = round(scrollView.contentOffset.x/view.frame.width)
             pageControl.currentPage = Int(pageIndex)
-            
+                        
             // Disable Vertical Scrolling
             if scrollView.contentOffset.y > 0 || scrollView.contentOffset.y < 0 {
                scrollView.contentOffset.y = 0
             }
             
-            
             // Wave Vertical Position
-            self.wave1.frame.origin.y = self.view.frame.height * (0.5 + (scrollView.contentOffset.x/self.view.frame.width)/2)
-            self.wave2.frame.origin.y = self.view.frame.height * (0.5 + (scrollView.contentOffset.x/self.view.frame.width)/2)
+            self.waveView.frame.origin.y = self.view.frame.height * (0.5 + (scrollView.contentOffset.x/self.view.frame.width)/2)
+//            self.wave2.frame.origin.y = self.view.frame.height * (0.5 + (scrollView.contentOffset.x/self.view.frame.width)/2)
 
             
             // SunPulse Vertical Position
