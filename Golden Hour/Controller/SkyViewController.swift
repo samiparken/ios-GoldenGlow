@@ -46,6 +46,7 @@ class SkyViewController: UIViewController {
 
         // Screen Organize
         view.bringSubviewToFront(scrollView)
+        
     }
     
     
