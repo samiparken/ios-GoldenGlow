@@ -21,11 +21,11 @@ class SkyViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControl: UIPageControl!
     
-    
-    // Initial UISliders
-    var sunSlider = UISlider(frame:CGRect(x: 0, y: 0, width: 100, height: 20))
-    var groundSlider = UISlider(frame:CGRect(x: 0, y: 0, width: 100, height: 20))
-            
+    var sunPulse: UIImageView!
+    var wave1: WaveView!
+    var wave2: WaveView!
+
+
     // Deallocate Notification Observer
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -41,8 +41,10 @@ class SkyViewController: UIViewController {
         registerObservers()
         setupScrollView()
         setupPageControl()
-        setupSunSlider()
-        setupGroundSlider()
+        setupWave1()
+        setupWave2()
+        setupSunPulse()
+        
 
         // Screen Organize
         view.bringSubviewToFront(scrollView)
@@ -64,6 +66,53 @@ class SkyViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         print("SkyView: viewWillDisappear")
 
+    }
+
+    
+    func setupSunPulse() {
+        sunPulse = UIImageView(image: UIImage(named: "Sun"))
+        sunPulse.frame = CGRect(x: (view.frame.width/2) - 35, y: view.frame.height * 0.2, width: 70, height: 70)
+        self.view.addSubview(sunPulse)
+
+        makePulse()
+    }
+    
+    func makePulse() {
+        let pulse = PulseAnimation(numberOfPulses: Float.infinity, radius: 50, position: CGPoint(x: 35, y: 35), duration: 10)
+        pulse.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        sunPulse.layer.insertSublayer(pulse, below: sunPulse.layer)
+    }
+    
+    func setupWave1() {
+        
+        let waveLength:CGFloat = 300
+        
+        wave1 = WaveView(frame: CGRect(x: -CGFloat(waveLength), y: view.frame.height/2 + 5, width: view.frame.width * 2, height: view.frame.height / 2), wLength: waveLength)
+        wave1.backgroundColor = .clear
+        view.addSubview(wave1)
+        
+        // UIView Animation
+        UIView.animate(withDuration: 1, delay: 0, options: [.curveLinear, .repeat] ) {
+            self.wave1.frame.origin.x = 0
+        } completion: { (_) in
+            self.wave1.frame.origin.x = -waveLength
+        }
+    }
+    
+    func setupWave2() {
+        
+        let waveLength:CGFloat = 250
+        
+        wave2 = WaveView(frame: CGRect(x: -waveLength, y: view.frame.height/2, width: view.frame.width * 2, height: view.frame.height / 2), wLength: waveLength)
+        wave2.backgroundColor = .clear
+        view.addSubview(wave2)
+        
+        // UIView Animation
+        UIView.animate(withDuration: 3, delay: 0, options: [.curveLinear, .repeat] ) {
+            self.wave2.frame.origin.x = 0
+        } completion: { (_) in
+            self.wave2.frame.origin.x = -waveLength
+        }
     }
     
     
@@ -92,48 +141,9 @@ class SkyViewController: UIViewController {
         view.bringSubviewToFront(pageControl)
     }
     
-    func setupGroundSlider() {
-        
-        // Custom UISlider
-        groundSlider.setThumbImage(UIImage(named: "Ground4"), for: .normal)
-        groundSlider.minimumTrackTintColor = UIColor.clear
-        groundSlider.maximumTrackTintColor = UIColor.clear
-        groundSlider.minimumValue = 0
-        groundSlider.maximumValue = 100
-        groundSlider.value = 0
 
-        // Constraints
-        groundSlider.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(groundSlider)
-        groundSlider.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2))  //rotate
-        NSLayoutConstraint.activate([
-            groundSlider.widthAnchor.constraint(equalTo: view.heightAnchor),      //width from view.height
-            groundSlider.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: view.frame.height * 0.6),
-            groundSlider.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-        
-    }
     
-    func setupSunSlider() {
-        
-        // Custom UISlider
-        sunSlider.setThumbImage(UIImage(named: "Sun"), for: .normal)
-        sunSlider.minimumTrackTintColor = UIColor.clear
-        sunSlider.maximumTrackTintColor = UIColor.clear
-        sunSlider.minimumValue = -20
-        sunSlider.maximumValue = 120
-        sunSlider.value = 0
-        
-        // Constraints
-        sunSlider.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(sunSlider)
-        sunSlider.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 2))  //rotate
-        NSLayoutConstraint.activate([
-            sunSlider.widthAnchor.constraint(equalTo: scrollView.heightAnchor),      //width from view.height
-            sunSlider.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-            sunSlider.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
-        ])
-    }
+
     
     
     @IBAction func currentLocationButtonPressed(_ sender: UIButton) {
@@ -197,9 +207,15 @@ extension SkyViewController: UIScrollViewDelegate {
                scrollView.contentOffset.y = 0
             }
             
-            // Change Sun Slider
-            sunSlider.value = Float(scrollView.contentOffset.x/view.frame.width * 100)
-            groundSlider.value = Float(scrollView.contentOffset.x/view.frame.width * 100)
+            
+            // Wave Vertical Position
+            self.wave1.frame.origin.y = self.view.frame.height * (0.5 + (scrollView.contentOffset.x/self.view.frame.width)/2)
+            self.wave2.frame.origin.y = self.view.frame.height * (0.5 + (scrollView.contentOffset.x/self.view.frame.width)/2)
+
+            
+            // SunPulse Vertical Position
+            self.sunPulse.frame.origin.y = self.view.frame.height * (0.2 + (scrollView.contentOffset.x/self.view.frame.width)/2)
+            
         }
 }
 
