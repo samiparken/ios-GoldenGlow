@@ -230,8 +230,6 @@ extension SkyViewController: UIScrollViewDelegate {
             
             // Wave Vertical Position
             self.waveView.frame.origin.y = self.view.frame.height * (0.5 + (scrollView.contentOffset.x/self.view.frame.width)/2)
-//            self.wave2.frame.origin.y = self.view.frame.height * (0.5 + (scrollView.contentOffset.x/self.view.frame.width)/2)
-
             
             // SunPulse Vertical Position
             self.sunPulse.frame.origin.y = self.view.frame.height * (0.2 + (scrollView.contentOffset.x/self.view.frame.width)/2)

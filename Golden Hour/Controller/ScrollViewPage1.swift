@@ -10,8 +10,11 @@ import UIKit
 
 class ScrollViewPage1: UIView {
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        
         
     }
     
