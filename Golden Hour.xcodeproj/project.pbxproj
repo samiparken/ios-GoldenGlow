@@ -12,7 +12,6 @@
 		224FCA3925190E1E00CC4EE4 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FCA3825190E1E00CC4EE4 /* TabBarController.swift */; };
 		224FCA3D25190E5900CC4EE4 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FCA3C25190E5900CC4EE4 /* SettingViewController.swift */; };
 		2271B2942500240F00DCB915 /* SunPositionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271B2932500240F00DCB915 /* SunPositionManager.swift */; };
-		22777B0524FAA36800834DDB /* PlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22777B0424FAA36800834DDB /* PlanViewController.swift */; };
 		2278250A250143260000794E /* CurrentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22782509250143260000794E /* CurrentData.swift */; };
 		22793BA524F81C2800BEBF8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22793BA424F81C2800BEBF8E /* AppDelegate.swift */; };
 		22793BA724F81C2800BEBF8E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22793BA624F81C2800BEBF8E /* SceneDelegate.swift */; };
@@ -28,9 +27,9 @@
 		22BF85F125110977001E03E5 /* ScrollViewPage2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22BF85F025110977001E03E5 /* ScrollViewPage2.xib */; };
 		22BFA2A32523890D00923D6C /* Notify.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22BFA2A22523890D00923D6C /* Notify.storyboard */; };
 		22BFA2A7252389C100923D6C /* NotifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BFA2A6252389C100923D6C /* NotifyViewController.swift */; };
-		22BFA2AC25238AA500923D6C /* Plan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22BFA2AB25238AA500923D6C /* Plan.storyboard */; };
 		22C5D01B25090A350077F7E2 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5D01A25090A350077F7E2 /* LocationManager.swift */; };
 		22C5D01D25091BC10077F7E2 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5D01C25091BC10077F7E2 /* TimerManager.swift */; };
+		22D49705252B238B008C269C /* NotifyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D49704252B238B008C269C /* NotifyTableViewController.swift */; };
 		22E4FD4424FE83C200C845E1 /* SunPositionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E4FD4324FE83C200C845E1 /* SunPositionModel.swift */; };
 		22E4FD4624FE884F00C845E1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E4FD4524FE884F00C845E1 /* Constants.swift */; };
 		22E4FD4824FE8D3600C845E1 /* SunPositionConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E4FD4724FE8D3600C845E1 /* SunPositionConstants.swift */; };
@@ -42,7 +41,6 @@
 		224FCA3825190E1E00CC4EE4 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		224FCA3C25190E5900CC4EE4 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		2271B2932500240F00DCB915 /* SunPositionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunPositionManager.swift; sourceTree = "<group>"; };
-		22777B0424FAA36800834DDB /* PlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanViewController.swift; sourceTree = "<group>"; };
 		22782509250143260000794E /* CurrentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentData.swift; sourceTree = "<group>"; };
 		22793BA124F81C2800BEBF8E /* Golden Hour.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Golden Hour.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22793BA424F81C2800BEBF8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -60,9 +58,9 @@
 		22BF85F025110977001E03E5 /* ScrollViewPage2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScrollViewPage2.xib; sourceTree = "<group>"; };
 		22BFA2A22523890D00923D6C /* Notify.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notify.storyboard; sourceTree = "<group>"; };
 		22BFA2A6252389C100923D6C /* NotifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyViewController.swift; sourceTree = "<group>"; };
-		22BFA2AB25238AA500923D6C /* Plan.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Plan.storyboard; sourceTree = "<group>"; };
 		22C5D01A25090A350077F7E2 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		22C5D01C25091BC10077F7E2 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
+		22D49704252B238B008C269C /* NotifyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyTableViewController.swift; sourceTree = "<group>"; };
 		22E4FD4324FE83C200C845E1 /* SunPositionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunPositionModel.swift; sourceTree = "<group>"; };
 		22E4FD4524FE884F00C845E1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		22E4FD4724FE8D3600C845E1 /* SunPositionConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunPositionConstants.swift; sourceTree = "<group>"; };
@@ -85,10 +83,10 @@
 				224FCA3825190E1E00CC4EE4 /* TabBarController.swift */,
 				22793BA824F81C2800BEBF8E /* SkyViewController.swift */,
 				22BFA2A6252389C100923D6C /* NotifyViewController.swift */,
+				22D49704252B238B008C269C /* NotifyTableViewController.swift */,
 				224FCA3C25190E5900CC4EE4 /* SettingViewController.swift */,
 				22BF85EA25110946001E03E5 /* ScrollViewPage1.swift */,
 				22BF85EC25110958001E03E5 /* ScrollViewPage2.swift */,
-				22777B0424FAA36800834DDB /* PlanViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -117,7 +115,6 @@
 				224FCA3425190D8600CC4EE4 /* Setting.storyboard */,
 				22BF85EE2511096B001E03E5 /* ScrollViewPage1.xib */,
 				22BF85F025110977001E03E5 /* ScrollViewPage2.xib */,
-				22BFA2AB25238AA500923D6C /* Plan.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -212,7 +209,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22BFA2AC25238AA500923D6C /* Plan.storyboard in Resources */,
 				22BF85EF2511096B001E03E5 /* ScrollViewPage1.xib in Resources */,
 				22793BB124F81C2C00BEBF8E /* LaunchScreen.storyboard in Resources */,
 				22BFA2A32523890D00923D6C /* Notify.storyboard in Resources */,
@@ -233,6 +229,7 @@
 			files = (
 				22BF85EB25110946001E03E5 /* ScrollViewPage1.swift in Sources */,
 				22E4FD4424FE83C200C845E1 /* SunPositionModel.swift in Sources */,
+				22D49705252B238B008C269C /* NotifyTableViewController.swift in Sources */,
 				2271B2942500240F00DCB915 /* SunPositionManager.swift in Sources */,
 				22C5D01D25091BC10077F7E2 /* TimerManager.swift in Sources */,
 				22C5D01B25090A350077F7E2 /* LocationManager.swift in Sources */,
@@ -242,7 +239,6 @@
 				22793BA524F81C2800BEBF8E /* AppDelegate.swift in Sources */,
 				22BF85ED25110958001E03E5 /* ScrollViewPage2.swift in Sources */,
 				2278250A250143260000794E /* CurrentData.swift in Sources */,
-				22777B0524FAA36800834DDB /* PlanViewController.swift in Sources */,
 				22793BA724F81C2800BEBF8E /* SceneDelegate.swift in Sources */,
 				224FCA3925190E1E00CC4EE4 /* TabBarController.swift in Sources */,
 				22BFA2A7252389C100923D6C /* NotifyViewController.swift in Sources */,
