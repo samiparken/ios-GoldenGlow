@@ -67,8 +67,8 @@ class ScrollViewPage1: UIView {
     @objc func updateSunAngle(notification: NSNotification) {
         let mySunAngle = myTabBar.sunAngle
         let mySunAngleText = mySunAngle < 10
-            ? String(format: "%2.1f", mySunAngle) + "°"
-            : String(format: "%2f", mySunAngle) + "°"
-            sunAngleLabel.text = mySunAngleText
+            ? String(format: "%.1f", mySunAngle) + "°"
+            : String(format: "%.0f", mySunAngle) + "°"
+        sunAngleLabel.text = mySunAngleText
     }
 }
