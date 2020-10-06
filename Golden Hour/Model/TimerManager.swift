@@ -15,22 +15,24 @@ protocol TimerManagerDelegate {
 class TimerManager {
     var delegate: TimerManagerDelegate?
     var countdownTimer: Timer!
-    var remainingTime: Int = 0
-    //    var totalTime: Int = 1
-    //    var progressPercent: Int = 100
+    var toTime: Date!
     
     func startTimer() {
         countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
     }
     
     @objc func updateTime() {
-        let hour: Int = (remainingTime / 3600)
-        let min: Int = (remainingTime / 60) % 60
-        let sec: Int = remainingTime % 60
-        self.delegate?.didUpdateTimer(hour, min, sec)
-                
-        if remainingTime > 0 { remainingTime -= 1 }
-        else { endTimer() }
+        let remainingTime = toTime.timeIntervalSince1970 - Date().timeIntervalSince1970
+
+        if ( remainingTime > 0 ) {
+            let hour: Int = Int((remainingTime / 3600))
+            let min: Int = Int(remainingTime / 60) % 60
+            let sec: Int = Int(remainingTime) % 60
+            self.delegate?.didUpdateTimer(hour, min, sec)
+        }
+        else {
+            endTimer()
+        }
     }
     
     func endTimer() {

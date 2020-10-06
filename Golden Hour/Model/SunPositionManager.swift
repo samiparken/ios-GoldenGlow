@@ -151,7 +151,7 @@ class SunPositionManager {
         // BG & morning/evening
         self.delegate?.didUpdateCurrentState(currentData.SunAltitude!, isSunGoingUp())
                 
-        // Current Scan -> SkyView1 (Timer & current Status)
+        // Current Scan -> SkyView1 (Timer & Current Status)
         let nowRange: [Date] = currentScan()
         let nowState = getState()
         let nowNext = getNextState()

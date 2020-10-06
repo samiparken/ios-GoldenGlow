@@ -115,7 +115,7 @@ extension TabBarController: SunPositionManagerDelegate {
         let percent = remaining / duration * 100
         
         // Start Timer
-        timerManager.remainingTime = Int(remaining)
+        timerManager.toTime = to
         timerManager.startTimer()
     }
     
