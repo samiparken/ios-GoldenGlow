@@ -218,14 +218,6 @@ class SkyViewController: UIViewController {
     }
 
     
-    
-
-
-
-
-
-    
-    
 }
 
 

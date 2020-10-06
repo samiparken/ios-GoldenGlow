@@ -62,6 +62,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="bell" catalog="system" id="tOk-gm-oZZ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="BGImageView" destination="L1V-vq-F88" id="vbb-zo-1xE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SgC-tb-0bV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
