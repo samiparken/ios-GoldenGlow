@@ -45,7 +45,7 @@ class ScrollViewPage2: UIView {
     //Bottom Bar Selector
     @IBOutlet weak var morningButton: UIButton!
     @IBOutlet weak var eveningButton: UIButton!
-    @IBOutlet weak var selectorBar: UIImageView!
+    @IBOutlet weak var selectorBar: UIView!
     
     @IBOutlet weak var contentCenterBar: UIStackView!
     

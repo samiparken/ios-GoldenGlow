@@ -38,14 +38,98 @@
                         <constraint firstAttribute="height" constant="30" id="bhw-Fn-6PX"/>
                     </constraints>
                 </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="BL7-Ar-bqr" userLabel="BottomBarSelector">
+                    <rect key="frame" x="50" y="84" width="275" height="30"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="jaY-f3-COw" userLabel="Selector Label Box">
+                            <rect key="frame" x="0.0" y="0.0" width="275" height="27"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4o5-jt-HiE">
+                                    <rect key="frame" x="0.0" y="0.0" width="137.66666666666666" height="27"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                    <state key="normal" title="MORNING">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="morningButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="cvO-9j-ggQ"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J9x-b3-86S">
+                                    <rect key="frame" x="137.66666666666663" y="0.0" width="137.33333333333337" height="27"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                    <state key="normal" title="EVENING">
+                                        <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="eveningButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="Z0S-IC-J8Y"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="VKG-hq-Ifv" userLabel="Selector Bar Box">
+                            <rect key="frame" x="0.0" y="27" width="275" height="2"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LfT-S2-mFq" userLabel="Selector Bar View">
+                                    <rect key="frame" x="0.0" y="0.0" width="137.66666666666666" height="2"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="colorFillWhite" translatesAutoresizingMaskIntoConstraints="NO" id="Jb1-jk-8H6" userLabel="Selector Bar">
+                                            <rect key="frame" x="20.000000000000007" y="0.0" width="97.666666666666686" height="2"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="2" id="JZl-3U-GaY"/>
+                                                <constraint firstAttribute="height" constant="2" id="T7w-UY-MYr"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Jb1-jk-8H6" firstAttribute="leading" secondItem="LfT-S2-mFq" secondAttribute="leading" constant="20" id="omZ-bd-5vP"/>
+                                        <constraint firstAttribute="trailing" secondItem="Jb1-jk-8H6" secondAttribute="trailing" constant="20" id="tyb-oT-UAy"/>
+                                        <constraint firstItem="Jb1-jk-8H6" firstAttribute="centerY" secondItem="LfT-S2-mFq" secondAttribute="centerY" id="ua0-mU-8TJ"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iJ2-ck-iV2" userLabel="Blank View">
+                                    <rect key="frame" x="137.66666666666663" y="0.0" width="137.33333333333337" height="2"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="2" id="fUL-gk-9fn"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="uea-c3-YGa" userLabel="Selector Bar Box">
+                            <rect key="frame" x="0.0" y="29" width="275" height="1"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blank" translatesAutoresizingMaskIntoConstraints="NO" id="xRs-Uc-MmX" userLabel="Selector Bar">
+                                    <rect key="frame" x="0.0" y="0.0" width="137.66666666666666" height="1"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="1" id="hjM-tL-9Ps"/>
+                                    </constraints>
+                                </imageView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xeG-aI-HXd" userLabel="Blank View">
+                                    <rect key="frame" x="137.66666666666663" y="0.0" width="137.33333333333337" height="1"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="1" id="yN3-hQ-eRb"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="5di-zW-0F2"/>
+                        <constraint firstItem="uea-c3-YGa" firstAttribute="leading" secondItem="BL7-Ar-bqr" secondAttribute="leading" id="EGK-Bo-veM"/>
+                        <constraint firstItem="VKG-hq-Ifv" firstAttribute="leading" secondItem="BL7-Ar-bqr" secondAttribute="leading" id="EoT-1t-msP"/>
+                        <constraint firstAttribute="trailing" secondItem="VKG-hq-Ifv" secondAttribute="trailing" id="JXy-IZ-NUT"/>
+                        <constraint firstAttribute="trailing" secondItem="uea-c3-YGa" secondAttribute="trailing" id="YbW-QE-Jne"/>
+                        <constraint firstItem="jaY-f3-COw" firstAttribute="leading" secondItem="BL7-Ar-bqr" secondAttribute="leading" id="i0Q-9Y-lSv"/>
+                        <constraint firstAttribute="trailing" secondItem="jaY-f3-COw" secondAttribute="trailing" id="vEi-Kp-MWI"/>
+                    </constraints>
+                </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5tR-yj-DFE">
-                    <rect key="frame" x="0.0" y="74" width="375" height="644"/>
+                    <rect key="frame" x="0.0" y="114" width="375" height="664"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vlR-AL-XOA">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="187.66666666666666"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="VW7-B0-Cgd" userLabel="Content Center Bar">
-                                    <rect key="frame" x="80" y="68.666666666666657" width="215" height="50"/>
+                                    <rect key="frame" x="70" y="68.666666666666657" width="235" height="50"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="OFR-Fc-GPv" userLabel="Weather Stack">
                                             <rect key="frame" x="0.0" y="5" width="25.666666666666668" height="40"/>
@@ -64,7 +148,7 @@
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="woS-q0-YNa" userLabel="SetRise Stack">
-                                            <rect key="frame" x="183.66666666666669" y="5" width="31.333333333333343" height="40"/>
+                                            <rect key="frame" x="203.66666666666669" y="5" width="31.333333333333343" height="40"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vsS-Yb-99f">
                                                     <rect key="frame" x="0.0" y="0.0" width="31.333333333333332" height="22.666666666666668"/>
@@ -86,8 +170,8 @@
                                 </stackView>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="VW7-B0-Cgd" firstAttribute="leading" secondItem="vlR-AL-XOA" secondAttribute="leading" constant="80" id="5iW-eu-1lZ"/>
-                                <constraint firstAttribute="trailing" secondItem="VW7-B0-Cgd" secondAttribute="trailing" constant="80" id="GAe-GC-4Xb"/>
+                                <constraint firstItem="VW7-B0-Cgd" firstAttribute="leading" secondItem="vlR-AL-XOA" secondAttribute="leading" constant="70" id="5iW-eu-1lZ"/>
+                                <constraint firstAttribute="trailing" secondItem="VW7-B0-Cgd" secondAttribute="trailing" constant="70" id="GAe-GC-4Xb"/>
                                 <constraint firstAttribute="width" secondItem="vlR-AL-XOA" secondAttribute="height" multiplier="100:50" id="Ocx-q0-9Sm"/>
                                 <constraint firstItem="VW7-B0-Cgd" firstAttribute="centerY" secondItem="vlR-AL-XOA" secondAttribute="centerY" id="k0B-Pi-9Ac"/>
                             </constraints>
@@ -312,92 +396,19 @@
                         <constraint firstItem="vlR-AL-XOA" firstAttribute="leading" secondItem="5tR-yj-DFE" secondAttribute="leading" id="vra-JL-Rch"/>
                     </constraints>
                 </view>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="BL7-Ar-bqr" userLabel="BottomBarSelector">
-                    <rect key="frame" x="20" y="718" width="335" height="30"/>
-                    <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="jaY-f3-COw" userLabel="Selector Label Box">
-                            <rect key="frame" x="0.0" y="0.0" width="335" height="27"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4o5-jt-HiE">
-                                    <rect key="frame" x="0.0" y="0.0" width="167.66666666666666" height="27"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                    <state key="normal" title="MORNING">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="morningButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="cvO-9j-ggQ"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J9x-b3-86S">
-                                    <rect key="frame" x="167.66666666666663" y="0.0" width="167.33333333333337" height="27"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                    <state key="normal" title="EVENING">
-                                        <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="eveningButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="Z0S-IC-J8Y"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                        </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="VKG-hq-Ifv" userLabel="Selector Bar Box">
-                            <rect key="frame" x="0.0" y="27" width="335" height="2"/>
-                            <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="colorFillWhite" translatesAutoresizingMaskIntoConstraints="NO" id="Jb1-jk-8H6" userLabel="Selector Bar">
-                                    <rect key="frame" x="0.0" y="0.0" width="167.66666666666666" height="2"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="2" id="T7w-UY-MYr"/>
-                                    </constraints>
-                                </imageView>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iJ2-ck-iV2" userLabel="Blank View">
-                                    <rect key="frame" x="167.66666666666663" y="0.0" width="167.33333333333337" height="2"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="2" id="fUL-gk-9fn"/>
-                                    </constraints>
-                                </view>
-                            </subviews>
-                        </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="uea-c3-YGa" userLabel="Selector Bar Box">
-                            <rect key="frame" x="0.0" y="29" width="335" height="1"/>
-                            <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blank" translatesAutoresizingMaskIntoConstraints="NO" id="xRs-Uc-MmX" userLabel="Selector Bar">
-                                    <rect key="frame" x="0.0" y="0.0" width="167.66666666666666" height="1"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="1" id="hjM-tL-9Ps"/>
-                                    </constraints>
-                                </imageView>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xeG-aI-HXd" userLabel="Blank View">
-                                    <rect key="frame" x="167.66666666666663" y="0.0" width="167.33333333333337" height="1"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="1" id="yN3-hQ-eRb"/>
-                                    </constraints>
-                                </view>
-                            </subviews>
-                        </stackView>
-                    </subviews>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="30" id="5di-zW-0F2"/>
-                        <constraint firstItem="uea-c3-YGa" firstAttribute="leading" secondItem="BL7-Ar-bqr" secondAttribute="leading" id="EGK-Bo-veM"/>
-                        <constraint firstItem="VKG-hq-Ifv" firstAttribute="leading" secondItem="BL7-Ar-bqr" secondAttribute="leading" id="EoT-1t-msP"/>
-                        <constraint firstAttribute="trailing" secondItem="VKG-hq-Ifv" secondAttribute="trailing" id="JXy-IZ-NUT"/>
-                        <constraint firstAttribute="trailing" secondItem="uea-c3-YGa" secondAttribute="trailing" id="YbW-QE-Jne"/>
-                        <constraint firstItem="jaY-f3-COw" firstAttribute="leading" secondItem="BL7-Ar-bqr" secondAttribute="leading" id="i0Q-9Y-lSv"/>
-                        <constraint firstAttribute="trailing" secondItem="jaY-f3-COw" secondAttribute="trailing" id="vEi-Kp-MWI"/>
-                    </constraints>
-                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <constraints>
-                <constraint firstItem="5tR-yj-DFE" firstAttribute="top" secondItem="HKt-PP-mzO" secondAttribute="bottom" id="0xa-N7-Jq0"/>
                 <constraint firstItem="HKt-PP-mzO" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="Gpw-SY-2VK"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="BL7-Ar-bqr" secondAttribute="trailing" constant="20" id="Nck-41-CQ3"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="BL7-Ar-bqr" secondAttribute="trailing" constant="50" id="Nck-41-CQ3"/>
                 <constraint firstItem="5tR-yj-DFE" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="RKF-3S-Stz"/>
-                <constraint firstItem="BL7-Ar-bqr" firstAttribute="top" secondItem="5tR-yj-DFE" secondAttribute="bottom" id="RLj-Ba-9U8"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="HKt-PP-mzO" secondAttribute="trailing" constant="30" id="TlN-HQ-mxL"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="5tR-yj-DFE" secondAttribute="trailing" id="Vtr-12-hIu"/>
+                <constraint firstItem="5tR-yj-DFE" firstAttribute="top" secondItem="BL7-Ar-bqr" secondAttribute="bottom" id="XSI-xt-qgw"/>
+                <constraint firstItem="BL7-Ar-bqr" firstAttribute="top" secondItem="HKt-PP-mzO" secondAttribute="bottom" constant="10" id="Ys2-dr-Nmm"/>
                 <constraint firstItem="HKt-PP-mzO" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="nIW-Z6-9QB"/>
-                <constraint firstItem="BL7-Ar-bqr" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" constant="-30" id="rm7-is-3MC"/>
-                <constraint firstItem="BL7-Ar-bqr" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="ymG-3D-Ksm"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="5tR-yj-DFE" secondAttribute="bottom" id="rVN-PI-ry4"/>
+                <constraint firstItem="BL7-Ar-bqr" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="50" id="ymG-3D-Ksm"/>
             </constraints>
             <connections>
                 <outlet property="contentCenterBar" destination="VW7-B0-Cgd" id="yfv-0n-y2m"/>
@@ -419,7 +430,7 @@
                 <outlet property="eventTimeLabel3" destination="1ps-ce-N9O" id="OBA-1o-VvL"/>
                 <outlet property="eventTimeLabel4" destination="MAH-E0-UMe" id="U9N-2g-ZjY"/>
                 <outlet property="morningButton" destination="4o5-jt-HiE" id="Xfo-ic-YR4"/>
-                <outlet property="selectorBar" destination="Jb1-jk-8H6" id="Nwp-gq-vwo"/>
+                <outlet property="selectorBar" destination="LfT-S2-mFq" id="J26-xR-kTx"/>
                 <outlet property="setRiseIcon" destination="vsS-Yb-99f" id="ltc-QF-HLd"/>
                 <outlet property="setRiseTimeLabel" destination="wpa-Ze-FVc" id="WuW-Na-AJu"/>
                 <outlet property="weatherIcon" destination="87Z-de-dGm" id="6qB-xt-EKz"/>
