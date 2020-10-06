@@ -28,7 +28,7 @@ class TabBarController: UITabBarController {
     var timerHour: String = ""
     var timerMin: String = ""
     var timerSec: String = ""
-    var sunAngle: Int = 0
+    var sunAngle: Double = 0.0
     var sunPulsePosition: CGFloat = 0.0
     var wavePosition: CGFloat = 0.0
     
@@ -61,7 +61,7 @@ class TabBarController: UITabBarController {
     
     func updateSunAngle() {
         sunPositionManager.updateCurrentAltitude()
-        let tempAngle = Int(sunPositionManager.getAltitude())
+        let tempAngle = sunPositionManager.getAltitude()
         
         if tempAngle != sunAngle
         {
