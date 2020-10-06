@@ -55,7 +55,7 @@ class ScrollViewPage2: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        registerObservers()
         setupEventLabelSpacing()
         setupEventBGsRadius()
         
@@ -223,6 +223,28 @@ class ScrollViewPage2: UIView {
         setRiseTimeLabel.text = myTabBar.sunsetTime
         setRiseTimeLabel.addCharacterSpacing()
     }
+    
+    
+    
+    //MARK: - For Notification Observers
+    
+    // for Notification Observers
+    let keyForMorningEveningReady = Notification.Name(rawValue: MorningEveningReadyNotificationKey)
+    
+    // Register Observers for updates
+    func registerObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(ScrollViewPage2.updateState(notification:)), name: keyForMorningEveningReady, object: nil)
+    }
+    
+    @objc func updateState(notification: NSNotification) {
+        
+        if myTabBar.isEvening {
+            eveningButtonPressed((Any).self)
+        } else {
+            morningButtonPressed((Any).self)
+        }
+    }
+        
     
     
     

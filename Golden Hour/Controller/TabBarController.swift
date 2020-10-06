@@ -11,6 +11,9 @@ import UIKit
 // Keys for Notification & Observers
 let CityNameUpdateNotificationKey = "co.samiparken.updateCityName"
 let BGImageUpdateNotificationKey = "co.samiparken.updateBGImage"
+let TimerUpdateNotificationKey = "co.samiparken.updateTimer"
+let SunAngleUpdateNotificationKey = "co.samiparken.updateSunAngle"
+let MorningEveningReadyNotificationKey = "co.samiparken.morningEveningReady"
 
 class TabBarController: UITabBarController {
     
@@ -21,7 +24,15 @@ class TabBarController: UITabBarController {
     var BGImageViewName: String?
     var currentLocation: String?
 
-    // PlanView Time
+    // SkyView1 Timer
+    var timerHour: String = ""
+    var timerMin: String = ""
+    var timerSec: String = ""
+    var sunAngle: Int = 0
+    var sunPulsePosition: CGFloat = 0.0
+    var wavePosition: CGFloat = 0.0
+    
+    // SkyView2 Times
     var morningTime: [String] = []   // morningTime.count == 4
     var morningDuration: [Int] = []  // morningDuration.count == 3
     var eveningTime: [String] = []   // eveningTime.count == 4
@@ -29,8 +40,7 @@ class TabBarController: UITabBarController {
     var sunriseTime: String = ""
     var sunsetTime: String = ""
     
-    
-    // PlanView Bottom Button
+    // SkyView2 Bottom Button
     var isEvening: Bool = true
     var isToday: Bool = true
     
@@ -39,37 +49,58 @@ class TabBarController: UITabBarController {
     var locationManager = LocationManager()
     var timerManager = TimerManager()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         // Delegates
         sunPositionManager.delegate = self
         locationManager.delegate = self
         timerManager.delegate = self
         
     }
+    
+    func updateSunAngle() {
+        sunPositionManager.updateCurrentAltitude()
+        let tempAngle = Int(sunPositionManager.getAltitude())
+        
+        if tempAngle != sunAngle
+        {
+            sunAngle = tempAngle
+            // Braodcast
+            let keyName = Notification.Name(rawValue: SunAngleUpdateNotificationKey)
+            NotificationCenter.default.post(name: keyName, object: nil)
+        }
+    }
 }
+
 
 //MARK: - SunPositionManagerDelegate
 extension TabBarController: SunPositionManagerDelegate {
 
     // Set BG & morning/evening
     func didUpdateCurrentState(_ sunAngle: Double, _ isUp: Bool) {
-        
+ 
+        //BG update
         switch sunAngle {
-        case -90 ..< -6 : BGImageViewName = "BG_Night";  isEvening = false; isToday = isUp ? true : false
-        case -6  ..< -4 : BGImageViewName = "BG_Blue";   isEvening = isUp ? false : true
-        case -4  ..< 0  : BGImageViewName = "BG_Golden-";isEvening = isUp ? false : true
-        case 0   ..< 6  : BGImageViewName = "BG_Golden+";isEvening = isUp ? false : true
-        case 6   ..< 10 : BGImageViewName = "BG_LowSun"; isEvening = isUp ? false : true
-        default         : BGImageViewName = "BG_Day";    isEvening = true
+        case -90 ..< -6 : BGImageViewName = "BG_Night";   isEvening = false; isToday = isUp ? true : false
+                            sunPulsePosition = 0.8 ;  wavePosition = 0.5
+        case -6  ..< -4 : BGImageViewName = "BG_Blue";    isEvening = isUp ? false : true
+                            sunPulsePosition = 0.7 ; wavePosition = 0.5
+        case -4  ..< 0  : BGImageViewName = "BG_Golden-"; isEvening = isUp ? false : true
+                            sunPulsePosition = 0.6 ; wavePosition = 0.5
+        case 0   ..< 6  : BGImageViewName = "BG_Golden+"; isEvening = isUp ? false : true
+                            sunPulsePosition = 0.5 ; wavePosition = 0.6
+        case 6   ..< 10 : BGImageViewName = "BG_LowSun";  isEvening = isUp ? false : true
+                            sunPulsePosition = 0.3; wavePosition = 0.7
+        default         : BGImageViewName = "BG_Day";     isEvening = true
+                            sunPulsePosition = 0.15; wavePosition = 0.8
         }
-        
         // Broadcast
         let keyName = Notification.Name(rawValue: BGImageUpdateNotificationKey)
         NotificationCenter.default.post(name: keyName, object: nil)
+
+        //SunAngle update
+        updateSunAngle()
     }
     
     func didUpdateCurrentScan(from: Date, to: Date, _ nowState: Int, _ nextState: Int) {
@@ -83,7 +114,9 @@ extension TabBarController: SunPositionManagerDelegate {
         //percent
         let percent = remaining / duration * 100
         
-        
+        // Start Timer
+        timerManager.remainingTime = Int(remaining)
+        timerManager.startTimer()
     }
     
     func didUpdateTodayScan(_ today: [Date]) {
@@ -135,13 +168,11 @@ extension TabBarController: SunPositionManagerDelegate {
                 eveningDuration.append( Int(end - start) / 60 )
             }
         }
-    }
-    
-    func didUpdateRemainingTime(_ remain: Int, _ total: Int) {
-        // Try Timer
-        timerManager.remainingTime = remain
-        timerManager.totalTime = total
-        timerManager.startTimer()
+        
+        // Get SkyView2 Ready
+        // Broadcast
+        let keyName2 = Notification.Name(rawValue: MorningEveningReadyNotificationKey)
+        NotificationCenter.default.post(name: keyName2, object: nil)
     }
     
 }
@@ -171,21 +202,20 @@ extension TabBarController: LocationManagerDelegate {
 //MARK: - TimerManagerDelegate
 extension TabBarController: TimerManagerDelegate {
     
-    func didUpdateTimer(_ min: Int, _ sec: Int) {
-        let minString: String = String(format: "%02d", min)
-        let secString: String = String(format: "%02d", sec)
+    func didUpdateTimer(_ hour: Int, _ min: Int, _ sec: Int) {
+        timerHour = String(format: "%02d", hour)
+        timerMin = String(format: "%02d", min)
+        timerSec = String(format: "%02d", sec)
         
-//        timeDigitMin.text = minString
-//        timeSaperator.text = ":"
-//        timeDigitSec.text = secString
-        
-        // update SunAltitude every 5 seconds
-        if (sec % 5 == 0)
+        // update SunAltitude every 10 seconds
+        if (sec%10 == 0)
         {
-            sunPositionManager.updateCurrentAltitude()
-            let sunAltitude = sunPositionManager.getAltitude()
-            print("SunAltitude: \(String(format: "%2.2f", sunAltitude))")
+            updateSunAngle()
         }
+        
+        // Braodcast
+        let keyName = Notification.Name(rawValue: TimerUpdateNotificationKey)
+        NotificationCenter.default.post(name: keyName, object: nil)
     }
         
     func didEndTimer() {

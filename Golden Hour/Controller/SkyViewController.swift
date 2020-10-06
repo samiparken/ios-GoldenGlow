@@ -46,10 +46,10 @@ class SkyViewController: UIViewController {
 
         // Initialize
         registerObservers()
+        setupSunPulse()
+        setupWave()
         setupScrollView()
         setupPageControl()
-        setupWave()
-        setupSunPulse()
         
         // Screen Organize
         view.bringSubviewToFront(scrollView)
@@ -66,7 +66,6 @@ class SkyViewController: UIViewController {
         if let imageName = myTabBar.BGImageViewName {
             BGImageView.image = UIImage(named: imageName)
         }
-
         waveAnimation()
 
     }
@@ -124,16 +123,18 @@ class SkyViewController: UIViewController {
     
     func setupSunPulse() {
         sunPulse = UIImageView(image: UIImage(named: "Sun"))
-        sunPulse.frame = CGRect(x: (view.frame.width/2) - 35, y: view.frame.height * 0.2, width: 70, height: 70)
+        sunPulse.frame = CGRect(x: (view.frame.width/2) - 35, y: -100, width: 70, height: 70)
         self.view.addSubview(sunPulse)
-
-        makePulse()
     }
     
+    
     func makePulse() {
-        let pulse = PulseAnimation(numberOfPulses: Float.infinity, radius: 50, position: CGPoint(x: 35, y: 35), duration: 10)
+
+        if Int(myTabBar.timerSec)! % 2 == 0 {
+        let pulse = PulseAnimation(numberOfPulses: 1, radius: 50, position: CGPoint(x: 35, y: 35), duration: 10)
         pulse.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         sunPulse.layer.insertSublayer(pulse, below: sunPulse.layer)
+        }
     }
 
     
@@ -142,18 +143,16 @@ class SkyViewController: UIViewController {
         scrollView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         scrollView.contentSize = CGSize(width: view.frame.width * 2, height: view.frame.height)
         
-        
-        // Initialize Slides
-        let page1:ScrollViewPage1 = Bundle.main.loadNibNamed("ScrollViewPage1", owner: self, options: nil)?.first as! ScrollViewPage1
-        let page2:ScrollViewPage2 = Bundle.main.loadNibNamed("ScrollViewPage2", owner: self, options: nil)?.first as! ScrollViewPage2
+        // Initialize Pages
+        let page1: ScrollViewPage1 = Bundle.main.loadNibNamed("ScrollViewPage1", owner: self, options: nil)?.first as! ScrollViewPage1
+        let page2: ScrollViewPage2 = Bundle.main.loadNibNamed("ScrollViewPage2", owner: self, options: nil)?.first as! ScrollViewPage2
                 
-        // Subview slides
+        // AddSubview Pages
         page1.frame = CGRect(x: view.frame.width * 0, y: 0, width: view.frame.width, height: view.frame.height)
         scrollView.addSubview(page1)
 
         page2.frame = CGRect(x: view.frame.width * 1, y: 0, width: view.frame.width, height: view.frame.height)
         scrollView.addSubview(page2)
-        
     }
     
     func setupPageControl() {
@@ -194,11 +193,15 @@ class SkyViewController: UIViewController {
     // for Notification Observers
     let keyForCityName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
     let keyForBGImage = Notification.Name(rawValue: BGImageUpdateNotificationKey)
+    let keyForTimerUpdate = Notification.Name(rawValue: TimerUpdateNotificationKey)
+    let keyForSunAngleUpdate = Notification.Name(rawValue: SunAngleUpdateNotificationKey)
+
 
     // Register Observers for updates
     func registerObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateCityName(notification:)), name: keyForCityName, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateBGImage(notification:)), name: keyForBGImage, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateTimer(notification:)), name: keyForTimerUpdate, object: nil)
     }
 
     @objc func updateCityName(notification: NSNotification) {
@@ -210,6 +213,18 @@ class SkyViewController: UIViewController {
         BGImageView.image = UIImage(named: myTabBar.BGImageViewName!)
     }
     
+    @objc func updateTimer(notification: NSNotification) {
+        makePulse()
+    }
+
+    
+    
+
+
+
+
+
+    
     
 }
 
@@ -218,9 +233,12 @@ class SkyViewController: UIViewController {
 extension SkyViewController: UIScrollViewDelegate {
     
         func scrollViewDidScroll(_ scrollView: UIScrollView) {
-                        
+            
+            let offsetRate = scrollView.contentOffset.x/view.frame.width
+            let screenHeight = self.view.frame.height
+            
             //Update Page Control
-            let pageIndex = round(scrollView.contentOffset.x/view.frame.width)
+            let pageIndex = round(offsetRate)
             pageControl.currentPage = Int(pageIndex)
                         
             // Disable Vertical Scrolling
@@ -229,10 +247,10 @@ extension SkyViewController: UIScrollViewDelegate {
             }
             
             // Wave Vertical Position
-            self.waveView.frame.origin.y = self.view.frame.height * (0.5 + (scrollView.contentOffset.x/self.view.frame.width)/2)
+            self.waveView.frame.origin.y = ((0.8 - myTabBar.wavePosition) * (offsetRate) + myTabBar.wavePosition ) * screenHeight
             
             // SunPulse Vertical Position
-            self.sunPulse.frame.origin.y = self.view.frame.height * (0.2 + (scrollView.contentOffset.x/self.view.frame.width)/2)
+            self.sunPulse.frame.origin.y = ((0.2 - myTabBar.sunPulsePosition) * (offsetRate) + myTabBar.sunPulsePosition ) * screenHeight
             
         }
 }

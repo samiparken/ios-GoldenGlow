@@ -12,7 +12,6 @@ protocol SunPositionManagerDelegate {
     func didUpdateCurrentState(_ sunAngle: Double, _ isUp: Bool)
     func didUpdateCurrentScan(from: Date, to: Date, _ nowState: Int, _ nextState: Int)
     func didUpdateTodayScan(_ today: [Date])
-    func didUpdateRemainingTime(_ remain: Int, _ total: Int)
 }
 
 class SunPositionManager {
@@ -152,13 +151,13 @@ class SunPositionManager {
         // BG & morning/evening
         self.delegate?.didUpdateCurrentState(currentData.SunAltitude!, isSunGoingUp())
                 
-        // Current Scan -> ProgressBar (SkyView)
+        // Current Scan -> SkyView1 (Timer & current Status)
         let nowRange: [Date] = currentScan()
         let nowState = getState()
         let nowNext = getNextState()
         self.delegate?.didUpdateCurrentScan(from: nowRange[0], to: nowRange[1], nowState, nowNext)
 
-        // Today Scan -> PlanView
+        // Today Scan -> SkyView2
         let today = Date()
         let calendar = Calendar.current
         let yyyy = String(calendar.component(.year, from: today))
