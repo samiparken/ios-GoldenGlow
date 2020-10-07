@@ -173,14 +173,16 @@ extension ScrollViewPage2: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
 
+        // Timestamp Mode
         if indexPath.row % 2 == 0 {
             cell.cellView.isHidden = true
             cell.timeLabel.isHidden = false
             cell.timeLabel.text = tableViewCellData[indexPath.row].timeString
             cell.timeLabel.addCharacterSpacing()
 
-
-        } else {
+        }
+        // Cell Mode
+        else {
             cell.cellView.isHidden = false
             cell.timeLabel.isHidden = true
             cell.cellTitle.text = tableViewCellData[indexPath.row].stateString
@@ -189,6 +191,8 @@ extension ScrollViewPage2: UITableViewDataSource {
             cell.cellDuration.addCharacterSpacing()
             cell.cellSymbol.image = UIImage(named: tableViewCellData[indexPath.row].symbol)
         }
+        
+        cell.selectionStyle = .none
 
         return cell
     }
