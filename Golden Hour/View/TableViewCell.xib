@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="55" id="KGk-i7-Jjw" customClass="TableViewCell" customModule="Golden_Hour" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18:25" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fys-S4-drf" userLabel="timeLabel">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="YwV-oD-SpD"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Tn-k5-2BP" userLabel="Cell View">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ground" translatesAutoresizingMaskIntoConstraints="NO" id="DOn-ln-jz9" userLabel="cellBG">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Symbol_goldenHour" translatesAutoresizingMaskIntoConstraints="NO" id="YGX-J2-n3a" userLabel="cellSymbol">
+                                <rect key="frame" x="20" y="13.5" width="15" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="15" id="8cg-mY-mar"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GOLDEN HOUR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcM-5o-4Ir" userLabel="cellTitle">
+                                <rect key="frame" x="45" y="19.5" width="95" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30min" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M2d-43-ysU" userLabel="cellDuration">
+                                <rect key="frame" x="246.5" y="20.5" width="35.5" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="buttonRight" translatesAutoresizingMaskIntoConstraints="NO" id="ef6-w0-Tqy" userLabel="cellRight">
+                                <rect key="frame" x="292" y="20" width="8" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="ME1-3L-bw7"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="DOn-ln-jz9" secondAttribute="bottom" id="04j-Fz-sHt"/>
+                            <constraint firstItem="YGX-J2-n3a" firstAttribute="centerY" secondItem="3Tn-k5-2BP" secondAttribute="centerY" id="2ON-Xa-QAP"/>
+                            <constraint firstItem="ef6-w0-Tqy" firstAttribute="centerY" secondItem="3Tn-k5-2BP" secondAttribute="centerY" id="ILD-d6-elY"/>
+                            <constraint firstItem="DOn-ln-jz9" firstAttribute="top" secondItem="3Tn-k5-2BP" secondAttribute="top" id="LJP-N5-m3p"/>
+                            <constraint firstAttribute="trailing" secondItem="DOn-ln-jz9" secondAttribute="trailing" id="QCL-bw-EQr"/>
+                            <constraint firstItem="hcM-5o-4Ir" firstAttribute="leading" secondItem="YGX-J2-n3a" secondAttribute="trailing" constant="10" id="TZ2-Di-hMA"/>
+                            <constraint firstItem="hcM-5o-4Ir" firstAttribute="centerY" secondItem="3Tn-k5-2BP" secondAttribute="centerY" id="UuB-Rz-98Q"/>
+                            <constraint firstItem="DOn-ln-jz9" firstAttribute="leading" secondItem="3Tn-k5-2BP" secondAttribute="leading" id="XgT-yE-inW"/>
+                            <constraint firstAttribute="trailing" secondItem="ef6-w0-Tqy" secondAttribute="trailing" constant="20" id="dYP-gz-gXA"/>
+                            <constraint firstItem="M2d-43-ysU" firstAttribute="centerY" secondItem="3Tn-k5-2BP" secondAttribute="centerY" id="kVB-te-jJn"/>
+                            <constraint firstItem="ef6-w0-Tqy" firstAttribute="leading" secondItem="M2d-43-ysU" secondAttribute="trailing" constant="10" id="mXc-Ry-EAb"/>
+                            <constraint firstItem="YGX-J2-n3a" firstAttribute="leading" secondItem="3Tn-k5-2BP" secondAttribute="leading" constant="20" id="wLm-MI-60K"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="3Tn-k5-2BP" secondAttribute="trailing" id="5qe-ya-n38"/>
+                    <constraint firstItem="Fys-S4-drf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="PTG-xp-Yu8"/>
+                    <constraint firstAttribute="bottom" secondItem="3Tn-k5-2BP" secondAttribute="bottom" id="WWR-q4-BVQ"/>
+                    <constraint firstItem="3Tn-k5-2BP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="g5I-Gf-Hlw"/>
+                    <constraint firstAttribute="trailing" secondItem="Fys-S4-drf" secondAttribute="trailing" id="hoj-t9-otH"/>
+                    <constraint firstItem="3Tn-k5-2BP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="sKL-UN-pPL"/>
+                    <constraint firstItem="Fys-S4-drf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="scl-MK-0XY"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="cellBG" destination="DOn-ln-jz9" id="vO0-yp-miG"/>
+                <outlet property="cellDuration" destination="M2d-43-ysU" id="xp8-kh-xzY"/>
+                <outlet property="cellSymbol" destination="YGX-J2-n3a" id="l3B-aS-L1Z"/>
+                <outlet property="cellTitle" destination="hcM-5o-4Ir" id="Vk3-WO-zLB"/>
+                <outlet property="cellView" destination="3Tn-k5-2BP" id="RJN-mc-jwa"/>
+                <outlet property="timeLabel" destination="Fys-S4-drf" id="yRx-pa-Cnl"/>
+            </connections>
+            <point key="canvasLocation" x="-14.492753623188406" y="71.316964285714278"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Ground" width="375" height="297"/>
+        <image name="Symbol_goldenHour" width="28" height="28"/>
+        <image name="buttonRight" width="8" height="14"/>
+    </resources>
+</document>

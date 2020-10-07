@@ -242,7 +242,7 @@ extension SkyViewController: UIScrollViewDelegate {
             self.waveView.frame.origin.y = ((0.8 - myTabBar.wavePosition) * (offsetRate) + myTabBar.wavePosition ) * screenHeight
             
             // SunPulse Vertical Position
-            self.sunPulse.frame.origin.y = ((0.25 - myTabBar.sunPulsePosition) * (offsetRate) + myTabBar.sunPulsePosition ) * screenHeight
+            self.sunPulse.frame.origin.y = ((0.23 - myTabBar.sunPulsePosition) * (offsetRate) + myTabBar.sunPulsePosition ) * screenHeight
             
         }
 }

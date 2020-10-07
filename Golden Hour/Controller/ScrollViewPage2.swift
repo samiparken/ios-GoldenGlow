@@ -49,16 +49,38 @@ class ScrollViewPage2: UIView {
     
     @IBOutlet weak var contentCenterBar: UIStackView!
     
+    // TableView
+    @IBOutlet weak var tableView: UITableView!
+    
     // for Sharing Data
     let myTabBar = TabBarController.singletonTabBar
 
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        registerObservers()
-        setupEventLabelSpacing()
-        setupEventBGsRadius()
         
+        
+        registerObservers()
+//        setupEventLabelSpacing()
+//        setupEventBGsRadius()
+        
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        setupTableView()
+        
+        
+        
+    }
+    
+    func setupTableView() {
+                
+        // Background
+        tableView.backgroundColor = .clear
+        
+        // Register TableViewCell
+        tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+
     }
 
 
@@ -195,18 +217,11 @@ class ScrollViewPage2: UIView {
         eventTimeLabel2.text = myTabBar.eveningTime[1]
         eventTimeLabel3.text = myTabBar.eveningTime[2]
         eventTimeLabel4.text = myTabBar.eveningTime[3]
-        eventTimeLabel1.addCharacterSpacing()
-        eventTimeLabel2.addCharacterSpacing()
-        eventTimeLabel3.addCharacterSpacing()
-        eventTimeLabel4.addCharacterSpacing()
         
         // Event Duration Update
         event1DurationLabel.text = String(myTabBar.eveningDuration[0]) + " min"
         event2DurationLabel.text = String(myTabBar.eveningDuration[1]) + " min"
         event3DurationLabel.text = String(myTabBar.eveningDuration[2]) + " min"
-        event1DurationLabel.addCharacterSpacing()
-        event2DurationLabel.addCharacterSpacing()
-        event3DurationLabel.addCharacterSpacing()
         
         // Event Label Update
 //        event1Label.text = "LOW SUN"
@@ -238,15 +253,57 @@ class ScrollViewPage2: UIView {
     
     @objc func updateState(notification: NSNotification) {
         
-        if myTabBar.isEvening {
-            eveningButtonPressed((Any).self)
-        } else {
-            morningButtonPressed((Any).self)
+//        if myTabBar.isEvening {
+//            eveningButtonPressed((Any).self)
+//        } else {
+//            morningButtonPressed((Any).self)
+//        }
+    }
+}
+
+
+
+
+//MARK: - UITableViewDelegate
+extension ScrollViewPage2: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("You tapped me!")
+    }
+    
+}
+
+//MARK: - UITableViewDataSource
+extension ScrollViewPage2: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 11
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        if indexPath.row % 2 == 0 {
+            return 18
+        }
+        else {
+            return tableView.frame.size.height/7
         }
     }
-        
     
-    
-    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
+
+        cell.timeLabel.text = String(indexPath.row)
+
+        if indexPath.row % 2 == 0 {
+            cell.cellView.isHidden = true
+            cell.timeLabel.isHidden = false
+        } else {
+            cell.cellView.isHidden = false
+            cell.timeLabel.isHidden = true
+        }
+
+        return cell
+    }
 }
 
