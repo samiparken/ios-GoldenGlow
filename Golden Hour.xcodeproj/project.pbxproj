@@ -11,6 +11,11 @@
 		224FCA3525190D8600CC4EE4 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224FCA3425190D8600CC4EE4 /* Setting.storyboard */; };
 		224FCA3925190E1E00CC4EE4 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FCA3825190E1E00CC4EE4 /* TabBarController.swift */; };
 		224FCA3D25190E5900CC4EE4 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FCA3C25190E5900CC4EE4 /* SettingViewController.swift */; };
+		2260F184252E0C390008B470 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2260F183252E0C390008B470 /* UIColor+Ext.swift */; };
+		2260F187252E0C770008B470 /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2260F186252E0C770008B470 /* UIButton+Ext.swift */; };
+		2260F18A252E0CA40008B470 /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2260F189252E0CA40008B470 /* UILabel+Ext.swift */; };
+		2260F18D252E0CF30008B470 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2260F18C252E0CF30008B470 /* UIView+Ext.swift */; };
+		2260F190252E0D140008B470 /* CALayer+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2260F18F252E0D140008B470 /* CALayer+Ext.swift */; };
 		2271B2942500240F00DCB915 /* SunPositionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271B2932500240F00DCB915 /* SunPositionManager.swift */; };
 		2278250A250143260000794E /* CurrentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22782509250143260000794E /* CurrentData.swift */; };
 		22793BA524F81C2800BEBF8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22793BA424F81C2800BEBF8E /* AppDelegate.swift */; };
@@ -44,6 +49,11 @@
 		224FCA3425190D8600CC4EE4 /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		224FCA3825190E1E00CC4EE4 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		224FCA3C25190E5900CC4EE4 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		2260F183252E0C390008B470 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
+		2260F186252E0C770008B470 /* UIButton+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
+		2260F189252E0CA40008B470 /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
+		2260F18C252E0CF30008B470 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		2260F18F252E0D140008B470 /* CALayer+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Ext.swift"; sourceTree = "<group>"; };
 		2271B2932500240F00DCB915 /* SunPositionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunPositionManager.swift; sourceTree = "<group>"; };
 		22782509250143260000794E /* CurrentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentData.swift; sourceTree = "<group>"; };
 		22793BA124F81C2800BEBF8E /* Golden Hour.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Golden Hour.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +106,7 @@
 				22BF85EA25110946001E03E5 /* ScrollViewPage1.swift */,
 				22BF85EC25110958001E03E5 /* ScrollViewPage2.swift */,
 				22DD4DFE252D8FB900F5258E /* TableViewCell.swift */,
+				2260F192252E0D290008B470 /* UI Extension */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -129,6 +140,18 @@
 				22DD4DFF252D8FB900F5258E /* TableViewCell.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		2260F192252E0D290008B470 /* UI Extension */ = {
+			isa = PBXGroup;
+			children = (
+				2260F183252E0C390008B470 /* UIColor+Ext.swift */,
+				2260F186252E0C770008B470 /* UIButton+Ext.swift */,
+				2260F189252E0CA40008B470 /* UILabel+Ext.swift */,
+				2260F18C252E0CF30008B470 /* UIView+Ext.swift */,
+				2260F18F252E0D140008B470 /* CALayer+Ext.swift */,
+			);
+			path = "UI Extension";
 			sourceTree = "<group>";
 		};
 		22793B9824F81C2800BEBF8E = {
@@ -252,14 +275,19 @@
 				224FCA3D25190E5900CC4EE4 /* SettingViewController.swift in Sources */,
 				22793BA924F81C2800BEBF8E /* SkyViewController.swift in Sources */,
 				227A7FC0252A189600C523BD /* WaveView.swift in Sources */,
+				2260F18D252E0CF30008B470 /* UIView+Ext.swift in Sources */,
 				22793BA524F81C2800BEBF8E /* AppDelegate.swift in Sources */,
 				22BF85ED25110958001E03E5 /* ScrollViewPage2.swift in Sources */,
 				2278250A250143260000794E /* CurrentData.swift in Sources */,
+				2260F184252E0C390008B470 /* UIColor+Ext.swift in Sources */,
 				22793BA724F81C2800BEBF8E /* SceneDelegate.swift in Sources */,
 				224FCA3925190E1E00CC4EE4 /* TabBarController.swift in Sources */,
+				2260F187252E0C770008B470 /* UIButton+Ext.swift in Sources */,
 				22BFA2A7252389C100923D6C /* NotifyViewController.swift in Sources */,
+				2260F190252E0D140008B470 /* CALayer+Ext.swift in Sources */,
 				22E4FD4624FE884F00C845E1 /* Constants.swift in Sources */,
 				227A7FC3252A18AC00C523BD /* PulseAnimation.swift in Sources */,
+				2260F18A252E0CA40008B470 /* UILabel+Ext.swift in Sources */,
 				22E4FD4824FE8D3600C845E1 /* SunPositionConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
