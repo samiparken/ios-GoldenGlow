@@ -129,16 +129,16 @@
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="VW7-B0-Cgd" userLabel="Content Center Bar">
                             <rect key="frame" x="70" y="50" width="235" height="50"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="OFR-Fc-GPv" userLabel="Weather Stack">
-                                    <rect key="frame" x="0.0" y="5" width="25.666666666666668" height="40"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="OFR-Fc-GPv" userLabel="Total Time Stack">
+                                    <rect key="frame" x="0.0" y="5.3333333333333428" width="35.333333333333336" height="39.333333333333336"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="87Z-de-dGm">
-                                            <rect key="frame" x="0.0" y="0.0" width="25.666666666666668" height="22.666666666666668"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="87Z-de-dGm" userLabel="Total Icon">
+                                            <rect key="frame" x="0.0" y="0.0" width="35.333333333333336" height="22"/>
                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <state key="normal" image="cloud.sun" catalog="system"/>
+                                            <state key="normal" image="timer" catalog="system"/>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fair" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFj-XA-s1A">
-                                            <rect key="frame" x="0.0" y="25.666666666666654" width="25.666666666666668" height="14.333333333333332"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="93min" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFj-XA-s1A" userLabel="Total Label">
+                                            <rect key="frame" x="0.0" y="24.999999999999996" width="35.333333333333336" height="14.333333333333332"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -174,7 +174,7 @@
                         <constraint firstItem="VW7-B0-Cgd" firstAttribute="centerY" secondItem="vlR-AL-XOA" secondAttribute="centerY" id="k0B-Pi-9Ac"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Soq-lk-utt">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Soq-lk-utt">
                     <rect key="frame" x="20" y="264" width="335" height="484"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
@@ -196,7 +196,6 @@
                 <constraint firstItem="BL7-Ar-bqr" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="50" id="ymG-3D-Ksm"/>
             </constraints>
             <connections>
-                <outlet property="contentCenterBar" destination="VW7-B0-Cgd" id="yfv-0n-y2m"/>
                 <outlet property="dateButton" destination="vNd-zH-mWF" id="c2A-mT-bgt"/>
                 <outlet property="dateLeftButton" destination="9yU-cc-lf8" id="G8c-VP-GnI"/>
                 <outlet property="dateRightButton" destination="dVX-5n-5ij" id="Het-Ts-iEc"/>
@@ -206,8 +205,8 @@
                 <outlet property="setRiseIcon" destination="vsS-Yb-99f" id="ltc-QF-HLd"/>
                 <outlet property="setRiseTimeLabel" destination="wpa-Ze-FVc" id="WuW-Na-AJu"/>
                 <outlet property="tableView" destination="Soq-lk-utt" id="GQT-uV-QeA"/>
-                <outlet property="weatherIcon" destination="87Z-de-dGm" id="6qB-xt-EKz"/>
-                <outlet property="weatherLabel" destination="gFj-XA-s1A" id="v8c-M5-MNm"/>
+                <outlet property="totalTimeIcon" destination="87Z-de-dGm" id="6qB-xt-EKz"/>
+                <outlet property="totalTimeLabel" destination="gFj-XA-s1A" id="v8c-M5-MNm"/>
             </connections>
             <point key="canvasLocation" x="-154.40000000000001" y="109.35960591133005"/>
         </view>
@@ -216,9 +215,9 @@
         <image name="blank" width="87" height="22"/>
         <image name="buttonLeft" width="8" height="14"/>
         <image name="buttonRight" width="8" height="14"/>
-        <image name="cloud.sun" catalog="system" width="128" height="93"/>
         <image name="colorFillWhite" width="140" height="9"/>
         <image name="sunset" catalog="system" width="128" height="97"/>
+        <image name="timer" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

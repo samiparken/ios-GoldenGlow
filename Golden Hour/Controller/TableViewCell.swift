@@ -27,12 +27,8 @@ class TableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
-        
+                
         cellBG.layer.cornerRadius = 15
-        timeLabel.addCharacterSpacing()
-        cellTitle.addCharacterSpacing()
-        cellDuration.addCharacterSpacing()
         
     }
 

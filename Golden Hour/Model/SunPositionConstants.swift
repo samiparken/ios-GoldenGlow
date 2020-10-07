@@ -1,15 +1,21 @@
 import Foundation
 
-
-let DAYTIME: Int = 4
-let LOWSUN: Int = 3
-let GOLDENHOUR: Int = 2
+// State
+let DAYTIME: Int = 6
+let LOWSUN: Int = 5
+let GOLDENHOURP: Int = 4
+let SETRISE: Int = 3
+let GOLDENHOURM: Int = 2
 let BLUEHOUR: Int = 1
 let NIGHTTIME: Int = 0
+let INVALIDSTATE: Int = -1
 
 // Golden Hour Altitude Range  (-6.00 ~ 10.00)
+let INVALIDANGLE: Double = 100
 let UPPERLIMIT: Double = 10     // Low Sun
 let UPPERGOLDEN: Double = 6     // Golden Hour
+let UPPERSETRISE: Double = 0.5  // Sunset
+let LOWERSETRISE: Double = -0.5 // Sunrise
 let LOWERGOLDEN: Double = -4    // Blue Hour
 let LOWERLIMIT: Double = -6     // End
 

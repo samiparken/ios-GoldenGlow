@@ -30,7 +30,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ground" translatesAutoresizingMaskIntoConstraints="NO" id="DOn-ln-jz9" userLabel="cellBG">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+                                <rect key="frame" x="0.0" y="3" width="320" height="49"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Symbol_goldenHour" translatesAutoresizingMaskIntoConstraints="NO" id="YGX-J2-n3a" userLabel="cellSymbol">
                                 <rect key="frame" x="20" y="13.5" width="15" height="28"/>
@@ -58,10 +58,10 @@
                             </imageView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="DOn-ln-jz9" secondAttribute="bottom" id="04j-Fz-sHt"/>
+                            <constraint firstAttribute="bottom" secondItem="DOn-ln-jz9" secondAttribute="bottom" constant="3" id="04j-Fz-sHt"/>
                             <constraint firstItem="YGX-J2-n3a" firstAttribute="centerY" secondItem="3Tn-k5-2BP" secondAttribute="centerY" id="2ON-Xa-QAP"/>
                             <constraint firstItem="ef6-w0-Tqy" firstAttribute="centerY" secondItem="3Tn-k5-2BP" secondAttribute="centerY" id="ILD-d6-elY"/>
-                            <constraint firstItem="DOn-ln-jz9" firstAttribute="top" secondItem="3Tn-k5-2BP" secondAttribute="top" id="LJP-N5-m3p"/>
+                            <constraint firstItem="DOn-ln-jz9" firstAttribute="top" secondItem="3Tn-k5-2BP" secondAttribute="top" constant="3" id="LJP-N5-m3p"/>
                             <constraint firstAttribute="trailing" secondItem="DOn-ln-jz9" secondAttribute="trailing" id="QCL-bw-EQr"/>
                             <constraint firstItem="hcM-5o-4Ir" firstAttribute="leading" secondItem="YGX-J2-n3a" secondAttribute="trailing" constant="10" id="TZ2-Di-hMA"/>
                             <constraint firstItem="hcM-5o-4Ir" firstAttribute="centerY" secondItem="3Tn-k5-2BP" secondAttribute="centerY" id="UuB-Rz-98Q"/>

@@ -21,6 +21,8 @@
 		22793BB124F81C2C00BEBF8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22793BAF24F81C2C00BEBF8E /* LaunchScreen.storyboard */; };
 		227A7FC0252A189600C523BD /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227A7FBF252A189600C523BD /* WaveView.swift */; };
 		227A7FC3252A18AC00C523BD /* PulseAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227A7FC2252A18AC00C523BD /* PulseAnimation.swift */; };
+		228BD78A252DC2F500F3FA50 /* CellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BD789252DC2F500F3FA50 /* CellData.swift */; };
+		228BD78D252DCE3600F3FA50 /* SunTimestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BD78C252DCE3600F3FA50 /* SunTimestamp.swift */; };
 		22BF85EB25110946001E03E5 /* ScrollViewPage1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF85EA25110946001E03E5 /* ScrollViewPage1.swift */; };
 		22BF85ED25110958001E03E5 /* ScrollViewPage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF85EC25110958001E03E5 /* ScrollViewPage2.swift */; };
 		22BF85EF2511096B001E03E5 /* ScrollViewPage1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22BF85EE2511096B001E03E5 /* ScrollViewPage1.xib */; };
@@ -54,6 +56,8 @@
 		22793BB224F81C2C00BEBF8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		227A7FBF252A189600C523BD /* WaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
 		227A7FC2252A18AC00C523BD /* PulseAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulseAnimation.swift; sourceTree = "<group>"; };
+		228BD789252DC2F500F3FA50 /* CellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellData.swift; sourceTree = "<group>"; };
+		228BD78C252DCE3600F3FA50 /* SunTimestamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunTimestamp.swift; sourceTree = "<group>"; };
 		22BF85EA25110946001E03E5 /* ScrollViewPage1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewPage1.swift; sourceTree = "<group>"; };
 		22BF85EC25110958001E03E5 /* ScrollViewPage2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewPage2.swift; sourceTree = "<group>"; };
 		22BF85EE2511096B001E03E5 /* ScrollViewPage1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScrollViewPage1.xib; sourceTree = "<group>"; };
@@ -107,6 +111,8 @@
 				22C5D01C25091BC10077F7E2 /* TimerManager.swift */,
 				227A7FBF252A189600C523BD /* WaveView.swift */,
 				227A7FC2252A18AC00C523BD /* PulseAnimation.swift */,
+				228BD789252DC2F500F3FA50 /* CellData.swift */,
+				228BD78C252DCE3600F3FA50 /* SunTimestamp.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -235,8 +241,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				22BF85EB25110946001E03E5 /* ScrollViewPage1.swift in Sources */,
+				228BD78D252DCE3600F3FA50 /* SunTimestamp.swift in Sources */,
 				22E4FD4424FE83C200C845E1 /* SunPositionModel.swift in Sources */,
 				22D49705252B238B008C269C /* NotifyTableViewController.swift in Sources */,
+				228BD78A252DC2F500F3FA50 /* CellData.swift in Sources */,
 				2271B2942500240F00DCB915 /* SunPositionManager.swift in Sources */,
 				22DD4E00252D8FB900F5258E /* TableViewCell.swift in Sources */,
 				22C5D01D25091BC10077F7E2 /* TimerManager.swift in Sources */,
