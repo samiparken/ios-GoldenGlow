@@ -14,27 +14,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="pa7-3y-Qns">
-                    <rect key="frame" x="178.5" y="807" width="57.5" height="15"/>
-                    <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sun.max" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="0dA-Hd-u4i">
-                            <rect key="frame" x="0.0" y="-0.5" width="21" height="15.5"/>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </imageView>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconAngle" translatesAutoresizingMaskIntoConstraints="NO" id="BIX-ba-jBi">
-                            <rect key="frame" x="24" y="1" width="15" height="13"/>
-                        </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xA-77-Lay" userLabel="angleLabel">
-                            <rect key="frame" x="42" y="0.0" width="15.5" height="15"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="15" id="Ruf-yc-gqP"/>
-                    </constraints>
-                </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f8J-bc-r9K">
                     <rect key="frame" x="0.0" y="44" width="414" height="276"/>
                     <subviews>
@@ -93,6 +72,27 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="pa7-3y-Qns">
+                    <rect key="frame" x="178.5" y="807" width="57.5" height="15"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sun.max" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="0dA-Hd-u4i">
+                            <rect key="frame" x="0.0" y="-0.5" width="21" height="15.5"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </imageView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconAngle" translatesAutoresizingMaskIntoConstraints="NO" id="BIX-ba-jBi">
+                            <rect key="frame" x="24" y="1" width="15" height="13"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xA-77-Lay" userLabel="angleLabel">
+                            <rect key="frame" x="42" y="0.0" width="15.5" height="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="Ruf-yc-gqP"/>
+                    </constraints>
                 </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

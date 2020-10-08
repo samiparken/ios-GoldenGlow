@@ -25,6 +25,8 @@ class TabBarController: UITabBarController {
     var currentLocation: String?
     
     // SkyView1 Timer
+    var currentState: String = ""
+    var nextState: String = ""
     var timerHour: String = ""
     var timerMin: String = ""
     var timerSec: String = ""
@@ -97,22 +99,45 @@ class TabBarController: UITabBarController {
 //MARK: - SunPositionManagerDelegate
 extension TabBarController: SunPositionManagerDelegate {
     
-    // Set BG & morning/evening
+    // Set BG & Current/Next State & morning/evening
     func didUpdateCurrentState(_ sunAngle: Double, _ isUp: Bool) {
         
         //BG update
         switch sunAngle {
-        case -90 ..< -6 : BGImageViewName = "BG_Night";   isEvening = false; isToday = isUp ? true : false
+        case -90 ..< -6 : BGImageViewName = "BG_Night";
+            currentState = "NIGHTTIME";
+            nextState = "BLUE HOUR";
+            isEvening = false; isToday = isUp ? true : false
             sunPulsePosition = 0.8 ;  wavePosition = 0.5
-        case -6  ..< -4 : BGImageViewName = "BG_Blue";    isEvening = isUp ? false : true
+        case -6  ..< -4 : BGImageViewName = "BG_Blue";
+            currentState = "BLUE HOUR";
+            nextState = isUp ? "GOLDEN HOUR-" : "NIGHTTIME";
+            isEvening = isUp ? false : true;
             sunPulsePosition = 0.7 ; wavePosition = 0.5
-        case -4  ..< 0  : BGImageViewName = "BG_Golden-"; isEvening = isUp ? false : true
+        case -4  ..< -0.5  : BGImageViewName = "BG_Golden-";
+            currentState = "GOLDEN HOUR -";
+            nextState = isUp ? "SUNRISE" : "BLUE HOUR";
+            isEvening = isUp ? false : true
             sunPulsePosition = 0.6 ; wavePosition = 0.5
-        case 0   ..< 6  : BGImageViewName = "BG_Golden+"; isEvening = isUp ? false : true
+        case -0.5 ..< 0.5 : BGImageViewName = "BG_Golden-";
+            currentState = isUp ? "SUNRISE" : "SUNSET";
+            nextState = isUp ? "GOLDEN HOUR +" : "GOLDEN HOUR -";
+            isEvening = isUp ? false : true;
+            sunPulsePosition = 0.6 ; wavePosition = 0.5
+        case 0.5   ..< 6  : BGImageViewName = "BG_Golden+";
+            currentState = "GOLDEN HOUR +";
+            nextState = isUp ? "LOW SUN" : "SUNSET";
+            isEvening = isUp ? false : true;
             sunPulsePosition = 0.5 ; wavePosition = 0.6
-        case 6   ..< 10 : BGImageViewName = "BG_LowSun";  isEvening = isUp ? false : true
+        case 6   ..< 10 : BGImageViewName = "BG_LowSun";
+            currentState = "LOW SUN";
+            nextState = isUp ? "DAYTIME" : "GOLDEN HOUR +"
+            isEvening = isUp ? false : true
             sunPulsePosition = 0.3; wavePosition = 0.7
-        default         : BGImageViewName = "BG_Day";     isEvening = true
+        default         : BGImageViewName = "BG_Day";
+            currentState = "DAYTIME"
+            nextState = "LOW SUN"
+            isEvening = true
             sunPulsePosition = 0.15; wavePosition = 0.8
         }
         // Broadcast

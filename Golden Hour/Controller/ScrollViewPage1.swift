@@ -52,12 +52,19 @@ class ScrollViewPage1: UIView {
     // for Notification Observers
     let keyForTimerUpdate = Notification.Name(rawValue: TimerUpdateNotificationKey)
     let keyForSunAngleUpdate = Notification.Name(rawValue: SunAngleUpdateNotificationKey)
+    let keyForBGImage = Notification.Name(rawValue: BGImageUpdateNotificationKey)
+
     
     // Register Observers for updates
     func registerObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(ScrollViewPage1.updateTimer(notification:)), name: keyForTimerUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ScrollViewPage1.updateSunAngle(notification:)), name: keyForSunAngleUpdate, object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(ScrollViewPage1.updateBGImage(notification:)), name: keyForBGImage, object: nil)
+    }
+    
+    @objc func updateBGImage(notification: NSNotification) {
+        middleCurrentState.setTitle(myTabBar.currentState, for: .normal)
+        middleNextStateLabel.text = "NEXT: " + myTabBar.nextState
     }
     
     @objc func updateTimer(notification: NSNotification) {

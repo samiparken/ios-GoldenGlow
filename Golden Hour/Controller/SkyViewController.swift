@@ -53,7 +53,6 @@ class SkyViewController: UIViewController {
         
         // Screen Organize
         view.bringSubviewToFront(scrollView)
-        
     }
     
     
@@ -127,16 +126,15 @@ class SkyViewController: UIViewController {
         self.view.addSubview(sunPulse)
     }
     
-    
     func makePulse() {
-
         if Int(myTabBar.timerSec)! % 2 == 0 {
-        let pulse = PulseAnimation(numberOfPulses: 1, radius: 50, position: CGPoint(x: 35, y: 35), duration: 10)
-        pulse.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        sunPulse.layer.insertSublayer(pulse, below: sunPulse.layer)
+            let pulse = PulseAnimation(numberOfPulses: 1, radius: 50, position: CGPoint(x: 35, y: 35), duration: 10)
+            pulse.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            sunPulse.layer.insertSublayer(pulse, below: sunPulse.layer)
         }
     }
-
+    
+    
     
     func setupScrollView() {
         // Initialize ScrollView

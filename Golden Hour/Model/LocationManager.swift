@@ -98,6 +98,5 @@ extension LocationManager: CLLocationManagerDelegate {
             locationData.append(location.coordinate.latitude)
             self.delegate?.didUpdateLocation(locationData)
         }
-        
     }
 }
