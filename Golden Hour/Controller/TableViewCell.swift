@@ -26,7 +26,6 @@ class TableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
                 
         cellBG.layer.cornerRadius = 15
         
