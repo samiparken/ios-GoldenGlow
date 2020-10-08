@@ -11,10 +11,9 @@ import UIKit
 extension UIButton{
     func addCharacterSpacing(_ spacing: CGFloat = 1.30) {
         if let labelText = self.titleLabel?.text!, labelText.count > 0 {
-            print("labelText : \(labelText)")
             let attributedString = NSMutableAttributedString(string: labelText)
             attributedString.addAttribute(NSAttributedString.Key.kern, value: spacing, range: NSRange(location: 0, length: attributedString.length - 1 ))
-            self.setAttributedTitle(attributedString, for: .normal)
+            setAttributedTitle(attributedString, for: .normal)
         }
     }
 }

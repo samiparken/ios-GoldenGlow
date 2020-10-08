@@ -65,7 +65,9 @@ class ScrollViewPage1: UIView {
     
     @objc func updateCurrentState(notification: NSNotification) {
         middleCurrentState.setTitle(myTabBar.currentState, for: .normal)
+        middleCurrentState.addCharacterSpacing(3)
         middleNextStateLabel.text = "NEXT: " + myTabBar.nextState
+        middleNextStateLabel.addCharacterSpacing()
     }
     
     @objc func updateTimer(notification: NSNotification) {
