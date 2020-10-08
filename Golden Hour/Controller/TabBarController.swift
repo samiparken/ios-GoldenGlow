@@ -14,6 +14,7 @@ let BGImageUpdateNotificationKey = "co.samiparken.updateBGImage"
 let TimerUpdateNotificationKey = "co.samiparken.updateTimer"
 let SunAngleUpdateNotificationKey = "co.samiparken.updateSunAngle"
 let MorningEveningReadyNotificationKey = "co.samiparken.morningEveningReady"
+let CurrentStateUpdateNotificationKey = "co.samiparken.currentState"
 
 class TabBarController: UITabBarController {
     
@@ -99,44 +100,30 @@ class TabBarController: UITabBarController {
 //MARK: - SunPositionManagerDelegate
 extension TabBarController: SunPositionManagerDelegate {
     
-    // Set BG & Current/Next State & morning/evening
+    // Set BG & morning/evening
     func didUpdateCurrentState(_ sunAngle: Double, _ isUp: Bool) {
         
         //BG update
         switch sunAngle {
         case -90 ..< -6 : BGImageViewName = "BG_Night";
-            currentState = "NIGHTTIME";
-            nextState = "BLUE HOUR";
             isEvening = false; isToday = isUp ? true : false
             sunPulsePosition = 0.8 ;  wavePosition = 0.5
         case -6  ..< -4 : BGImageViewName = "BG_Blue";
-            currentState = "BLUE HOUR";
-            nextState = isUp ? "GOLDEN HOUR-" : "NIGHTTIME";
             isEvening = isUp ? false : true;
             sunPulsePosition = 0.7 ; wavePosition = 0.5
         case -4  ..< -0.5  : BGImageViewName = "BG_Golden-";
-            currentState = "GOLDEN HOUR -";
-            nextState = isUp ? "SUNRISE" : "BLUE HOUR";
             isEvening = isUp ? false : true
             sunPulsePosition = 0.6 ; wavePosition = 0.5
         case -0.5 ..< 0.5 : BGImageViewName = "BG_Golden-";
-            currentState = isUp ? "SUNRISE" : "SUNSET";
-            nextState = isUp ? "GOLDEN HOUR +" : "GOLDEN HOUR -";
             isEvening = isUp ? false : true;
             sunPulsePosition = 0.6 ; wavePosition = 0.5
         case 0.5   ..< 6  : BGImageViewName = "BG_Golden+";
-            currentState = "GOLDEN HOUR +";
-            nextState = isUp ? "LOW SUN" : "SUNSET";
             isEvening = isUp ? false : true;
             sunPulsePosition = 0.5 ; wavePosition = 0.6
         case 6   ..< 10 : BGImageViewName = "BG_LowSun";
-            currentState = "LOW SUN";
-            nextState = isUp ? "DAYTIME" : "GOLDEN HOUR +"
             isEvening = isUp ? false : true
             sunPulsePosition = 0.3; wavePosition = 0.7
         default         : BGImageViewName = "BG_Day";
-            currentState = "DAYTIME"
-            nextState = "LOW SUN"
             isEvening = true
             sunPulsePosition = 0.15; wavePosition = 0.8
         }
@@ -148,20 +135,47 @@ extension TabBarController: SunPositionManagerDelegate {
         updateSunAngle()
     }
     
-    func didUpdateCurrentScan(from: Date, to: Date, _ nowState: Int, _ nextState: Int) {
+    func didUpdateCurrentScan(from: Date, to: Date, _ nowState: Int, _ _nextState: Int) {
         
-        //TotalDuration
-        let duration = to.timeIntervalSince1970 - from.timeIntervalSince1970
-        
-        //remaining
-        let remaining = to.timeIntervalSince1970 - Date().timeIntervalSince1970
-        
-        //percent
-        let percent = remaining / duration * 100
-        
+        switch nowState  {
+        case DAYTIME: currentState = "DAYTIME"
+        case LOWSUN: currentState = "LOW SUN"
+        case GOLDENHOURP: currentState = "GOLDEN HOUR +"
+        case SETRISE: currentState = _nextState == GOLDENHOURP ? "SUNRISE" : "SUNSET"
+        case GOLDENHOURM: currentState = "GOLDEN HOUR -"
+        case BLUEHOUR: currentState = "BLUE HOUR"
+        case NIGHTTIME: currentState = "NIGHTTIME"
+        default: currentState = "ERROR"
+        }
+              
+        switch _nextState  {
+        case DAYTIME: nextState = "DAYTIME"
+        case LOWSUN: nextState = "LOW SUN"
+        case GOLDENHOURP: nextState = "GOLDEN HOUR +"
+        case SETRISE: nextState = nowState == GOLDENHOURM ? "SUNRISE" : "SUNSET"
+        case GOLDENHOURM: nextState = "GOLDEN HOUR -"
+        case BLUEHOUR: nextState = "BLUE HOUR"
+        case NIGHTTIME: nextState = "NIGHTTIME"
+        default: nextState = "ERROR"
+        }
+
+        // Broadcast CurrentState
+        let keyName = Notification.Name(rawValue: CurrentStateUpdateNotificationKey)
+        NotificationCenter.default.post(name: keyName, object: nil)
+
         // Start Timer
-        timerManager.toTime = to
-        timerManager.startTimer()
+        timerManager.startTimer(to)
+
+        
+//        //TotalDuration
+//        let duration = to.timeIntervalSince1970 - from.timeIntervalSince1970
+//
+//        //remaining
+//        let remaining = to.timeIntervalSince1970 - Date().timeIntervalSince1970
+//
+//        //percent
+//        let percent = remaining / duration * 100
+        
     }
     
     func didUpdateTodayScan(_ today: [SunTimestamp]) {

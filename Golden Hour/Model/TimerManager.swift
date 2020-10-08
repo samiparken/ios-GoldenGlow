@@ -17,7 +17,8 @@ class TimerManager {
     var countdownTimer: Timer!
     var toTime: Date!
     
-    func startTimer() {
+    func startTimer(_ to: Date) {
+        self.toTime = to
         countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
     }
     

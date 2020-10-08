@@ -148,7 +148,6 @@ extension ScrollViewPage2: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You tapped me!")
     }
-    
 }
 
 //MARK: - UITableViewDataSource

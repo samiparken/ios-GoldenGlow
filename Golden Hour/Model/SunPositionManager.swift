@@ -118,7 +118,27 @@ class SunPositionManager {
         else { return result }
     }
     
-    
+    func updateCurrentAltitude()
+    {
+        // Get current date & time
+        let now = Date()
+        let GMT = currentData.GMT
+        if let lon = currentData.Longitude
+        {
+            let lat = currentData.Latitude!
+            let sun = SunPositionModel(now, GMT, longitude: lon, latitude: lat)
+            sun.spa_calculate()
+            
+            if let sunAltitude = currentData.SunAltitude //if not first try
+            {
+                // Save Rate of Sun Altitude Change
+                currentData.SunAltitudeChange = sun.declination - sunAltitude
+            }
+            
+            // Save currentSunAltitude
+            currentData.SunAltitude = sun.declination
+        }
+    }
     
     func startSunPositionSystem()
     {
@@ -140,12 +160,10 @@ class SunPositionManager {
             currentData.SunAltitudeChange = sun2.declination - sun1.declination
         }
         updateScreen()
-        
     }
     
     func updateScreen()
     {
-
         // BG & morning/evening
         self.delegate?.didUpdateCurrentState(currentData.SunAltitude!, isSunGoingUp())
                 
@@ -165,28 +183,6 @@ class SunPositionManager {
         let todayScan: [SunTimestamp] = dailyScan(yyyy,mm,dd)
         self.delegate?.didUpdateTodayScan(todayScan)
         
-    }
-    
-    func updateCurrentAltitude()
-    {
-        // Get current date & time
-        let now = Date()
-        let GMT = currentData.GMT
-        if let lon = currentData.Longitude
-        {
-            let lat = currentData.Latitude!
-            let sun = SunPositionModel(now, GMT, longitude: lon, latitude: lat)
-            sun.spa_calculate()
-            
-            if let sunAltitude = currentData.SunAltitude //if not first try
-            {
-                // Save Rate of Sun Altitude Change
-                currentData.SunAltitudeChange = sun.declination - sunAltitude
-            }
-            
-            // Save currentSunAltitude
-            currentData.SunAltitude = sun.declination
-        }
     }
     
     
