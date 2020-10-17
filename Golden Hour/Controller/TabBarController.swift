@@ -266,26 +266,14 @@ extension TabBarController: SunPositionManagerDelegate {
 //MARK: - LocationManagerDelegate
 extension TabBarController: LocationManagerDelegate {
     
-    // Updated Location
-    func didUpdateCoordinate(_ locationData: [Double]) {
-        sunPositionManager.currentData.Longitude = locationData[0]
-        sunPositionManager.currentData.Latitude = locationData[1]
-        
-        /* START SUN POSITION SYSTEM */
-        if let _ = sunPositionManager.currentData.SunAltitudeChange {}
-        else { sunPositionManager.startSunPositionSystem() }
-    }
-    
+    // Updated CityName & CountryCode
     func didUpdateLocation(_ location: CLPlacemark) {
 
-        let cityName = location.locality?.uppercased()
+        let cityName = location.locality
         let countryCode = location.isoCountryCode
         
-        // Realm, Read All LocationData
-        locationData = realm.objects(LocationData.self)
-        
-        // Realm, Query
-        locationData = locationData?.filter("cityName == %@ AND countryCode == %@", cityName!, countryCode!)
+        // Realm, DB check & Save
+        locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName!, countryCode!)
         if ( locationData!.count == 0 )
         {
             let newLocationData = LocationData() //Realm Object
@@ -296,17 +284,28 @@ extension TabBarController: LocationManagerDelegate {
                     realm.add(newLocationData)
                 }
             } catch {
-                print("Error saving category \(error)")
+                print("Error saving newLocationData \(error)")
             }
-        } else {
-            
+            locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName!, countryCode!)
         }
-
-        currentLocation = cityName!
+                
+        
         // Braodcast
+        currentLocation = cityName!.uppercased()
         let keyName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
         NotificationCenter.default.post(name: keyName, object: nil)
     }
+    
+    // Updated Coordinate
+    func didUpdateCoordinate(_ locationData: [Double]) {
+        sunPositionManager.currentData.Longitude = locationData[0]
+        sunPositionManager.currentData.Latitude = locationData[1]
+        
+        /* START SUN POSITION SYSTEM */
+        if let _ = sunPositionManager.currentData.SunAltitudeChange {}
+        else { sunPositionManager.startSunPositionSystem() }
+    }
+
 }
 
 //MARK: - TimerManagerDelegate

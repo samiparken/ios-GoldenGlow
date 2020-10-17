@@ -56,6 +56,10 @@ extension LocationManager {
             completion(placemark)
         }
     }
+    
+    func getCoordinate(city: String, completion: @escaping(_ coordinate: CLLocationCoordinate2D?, _ error: Error?) -> () ) {
+        CLGeocoder().geocodeAddressString(city) { completion($0?.first?.location?.coordinate, $1) }
+    }
 }
 
 
@@ -86,13 +90,30 @@ extension LocationManager: CLLocationManagerDelegate {
                 guard let placemark = placemark else { return }
                 
                 self.delegate?.didUpdateLocation(placemark)
+                
+                // Get Coordinate from CityName
+                self.getCoordinate(city: placemark.locality!) { coordinate, error in
+                    guard let coordinate = coordinate, error == nil else { return }
+                    
+//                    // don't forget to update the UI from the main thread
+//                    DispatchQueue.main.async {
+                        
+                    print("\(placemark.locality ?? "?") Location:, \(coordinate)")
+                    
+                    var locationData:[Double] = []
+                    locationData.append(coordinate.longitude)
+                    locationData.append(coordinate.latitude)
+                    self.delegate?.didUpdateCoordinate(locationData)
+//
+//                    }
+                }
             }
             
             // Get longitude & latitude
-            var locationData:[Double] = []
-            locationData.append(location.coordinate.longitude)
-            locationData.append(location.coordinate.latitude)
-            self.delegate?.didUpdateCoordinate(locationData)
+//            var locationData:[Double] = []
+//            locationData.append(location.coordinate.longitude)
+//            locationData.append(location.coordinate.latitude)
+//            self.delegate?.didUpdateCoordinate(locationData)
         }
     }
 }
