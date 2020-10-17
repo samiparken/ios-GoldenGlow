@@ -267,10 +267,11 @@ extension TabBarController: SunPositionManagerDelegate {
 extension TabBarController: LocationManagerDelegate {
     
     // Updated CityName & CountryCode
-    func didUpdateLocation(_ location: CLPlacemark) {
+    func didUpdateLocation(_ place: CLPlacemark) {
 
-        let cityName = location.locality
-        let countryCode = location.isoCountryCode
+        let cityName = place.locality
+        let countryName = place.country
+        let countryCode = place.isoCountryCode
         
         // Realm, DB check & Save
         locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName!, countryCode!)
@@ -278,6 +279,7 @@ extension TabBarController: LocationManagerDelegate {
         {
             let newLocationData = LocationData() //Realm Object
             newLocationData.cityName = cityName!
+            newLocationData.countryName = countryName!
             newLocationData.countryCode = countryCode!
             do {
                 try realm.write { // Make Realm updated
@@ -288,24 +290,25 @@ extension TabBarController: LocationManagerDelegate {
             }
             locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName!, countryCode!)
         }
-                
         
-        // Braodcast
+        
+        // Braodcast: CityName
         currentLocation = cityName!.uppercased()
         let keyName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
         NotificationCenter.default.post(name: keyName, object: nil)
-    }
-    
-    // Updated Coordinate
-    func didUpdateCoordinate(_ locationData: [Double]) {
-        sunPositionManager.currentData.Longitude = locationData[0]
-        sunPositionManager.currentData.Latitude = locationData[1]
+        
+        // Update Coordinate
+        let long = place.location?.coordinate.longitude
+        let lat = place.location?.coordinate.latitude
+        print("Longitude: \(long ?? 0), Latitude: \(lat ?? 0)")
+        sunPositionManager.currentData.Longitude = long
+        sunPositionManager.currentData.Latitude = lat
+        
         
         /* START SUN POSITION SYSTEM */
         if let _ = sunPositionManager.currentData.SunAltitudeChange {}
         else { sunPositionManager.startSunPositionSystem() }
     }
-
 }
 
 //MARK: - TimerManagerDelegate
