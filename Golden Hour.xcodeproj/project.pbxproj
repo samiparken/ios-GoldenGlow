@@ -42,9 +42,11 @@
 		22E4FD4424FE83C200C845E1 /* SunPositionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E4FD4324FE83C200C845E1 /* SunPositionModel.swift */; };
 		22E4FD4624FE884F00C845E1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E4FD4524FE884F00C845E1 /* Constants.swift */; };
 		22E4FD4824FE8D3600C845E1 /* SunPositionConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E4FD4724FE8D3600C845E1 /* SunPositionConstants.swift */; };
+		4927DE60C73F2E2A7FCB89C5 /* Pods_Golden_Hour.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004AC57CDD6150C14DED6694 /* Pods_Golden_Hour.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		004AC57CDD6150C14DED6694 /* Pods_Golden_Hour.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Golden_Hour.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		224FCA2D25190D0500CC4EE4 /* Sky.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Sky.storyboard; sourceTree = "<group>"; };
 		224FCA3425190D8600CC4EE4 /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		224FCA3825190E1E00CC4EE4 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -82,6 +84,8 @@
 		22E4FD4324FE83C200C845E1 /* SunPositionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunPositionModel.swift; sourceTree = "<group>"; };
 		22E4FD4524FE884F00C845E1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		22E4FD4724FE8D3600C845E1 /* SunPositionConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunPositionConstants.swift; sourceTree = "<group>"; };
+		457F3F6E785BB1241BBAF48F /* Pods-Golden Hour.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Golden Hour.release.xcconfig"; path = "Target Support Files/Pods-Golden Hour/Pods-Golden Hour.release.xcconfig"; sourceTree = "<group>"; };
+		D9FBAFC4B7E3329295A7E560 /* Pods-Golden Hour.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Golden Hour.debug.xcconfig"; path = "Target Support Files/Pods-Golden Hour/Pods-Golden Hour.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4927DE60C73F2E2A7FCB89C5 /* Pods_Golden_Hour.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,6 +164,8 @@
 			children = (
 				22793BA324F81C2800BEBF8E /* Golden Hour */,
 				22793BA224F81C2800BEBF8E /* Products */,
+				B585B680B55E3C363021E0A8 /* Pods */,
+				9DF913B7FDE80D158635C335 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -186,6 +193,24 @@
 			path = "Golden Hour";
 			sourceTree = "<group>";
 		};
+		9DF913B7FDE80D158635C335 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				004AC57CDD6150C14DED6694 /* Pods_Golden_Hour.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B585B680B55E3C363021E0A8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D9FBAFC4B7E3329295A7E560 /* Pods-Golden Hour.debug.xcconfig */,
+				457F3F6E785BB1241BBAF48F /* Pods-Golden Hour.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -193,9 +218,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22793BB524F81C2C00BEBF8E /* Build configuration list for PBXNativeTarget "Golden Hour" */;
 			buildPhases = (
+				78C8196CC6A9CE5012B99200 /* [CP] Check Pods Manifest.lock */,
 				22793B9D24F81C2800BEBF8E /* Sources */,
 				22793B9E24F81C2800BEBF8E /* Frameworks */,
 				22793B9F24F81C2800BEBF8E /* Resources */,
+				EB4A9C91EC17BF4EDFEE19FB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -257,6 +284,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		78C8196CC6A9CE5012B99200 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Golden Hour-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EB4A9C91EC17BF4EDFEE19FB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Golden Hour/Pods-Golden Hour-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Golden Hour/Pods-Golden Hour-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Golden Hour/Pods-Golden Hour-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		22793B9D24F81C2800BEBF8E /* Sources */ = {
@@ -430,6 +499,7 @@
 		};
 		22793BB624F81C2C00BEBF8E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D9FBAFC4B7E3329295A7E560 /* Pods-Golden Hour.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -448,6 +518,7 @@
 		};
 		22793BB724F81C2C00BEBF8E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 457F3F6E785BB1241BBAF48F /* Pods-Golden Hour.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
