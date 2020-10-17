@@ -8,7 +8,7 @@
 
 import RealmSwift
 
-class Timestamp: Object {
+class TimestampData: Object {
     @objc dynamic var time: Date? 
     @objc dynamic var gmt: Double = 0.0
     @objc dynamic var from: Int = 0
@@ -17,7 +17,7 @@ class Timestamp: Object {
     @objc dynamic var toString: String = ""
     
     //Relationship
-    var parentLocation = LinkingObjects(fromType: Location.self, property: "timestamps")
+    var parentLocationData = LinkingObjects(fromType: LocationData.self, property: "timestampData")
     
     required init() {
 

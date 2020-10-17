@@ -9,8 +9,8 @@
 import Foundation
 import CoreLocation
 protocol LocationManagerDelegate {
-    func didUpdateLocation(_ locationData: [Double])
-    func didUpdateCityName(_ cityname: String)
+    func didUpdateCoordinate(_ locationData: [Double])
+    func didUpdateLocation(_ location: CLPlacemark)
 }
 
 class LocationManager: NSObject {
@@ -85,21 +85,14 @@ extension LocationManager: CLLocationManagerDelegate {
             getPlace(for: location) { placemark in
                 guard let placemark = placemark else { return }
                 
-                // City Name
-                if let town = placemark.locality {
-                    self.delegate?.didUpdateCityName(town)
-                }
-                // ISO Country Code
-                if let countryCode = placemark.isoCountryCode {
-                    print("countryCode: \(countryCode)")
-                }
+                self.delegate?.didUpdateLocation(placemark)
             }
             
             // Get longitude & latitude
             var locationData:[Double] = []
             locationData.append(location.coordinate.longitude)
             locationData.append(location.coordinate.latitude)
-            self.delegate?.didUpdateLocation(locationData)
+            self.delegate?.didUpdateCoordinate(locationData)
         }
     }
 }

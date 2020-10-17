@@ -32,7 +32,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ground" translatesAutoresizingMaskIntoConstraints="NO" id="DOn-ln-jz9" userLabel="cellBG">
                                 <rect key="frame" x="0.0" y="3" width="320" height="49"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Symbol_goldenHour" translatesAutoresizingMaskIntoConstraints="NO" id="YGX-J2-n3a" userLabel="cellSymbol">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Symbol_golden+" translatesAutoresizingMaskIntoConstraints="NO" id="YGX-J2-n3a" userLabel="cellSymbol">
                                 <rect key="frame" x="20" y="13.5" width="15" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="15" id="8cg-mY-mar"/>
@@ -98,7 +98,7 @@
     </objects>
     <resources>
         <image name="Ground" width="375" height="297"/>
-        <image name="Symbol_goldenHour" width="28" height="28"/>
+        <image name="Symbol_golden+" width="28" height="28"/>
         <image name="buttonRight" width="8" height="14"/>
     </resources>
 </document>

@@ -8,14 +8,12 @@
 
 import RealmSwift
 
-class Location: Object {
+class LocationData: Object {
     //dynamic : being monitored while running
     @objc dynamic var cityName: String = ""
     @objc dynamic var countryName: String = ""
     @objc dynamic var countryCode: String = ""
     
     //Relationship
-    let timestamps = List<Timestamp>()  //Initialize with empty List of Timestamp
+    let timestampData = List<TimestampData>()  //Initialize with empty List of Timestamp
 }
-
-

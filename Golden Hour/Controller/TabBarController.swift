@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RealmSwift
+import CoreLocation
 
 // Keys for Notification & Observers
 let CityNameUpdateNotificationKey = "co.samiparken.updateCityName"
@@ -18,9 +20,17 @@ let CurrentStateUpdateNotificationKey = "co.samiparken.currentState"
 
 class TabBarController: UITabBarController {
     
-    static let singletonTabBar = TabBarController()
+    /* Realm Database*/
+    // Initialize Realm
+    let realm = try! Realm()
+    
+    // Realm Object
+    var locationData: Results<LocationData>?
+
     
     /* for Sharing Data Btw View Controllers */
+    static let singletonTabBar = TabBarController()
+    
     // BG & Location
     var BGImageViewName: String?
     var currentLocation: String?
@@ -257,7 +267,7 @@ extension TabBarController: SunPositionManagerDelegate {
 extension TabBarController: LocationManagerDelegate {
     
     // Updated Location
-    func didUpdateLocation(_ locationData: [Double]) {
+    func didUpdateCoordinate(_ locationData: [Double]) {
         sunPositionManager.currentData.Longitude = locationData[0]
         sunPositionManager.currentData.Latitude = locationData[1]
         
@@ -266,9 +276,33 @@ extension TabBarController: LocationManagerDelegate {
         else { sunPositionManager.startSunPositionSystem() }
     }
     
-    func didUpdateCityName(_ cityname: String) {
-        currentLocation = cityname.uppercased()
+    func didUpdateLocation(_ location: CLPlacemark) {
+
+        let cityName = location.locality?.uppercased()
+        let countryCode = location.isoCountryCode
         
+        // Realm, Read All LocationData
+        locationData = realm.objects(LocationData.self)
+        
+        // Realm, Query
+        locationData = locationData?.filter("cityName == %@ AND countryCode == %@", cityName!, countryCode!)
+        if ( locationData!.count == 0 )
+        {
+            let newLocationData = LocationData() //Realm Object
+            newLocationData.cityName = cityName!
+            newLocationData.countryCode = countryCode!
+            do {
+                try realm.write { // Make Realm updated
+                    realm.add(newLocationData)
+                }
+            } catch {
+                print("Error saving category \(error)")
+            }
+        } else {
+            
+        }
+
+        currentLocation = cityName!
         // Braodcast
         let keyName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
         NotificationCenter.default.post(name: keyName, object: nil)

@@ -16,8 +16,8 @@
 		2260F18A252E0CA40008B470 /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2260F189252E0CA40008B470 /* UILabel+Ext.swift */; };
 		2260F18D252E0CF30008B470 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2260F18C252E0CF30008B470 /* UIView+Ext.swift */; };
 		2260F190252E0D140008B470 /* CALayer+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2260F18F252E0D140008B470 /* CALayer+Ext.swift */; };
-		226A2ED4253B3D0100F54439 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A2ED3253B3D0100F54439 /* Location.swift */; };
-		226A2ED7253B3D1600F54439 /* Timestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A2ED6253B3D1600F54439 /* Timestamp.swift */; };
+		226A2ED4253B3D0100F54439 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A2ED3253B3D0100F54439 /* LocationData.swift */; };
+		226A2ED7253B3D1600F54439 /* TimestampData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A2ED6253B3D1600F54439 /* TimestampData.swift */; };
 		2271B2942500240F00DCB915 /* SunPositionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271B2932500240F00DCB915 /* SunPositionManager.swift */; };
 		2278250A250143260000794E /* CurrentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22782509250143260000794E /* CurrentData.swift */; };
 		22793BA524F81C2800BEBF8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22793BA424F81C2800BEBF8E /* AppDelegate.swift */; };
@@ -58,8 +58,8 @@
 		2260F189252E0CA40008B470 /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
 		2260F18C252E0CF30008B470 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		2260F18F252E0D140008B470 /* CALayer+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Ext.swift"; sourceTree = "<group>"; };
-		226A2ED3253B3D0100F54439 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		226A2ED6253B3D1600F54439 /* Timestamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timestamp.swift; sourceTree = "<group>"; };
+		226A2ED3253B3D0100F54439 /* LocationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationData.swift; sourceTree = "<group>"; };
+		226A2ED6253B3D1600F54439 /* TimestampData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimestampData.swift; sourceTree = "<group>"; };
 		2271B2932500240F00DCB915 /* SunPositionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunPositionManager.swift; sourceTree = "<group>"; };
 		22782509250143260000794E /* CurrentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentData.swift; sourceTree = "<group>"; };
 		22793BA124F81C2800BEBF8E /* Golden Hour.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Golden Hour.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -164,8 +164,8 @@
 		226A2ED9253B3D1900F54439 /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
-				226A2ED3253B3D0100F54439 /* Location.swift */,
-				226A2ED6253B3D1600F54439 /* Timestamp.swift */,
+				226A2ED3253B3D0100F54439 /* LocationData.swift */,
+				226A2ED6253B3D1600F54439 /* TimestampData.swift */,
 				228BD789252DC2F500F3FA50 /* CellData.swift */,
 			);
 			path = "Data Model";
@@ -366,8 +366,8 @@
 				22793BA924F81C2800BEBF8E /* SkyViewController.swift in Sources */,
 				227A7FC0252A189600C523BD /* WaveView.swift in Sources */,
 				2260F18D252E0CF30008B470 /* UIView+Ext.swift in Sources */,
-				226A2ED4253B3D0100F54439 /* Location.swift in Sources */,
-				226A2ED7253B3D1600F54439 /* Timestamp.swift in Sources */,
+				226A2ED4253B3D0100F54439 /* LocationData.swift in Sources */,
+				226A2ED7253B3D1600F54439 /* TimestampData.swift in Sources */,
 				22793BA524F81C2800BEBF8E /* AppDelegate.swift in Sources */,
 				22BF85ED25110958001E03E5 /* ScrollViewPage2.swift in Sources */,
 				2278250A250143260000794E /* CurrentData.swift in Sources */,
