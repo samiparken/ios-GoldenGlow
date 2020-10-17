@@ -15,7 +15,7 @@ class Location: Object {
     @objc dynamic var countryCode: String = ""
     
     //Relationship
-    let timestamps = List<Timestamp>()  //Initialize with empty List of Item
+    let timestamps = List<Timestamp>()  //Initialize with empty List of Timestamp
 }
 
 
