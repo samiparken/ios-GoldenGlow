@@ -85,11 +85,14 @@ extension LocationManager: CLLocationManagerDelegate {
             getPlace(for: location) { placemark in
                 guard let placemark = placemark else { return }
                 
-                var  output = ""
+                // City Name
                 if let town = placemark.locality {
-                    output = town
+                    self.delegate?.didUpdateCityName(town)
                 }
-                self.delegate?.didUpdateCityName(output)
+                // ISO Country Code
+                if let countryCode = placemark.isoCountryCode {
+                    print("countryCode: \(countryCode)")
+                }
             }
             
             // Get longitude & latitude
