@@ -266,12 +266,20 @@ extension TabBarController: SunPositionManagerDelegate {
 //MARK: - LocationManagerDelegate
 extension TabBarController: LocationManagerDelegate {
     
-    // Updated CityName & CountryCode
+    // Updated Current CityName & CountryCode
     func didUpdateLocation(_ place: CLPlacemark) {
 
         let cityName = place.locality
         let countryName = place.country
         let countryCode = place.isoCountryCode
+
+        // Update Coordinate
+        let long = place.location?.coordinate.longitude
+        let lat = place.location?.coordinate.latitude
+        print("Longitude: \(long ?? 0), Latitude: \(lat ?? 0)")
+        sunPositionManager.currentData.Longitude = long
+        sunPositionManager.currentData.Latitude = lat
+
         
         // Realm, DB check & Save
         locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName!, countryCode!)
@@ -281,6 +289,8 @@ extension TabBarController: LocationManagerDelegate {
             newLocationData.cityName = cityName!
             newLocationData.countryName = countryName!
             newLocationData.countryCode = countryCode!
+            newLocationData.longitude = long!
+            newLocationData.latitude = lat!
             do {
                 try realm.write { // Make Realm updated
                     realm.add(newLocationData)
@@ -290,19 +300,15 @@ extension TabBarController: LocationManagerDelegate {
             }
             locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName!, countryCode!)
         }
-        
-        
+                
         // Braodcast: CityName
         currentLocation = cityName!.uppercased()
         let keyName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
         NotificationCenter.default.post(name: keyName, object: nil)
         
-        // Update Coordinate
-        let long = place.location?.coordinate.longitude
-        let lat = place.location?.coordinate.latitude
-        print("Longitude: \(long ?? 0), Latitude: \(lat ?? 0)")
-        sunPositionManager.currentData.Longitude = long
-        sunPositionManager.currentData.Latitude = lat
+        
+        
+        
         
         
         /* START SUN POSITION SYSTEM */
