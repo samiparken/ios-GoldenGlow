@@ -7,6 +7,7 @@
 //
 
 import RealmSwift
+import Foundation
 
 class LocationData: Object {
     //dynamic : being monitored while running
@@ -17,5 +18,5 @@ class LocationData: Object {
     @objc dynamic var latitude: Double = 0.0
         
     //Relationship
-    let timestampData = List<TimestampData>()  //Initialize with empty List of Timestamp
+    let timestampDatas = List<TimestampData>()  //Initialize with empty List of Timestamp
 }

@@ -17,7 +17,7 @@ class TimestampData: Object {
     @objc dynamic var toString: String = ""
     
     //Relationship
-    var parentLocationData = LinkingObjects(fromType: LocationData.self, property: "timestampData")
+    var parentLocationData = LinkingObjects(fromType: LocationData.self, property: "timestampDatas")
     
     required init() {
 

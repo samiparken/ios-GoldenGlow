@@ -26,8 +26,9 @@ class TabBarController: UITabBarController {
     
     // Realm Object
     var locationData: Results<LocationData>?
+    var selectedLocationData: LocationData?
+    var timestampData: Results<TimestampData>?
 
-    
     /* for Sharing Data Btw View Controllers */
     static let singletonTabBar = TabBarController()
     
@@ -301,19 +302,33 @@ extension TabBarController: LocationManagerDelegate {
             locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName!, countryCode!)
         }
                 
-        // Braodcast: CityName
+        // Braodcast: CityName to Show
         currentLocation = cityName!.uppercased()
         let keyName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
         NotificationCenter.default.post(name: keyName, object: nil)
         
         
+        // Realm, check today timestamp
+        let todayStart = Calendar.current.startOfDay(for: Date())
+        let todayEnd: Date = {
+          let components = DateComponents(day: 1, second: -1)
+          return Calendar.current.date(byAdding: components, to: todayStart)!
+        }()
+        selectedLocationData = locationData![0]
+        timestampData = selectedLocationData?.timestampDatas.filter("date BETWEEN %@", [todayStart, todayEnd])
+        if( timestampData!.count == 0)
+        {
+            // scan data & store timestamps in RealmDB
+
+            /* START SUN POSITION SYSTEM */
+            if let _ = sunPositionManager.currentData.SunAltitudeChange {}
+            else { sunPositionManager.startSunPositionSystem() }
+            
+        } else {
+            timestampData = timestampData?.sorted(byKeyPath: "time", ascending: true)
+        }
         
         
-        
-        
-        /* START SUN POSITION SYSTEM */
-        if let _ = sunPositionManager.currentData.SunAltitudeChange {}
-        else { sunPositionManager.startSunPositionSystem() }
     }
 }
 
