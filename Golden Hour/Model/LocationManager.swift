@@ -17,7 +17,6 @@ class LocationManager: NSObject {
     
     let locationManager = CLLocationManager()
     
-    // - API
     public var exposedLocation: CLLocation? {
         return self.locationManager.location
     }
@@ -27,7 +26,6 @@ class LocationManager: NSObject {
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.requestLocation()
     }
     
 }
@@ -83,11 +81,14 @@ extension LocationManager: CLLocationManagerDelegate {
         print(error)
     }
     
+    // Location Authorization
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .notDetermined         : print("notDetermined")        // location permission not asked for yet
         case .authorizedWhenInUse   : print("authorizedWhenInUse")  // location authorized
+                                    self.locationManager.requestLocation()
         case .authorizedAlways      : print("authorizedAlways")     // location authorized
+                                    self.locationManager.requestLocation()
         case .restricted            : print("restricted")           // TODO: handle
         case .denied                : print("denied")               // TODO: handle
         default                     : print("location error")
@@ -102,8 +103,7 @@ extension LocationManager: CLLocationManagerDelegate {
                 guard let placemark = placemark else { return }
                 
                 self.delegate?.didUpdateLocation(placemark)
-                
-                
+                                
             }
         }
     }
