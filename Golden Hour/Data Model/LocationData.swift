@@ -18,5 +18,5 @@ class LocationData: Object {
     @objc dynamic var latitude: Double = 0.0
         
     //Relationship
-    let timestampDatas = List<TimestampData>()  //Initialize with empty List of Timestamp
+    let timestampDataSet = List<TimestampData>()  //Initialize with empty List of Timestamp
 }

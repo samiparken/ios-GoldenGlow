@@ -315,7 +315,7 @@ extension TabBarController: LocationManagerDelegate {
           return Calendar.current.date(byAdding: components, to: todayStart)!
         }()
         selectedLocationData = locationData![0]
-        timestampData = selectedLocationData?.timestampDatas.filter("time BETWEEN %@", [todayStart, todayEnd])
+        timestampData = selectedLocationData?.timestampDataSet.filter("time BETWEEN %@", [todayStart, todayEnd])
         if( timestampData!.count == 0)
         {
             // scan data & store timestamps in RealmDB
