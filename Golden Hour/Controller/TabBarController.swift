@@ -270,19 +270,20 @@ extension TabBarController: LocationManagerDelegate {
     // Updated Current CityName & CountryCode
     func didUpdateLocation(_ place: CLPlacemark) {
 
+        // Current Location
         let cityName = place.locality
         let countryName = place.country
         let countryCode = place.isoCountryCode
-
-        // Update Coordinate
         let long = place.location?.coordinate.longitude
         let lat = place.location?.coordinate.latitude
         print("Longitude: \(long ?? 0), Latitude: \(lat ?? 0)")
+        
+        // for calculation
         sunPositionManager.currentData.Longitude = long
         sunPositionManager.currentData.Latitude = lat
 
         
-        // Realm, DB check & Save
+        // Realm, DB Check & Store
         locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName!, countryCode!)
         if ( locationData!.count == 0 )
         {
@@ -320,6 +321,10 @@ extension TabBarController: LocationManagerDelegate {
         {
             // scan data & store timestamps in RealmDB
 
+            
+            
+            
+            
             /* START SUN POSITION SYSTEM */
             if let _ = sunPositionManager.currentData.SunAltitudeChange {}
             else { sunPositionManager.startSunPositionSystem() }

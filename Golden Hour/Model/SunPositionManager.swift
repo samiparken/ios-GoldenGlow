@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 protocol SunPositionManagerDelegate {
     func didUpdateCurrentState(_ sunAngle: Double, _ isUp: Bool)
@@ -272,6 +273,49 @@ class SunPositionManager {
         } while( (sun.date < scanLimitDate) && ( result.count < 12 ) )
 
         return result
+    }
+    
+    // Scan TargetDate & return TimestampData[]
+    func dailyScan2(_ year: String, _ month: String, _ day: String, _ lon: Double,_ lat: Double) {
+        
+        var DLSOffset: Double = 0.0
+        
+        let loc = CLLocation.init(latitude: lat, longitude: lon);
+        let coder = CLGeocoder();
+        coder.reverseGeocodeLocation(loc) { [self] (placemarks, error) in
+            let place = placemarks?.last;
+            let GMT = Double((place?.timeZone?.secondsFromGMT())!) / 3600  // 2.0
+            
+            let GMTString = String(format: "%+05d", GMT * 100)     // +0200
+            let inputDateString = year + "-" + month + "-" + day + " 00:00:00  " + GMTString
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"  //ex) 2020-03-13 00:00:00 +0200
+            var inputDate = dateFormatter.date(from: inputDateString)
+            
+            DLSOffset = Double(((place?.timeZone?.daylightSavingTimeOffset(for: inputDate!))!)) / 3600
+            inputDate! -= DLSOffset*3600
+                        
+            let scanLimitDate = inputDate! + 86400 // within 24h
+            let sun = SunPositionModel(inputDate!, GMT+DLSOffset, longitude: lon, latitude: lat)
+            sun.spa_calculate()
+            var currentState = self.getState(sun.declination)
+            sun.date += self.calculateTimeGap(sun.declination)   // increase timestamp for scanning
+
+//            repeat {
+//                sun.spa_calculate()
+//                let sunAngle = sun.declination
+//                let newState = getState(sunAngle)
+//                if ( currentState != newState )
+//                {
+//                    let newTimestamp = SunTimestamp(time: sun.date, from: currentState, to: newState)
+//                    result.append(newTimestamp)
+//                    currentState = newState
+//                }
+//                sun.date += calculateTimeGap(sunAngle)   // increase timestamp for scanning
+//                print("\(year)-\(month)-\(day), \(sunAngle)")
+//            } while( (sun.date < scanLimitDate) && ( result.count < 12 ) )
+//
+        }
     }
     
     func calculateTimeGap(_ sunAngle: Double) -> Double {
