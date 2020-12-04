@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EHY-iJ-SuV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EHY-iJ-SuV">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -211,7 +211,7 @@
                                                 <switch opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5qV-Do-8TI">
                                                     <rect key="frame" x="246" y="4.5" width="51" height="31"/>
                                                 </switch>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Symbol_lowSun" translatesAutoresizingMaskIntoConstraints="NO" id="DAU-Co-db6">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Symbol_lowsun" translatesAutoresizingMaskIntoConstraints="NO" id="DAU-Co-db6">
                                                     <rect key="frame" x="25" y="12.5" width="15" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="I3P-wj-oip"/>
@@ -245,7 +245,7 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Q3Q-Mh-spv">
                                                     <rect key="frame" x="246" y="4.5" width="51" height="31"/>
                                                 </switch>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Symbol_goldenHour" translatesAutoresizingMaskIntoConstraints="NO" id="qoX-fD-bf6">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Symbol_golden" translatesAutoresizingMaskIntoConstraints="NO" id="qoX-fD-bf6">
                                                     <rect key="frame" x="25" y="12.5" width="15" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="15" id="X1F-tD-B1p"/>
@@ -285,7 +285,7 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eir-jF-1Tt">
                                                     <rect key="frame" x="246" y="4.5" width="51" height="31"/>
                                                 </switch>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Symbol_blueHour" translatesAutoresizingMaskIntoConstraints="NO" id="8ap-fR-d4w">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Symbol_blue" translatesAutoresizingMaskIntoConstraints="NO" id="8ap-fR-d4w">
                                                     <rect key="frame" x="25" y="12.5" width="15" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="15" id="cr9-Gs-BX1"/>
@@ -493,9 +493,9 @@
     <resources>
         <image name="BG_Day" width="375" height="812"/>
         <image name="Ground" width="375" height="297"/>
-        <image name="Symbol_blueHour" width="28" height="28"/>
-        <image name="Symbol_goldenHour" width="28" height="28"/>
-        <image name="Symbol_lowSun" width="28" height="28"/>
+        <image name="Symbol_blue" width="28" height="28"/>
+        <image name="Symbol_golden" width="28" height="28"/>
+        <image name="Symbol_lowsun" width="28" height="28"/>
         <image name="bell" catalog="system" width="128" height="124"/>
     </resources>
 </document>
