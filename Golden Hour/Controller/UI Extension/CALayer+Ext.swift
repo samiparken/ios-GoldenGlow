@@ -1,14 +1,5 @@
-//
-//  CALayer+Ext.swift
-//  Golden Hour
-//
-//  Created by Sam on 10/7/20.
-//  Copyright © 2020 Sam. All rights reserved.
-//
-
 import Foundation
 import UIKit
-
 
 //MARK: - Custom Side Border
 extension CALayer {

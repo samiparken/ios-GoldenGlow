@@ -1,11 +1,3 @@
-//
-//  TabBarController.swift
-//  Golden Hour
-//
-//  Created by Sam on 9/21/20.
-//  Copyright © 2020 Sam. All rights reserved.
-//
-
 import UIKit
 import RealmSwift
 import CoreLocation
@@ -42,9 +34,29 @@ class TabBarController: UITabBarController {
     var timerHour: String = ""
     var timerMin: String = ""
     var timerSec: String = ""
-    var sunAngle: Double = 0.0
-    var sunPulsePosition: CGFloat = 0.0
-    var wavePosition: CGFloat = 0.0
+    var sunAngle: Double = 0.0 {
+        didSet {
+            if sunAngle != oldValue {
+                // Braodcast
+                let keyName = Notification.Name(rawValue: SunAngleUpdateNotificationKey)
+                NotificationCenter.default.post(name: keyName, object: nil)
+            }
+        }
+    }
+    var sunPulsePosition: CGFloat = 0.0 {
+        didSet {
+            if sunPulsePosition != oldValue {
+                // + broadcast update sunPulse
+            }
+        }
+    }
+    var wavePosition: CGFloat = 0.0 {
+        didSet {
+            if wavePosition != oldValue {
+                // + broadcast update wavePosition
+            }
+        }
+    }
     
     // SkyView2 Switch
     var isEvening: Bool = true
@@ -77,15 +89,7 @@ class TabBarController: UITabBarController {
     
     func updateSunAngle() {
         sunPositionManager.updateCurrentAltitude()
-        let tempAngle = sunPositionManager.getAltitude()
-        
-        if tempAngle != sunAngle
-        {
-            sunAngle = tempAngle
-            // Braodcast
-            let keyName = Notification.Name(rawValue: SunAngleUpdateNotificationKey)
-            NotificationCenter.default.post(name: keyName, object: nil)
-        }
+        sunAngle = sunPositionManager.getAltitude()
     }
     
     func calculateTotalDuration(_ data: [CellData]) -> String {
@@ -138,6 +142,7 @@ extension TabBarController: SunPositionManagerDelegate {
             isEvening = true
             sunPulsePosition = 0.15; wavePosition = 0.8
         }
+        
         // Broadcast
         let keyName = Notification.Name(rawValue: BGImageUpdateNotificationKey)
         NotificationCenter.default.post(name: keyName, object: nil)

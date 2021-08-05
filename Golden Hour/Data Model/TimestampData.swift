@@ -19,8 +19,5 @@ class TimestampData: Object {
     
     //Relationship
     var parentLocationData = LinkingObjects(fromType: LocationData.self, property: "timestampDataSet")
-    
-    required init() {
 
-    }
 }

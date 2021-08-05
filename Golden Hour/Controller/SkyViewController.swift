@@ -66,7 +66,6 @@ class SkyViewController: UIViewController {
             BGImageView.image = UIImage(named: imageName)
         }
         waveAnimation()
-
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -74,6 +73,43 @@ class SkyViewController: UIViewController {
 
     }
 
+    
+//    // Prepare for Switching Screen
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "goToSearch" {
+//            let destinationVC = segue.destination as! SearchViewController
+//            //            destinationVC.totalPerPerson = calculatorBrain.getTotalPerPerson()
+//            //            destinationVC.splitNumber = calculatorBrain.getSplitNumber()
+//            //            destinationVC.tipPct = calculatorBrain.getTipPct()
+//        }
+//    }
+
+    
+
+//MARK: - Init
+    
+    func setupScrollView() {
+        // Initialize ScrollView
+        scrollView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        scrollView.contentSize = CGSize(width: view.frame.width * 2, height: view.frame.height)
+        
+        // Initialize Pages
+        let page1: ScrollViewPage1 = Bundle.main.loadNibNamed("ScrollViewPage1", owner: self, options: nil)?.first as! ScrollViewPage1
+        let page2: ScrollViewPage2 = Bundle.main.loadNibNamed("ScrollViewPage2", owner: self, options: nil)?.first as! ScrollViewPage2
+                
+        // AddSubview Pages
+        page1.frame = CGRect(x: view.frame.width * 0, y: 0, width: view.frame.width, height: view.frame.height)
+        scrollView.addSubview(page1)
+
+        page2.frame = CGRect(x: view.frame.width * 1, y: 0, width: view.frame.width, height: view.frame.height)
+        scrollView.addSubview(page2)
+    }
+    
+    func setupPageControl() {
+        pageControl.numberOfPages = 2
+        pageControl.currentPage = 0
+        view.bringSubviewToFront(pageControl)
+    }
     
     func setupWave() {
         
@@ -116,8 +152,9 @@ class SkyViewController: UIViewController {
         } completion: { (_) in
             self.wave3.frame.origin.x = -self.wave3Length
         }
-        
     }
+    
+    
     
     
     func setupSunPulse() {
@@ -136,33 +173,29 @@ class SkyViewController: UIViewController {
     
     
     
-    func setupScrollView() {
-        // Initialize ScrollView
-        scrollView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        scrollView.contentSize = CGSize(width: view.frame.width * 2, height: view.frame.height)
-        
-        // Initialize Pages
-        let page1: ScrollViewPage1 = Bundle.main.loadNibNamed("ScrollViewPage1", owner: self, options: nil)?.first as! ScrollViewPage1
-        let page2: ScrollViewPage2 = Bundle.main.loadNibNamed("ScrollViewPage2", owner: self, options: nil)?.first as! ScrollViewPage2
-                
-        // AddSubview Pages
-        page1.frame = CGRect(x: view.frame.width * 0, y: 0, width: view.frame.width, height: view.frame.height)
-        scrollView.addSubview(page1)
 
-        page2.frame = CGRect(x: view.frame.width * 1, y: 0, width: view.frame.width, height: view.frame.height)
-        scrollView.addSubview(page2)
+
+    
+//MARK: - Methods
+    func updateWavePosition() {
+        let offsetRate = scrollView.contentOffset.x/view.frame.width
+        let screenHeight = self.view.frame.height
+
+        // Wave Vertical Position
+        self.waveView.frame.origin.y = ((0.8 - myTabBar.wavePosition) * (offsetRate) + myTabBar.wavePosition ) * screenHeight
+
     }
     
-    func setupPageControl() {
-        pageControl.numberOfPages = 2
-        pageControl.currentPage = 0
-        view.bringSubviewToFront(pageControl)
+    func updateSunPulsePosition() {
+        let offsetRate = scrollView.contentOffset.x/view.frame.width
+        let screenHeight = self.view.frame.height
+
+        // SunPulse Vertical Position
+        self.sunPulse.frame.origin.y = ((0.23 - myTabBar.sunPulsePosition) * (offsetRate) + myTabBar.sunPulsePosition ) * screenHeight
     }
-    
 
-    
 
-    
+//MARK: - Actions
     
     @IBAction func currentLocationButtonPressed(_ sender: UIButton) {
         //self.performSegue(withIdentifier: "goToSearch", sender: self)
@@ -175,17 +208,6 @@ class SkyViewController: UIViewController {
         
     }
     
-//    // Prepare for Switching Screen
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "goToSearch" {
-//            let destinationVC = segue.destination as! SearchViewController
-//            //            destinationVC.totalPerPerson = calculatorBrain.getTotalPerPerson()
-//            //            destinationVC.splitNumber = calculatorBrain.getSplitNumber()
-//            //            destinationVC.tipPct = calculatorBrain.getTipPct()
-//        }
-//    }
-    
-    
 //MARK: - For Notification Observers
 
     // for Notification Observers
@@ -193,7 +215,6 @@ class SkyViewController: UIViewController {
     let keyForBGImage = Notification.Name(rawValue: BGImageUpdateNotificationKey)
     let keyForTimerUpdate = Notification.Name(rawValue: TimerUpdateNotificationKey)
     let keyForSunAngleUpdate = Notification.Name(rawValue: SunAngleUpdateNotificationKey)
-
 
     // Register Observers for updates
     func registerObservers() {
@@ -215,7 +236,6 @@ class SkyViewController: UIViewController {
         makePulse()
     }
 
-    
 }
 
 
@@ -223,10 +243,8 @@ class SkyViewController: UIViewController {
 extension SkyViewController: UIScrollViewDelegate {
     
         func scrollViewDidScroll(_ scrollView: UIScrollView) {
-            
             let offsetRate = scrollView.contentOffset.x/view.frame.width
-            let screenHeight = self.view.frame.height
-            
+
             //Update Page Control
             let pageIndex = round(offsetRate)
             pageControl.currentPage = Int(pageIndex)
@@ -235,13 +253,10 @@ extension SkyViewController: UIScrollViewDelegate {
             if scrollView.contentOffset.y > 0 || scrollView.contentOffset.y < 0 {
                scrollView.contentOffset.y = 0
             }
-            
-            // Wave Vertical Position
-            self.waveView.frame.origin.y = ((0.8 - myTabBar.wavePosition) * (offsetRate) + myTabBar.wavePosition ) * screenHeight
-            
-            // SunPulse Vertical Position
-            self.sunPulse.frame.origin.y = ((0.23 - myTabBar.sunPulsePosition) * (offsetRate) + myTabBar.sunPulsePosition ) * screenHeight
-            
+                        
+            updateWavePosition()
+            updateSunPulsePosition()
+                        
         }
 }
 
