@@ -214,12 +214,18 @@ class SkyViewController: UIViewController {
     let keyForCityName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
     let keyForBGImage = Notification.Name(rawValue: BGImageUpdateNotificationKey)
     let keyForTimerUpdate = Notification.Name(rawValue: TimerUpdateNotificationKey)
+    let keyForSunPulsePositionUpdate = Notification.Name(rawValue: SunPulsePositionUpdateNotificationKey)
+    let keyForWavePositionUpdate = Notification.Name(rawValue: wavePositionUpdateNotificationKey)
+
 
     // Register Observers for updates
     func registerObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateCityName(notification:)), name: keyForCityName, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateBGImage(notification:)), name: keyForBGImage, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateTimer(notification:)), name: keyForTimerUpdate, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateSunPulsePosition(notification:)), name: keyForSunPulsePositionUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateWavePosition(notification:)), name: keyForWavePositionUpdate, object: nil)
     }
 
     @objc func updateCityName(notification: NSNotification) {
@@ -234,6 +240,14 @@ class SkyViewController: UIViewController {
     @objc func updateTimer(notification: NSNotification) {
         makePulse()
     }
+    
+    @objc func updateSunPulsePosition(notification: NSNotification) {
+        updateSunPulsePosition()
+    }
+    @objc func updateWavePosition(notification: NSNotification) {
+        updateWavePosition()
+    }
+
 
 }
 
@@ -241,22 +255,21 @@ class SkyViewController: UIViewController {
 //MARK: - UIScrollViewDelegate
 extension SkyViewController: UIScrollViewDelegate {
     
-        func scrollViewDidScroll(_ scrollView: UIScrollView) {
-            let offsetRate = scrollView.contentOffset.x/view.frame.width
-
-            //Update Page Control
-            let pageIndex = round(offsetRate)
-            pageControl.currentPage = Int(pageIndex)
-                        
-            // Disable Vertical Scrolling
-            if scrollView.contentOffset.y > 0 || scrollView.contentOffset.y < 0 {
-               scrollView.contentOffset.y = 0
-            }
-                        
-            updateWavePosition()
-            updateSunPulsePosition()
-                        
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetRate = scrollView.contentOffset.x/view.frame.width
+        
+        //Update Page Control
+        let pageIndex = round(offsetRate)
+        pageControl.currentPage = Int(pageIndex)
+        
+        // Disable Vertical Scrolling
+        if scrollView.contentOffset.y > 0 || scrollView.contentOffset.y < 0 {
+            scrollView.contentOffset.y = 0
         }
+        
+        updateWavePosition()
+        updateSunPulsePosition()
+    }
 }
 
 

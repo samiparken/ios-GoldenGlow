@@ -39,14 +39,18 @@ class TabBarController: UITabBarController {
     var sunPulsePosition: CGFloat = 0.0 {
         didSet {
             if sunPulsePosition != oldValue {
-                // + broadcast update sunPulse
+                // Braodcast
+                let keyName = Notification.Name(rawValue: SunPulsePositionUpdateNotificationKey)
+                NotificationCenter.default.post(name: keyName, object: nil)
             }
         }
     }
     var wavePosition: CGFloat = 0.0 {
         didSet {
             if wavePosition != oldValue {
-                // + broadcast update wavePosition
+                // Braodcast
+                let keyName = Notification.Name(rawValue: wavePositionUpdateNotificationKey)
+                NotificationCenter.default.post(name: keyName, object: nil)
             }
         }
     }
