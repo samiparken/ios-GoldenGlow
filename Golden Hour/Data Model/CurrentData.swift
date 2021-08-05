@@ -1,11 +1,3 @@
-//
-//  CurrentData.swift
-//  Golden Hour
-//
-//  Created by Sam on 9/3/20.
-//  Copyright © 2020 Sam. All rights reserved.
-//
-
 import Foundation
 
 struct CurrentData {

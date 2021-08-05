@@ -123,7 +123,6 @@
 		222ED47E24F851B5007D7E8D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				22782509250143260000794E /* CurrentData.swift */,
 				22E4FD4724FE8D3600C845E1 /* SunPositionConstants.swift */,
 				22E4FD4324FE83C200C845E1 /* SunPositionModel.swift */,
 				2271B2932500240F00DCB915 /* SunPositionManager.swift */,
@@ -167,6 +166,7 @@
 				226A2ED3253B3D0100F54439 /* LocationData.swift */,
 				226A2ED6253B3D1600F54439 /* TimestampData.swift */,
 				228BD789252DC2F500F3FA50 /* CellData.swift */,
+				22782509250143260000794E /* CurrentData.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";

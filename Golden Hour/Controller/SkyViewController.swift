@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  Golden Hour
-//
-//  Created by Sam on 8/27/20.
-//  Copyright © 2020 Sam. All rights reserved.
-//
 // Development Process
 // + Timer / Activate
 // + Timer / Apply current time
@@ -83,7 +76,45 @@ class SkyViewController: UIViewController {
 //            //            destinationVC.tipPct = calculatorBrain.getTipPct()
 //        }
 //    }
+    
+    //MARK: - For Notification Observers
 
+        // for Notification Observers
+        let keyForCityName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
+        let keyForBGImage = Notification.Name(rawValue: BGImageUpdateNotificationKey)
+        let keyForTimerUpdate = Notification.Name(rawValue: TimerUpdateNotificationKey)
+        let keyForSunPulsePositionUpdate = Notification.Name(rawValue: SunPulsePositionUpdateNotificationKey)
+        let keyForWavePositionUpdate = Notification.Name(rawValue: wavePositionUpdateNotificationKey)
+
+        // Register Observers for updates
+        func registerObservers() {
+            NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateCityName(notification:)), name: keyForCityName, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateBGImage(notification:)), name: keyForBGImage, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateTimer(notification:)), name: keyForTimerUpdate, object: nil)
+
+            NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateSunPulsePosition(notification:)), name: keyForSunPulsePositionUpdate, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateWavePosition(notification:)), name: keyForWavePositionUpdate, object: nil)
+        }
+
+        @objc func updateCityName(notification: NSNotification) {
+            currentLocationButton.setTitle(myTabBar.currentLocation, for: .normal)
+            currentLocationButton.addCharacterSpacing()
+        }
+        
+        @objc func updateBGImage(notification: NSNotification) {
+            BGImageView.image = UIImage(named: myTabBar.BGImageViewName!)
+        }
+        
+        @objc func updateTimer(notification: NSNotification) {
+            makePulse()
+        }
+        
+        @objc func updateSunPulsePosition(notification: NSNotification) {
+            updateSunPulsePosition()
+        }
+        @objc func updateWavePosition(notification: NSNotification) {
+            updateWavePosition()
+        }
     
 
 //MARK: - Init
@@ -111,8 +142,7 @@ class SkyViewController: UIViewController {
         view.bringSubviewToFront(pageControl)
     }
     
-    func setupWave() {
-        
+    func setupWave() {        
         waveView = UIView(frame:CGRect(x: 0, y: view.frame.height/2, width: view.frame.width, height: view.frame.height/2))
         view.addSubview(waveView)
         
@@ -154,9 +184,6 @@ class SkyViewController: UIViewController {
         }
     }
     
-    
-    
-    
     func setupSunPulse() {
         sunPulse = UIImageView(image: UIImage(named: "Sun"))
         sunPulse.frame = CGRect(x: (view.frame.width/2) - 35, y: -100, width: 70, height: 70)
@@ -170,10 +197,6 @@ class SkyViewController: UIViewController {
             sunPulse.layer.insertSublayer(pulse, below: sunPulse.layer)
         }
     }
-    
-    
-    
-
 
     
 //MARK: - Methods
@@ -207,50 +230,7 @@ class SkyViewController: UIViewController {
     @IBAction func settingsButtonPressed(_ sender: UIButton) {
         
     }
-    
-//MARK: - For Notification Observers
-
-    // for Notification Observers
-    let keyForCityName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
-    let keyForBGImage = Notification.Name(rawValue: BGImageUpdateNotificationKey)
-    let keyForTimerUpdate = Notification.Name(rawValue: TimerUpdateNotificationKey)
-    let keyForSunPulsePositionUpdate = Notification.Name(rawValue: SunPulsePositionUpdateNotificationKey)
-    let keyForWavePositionUpdate = Notification.Name(rawValue: wavePositionUpdateNotificationKey)
-
-
-    // Register Observers for updates
-    func registerObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateCityName(notification:)), name: keyForCityName, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateBGImage(notification:)), name: keyForBGImage, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateTimer(notification:)), name: keyForTimerUpdate, object: nil)
-
-        NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateSunPulsePosition(notification:)), name: keyForSunPulsePositionUpdate, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateWavePosition(notification:)), name: keyForWavePositionUpdate, object: nil)
-    }
-
-    @objc func updateCityName(notification: NSNotification) {
-        currentLocationButton.setTitle(myTabBar.currentLocation, for: .normal)
-        currentLocationButton.addCharacterSpacing()
-    }
-    
-    @objc func updateBGImage(notification: NSNotification) {
-        BGImageView.image = UIImage(named: myTabBar.BGImageViewName!)
-    }
-    
-    @objc func updateTimer(notification: NSNotification) {
-        makePulse()
-    }
-    
-    @objc func updateSunPulsePosition(notification: NSNotification) {
-        updateSunPulsePosition()
-    }
-    @objc func updateWavePosition(notification: NSNotification) {
-        updateWavePosition()
-    }
-
-
 }
-
 
 //MARK: - UIScrollViewDelegate
 extension SkyViewController: UIScrollViewDelegate {
