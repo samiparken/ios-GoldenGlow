@@ -26,8 +26,7 @@ class ScrollViewPage1: UIView {
     
     
     @IBOutlet weak var sunAngleLabel: UILabel!
-    
-    
+        
     // for Sharing Data
     let myTabBar = TabBarController.singletonTabBar
 
@@ -45,7 +44,6 @@ class ScrollViewPage1: UIView {
     }
     
     
-
     //MARK: - For Notification Observers
     
     // for Notification Observers
