@@ -5,6 +5,7 @@ class SettingViewController: UIViewController {
     
     @IBOutlet weak var BGImageView: UIImageView!
     @IBOutlet weak var aboutStackViewBG: UIView!
+    @IBOutlet weak var settingTitleButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +59,9 @@ class SettingViewController: UIViewController {
     
     func initLayout() {
         aboutStackViewBG.layer.cornerRadius = 10
+        settingTitleButton.addCharacterSpacing()
+        
+        
     }
     
 }

@@ -57,3 +57,18 @@ class NotifyViewController: UIViewController {
     }
     
 }
+
+
+/* from deleted NotifyTableViewController.swift
+ 
+ // set background to clear
+ tableView.backgroundColor = .clear
+
+ // add clear view as tableFooterView
+ // to prevent empty cells
+ let v = UIView()
+ v.backgroundColor = .clear
+ tableView.tableFooterView = v
+ 
+ 
+ */

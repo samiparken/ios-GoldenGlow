@@ -26,7 +26,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="MzX-lD-abi" userLabel="Top Bar">
                                 <rect key="frame" x="0.0" y="44" width="414" height="30"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v5N-XY-nWf" userLabel="Notification">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v5N-XY-nWf" userLabel="Settings">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -254,6 +254,7 @@
                     <connections>
                         <outlet property="BGImageView" destination="bUx-Zi-FOh" id="9oa-iX-wc1"/>
                         <outlet property="aboutStackViewBG" destination="GGu-Ro-5T7" id="3HR-gF-GuZ"/>
+                        <outlet property="settingTitleButton" destination="v5N-XY-nWf" id="MO8-BT-gSW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zap-ac-ppc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
