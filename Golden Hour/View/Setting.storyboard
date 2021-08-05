@@ -13,15 +13,11 @@
             <objects>
                 <viewController id="NEb-E1-xVY" customClass="SettingViewController" customModule="Golden_Hour" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="omw-zQ-lep">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="1500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BG_Day" translatesAutoresizingMaskIntoConstraints="NO" id="bUx-Zi-FOh" userLabel="BG">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ground" translatesAutoresizingMaskIntoConstraints="NO" id="LBu-qb-VPe" userLabel="TableViewBG">
-                                <rect key="frame" x="0.0" y="74" width="414" height="739"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BG_Day" translatesAutoresizingMaskIntoConstraints="NO" id="bUx-Zi-FOh" userLabel="BG">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="1500"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="MzX-lD-abi" userLabel="Top Bar">
                                 <rect key="frame" x="0.0" y="44" width="414" height="30"/>
@@ -38,44 +34,58 @@
                                     <constraint firstAttribute="height" constant="30" id="7vI-k3-elH"/>
                                 </constraints>
                             </stackView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kFf-Fu-QMu">
-                                <rect key="frame" x="0.0" y="74" width="414" height="739"/>
-                                <connections>
-                                    <segue destination="8Mc-Mt-pRW" kind="embed" id="kRt-u5-fy5"/>
-                                </connections>
-                            </containerView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="88i-sW-T9N">
+                                <rect key="frame" x="0.0" y="74" width="414" height="1343"/>
+                                <subviews>
+                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gbv-xf-EI7" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1200"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1200" id="NYg-0L-Za4"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="gbv-xf-EI7" firstAttribute="top" secondItem="88i-sW-T9N" secondAttribute="top" id="ARs-22-ssu"/>
+                                    <constraint firstAttribute="bottom" secondItem="gbv-xf-EI7" secondAttribute="bottom" id="c7d-Db-92V"/>
+                                    <constraint firstItem="gbv-xf-EI7" firstAttribute="leading" secondItem="88i-sW-T9N" secondAttribute="leading" id="d1m-IC-Oze"/>
+                                    <constraint firstAttribute="trailing" secondItem="gbv-xf-EI7" secondAttribute="trailing" id="yOf-RS-VOU"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="OHn-r2-zbJ"/>
                         <constraints>
-                            <constraint firstItem="LBu-qb-VPe" firstAttribute="top" secondItem="MzX-lD-abi" secondAttribute="bottom" id="1OJ-hs-EiX"/>
                             <constraint firstItem="OHn-r2-zbJ" firstAttribute="trailing" secondItem="MzX-lD-abi" secondAttribute="trailing" id="3bM-Z6-kax"/>
+                            <constraint firstItem="bUx-Zi-FOh" firstAttribute="trailing" secondItem="OHn-r2-zbJ" secondAttribute="trailing" id="4BB-xS-hMd"/>
+                            <constraint firstItem="gbv-xf-EI7" firstAttribute="width" secondItem="omw-zQ-lep" secondAttribute="width" id="CKB-xd-Xj0"/>
                             <constraint firstItem="MzX-lD-abi" firstAttribute="top" secondItem="OHn-r2-zbJ" secondAttribute="top" id="Cgg-C2-pHW"/>
-                            <constraint firstItem="kFf-Fu-QMu" firstAttribute="top" secondItem="MzX-lD-abi" secondAttribute="bottom" id="JtE-yR-mRY"/>
-                            <constraint firstItem="OHn-r2-zbJ" firstAttribute="trailing" secondItem="kFf-Fu-QMu" secondAttribute="trailing" id="Ppy-Si-afm"/>
-                            <constraint firstItem="kFf-Fu-QMu" firstAttribute="bottom" secondItem="LBu-qb-VPe" secondAttribute="bottom" id="QJs-iM-Toy"/>
-                            <constraint firstItem="OHn-r2-zbJ" firstAttribute="bottom" secondItem="kFf-Fu-QMu" secondAttribute="bottom" id="iBg-6X-Cft"/>
-                            <constraint firstItem="kFf-Fu-QMu" firstAttribute="leading" secondItem="OHn-r2-zbJ" secondAttribute="leading" id="ndx-pn-Q9w"/>
-                            <constraint firstItem="LBu-qb-VPe" firstAttribute="leading" secondItem="OHn-r2-zbJ" secondAttribute="leading" id="ozn-6v-qpE"/>
+                            <constraint firstItem="88i-sW-T9N" firstAttribute="top" secondItem="MzX-lD-abi" secondAttribute="bottom" id="Mic-yS-cMp"/>
+                            <constraint firstItem="bUx-Zi-FOh" firstAttribute="leading" secondItem="OHn-r2-zbJ" secondAttribute="leading" id="PF3-Qc-aZ6"/>
+                            <constraint firstItem="bUx-Zi-FOh" firstAttribute="top" secondItem="omw-zQ-lep" secondAttribute="top" id="Vyc-KD-zEj"/>
+                            <constraint firstItem="88i-sW-T9N" firstAttribute="bottom" secondItem="OHn-r2-zbJ" secondAttribute="bottom" id="YpJ-v7-glw"/>
+                            <constraint firstAttribute="bottom" secondItem="bUx-Zi-FOh" secondAttribute="bottom" id="c0x-lb-06k"/>
+                            <constraint firstItem="88i-sW-T9N" firstAttribute="trailing" secondItem="OHn-r2-zbJ" secondAttribute="trailing" id="daj-EA-Xrk"/>
+                            <constraint firstItem="88i-sW-T9N" firstAttribute="leading" secondItem="OHn-r2-zbJ" secondAttribute="leading" id="o5B-6G-Ib7"/>
                             <constraint firstItem="MzX-lD-abi" firstAttribute="leading" secondItem="OHn-r2-zbJ" secondAttribute="leading" id="qfK-lF-QaP"/>
-                            <constraint firstItem="LBu-qb-VPe" firstAttribute="trailing" secondItem="OHn-r2-zbJ" secondAttribute="trailing" id="zw6-cU-whQ"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="gearshape" catalog="system" id="JJf-7b-9Lv"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <size key="freeformSize" width="414" height="1500"/>
                     <connections>
                         <outlet property="BGImageView" destination="bUx-Zi-FOh" id="9oa-iX-wc1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zap-ac-ppc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="181" y="103"/>
+            <point key="canvasLocation" x="179.71014492753625" y="102.45535714285714"/>
         </scene>
         <!--Setting Table View Controller-->
         <scene sceneID="k7R-z5-73v">
             <objects>
                 <tableViewController id="8Mc-Mt-pRW" customClass="SettingTableViewController" customModule="Golden_Hour" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cev-CK-RRj">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="739"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
@@ -312,12 +322,11 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8ah-7L-pDt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="903" y="103"/>
+            <point key="canvasLocation" x="839" y="-100"/>
         </scene>
     </scenes>
     <resources>
         <image name="BG_Day" width="375" height="812"/>
-        <image name="Ground" width="375" height="297"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
     </resources>
 </document>
