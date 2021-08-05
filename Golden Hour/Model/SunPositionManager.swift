@@ -196,8 +196,8 @@ class SunPositionManager {
         let lat = currentData.Latitude!
 
         let now = Date()
-        let scanForwardLimit = now + 43200 // within 12h
-        let scanBackwardLimit = now - 43200 // within 12h
+        let scanForwardLimit = now + 86400 // within 24h
+        let scanBackwardLimit = now - 86400 // within 24h
         
         let sun = SunPositionModel(now, GMT, longitude: lon, latitude: lat)
         sun.spa_calculate()

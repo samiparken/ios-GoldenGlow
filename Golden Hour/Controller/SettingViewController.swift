@@ -1,22 +1,19 @@
-//
-//  SettingViewController.swift
-//  Golden Hour
-//
-//  Created by Sam on 9/21/20.
-//  Copyright © 2020 Sam. All rights reserved.
-//
-
 import UIKit
 
 class SettingViewController: UIViewController {
     let myTabBar = TabBarController.singletonTabBar
     
     @IBOutlet weak var BGImageView: UIImageView!
+    @IBOutlet weak var aboutStackViewBG: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         registerObservers()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        initLayout()
     }
         
     override func viewDidAppear(_ animated: Bool) {
@@ -54,6 +51,13 @@ class SettingViewController: UIViewController {
     
     @objc func updateBGImage(notification: NSNotification) {
         BGImageView.image = UIImage(named: myTabBar.BGImageViewName!)
+    }
+    
+    
+//MARK: - Init
+    
+    func initLayout() {
+        aboutStackViewBG.layer.cornerRadius = 10
     }
     
 }
