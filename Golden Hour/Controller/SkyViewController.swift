@@ -214,7 +214,6 @@ class SkyViewController: UIViewController {
     let keyForCityName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
     let keyForBGImage = Notification.Name(rawValue: BGImageUpdateNotificationKey)
     let keyForTimerUpdate = Notification.Name(rawValue: TimerUpdateNotificationKey)
-    let keyForSunAngleUpdate = Notification.Name(rawValue: SunAngleUpdateNotificationKey)
 
     // Register Observers for updates
     func registerObservers() {

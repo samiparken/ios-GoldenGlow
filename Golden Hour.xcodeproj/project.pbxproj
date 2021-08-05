@@ -207,10 +207,10 @@
 				222ED47E24F851B5007D7E8D /* Model */,
 				222ED47D24F8519B007D7E8D /* Controller */,
 				222ED47F24F851BE007D7E8D /* View */,
+				22E4FD4524FE884F00C845E1 /* Constants.swift */,
 				22793BAD24F81C2C00BEBF8E /* Assets.xcassets */,
 				22793BAF24F81C2C00BEBF8E /* LaunchScreen.storyboard */,
 				22793BB224F81C2C00BEBF8E /* Info.plist */,
-				22E4FD4524FE884F00C845E1 /* Constants.swift */,
 			);
 			path = "Golden Hour";
 			sourceTree = "<group>";

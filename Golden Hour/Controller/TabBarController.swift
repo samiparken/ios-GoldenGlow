@@ -2,13 +2,6 @@ import UIKit
 import RealmSwift
 import CoreLocation
 
-// Keys for Notification & Observers
-let CityNameUpdateNotificationKey = "co.samiparken.updateCityName"
-let BGImageUpdateNotificationKey = "co.samiparken.updateBGImage"
-let TimerUpdateNotificationKey = "co.samiparken.updateTimer"
-let SunAngleUpdateNotificationKey = "co.samiparken.updateSunAngle"
-let MorningEveningReadyNotificationKey = "co.samiparken.morningEveningReady"
-let CurrentStateUpdateNotificationKey = "co.samiparken.currentState"
 
 class TabBarController: UITabBarController {
     
