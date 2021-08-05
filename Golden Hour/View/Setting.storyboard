@@ -62,28 +62,28 @@
                                                 </segments>
                                             </segmentedControl>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v5r-nQ-l3J">
-                                                <rect key="frame" x="20" y="114" width="374" height="24"/>
+                                                <rect key="frame" x="20" y="124" width="374" height="24"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GGu-Ro-5T7" userLabel="AboutStackViewBG">
-                                                <rect key="frame" x="30" y="148" width="354" height="307"/>
+                                            <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GGu-Ro-5T7" userLabel="AboutStackViewBG">
+                                                <rect key="frame" x="20" y="158" width="374" height="307"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Z4w-7T-RGN" userLabel="AboutStackView">
-                                                <rect key="frame" x="30" y="148" width="354" height="307"/>
+                                                <rect key="frame" x="40" y="158" width="334" height="307"/>
                                                 <subviews>
                                                     <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMx-dc-Cnd" userLabel="line">
-                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="1"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="334" height="1"/>
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="NcS-UL-yoR"/>
                                                         </constraints>
                                                     </view>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sl1-Gd-2ZT">
-                                                        <rect key="frame" x="0.0" y="6" width="354" height="40"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sl1-Gd-2ZT">
+                                                        <rect key="frame" x="0.0" y="6" width="334" height="40"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="lcA-jy-LcB"/>
@@ -95,14 +95,14 @@
                                                         </state>
                                                     </button>
                                                     <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yOc-sB-O5a" userLabel="line">
-                                                        <rect key="frame" x="0.0" y="51" width="354" height="1"/>
+                                                        <rect key="frame" x="0.0" y="51" width="334" height="1"/>
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="FO1-Sh-gnI"/>
                                                         </constraints>
                                                     </view>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zJU-gV-jQ7">
-                                                        <rect key="frame" x="0.0" y="57" width="354" height="40"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zJU-gV-jQ7">
+                                                        <rect key="frame" x="0.0" y="57" width="334" height="40"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="uWg-Ca-pfq"/>
@@ -114,14 +114,14 @@
                                                         </state>
                                                     </button>
                                                     <view alpha="0.30000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0It-2P-7M6" userLabel="line">
-                                                        <rect key="frame" x="0.0" y="102" width="354" height="1"/>
+                                                        <rect key="frame" x="0.0" y="102" width="334" height="1"/>
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="6DK-Nq-xd9"/>
                                                         </constraints>
                                                     </view>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cFV-Vs-NIl">
-                                                        <rect key="frame" x="0.0" y="108" width="354" height="40"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cFV-Vs-NIl">
+                                                        <rect key="frame" x="0.0" y="108" width="334" height="40"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="odX-se-4kL"/>
@@ -133,14 +133,14 @@
                                                         </state>
                                                     </button>
                                                     <view alpha="0.30000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kLG-V5-ZZr" userLabel="line">
-                                                        <rect key="frame" x="0.0" y="153" width="354" height="1"/>
+                                                        <rect key="frame" x="0.0" y="153" width="334" height="1"/>
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="XlP-66-nkz"/>
                                                         </constraints>
                                                     </view>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zZL-Aw-PHJ">
-                                                        <rect key="frame" x="0.0" y="159" width="354" height="40"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zZL-Aw-PHJ">
+                                                        <rect key="frame" x="0.0" y="159" width="334" height="40"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="Bv8-sd-qcd"/>
@@ -152,32 +152,33 @@
                                                         </state>
                                                     </button>
                                                     <view alpha="0.30000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X5b-4q-0lC" userLabel="line">
-                                                        <rect key="frame" x="0.0" y="204" width="354" height="1"/>
+                                                        <rect key="frame" x="0.0" y="204" width="334" height="1"/>
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="1kB-cR-NNr"/>
                                                         </constraints>
                                                     </view>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lAr-tb-tg8">
-                                                        <rect key="frame" x="0.0" y="210" width="354" height="40"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lAr-tb-tg8">
+                                                        <rect key="frame" x="0.0" y="210" width="334" height="40"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="TWI-DP-K8K"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <state key="normal" title="  Review GoldenGlow on the App Store">
-                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="  Review GoldenGlow on the App Store" image="dial" catalog="system">
+                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
                                                         </state>
                                                     </button>
                                                     <view alpha="0.30000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="27K-5d-jBL" userLabel="line">
-                                                        <rect key="frame" x="0.0" y="255" width="354" height="1"/>
+                                                        <rect key="frame" x="0.0" y="255" width="334" height="1"/>
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="6Eg-Nk-uwa"/>
                                                         </constraints>
                                                     </view>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gw6-7k-skM">
-                                                        <rect key="frame" x="0.0" y="261" width="354" height="40"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gw6-7k-skM">
+                                                        <rect key="frame" x="0.0" y="261" width="334" height="40"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="ejt-gy-0kJ"/>
@@ -189,7 +190,7 @@
                                                         </state>
                                                     </button>
                                                     <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pid-UV-JGs" userLabel="line">
-                                                        <rect key="frame" x="0.0" y="306" width="354" height="1"/>
+                                                        <rect key="frame" x="0.0" y="306" width="334" height="1"/>
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="8NO-Vm-xJl"/>
@@ -201,11 +202,11 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Z4w-7T-RGN" firstAttribute="bottom" secondItem="GGu-Ro-5T7" secondAttribute="bottom" id="0ON-dq-cu4"/>
-                                            <constraint firstAttribute="trailing" secondItem="Z4w-7T-RGN" secondAttribute="trailing" constant="30" id="5ac-dq-Ahq"/>
+                                            <constraint firstItem="GGu-Ro-5T7" firstAttribute="trailing" secondItem="Z4w-7T-RGN" secondAttribute="trailing" constant="20" id="5ac-dq-Ahq"/>
                                             <constraint firstItem="k8l-rZ-c2t" firstAttribute="leading" secondItem="gbv-xf-EI7" secondAttribute="leading" constant="30" id="6TO-Yn-T2K"/>
                                             <constraint firstAttribute="trailing" secondItem="k8l-rZ-c2t" secondAttribute="trailing" constant="30" id="6bp-52-Y8l"/>
-                                            <constraint firstItem="Z4w-7T-RGN" firstAttribute="trailing" secondItem="GGu-Ro-5T7" secondAttribute="trailing" id="6tj-X9-PIx"/>
-                                            <constraint firstItem="GGu-Ro-5T7" firstAttribute="leading" secondItem="Z4w-7T-RGN" secondAttribute="leading" id="BFh-7t-jvv"/>
+                                            <constraint firstAttribute="trailing" secondItem="GGu-Ro-5T7" secondAttribute="trailing" constant="20" id="6tj-X9-PIx"/>
+                                            <constraint firstItem="GGu-Ro-5T7" firstAttribute="leading" secondItem="gbv-xf-EI7" secondAttribute="leading" constant="20" id="BFh-7t-jvv"/>
                                             <constraint firstItem="M0Q-bA-t4I" firstAttribute="top" secondItem="gbv-xf-EI7" secondAttribute="top" constant="20" id="BWO-ew-krB"/>
                                             <constraint firstItem="Z4w-7T-RGN" firstAttribute="top" secondItem="v5r-nQ-l3J" secondAttribute="bottom" constant="10" id="DF6-xV-8yd"/>
                                             <constraint firstItem="k8l-rZ-c2t" firstAttribute="top" secondItem="M0Q-bA-t4I" secondAttribute="bottom" constant="10" id="IsJ-Ha-yKD"/>
@@ -213,10 +214,10 @@
                                             <constraint firstItem="v5r-nQ-l3J" firstAttribute="leading" secondItem="gbv-xf-EI7" secondAttribute="leading" constant="20" id="ODm-AV-bh6"/>
                                             <constraint firstAttribute="trailing" secondItem="M0Q-bA-t4I" secondAttribute="trailing" constant="20" id="Ug2-UL-p6Z"/>
                                             <constraint firstItem="M0Q-bA-t4I" firstAttribute="leading" secondItem="gbv-xf-EI7" secondAttribute="leading" constant="20" id="Y99-rf-gJT"/>
-                                            <constraint firstItem="v5r-nQ-l3J" firstAttribute="top" secondItem="k8l-rZ-c2t" secondAttribute="bottom" constant="20" id="h2S-w0-iNi"/>
+                                            <constraint firstItem="v5r-nQ-l3J" firstAttribute="top" secondItem="k8l-rZ-c2t" secondAttribute="bottom" constant="30" id="h2S-w0-iNi"/>
                                             <constraint firstAttribute="trailing" secondItem="v5r-nQ-l3J" secondAttribute="trailing" constant="20" id="o2E-8b-AG8"/>
                                             <constraint firstItem="GGu-Ro-5T7" firstAttribute="top" secondItem="Z4w-7T-RGN" secondAttribute="top" id="w76-5X-4VM"/>
-                                            <constraint firstItem="Z4w-7T-RGN" firstAttribute="leading" secondItem="gbv-xf-EI7" secondAttribute="leading" constant="30" id="zbR-y9-QnY"/>
+                                            <constraint firstItem="Z4w-7T-RGN" firstAttribute="leading" secondItem="GGu-Ro-5T7" secondAttribute="leading" constant="20" id="zbR-y9-QnY"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -264,6 +265,7 @@
     </scenes>
     <resources>
         <image name="BG_Day" width="375" height="812"/>
+        <image name="dial" catalog="system" width="128" height="106"/>
         <image name="doc.text" catalog="system" width="115" height="128"/>
         <image name="folder.fill" catalog="system" width="128" height="97"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
