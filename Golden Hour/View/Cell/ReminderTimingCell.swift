@@ -2,6 +2,8 @@ import UIKit
 
 class ReminderTimingCell: UITableViewCell {
 
+    @IBOutlet weak var cellTitle: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
 

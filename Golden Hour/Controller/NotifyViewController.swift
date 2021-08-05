@@ -1,4 +1,3 @@
-
 import UIKit
 
 class NotifyViewController: UIViewController {
@@ -21,6 +20,7 @@ class NotifyViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         initLayout()
+        initTableView()
     }
         
     override func viewDidAppear(_ animated: Bool) {
@@ -67,19 +67,22 @@ class NotifyViewController: UIViewController {
         sunStackViewBG.layer.cornerRadius = 10
     }
     
+    func initTableView() {
+        // set background to clear
+        reminderTimingTableView.backgroundColor = .clear
+
+        // add clear view as tableFooterView
+        // to prevent empty cells
+        let v = UIView()
+        v.backgroundColor = .clear
+        reminderTimingTableView.tableFooterView = v
+    }
+    
 }
 
 
 /* from deleted NotifyTableViewController.swift
  
- // set background to clear
- tableView.backgroundColor = .clear
-
- // add clear view as tableFooterView
- // to prevent empty cells
- let v = UIView()
- v.backgroundColor = .clear
- tableView.tableFooterView = v
  
  
  */
@@ -89,6 +92,20 @@ class NotifyViewController: UIViewController {
 //MARK: - UITableViewDelegate
 extension NotifyViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // clear AccessorryType
+        for row in 0..<tableView.numberOfRows(inSection: 0) {
+            let cell = tableView.cellForRow(at: IndexPath(row: row, section: 0))
+            cell?.accessoryType = .none
+        }
+        
+        // set AccessoryType
+        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        
+        // auto-deselect animation
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 //MARK: - UITableViewDataSource
@@ -96,15 +113,17 @@ extension NotifyViewController: UITableViewDataSource {
     
     // Num of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return K.REMINDER_TIMING_MODEL.count
     }
     
     // Cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell: ReminderTimingCell = tableView.dequeueReusableCell(withIdentifier: "ReminderTimingCell") as! ReminderTimingCell
-        
-    
+            
+        cell.cellTitle.text = K.REMINDER_TIMING_MODEL[indexPath.row]
+        cell.accessoryType = indexPath.row == 0 ? .checkmark : .none
+                
         return cell
     }
 }

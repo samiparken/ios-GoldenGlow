@@ -3,7 +3,16 @@
 // static : make it constant. You can use it somewhere as Constants.registerSegue
 // struct K is convention.
 
-
+struct K {
+    static let REMINDER_TIMING_MODEL = [
+    "On Time",
+    "5 Mins Before",
+    "15 Mins Before",
+    "30 Mins Before",
+    "1 Hour Before"
+    ]
+    
+}
 
 
 
