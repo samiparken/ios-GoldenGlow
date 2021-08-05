@@ -7,12 +7,16 @@ class NotifyViewController: UIViewController {
     @IBOutlet weak var BGImageView: UIImageView!
     @IBOutlet weak var notificationTitleButton: UIButton!
     @IBOutlet weak var sunStackViewBG: UIView!
-    
-    
+    @IBOutlet weak var reminderTimingTableView: UITableView!
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         registerObservers()
         
+        //delegate
+        reminderTimingTableView.delegate = self
+        reminderTimingTableView.dataSource = self
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,3 +83,28 @@ class NotifyViewController: UIViewController {
  
  
  */
+
+
+
+//MARK: - UITableViewDelegate
+extension NotifyViewController: UITableViewDelegate {
+    
+}
+
+//MARK: - UITableViewDataSource
+extension NotifyViewController: UITableViewDataSource {
+    
+    // Num of rows
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 6
+    }
+    
+    // Cell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let cell: ReminderTimingCell = tableView.dequeueReusableCell(withIdentifier: "ReminderTimingCell") as! ReminderTimingCell
+        
+    
+        return cell
+    }
+}

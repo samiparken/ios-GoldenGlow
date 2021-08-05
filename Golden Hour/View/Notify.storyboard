@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -339,6 +340,23 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MKV-xV-PNM">
+                                                <rect key="frame" x="40" y="409" width="334" height="300"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="300" id="OQ9-KG-Eh0"/>
+                                                </constraints>
+                                                <prototypes>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReminderTimingCell" id="pya-Gk-GUA">
+                                                        <rect key="frame" x="0.0" y="24.5" width="334" height="43.5"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pya-Gk-GUA" id="7mI-6A-W8j">
+                                                            <rect key="frame" x="0.0" y="0.0" width="334" height="43.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </tableViewCellContentView>
+                                                    </tableViewCell>
+                                                </prototypes>
+                                            </tableView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -348,11 +366,14 @@
                                             <constraint firstAttribute="trailing" secondItem="XLM-Vw-3dq" secondAttribute="trailing" constant="40" id="3sY-DM-ydY"/>
                                             <constraint firstAttribute="trailing" secondItem="Y1e-2F-eyG" secondAttribute="trailing" constant="20" id="767-HF-TV6"/>
                                             <constraint firstItem="XLM-Vw-3dq" firstAttribute="top" secondItem="Qpw-Lb-qoq" secondAttribute="bottom" constant="10" id="Bwa-J8-6oV"/>
+                                            <constraint firstAttribute="trailing" secondItem="MKV-xV-PNM" secondAttribute="trailing" constant="40" id="CXa-qT-eoD"/>
                                             <constraint firstItem="XLM-Vw-3dq" firstAttribute="bottom" secondItem="E3j-7m-Y5Y" secondAttribute="bottom" id="HDP-cO-Mjr"/>
                                             <constraint firstAttribute="trailing" secondItem="E3j-7m-Y5Y" secondAttribute="trailing" constant="20" id="ITm-XK-zhk"/>
                                             <constraint firstAttribute="trailing" secondItem="Qpw-Lb-qoq" secondAttribute="trailing" constant="20" id="R5B-Qo-DrI"/>
                                             <constraint firstItem="Y1e-2F-eyG" firstAttribute="top" secondItem="E3j-7m-Y5Y" secondAttribute="bottom" constant="30" id="VfT-bZ-zLN"/>
                                             <constraint firstItem="E3j-7m-Y5Y" firstAttribute="leading" secondItem="8Ha-4F-7d5" secondAttribute="leading" constant="20" id="Xkp-aG-BPs"/>
+                                            <constraint firstItem="MKV-xV-PNM" firstAttribute="leading" secondItem="8Ha-4F-7d5" secondAttribute="leading" constant="40" id="Xo5-Tu-MGf"/>
+                                            <constraint firstItem="MKV-xV-PNM" firstAttribute="top" secondItem="Y1e-2F-eyG" secondAttribute="bottom" constant="10" id="bwD-sw-kNw"/>
                                             <constraint firstItem="XLM-Vw-3dq" firstAttribute="leading" secondItem="8Ha-4F-7d5" secondAttribute="leading" constant="40" id="dap-ZY-cHa"/>
                                             <constraint firstItem="Qpw-Lb-qoq" firstAttribute="leading" secondItem="8Ha-4F-7d5" secondAttribute="leading" constant="20" id="vb4-UY-awM"/>
                                             <constraint firstAttribute="height" constant="800" id="xTb-Y7-9L7"/>
@@ -393,6 +414,7 @@
                     <connections>
                         <outlet property="BGImageView" destination="L1V-vq-F88" id="vbb-zo-1xE"/>
                         <outlet property="notificationTitleButton" destination="i2f-rS-2eo" id="YbF-3e-gF5"/>
+                        <outlet property="reminderTimingTableView" destination="MKV-xV-PNM" id="DQx-eQ-03O"/>
                         <outlet property="sunStackViewBG" destination="E3j-7m-Y5Y" id="Ece-XC-LAa"/>
                     </connections>
                 </viewController>
@@ -404,5 +426,8 @@
     <resources>
         <image name="BG_Day" width="375" height="812"/>
         <image name="bell" catalog="system" width="128" height="124"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
