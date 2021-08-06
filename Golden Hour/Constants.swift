@@ -4,12 +4,32 @@
 // struct K is convention.
 
 struct K {
+    
+    struct UserDefaults {
+        
+        struct Notification {
+            static let sunrise = "notifySunrise"
+            static let sunset = "notifySunset"
+            static let lowSunMorning = "notifyLowSunMorning"
+            static let lowSunEvening = "notifyLowSunEvening"
+            static let goldenHourMorning = "notifyGoldenHourMorning"
+            static let goldenHourEvening = "notifyGoldenHourEvening"
+            static let blueHourMorning = "notifyBlueHourMorning"
+            static let blueHourEvening = "notifyBlueHourEvening"
+            static let reminderTiming = "notifyreminderTiming"
+        }
+        
+        struct Setting {
+            static let timeFormat = "settingTimeFormat"
+        }
+    }
+        
     static let REMINDER_TIMING_MODEL = [
-    "On Time",
-    "5 Mins Before",
-    "15 Mins Before",
-    "30 Mins Before",
-    "1 Hour Before"
+        "On Time",
+        "5 Mins Before",
+        "15 Mins Before",
+        "30 Mins Before",
+        "1 Hour Before"
     ]
     
 }
