@@ -218,18 +218,15 @@ class SkyViewController: UIViewController {
     }
 
 
-//MARK: - Actions
+//MARK: - UI Actions
     
     @IBAction func currentLocationButtonPressed(_ sender: UIButton) {
         //self.performSegue(withIdentifier: "goToSearch", sender: self)
         //locationManager.requestLocation()
     }
-    @IBAction func searchButtonPressed(_ sender: UIButton) {
-        //self.performSegue(withIdentifier: "goToSearch", sender: self)
-    }
-    @IBAction func settingsButtonPressed(_ sender: UIButton) {
-        
-    }
+    
+    
+
 }
 
 //MARK: - UIScrollViewDelegate
