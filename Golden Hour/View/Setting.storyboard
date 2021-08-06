@@ -88,7 +88,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="lcA-jy-LcB"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title=" Unlock Pro Features" image="lock.open.fill" catalog="system">
                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
@@ -107,7 +107,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="uWg-Ca-pfq"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="  Follow GoldenGlow on Instagram" image="folder.fill" catalog="system">
                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
@@ -126,7 +126,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="odX-se-4kL"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="  Help Translate GoldenGlow" image="globe" catalog="system">
                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
@@ -145,7 +145,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="Bv8-sd-qcd"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="  Send Feedback" image="paperplane" catalog="system">
                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
@@ -164,7 +164,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="TWI-DP-K8K"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="  Review GoldenGlow on the App Store" image="dial" catalog="system">
                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
@@ -183,7 +183,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="ejt-gy-0kJ"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="  Privacy Policy" image="doc.text" catalog="system">
                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>

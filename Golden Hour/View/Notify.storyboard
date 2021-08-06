@@ -71,7 +71,7 @@
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunrise" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XbB-dY-gsa">
                                                                 <rect key="frame" x="0.0" y="0.0" width="274" height="40"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -106,7 +106,7 @@
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunset" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wmq-n4-uVU">
                                                                 <rect key="frame" x="0.0" y="0.0" width="274" height="40"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -189,7 +189,7 @@
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Low Sun" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0vN-Wp-tSA">
                                                                 <rect key="frame" x="0.0" y="0.0" width="194" height="40"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -238,7 +238,7 @@
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Golden Hour" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v6J-KI-rbT">
                                                                 <rect key="frame" x="0.0" y="0.0" width="194" height="40"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -287,7 +287,7 @@
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blue Hour" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iuY-Gu-5vO">
                                                                 <rect key="frame" x="0.0" y="0.0" width="194" height="40"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -340,27 +340,31 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MKV-xV-PNM">
-                                                <rect key="frame" x="40" y="409" width="334" height="250"/>
+                                            <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FxW-Si-Zo9" userLabel="ReminderTimingTableViewBG">
+                                                <rect key="frame" x="20" y="409" width="374" height="220"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MKV-xV-PNM">
+                                                <rect key="frame" x="40" y="419" width="334" height="210"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="250" id="OQ9-KG-Eh0"/>
+                                                    <constraint firstAttribute="height" constant="210" id="OQ9-KG-Eh0"/>
                                                 </constraints>
                                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReminderTimingCell" rowHeight="36" id="pya-Gk-GUA" customClass="ReminderTimingCell" customModule="Golden_Hour" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="24.5" width="334" height="36"/>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReminderTimingCell" rowHeight="43" id="pya-Gk-GUA" customClass="ReminderTimingCell" customModule="Golden_Hour" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="24.5" width="334" height="43"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pya-Gk-GUA" id="7mI-6A-W8j">
-                                                            <rect key="frame" x="0.0" y="0.0" width="334" height="36"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="334" height="43"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vkg-0T-v7n">
-                                                                    <rect key="frame" x="20" y="10" width="41.5" height="16"/>
+                                                                    <rect key="frame" x="20" y="10" width="39.5" height="23"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="20" id="rIV-3x-lNB"/>
                                                                     </constraints>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
@@ -385,6 +389,7 @@
                                             <constraint firstItem="Y1e-2F-eyG" firstAttribute="leading" secondItem="8Ha-4F-7d5" secondAttribute="leading" constant="20" id="2Va-mk-F5Q"/>
                                             <constraint firstItem="Qpw-Lb-qoq" firstAttribute="top" secondItem="8Ha-4F-7d5" secondAttribute="top" constant="20" id="2cc-kK-qQE"/>
                                             <constraint firstItem="E3j-7m-Y5Y" firstAttribute="top" secondItem="Qpw-Lb-qoq" secondAttribute="bottom" constant="10" id="2uA-nc-iIa"/>
+                                            <constraint firstItem="FxW-Si-Zo9" firstAttribute="leading" secondItem="8Ha-4F-7d5" secondAttribute="leading" constant="20" id="3Ud-EP-f6R"/>
                                             <constraint firstAttribute="trailing" secondItem="XLM-Vw-3dq" secondAttribute="trailing" constant="40" id="3sY-DM-ydY"/>
                                             <constraint firstAttribute="trailing" secondItem="Y1e-2F-eyG" secondAttribute="trailing" constant="20" id="767-HF-TV6"/>
                                             <constraint firstItem="XLM-Vw-3dq" firstAttribute="top" secondItem="Qpw-Lb-qoq" secondAttribute="bottom" constant="10" id="Bwa-J8-6oV"/>
@@ -395,10 +400,13 @@
                                             <constraint firstItem="Y1e-2F-eyG" firstAttribute="top" secondItem="E3j-7m-Y5Y" secondAttribute="bottom" constant="30" id="VfT-bZ-zLN"/>
                                             <constraint firstItem="E3j-7m-Y5Y" firstAttribute="leading" secondItem="8Ha-4F-7d5" secondAttribute="leading" constant="20" id="Xkp-aG-BPs"/>
                                             <constraint firstItem="MKV-xV-PNM" firstAttribute="leading" secondItem="8Ha-4F-7d5" secondAttribute="leading" constant="40" id="Xo5-Tu-MGf"/>
-                                            <constraint firstItem="MKV-xV-PNM" firstAttribute="top" secondItem="Y1e-2F-eyG" secondAttribute="bottom" constant="10" id="bwD-sw-kNw"/>
+                                            <constraint firstItem="MKV-xV-PNM" firstAttribute="top" secondItem="Y1e-2F-eyG" secondAttribute="bottom" constant="20" id="bwD-sw-kNw"/>
                                             <constraint firstItem="XLM-Vw-3dq" firstAttribute="leading" secondItem="8Ha-4F-7d5" secondAttribute="leading" constant="40" id="dap-ZY-cHa"/>
+                                            <constraint firstItem="FxW-Si-Zo9" firstAttribute="top" secondItem="MKV-xV-PNM" secondAttribute="top" constant="-10" id="g5C-S3-9jI"/>
+                                            <constraint firstItem="MKV-xV-PNM" firstAttribute="bottom" secondItem="FxW-Si-Zo9" secondAttribute="bottom" id="oPy-Bo-637"/>
                                             <constraint firstItem="Qpw-Lb-qoq" firstAttribute="leading" secondItem="8Ha-4F-7d5" secondAttribute="leading" constant="20" id="vb4-UY-awM"/>
                                             <constraint firstAttribute="height" constant="650" id="xTb-Y7-9L7"/>
+                                            <constraint firstAttribute="trailing" secondItem="FxW-Si-Zo9" secondAttribute="trailing" constant="20" id="xwO-qp-1z9"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -437,6 +445,7 @@
                         <outlet property="BGImageView" destination="L1V-vq-F88" id="vbb-zo-1xE"/>
                         <outlet property="notificationTitleButton" destination="i2f-rS-2eo" id="YbF-3e-gF5"/>
                         <outlet property="reminderTimingTableView" destination="MKV-xV-PNM" id="DQx-eQ-03O"/>
+                        <outlet property="reminderTimingTableViewBG" destination="FxW-Si-Zo9" id="zgk-ct-aEj"/>
                         <outlet property="sunStackViewBG" destination="E3j-7m-Y5Y" id="Ece-XC-LAa"/>
                     </connections>
                 </viewController>

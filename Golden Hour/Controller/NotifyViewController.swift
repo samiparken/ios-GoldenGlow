@@ -5,9 +5,11 @@ class NotifyViewController: UIViewController {
     
     @IBOutlet weak var BGImageView: UIImageView!
     @IBOutlet weak var notificationTitleButton: UIButton!
+    
     @IBOutlet weak var sunStackViewBG: UIView!
     @IBOutlet weak var reminderTimingTableView: UITableView!
-        
+    @IBOutlet weak var reminderTimingTableViewBG: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         registerObservers()
@@ -65,6 +67,7 @@ class NotifyViewController: UIViewController {
     func initLayout() {
         notificationTitleButton.addCharacterSpacing()
         sunStackViewBG.layer.cornerRadius = 10
+        reminderTimingTableViewBG.layer.cornerRadius = 10
     }
     
     func initTableView() {
@@ -80,15 +83,6 @@ class NotifyViewController: UIViewController {
     
 }
 
-
-/* from deleted NotifyTableViewController.swift
- 
- 
- 
- */
-
-
-
 //MARK: - UITableViewDelegate
 extension NotifyViewController: UITableViewDelegate {
     
@@ -96,8 +90,8 @@ extension NotifyViewController: UITableViewDelegate {
         
         // clear AccessorryType
         for row in 0..<tableView.numberOfRows(inSection: 0) {
-            let cell = tableView.cellForRow(at: IndexPath(row: row, section: 0))
-            cell?.accessoryType = .none
+            let cell:ReminderTimingCell = tableView.cellForRow(at: IndexPath(row: row, section: 0)) as! ReminderTimingCell
+            cell.accessoryType = .none
         }
         
         // set AccessoryType
