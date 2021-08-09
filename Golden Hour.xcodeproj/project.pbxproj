@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		220A7FBF26BC7E2000789C1F /* ReminderTimingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220A7FBE26BC7E2000789C1F /* ReminderTimingCell.swift */; };
 		2225086526C10A1F00BB7078 /* LocationSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2225086426C10A1F00BB7078 /* LocationSearchCell.swift */; };
+		2225086726C113FD00BB7078 /* LocationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2225086626C113FD00BB7078 /* LocationSearchViewController.swift */; };
 		224FCA2E25190D0500CC4EE4 /* Sky.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224FCA2D25190D0500CC4EE4 /* Sky.storyboard */; };
 		224FCA3525190D8600CC4EE4 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224FCA3425190D8600CC4EE4 /* Setting.storyboard */; };
 		224FCA3925190E1E00CC4EE4 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FCA3825190E1E00CC4EE4 /* TabBarController.swift */; };
@@ -33,7 +34,6 @@
 		228BD78A252DC2F500F3FA50 /* CellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BD789252DC2F500F3FA50 /* CellData.swift */; };
 		228BD78D252DCE3600F3FA50 /* SunTimestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BD78C252DCE3600F3FA50 /* SunTimestamp.swift */; };
 		22918D1E26BD23C500C7967C /* LocationSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22918D1D26BD23C500C7967C /* LocationSearch.storyboard */; };
-		22918D2126BD24A700C7967C /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22918D2026BD24A700C7967C /* LocationSearchTableViewController.swift */; };
 		22BF85EB25110946001E03E5 /* ScrollViewPage1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF85EA25110946001E03E5 /* ScrollViewPage1.swift */; };
 		22BF85ED25110958001E03E5 /* ScrollViewPage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF85EC25110958001E03E5 /* ScrollViewPage2.swift */; };
 		22BF85EF2511096B001E03E5 /* ScrollViewPage1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22BF85EE2511096B001E03E5 /* ScrollViewPage1.xib */; };
@@ -54,6 +54,7 @@
 		004AC57CDD6150C14DED6694 /* Pods_Golden_Hour.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Golden_Hour.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		220A7FBE26BC7E2000789C1F /* ReminderTimingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderTimingCell.swift; sourceTree = "<group>"; };
 		2225086426C10A1F00BB7078 /* LocationSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchCell.swift; sourceTree = "<group>"; };
+		2225086626C113FD00BB7078 /* LocationSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchViewController.swift; sourceTree = "<group>"; };
 		224FCA2D25190D0500CC4EE4 /* Sky.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Sky.storyboard; sourceTree = "<group>"; };
 		224FCA3425190D8600CC4EE4 /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		224FCA3825190E1E00CC4EE4 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -80,7 +81,6 @@
 		228BD789252DC2F500F3FA50 /* CellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellData.swift; sourceTree = "<group>"; };
 		228BD78C252DCE3600F3FA50 /* SunTimestamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunTimestamp.swift; sourceTree = "<group>"; };
 		22918D1D26BD23C500C7967C /* LocationSearch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationSearch.storyboard; sourceTree = "<group>"; };
-		22918D2026BD24A700C7967C /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewController.swift; sourceTree = "<group>"; };
 		22BF85EA25110946001E03E5 /* ScrollViewPage1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewPage1.swift; sourceTree = "<group>"; };
 		22BF85EC25110958001E03E5 /* ScrollViewPage2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewPage2.swift; sourceTree = "<group>"; };
 		22BF85EE2511096B001E03E5 /* ScrollViewPage1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScrollViewPage1.xib; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 		22918D2226BD24AD00C7967C /* ControllerSecondary */ = {
 			isa = PBXGroup;
 			children = (
-				22918D2026BD24A700C7967C /* LocationSearchTableViewController.swift */,
+				2225086626C113FD00BB7078 /* LocationSearchViewController.swift */,
 			);
 			path = ControllerSecondary;
 			sourceTree = "<group>";
@@ -402,7 +402,6 @@
 				227A7FC0252A189600C523BD /* WaveView.swift in Sources */,
 				2260F18D252E0CF30008B470 /* UIView+Ext.swift in Sources */,
 				226A2ED4253B3D0100F54439 /* LocationData.swift in Sources */,
-				22918D2126BD24A700C7967C /* LocationSearchTableViewController.swift in Sources */,
 				226A2ED7253B3D1600F54439 /* TimestampData.swift in Sources */,
 				22793BA524F81C2800BEBF8E /* AppDelegate.swift in Sources */,
 				22BF85ED25110958001E03E5 /* ScrollViewPage2.swift in Sources */,
@@ -410,6 +409,7 @@
 				2260F184252E0C390008B470 /* UIColor+Ext.swift in Sources */,
 				22793BA724F81C2800BEBF8E /* SceneDelegate.swift in Sources */,
 				224FCA3925190E1E00CC4EE4 /* TabBarController.swift in Sources */,
+				2225086726C113FD00BB7078 /* LocationSearchViewController.swift in Sources */,
 				2260F187252E0C770008B470 /* UIButton+Ext.swift in Sources */,
 				22BFA2A7252389C100923D6C /* NotifyViewController.swift in Sources */,
 				2260F190252E0D140008B470 /* CALayer+Ext.swift in Sources */,
