@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		220A7FBF26BC7E2000789C1F /* ReminderTimingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220A7FBE26BC7E2000789C1F /* ReminderTimingCell.swift */; };
+		2225086526C10A1F00BB7078 /* LocationSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2225086426C10A1F00BB7078 /* LocationSearchCell.swift */; };
 		224FCA2E25190D0500CC4EE4 /* Sky.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224FCA2D25190D0500CC4EE4 /* Sky.storyboard */; };
 		224FCA3525190D8600CC4EE4 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224FCA3425190D8600CC4EE4 /* Setting.storyboard */; };
 		224FCA3925190E1E00CC4EE4 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FCA3825190E1E00CC4EE4 /* TabBarController.swift */; };
@@ -52,6 +53,7 @@
 /* Begin PBXFileReference section */
 		004AC57CDD6150C14DED6694 /* Pods_Golden_Hour.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Golden_Hour.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		220A7FBE26BC7E2000789C1F /* ReminderTimingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderTimingCell.swift; sourceTree = "<group>"; };
+		2225086426C10A1F00BB7078 /* LocationSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchCell.swift; sourceTree = "<group>"; };
 		224FCA2D25190D0500CC4EE4 /* Sky.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Sky.storyboard; sourceTree = "<group>"; };
 		224FCA3425190D8600CC4EE4 /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		224FCA3825190E1E00CC4EE4 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				220A7FBE26BC7E2000789C1F /* ReminderTimingCell.swift */,
+				2225086426C10A1F00BB7078 /* LocationSearchCell.swift */,
 			);
 			path = ViewCell;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				22E4FD4424FE83C200C845E1 /* SunPositionModel.swift in Sources */,
 				228BD78A252DC2F500F3FA50 /* CellData.swift in Sources */,
 				2271B2942500240F00DCB915 /* SunPositionManager.swift in Sources */,
+				2225086526C10A1F00BB7078 /* LocationSearchCell.swift in Sources */,
 				22DD4E00252D8FB900F5258E /* TableViewCell.swift in Sources */,
 				22C5D01D25091BC10077F7E2 /* TimerManager.swift in Sources */,
 				22C5D01B25090A350077F7E2 /* LocationManager.swift in Sources */,
