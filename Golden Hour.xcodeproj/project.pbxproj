@@ -113,6 +113,7 @@
 		220A7FC026BC7E2D00789C1F /* ViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				22DD4DFF252D8FB900F5258E /* TableViewCell.xib */,
 				220A7FBE26BC7E2000789C1F /* ReminderTimingCell.swift */,
 				2225086426C10A1F00BB7078 /* LocationSearchCell.swift */,
 			);
@@ -153,11 +154,10 @@
 			children = (
 				22793BAA24F81C2800BEBF8E /* Main.storyboard */,
 				224FCA2D25190D0500CC4EE4 /* Sky.storyboard */,
-				22BFA2A22523890D00923D6C /* Notify.storyboard */,
-				224FCA3425190D8600CC4EE4 /* Setting.storyboard */,
 				22BF85EE2511096B001E03E5 /* ScrollViewPage1.xib */,
 				22BF85F025110977001E03E5 /* ScrollViewPage2.xib */,
-				22DD4DFF252D8FB900F5258E /* TableViewCell.xib */,
+				22BFA2A22523890D00923D6C /* Notify.storyboard */,
+				224FCA3425190D8600CC4EE4 /* Setting.storyboard */,
 			);
 			path = ViewMain;
 			sourceTree = "<group>";

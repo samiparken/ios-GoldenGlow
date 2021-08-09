@@ -18,17 +18,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GÖTEBORG" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yd9-P1-4dC">
-                                <rect key="frame" x="0.0" y="44" width="414" height="21"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                <rect key="frame" x="0.0" y="54" width="414" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Yup-44-muA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="Qrm-iN-I0U">
-                                <rect key="frame" x="0.0" y="65" width="414" height="51"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <rect key="frame" x="0.0" y="104" width="414" height="51"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES" textContentType="location"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6oB-Yw-r9N">
-                                <rect key="frame" x="0.0" y="116" width="414" height="780"/>
+                                <rect key="frame" x="0.0" y="155" width="414" height="741"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LocationSearchCell" id="2Hl-Fn-0YU" customClass="LocationSearchCell" customModule="Golden_Hour" customModuleProvider="target">
@@ -56,6 +59,15 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MJU-VD-f6u">
+                                <rect key="frame" x="376.5" y="64" width="17.5" height="22"/>
+                                <state key="normal" image="xmark" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="medium"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeButtonPressed:" destination="t0z-m2-LwQ" eventType="touchUpInside" id="dui-tI-Tmf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Nie-US-AYz"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -63,8 +75,10 @@
                             <constraint firstItem="Qrm-iN-I0U" firstAttribute="trailing" secondItem="Nie-US-AYz" secondAttribute="trailing" id="5Ji-Lk-Rvd"/>
                             <constraint firstItem="Qrm-iN-I0U" firstAttribute="top" secondItem="yd9-P1-4dC" secondAttribute="bottom" id="Aek-of-Lwo"/>
                             <constraint firstItem="6oB-Yw-r9N" firstAttribute="top" secondItem="Qrm-iN-I0U" secondAttribute="bottom" id="BhR-LG-h6R"/>
-                            <constraint firstItem="yd9-P1-4dC" firstAttribute="top" secondItem="Nie-US-AYz" secondAttribute="top" id="PlG-W3-qrB"/>
+                            <constraint firstItem="Nie-US-AYz" firstAttribute="trailing" secondItem="MJU-VD-f6u" secondAttribute="trailing" constant="20" id="Fv5-hK-8Fw"/>
+                            <constraint firstItem="yd9-P1-4dC" firstAttribute="top" secondItem="Nie-US-AYz" secondAttribute="top" constant="10" id="PlG-W3-qrB"/>
                             <constraint firstItem="Qrm-iN-I0U" firstAttribute="leading" secondItem="Nie-US-AYz" secondAttribute="leading" id="Q7p-4G-kQZ"/>
+                            <constraint firstItem="MJU-VD-f6u" firstAttribute="top" secondItem="Nie-US-AYz" secondAttribute="top" constant="20" id="SGz-3z-D7v"/>
                             <constraint firstItem="yd9-P1-4dC" firstAttribute="leading" secondItem="Nie-US-AYz" secondAttribute="leading" id="UFs-Nv-5Gc"/>
                             <constraint firstAttribute="bottom" secondItem="6oB-Yw-r9N" secondAttribute="bottom" id="aFd-iA-dFT"/>
                             <constraint firstItem="6oB-Yw-r9N" firstAttribute="leading" secondItem="Nie-US-AYz" secondAttribute="leading" id="cc2-GX-CEF"/>
@@ -84,6 +98,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

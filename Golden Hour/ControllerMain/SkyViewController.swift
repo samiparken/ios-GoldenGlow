@@ -52,7 +52,7 @@ class SkyViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         print("SkyView: viewDidAppear")
         if let location = myTabBar.currentLocation {
-            currentLocationButton.setTitle(location, for: .normal)
+            currentLocationButton.titleLabel?.text = location
             currentLocationButton.addCharacterSpacing()
         }
         if let imageName = myTabBar.BGImageViewName {

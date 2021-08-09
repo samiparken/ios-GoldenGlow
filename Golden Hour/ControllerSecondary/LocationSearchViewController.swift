@@ -21,12 +21,27 @@ class LocationSearchViewController: UIViewController {
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        setCurrentLocation()
+    }
+    
 //MARK: - Init
     func setCurrentLocation() {
         if let location = myTabBar.currentLocation {
-            selectedCityLabel.text = "📍" + location
+            selectedCityLabel.text = location
+            selectedCityLabel.addCharacterSpacing()
         }
     }
+    
+    
+    
+    
+//MARK: - UI Action
+    
+    @IBAction func closeButtonPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 //MARK: - UITableViewDataSource
