@@ -6,6 +6,14 @@
 struct K {
     
     struct UserDefaults {
+
+        struct PresentLocation {
+            static let cityName = "presentLocationCity"
+            static let countryName = "presentLocationCountry"
+            static let countryCode = "presentLocationCountryCode"
+            static let lat = "presentLocationLatitude"
+            static let long = "presentLocationLongitude"
+        }
         
         struct Notification {
             static let sunrise = "notifySunrise"

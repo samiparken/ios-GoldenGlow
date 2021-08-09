@@ -75,8 +75,7 @@ extension LocationManager {
 
 //MARK: - CLLocationManager Delegate
 extension LocationManager: CLLocationManagerDelegate {
-    
-    
+        
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
     }

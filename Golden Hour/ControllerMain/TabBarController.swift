@@ -4,6 +4,7 @@ import CoreLocation
 
 
 class TabBarController: UITabBarController {
+    let defaults = UserDefaults.standard
     
     /* Realm Database*/
     // Initialize Realm
@@ -81,9 +82,24 @@ class TabBarController: UITabBarController {
         sunPositionManager.delegate = self
         locationManager.delegate = self
         timerManager.delegate = self
+
         
+        // check UserDefaults for presentLocation
+        if let cityName = defaults.string(forKey: K.UserDefaults.PresentLocation.cityName),
+           let countryName = defaults.string(forKey: K.UserDefaults.PresentLocation.countryName),
+           let countryCode = defaults.string(forKey: K.UserDefaults.PresentLocation.countryCode)
+           {
+            let long = defaults.double(forKey: K.UserDefaults.PresentLocation.long)
+            let lat = defaults.double(forKey: K.UserDefaults.PresentLocation.lat)
+
+            showData(cityName, countryName, countryCode, long: long, lat: lat)
+        }
+        
+        // if not, try to get a current location
+
     }
     
+//MARK: - Methods
     func updateSunAngle() {
         sunPositionManager.updateCurrentAltitude()
         sunAngle = sunPositionManager.getAltitude()
@@ -105,6 +121,66 @@ class TabBarController: UITabBarController {
         }
     }
     
+    func showData(_ cityName: String,
+                  _ countryName: String,
+                  _ countryCode: String,
+                  long:  CLLocationDegrees,
+                  lat:  CLLocationDegrees) {
+        
+        // for calculation
+        sunPositionManager.currentData.Longitude = long
+        sunPositionManager.currentData.Latitude = lat
+                
+        // Realm, DB Check & Store
+        locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName, countryCode)
+        if ( locationData!.count == 0 )
+        {
+            let newLocationData = LocationData() //Realm Object
+            newLocationData.cityName = cityName
+            newLocationData.countryName = countryName
+            newLocationData.countryCode = countryCode
+            newLocationData.longitude = long
+            newLocationData.latitude = lat
+            do {
+                try realm.write { // Make Realm updated
+                    realm.add(newLocationData)
+                }
+            } catch {
+                print("Error saving newLocationData \(error)")
+            }
+            locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName, countryCode)
+        }
+        
+        // Braodcast: CityName to Show
+        currentLocation = cityName.uppercased()
+        let keyName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
+        NotificationCenter.default.post(name: keyName, object: nil)
+        
+        
+        // Realm, check today timestamp
+        let todayStart = Calendar.current.startOfDay(for: Date())
+        let todayEnd: Date = {
+          let components = DateComponents(day: 1, second: -1)
+          return Calendar.current.date(byAdding: components, to: todayStart)!
+        }()
+        selectedLocationData = locationData![0]
+        timestampData = selectedLocationData?.timestampDataSet.filter("time BETWEEN %@", [todayStart, todayEnd])
+        if( timestampData!.count == 0)
+        {
+            // scan data & store timestamps in RealmDB
+
+            
+            
+            
+            
+            /* START SUN POSITION SYSTEM */
+            if let _ = sunPositionManager.currentData.SunAltitudeChange {}
+            else { sunPositionManager.startSunPositionSystem() }
+            
+        } else {
+            timestampData = timestampData?.sorted(byKeyPath: "time", ascending: true)
+        }
+    }
     
 }
 
@@ -273,69 +349,24 @@ extension TabBarController: LocationManagerDelegate {
     func didUpdateLocation(_ place: CLPlacemark) {
 
         // Current Location
-        let cityName = place.locality
-        let countryName = place.country
-        let countryCode = place.isoCountryCode
+        let cityName = place.locality ?? ""
+        let countryName = place.country ?? ""
+        let countryCode = place.isoCountryCode ?? ""
         let long = place.location?.coordinate.longitude
         let lat = place.location?.coordinate.latitude
         print("Longitude: \(long ?? 0), Latitude: \(lat ?? 0)")
-        
-        // for calculation
-        sunPositionManager.currentData.Longitude = long
-        sunPositionManager.currentData.Latitude = lat
-
-        
-        // Realm, DB Check & Store
-        locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName!, countryCode!)
-        if ( locationData!.count == 0 )
-        {
-            let newLocationData = LocationData() //Realm Object
-            newLocationData.cityName = cityName!
-            newLocationData.countryName = countryName!
-            newLocationData.countryCode = countryCode!
-            newLocationData.longitude = long!
-            newLocationData.latitude = lat!
-            do {
-                try realm.write { // Make Realm updated
-                    realm.add(newLocationData)
-                }
-            } catch {
-                print("Error saving newLocationData \(error)")
-            }
-            locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName!, countryCode!)
-        }
                 
-        // Braodcast: CityName to Show
-        currentLocation = cityName!.uppercased()
-        let keyName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
-        NotificationCenter.default.post(name: keyName, object: nil)
-        
-        
-        // Realm, check today timestamp
-        let todayStart = Calendar.current.startOfDay(for: Date())
-        let todayEnd: Date = {
-          let components = DateComponents(day: 1, second: -1)
-          return Calendar.current.date(byAdding: components, to: todayStart)!
-        }()
-        selectedLocationData = locationData![0]
-        timestampData = selectedLocationData?.timestampDataSet.filter("time BETWEEN %@", [todayStart, todayEnd])
-        if( timestampData!.count == 0)
-        {
-            // scan data & store timestamps in RealmDB
-
-            
-            
-            
-            
-            /* START SUN POSITION SYSTEM */
-            if let _ = sunPositionManager.currentData.SunAltitudeChange {}
-            else { sunPositionManager.startSunPositionSystem() }
+        if let _ = defaults.string(forKey: K.UserDefaults.PresentLocation.cityName) {
             
         } else {
-            timestampData = timestampData?.sorted(byKeyPath: "time", ascending: true)
+            self.defaults.set(cityName, forKey: K.UserDefaults.PresentLocation.cityName)
+            self.defaults.set(countryName, forKey: K.UserDefaults.PresentLocation.countryName)
+            self.defaults.set(countryCode, forKey: K.UserDefaults.PresentLocation.countryCode)
+            self.defaults.set(long, forKey: K.UserDefaults.PresentLocation.long)
+            self.defaults.set(lat, forKey: K.UserDefaults.PresentLocation.lat)
+
+            showData(cityName, countryName, countryCode, long: long!, lat: lat!)
         }
-        
-        
     }
 }
 
