@@ -39,9 +39,17 @@ class LocationSearchTableViewController: UITableViewController {
         let cell: LocationSearchCell = tableView.dequeueReusableCell(withIdentifier: "LocationSearchCell", for: indexPath) as! LocationSearchCell
 
         let selectedItem = matchingItems[indexPath.row].placemark
-        cell.label?.text = selectedItem.name
+        cell.label?.text = (selectedItem.locality ?? "") + ", " + (selectedItem.country ?? "")
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // auto-deselect animation
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        print("Selected at \(indexPath.row)")
+
     }
 }
 
@@ -50,17 +58,19 @@ class LocationSearchTableViewController: UITableViewController {
 extension LocationSearchTableViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
-        guard let inputText = searchController.searchBar.text else {
-            return
+        let inputText = searchController.searchBar.text
+        
+        if inputText == nil || inputText == "" {
+            self.matchingItems = []
+            self.tableView.reloadData()
         }
                 
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = inputText
+        request.region = MKCoordinateRegion(.world)
         let search = MKLocalSearch(request: request)
         search.start { response, _ in
-            guard let response = response else {
-                return
-            }
+            guard let response = response else { return }
             self.matchingItems = response.mapItems
             self.tableView.reloadData()
         }
