@@ -8,7 +8,9 @@ class LocationSearchTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
             
+        searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -21,8 +23,8 @@ class LocationSearchTableViewController: UITableViewController {
             title = "📍" + location
         }
     }
-    
-    // MARK: - Table view data source
+
+// MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -93,7 +95,7 @@ extension LocationSearchTableViewController: UISearchResultsUpdating {
         guard let text = searchController.searchBar.text else {
             return
         }
-                
+        
         print(text)
     }
         
