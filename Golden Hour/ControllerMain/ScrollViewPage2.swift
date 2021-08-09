@@ -45,7 +45,8 @@ class ScrollViewPage2: UIView {
         setupTableView()
         
     }
-    
+
+//MARK: - Init
     func setupTableView() {
                 
         // Background
@@ -56,6 +57,26 @@ class ScrollViewPage2: UIView {
 
     }
     
+//MARK: - For Notification Observers
+    
+    // for Notification Observers
+    let keyForMorningEveningReady = Notification.Name(rawValue: MorningEveningReadyNotificationKey)
+    
+    // Register Observers for updates
+    func registerObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(ScrollViewPage2.updateState(notification:)), name: keyForMorningEveningReady, object: nil)
+    }
+    
+    @objc func updateState(notification: NSNotification) {
+        
+        if myTabBar.isEvening {
+            eveningButtonPressed((Any).self)
+        } else {
+            morningButtonPressed((Any).self)
+        }
+    }
+
+//MARK: - Methods
     func setSunsetMode(){
         setRiseIcon.setImage(UIImage(systemName: "sunset"), for: .normal)
     }
@@ -63,9 +84,8 @@ class ScrollViewPage2: UIView {
     func setSunriseMode(){
         setRiseIcon.setImage(UIImage(systemName: "sunrise"), for: .normal)
     }
-
     
-    
+//MARK: - UI Actions
     @IBAction func morningButtonPressed(_ sender: Any) {
         
         // Button Color Change
@@ -122,31 +142,14 @@ class ScrollViewPage2: UIView {
     }
     
     
-    //MARK: - For Notification Observers
     
-    // for Notification Observers
-    let keyForMorningEveningReady = Notification.Name(rawValue: MorningEveningReadyNotificationKey)
-    
-    // Register Observers for updates
-    func registerObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(ScrollViewPage2.updateState(notification:)), name: keyForMorningEveningReady, object: nil)
-    }
-    
-    @objc func updateState(notification: NSNotification) {
-        
-        if myTabBar.isEvening {
-            eveningButtonPressed((Any).self)
-        } else {
-            morningButtonPressed((Any).self)
-        }
-    }
 }
 
 //MARK: - UITableViewDelegate
 extension ScrollViewPage2: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("You tapped me!")
+        print("You tapped TimeTableCell!")
     }
 }
 

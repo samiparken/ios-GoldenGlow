@@ -2,7 +2,6 @@ import UIKit
 import RealmSwift
 import CoreLocation
 
-
 class TabBarController: UITabBarController {
     let defaults = UserDefaults.standard
     
@@ -82,7 +81,6 @@ class TabBarController: UITabBarController {
         sunPositionManager.delegate = self
         locationManager.delegate = self
         timerManager.delegate = self
-
         
         // check UserDefaults for presentLocation
         if let cityName = defaults.string(forKey: K.UserDefaults.PresentLocation.cityName),
@@ -97,7 +95,7 @@ class TabBarController: UITabBarController {
         
         // if not, try to get a current location
 
-    }
+    }    
     
 //MARK: - Methods
     func updateSunAngle() {
@@ -170,9 +168,6 @@ class TabBarController: UITabBarController {
             // scan data & store timestamps in RealmDB
 
             
-            
-            
-            
             /* START SUN POSITION SYSTEM */
             if let _ = sunPositionManager.currentData.SunAltitudeChange {}
             else { sunPositionManager.startSunPositionSystem() }
@@ -181,7 +176,6 @@ class TabBarController: UITabBarController {
             timestampData = timestampData?.sorted(byKeyPath: "time", ascending: true)
         }
     }
-    
 }
 
 
@@ -366,6 +360,7 @@ extension TabBarController: LocationManagerDelegate {
             self.defaults.set(lat, forKey: K.UserDefaults.PresentLocation.lat)
 
             showData(cityName, countryName, countryCode, long: long!, lat: lat!)
+            
         }
     }
 }

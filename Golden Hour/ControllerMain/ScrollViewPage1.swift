@@ -1,15 +1,8 @@
-//
-//  ScrollViewPage1.swift
-//  Golden Hour
-//
-//  Created by Sam on 9/15/20.
-//  Copyright © 2020 Sam. All rights reserved.
-//
-
 import UIKit
 
 class ScrollViewPage1: UIView {
-        
+    let myTabBar = TabBarController.singletonTabBar
+
     @IBOutlet weak var upperView: UIView!
     @IBOutlet weak var upperStateStack: UIStackView!
     @IBOutlet weak var middleStateStack: UIStackView!
@@ -23,13 +16,27 @@ class ScrollViewPage1: UIView {
     @IBOutlet weak var middleCurrentState: UIButton!
     @IBOutlet weak var middleRemainingTime: UILabel!
     @IBOutlet weak var middleNextStateLabel: UILabel!
-    
-    
-    @IBOutlet weak var sunAngleLabel: UILabel!
         
-    // for Sharing Data
-    let myTabBar = TabBarController.singletonTabBar
-
+    @IBOutlet weak var sunAngleLabel: UILabel!
+    
+    var currentState: String = "" {
+        didSet {
+            if currentState != oldValue {
+                middleCurrentState.titleLabel?.text = myTabBar.currentState
+                middleCurrentState.addCharacterSpacing(3)
+            }
+        }
+    }
+    
+    var nextState: String = "" {
+        didSet {
+            if nextState != oldValue {
+                middleNextStateLabel.text = "NEXT: " + myTabBar.nextState
+                middleNextStateLabel.addCharacterSpacing()
+            }
+        }
+    }
+    
     // Deallocate Notification Observer
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -40,9 +47,8 @@ class ScrollViewPage1: UIView {
         registerObservers()
 
         upperStateStack.isHidden = true
-        
     }
-    
+        
     
     //MARK: - For Notification Observers
     
@@ -59,21 +65,24 @@ class ScrollViewPage1: UIView {
     }
     
     @objc func updateCurrentState(notification: NSNotification) {
-        middleCurrentState.titleLabel?.text = myTabBar.currentState
-        middleCurrentState.addCharacterSpacing(3)
-        middleNextStateLabel.text = "NEXT: " + myTabBar.nextState
-        middleNextStateLabel.addCharacterSpacing()
+        //update labels
+        currentState = myTabBar.currentState
+        nextState = myTabBar.nextState
     }
-    
-    @objc func updateTimer(notification: NSNotification) {
-        middleRemainingTime.text = "\(myTabBar.timerHour):\(myTabBar.timerMin):\(myTabBar.timerSec)"
-    }
-    
+        
     @objc func updateSunAngle(notification: NSNotification) {
         let mySunAngle = myTabBar.sunAngle
         let mySunAngleText = mySunAngle < 10
             ? String(format: "%.1f", mySunAngle) + "°"
             : String(format: "%.0f", mySunAngle) + "°"
         sunAngleLabel.text = mySunAngleText
+    }
+    
+    @objc func updateTimer(notification: NSNotification) {
+        middleRemainingTime.text = "\(myTabBar.timerHour):\(myTabBar.timerMin):\(myTabBar.timerSec)"
+        
+        //update labels
+        currentState = myTabBar.currentState
+        nextState = myTabBar.nextState
     }
 }

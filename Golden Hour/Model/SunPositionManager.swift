@@ -1,11 +1,3 @@
-//
-//  SunPositionManager.swift
-//  Golden Hour
-//
-//  Created by Sam on 9/2/20.
-//  Copyright © 2020 Sam. All rights reserved.
-//
-
 import Foundation
 import CoreLocation
 
@@ -183,7 +175,6 @@ class SunPositionManager {
 
         let todayScan: [SunTimestamp] = dailyScan(yyyy,mm,dd)
         self.delegate?.didUpdateTodayScan(todayScan)
-        
     }
     
     
