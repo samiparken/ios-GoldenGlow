@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableViewCell: UITableViewCell {
+class TimeTableCell: UITableViewCell {
     
     // Time Mode
     @IBOutlet weak var timeLabel: UILabel!

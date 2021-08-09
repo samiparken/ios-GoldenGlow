@@ -52,7 +52,7 @@ class ScrollViewPage2: UIView {
         tableView.backgroundColor = .clear
         
         // Register TableViewCell
-        tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        tableView.register(UINib(nibName: "TimeTableCell", bundle: nil), forCellReuseIdentifier: "TimeTableCell")
 
     }
     
@@ -170,7 +170,7 @@ extension ScrollViewPage2: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
+        let cell: TimeTableCell = tableView.dequeueReusableCell(withIdentifier: "TimeTableCell", for: indexPath) as! TimeTableCell
 
         // Timestamp Mode
         if indexPath.row % 2 == 0 {
