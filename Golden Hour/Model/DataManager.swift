@@ -12,24 +12,16 @@ class DataManager {
     var selectedLocationData: LocationData?
     var timestampData: Results<TimestampData>?
 
-    func storeLocationData(_ cityName: String,
-                           _ countryName: String,
-                           _ countryCode: String,
-                           long: Double,
-                           lat: Double) {
+    func storeLocationData(_ newLocationData: LocationData) {
             
+        let cityName = newLocationData.cityName
+        let countryCode = newLocationData.countryCode
+        
         // Realm, DB Check & Store
         locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName, countryCode)
         
         if ( locationData!.count == 0 )
         {
-            let newLocationData = LocationData() //Realm Object
-            newLocationData.cityName = cityName
-            newLocationData.countryName = countryName
-            newLocationData.countryCode = countryCode
-            newLocationData.longitude = long
-            newLocationData.latitude = lat
-            
             do {
                 try realm.write { // Make Realm updated
                     realm.add(newLocationData)
@@ -41,11 +33,14 @@ class DataManager {
     }
     
     
-    func readTimestampData(_ cityName: String,
-                           _ countryCode: String,
+    func readTimestampData(_ lData: LocationData,
                            _ date: Date) -> Results<TimestampData>? {
         
+        let cityName = lData.cityName
+        let countryCode = lData.countryCode
+
         locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName, countryCode)
+        
         selectedLocationData = locationData![0]
         
         // Realm, check today timestamp

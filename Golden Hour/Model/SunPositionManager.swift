@@ -77,11 +77,18 @@ class SunPositionManager {
         let keyName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
         NotificationCenter.default.post(name: keyName, object: nil)
 
-        dataManager.storeLocationData(cityName, countryName, countryCode, long: long, lat: lat)
-                                
         
+        let locationData = LocationData() //Realm Object
+        locationData.cityName = cityName
+        locationData.countryName = countryName
+        locationData.countryCode = countryCode
+        locationData.longitude = long
+        locationData.latitude = lat
+        
+        dataManager.storeLocationData(locationData)
+                                        
         let today = Date() //temporary
-        timestampData = dataManager.readTimestampData(cityName, countryCode, today)
+        timestampData = dataManager.readTimestampData(locationData, today)
 
         if( timestampData!.count == 0)
         {
