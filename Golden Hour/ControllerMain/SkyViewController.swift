@@ -51,6 +51,14 @@ class SkyViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         print("SkyView: viewDidAppear")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        print("SkyView: viewWillDisappear")
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         if let location = myTabBar.currentLocation {
             currentLocationButton.titleLabel?.text = location
             currentLocationButton.addCharacterSpacing()
@@ -61,21 +69,6 @@ class SkyViewController: UIViewController {
         waveAnimation()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        print("SkyView: viewWillDisappear")
-
-    }
-
-    
-//    // Prepare for Switching Screen
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "goToSearch" {
-//            let destinationVC = segue.destination as! SearchViewController
-//            //            destinationVC.totalPerPerson = calculatorBrain.getTotalPerPerson()
-//            //            destinationVC.splitNumber = calculatorBrain.getSplitNumber()
-//            //            destinationVC.tipPct = calculatorBrain.getTipPct()
-//        }
-//    }
     
     //MARK: - For Notification Observers
 
@@ -216,17 +209,13 @@ class SkyViewController: UIViewController {
         // SunPulse Vertical Position
         self.sunPulse.frame.origin.y = ((0.23 - myTabBar.sunPulsePosition) * (offsetRate) + myTabBar.sunPulsePosition ) * screenHeight
     }
-
-
-//MARK: - UI Actions
-    
-    @IBAction func currentLocationButtonPressed(_ sender: UIButton) {
-        //self.performSegue(withIdentifier: "goToSearch", sender: self)
-        //locationManager.requestLocation()
-    }
     
     
-
+    //MARK: - UI Actions
+        
+        @IBAction func currentLocationButtonPressed(_ sender: UIButton) {
+            
+        }
 }
 
 //MARK: - UIScrollViewDelegate

@@ -126,11 +126,9 @@ class TabBarController: UITabBarController {
                   lat:  CLLocationDegrees) {
         
         // for calculation
-        sunPositionManager.currentData.Longitude = long
-        sunPositionManager.currentData.Latitude = lat
+        sunPositionManager.initLocation(long: long, lat: lat)
                 
         // Realm, DB Check & Store
-        /*
         locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName, countryCode)
         if ( locationData!.count == 0 )
         {
@@ -149,7 +147,6 @@ class TabBarController: UITabBarController {
             }
             locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName, countryCode)
         }
-        */
         
         // Braodcast: CityName to Show
         currentLocation = cityName.uppercased()

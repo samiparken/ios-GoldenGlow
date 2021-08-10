@@ -29,7 +29,7 @@
                                         <state key="normal" title="GOTEBORG"/>
                                         <connections>
                                             <action selector="currentLocationButtonPressed:" destination="NV3-4U-HHo" eventType="touchUpInside" id="oIK-30-3qg"/>
-                                            <segue destination="Oxk-fm-LbL" kind="presentation" id="dLR-Br-e61"/>
+                                            <segue destination="lTi-1s-r3H" kind="presentation" id="7kj-xN-ew6"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -76,12 +76,12 @@
             <point key="canvasLocation" x="135.19999999999999" y="125.61576354679804"/>
         </scene>
         <!--LocationSearch-->
-        <scene sceneID="t5g-if-bjp">
+        <scene sceneID="cXA-je-Yh9">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="LocationSearch" storyboardName="LocationSearch" id="Oxk-fm-LbL" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9mW-15-PEg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="LocationSearch" id="lTi-1s-r3H" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="osg-ht-bw5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="762" y="-170"/>
+            <point key="canvasLocation" x="744" y="-187"/>
         </scene>
     </scenes>
     <resources>

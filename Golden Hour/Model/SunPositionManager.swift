@@ -10,7 +10,16 @@ protocol SunPositionManagerDelegate {
 class SunPositionManager {
     var delegate: SunPositionManagerDelegate?
     var currentData = CurrentData()
+
     
+    
+//MARK: - Set
+    func initLocation(long: Double, lat: Double) {
+        currentData.Longitude = long
+        currentData.Latitude = lat
+    }
+    
+//MARK: - Get
     func isAboveEvent() -> Bool {
         let sun = currentData.SunAltitude!
         return isAboveEvent(sun)
@@ -110,7 +119,11 @@ class SunPositionManager {
         else if ( result < NIGHTTIME ) {return BLUEHOUR }
         else { return result }
     }
+
     
+    
+    
+//MARK: - Update
     func updateCurrentAltitude()
     {
         // Get current date & time

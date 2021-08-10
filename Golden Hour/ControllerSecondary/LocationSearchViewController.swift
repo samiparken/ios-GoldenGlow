@@ -15,10 +15,8 @@ class LocationSearchViewController: UIViewController {
         super.viewDidLoad()
 
         searchBar.delegate = self
-
         tableView.dataSource = self
         tableView.delegate = self
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,9 +30,6 @@ class LocationSearchViewController: UIViewController {
             selectedCityLabel.addCharacterSpacing()
         }
     }
-    
-    
-    
     
 //MARK: - UI Action
     
@@ -70,9 +65,7 @@ extension LocationSearchViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         print("Selected at \(indexPath.row)")
-
     }
-
 }
 
 //MARK: - UISearchBarDelegate
