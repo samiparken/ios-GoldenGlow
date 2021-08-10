@@ -1,4 +1,5 @@
 import Foundation
+import RealmSwift
 import CoreLocation
 
 protocol SunPositionManagerDelegate {
@@ -11,15 +12,99 @@ class SunPositionManager {
     var delegate: SunPositionManagerDelegate?
     var currentData = CurrentData()
 
-//MARK: - Set
-    func initLocation(long: Double, lat: Double) {
-        currentData.Longitude = long
-        currentData.Latitude = lat
+    /* Realm Database*/
+    // Initialize Realm
+    let realm = try! Realm()
+    
+    // Realm Object
+    var locationData: Results<LocationData>?
+    var selectedLocationData: LocationData?
+    var timestampData: Results<TimestampData>?
+    
+    // Location Data
+    var cityName: String = ""
+    var countryName: String = ""
+    var countryCode: String = ""
+    var GMT: Double = Double(TimeZone.current.secondsFromGMT()) / 3600
+    var Longitude: Double?
+    var Latitude: Double?
+    
+    // Sun Position Data
+    var SunAltitude: Double?
+    var SunAltitudeChange: Double?   //Rate of Change
+    var isMorning: Bool?       // for PlanView
+    
+    
+//MARK: - Init
+    func initSunPositionSystem(_ cityName: String,
+                               _ countryName: String,
+                               _ countryCode: String,
+                               long:  CLLocationDegrees,
+                               lat:  CLLocationDegrees) {
+        
+        self.cityName = cityName
+        self.countryName = countryName
+        self.countryCode = countryCode
+        self.Longitude = long
+        self.Latitude = lat
+                
+        // Realm, DB Check & Store
+        locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName, countryCode)
+        if ( locationData!.count == 0 )
+        {
+            let newLocationData = LocationData() //Realm Object
+            newLocationData.cityName = cityName
+            newLocationData.countryName = countryName
+            newLocationData.countryCode = countryCode
+            newLocationData.longitude = long
+            newLocationData.latitude = lat
+            do {
+                try realm.write { // Make Realm updated
+                    realm.add(newLocationData)
+                }
+            } catch {
+                print("Error saving newLocationData \(error)")
+            }
+            locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName, countryCode)
+        }
+        
+        // Braodcast: CityName to Show
+        let keyName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
+        NotificationCenter.default.post(name: keyName, object: nil)
+        
+        
+        // Realm, check today timestamp
+        let todayStart = Calendar.current.startOfDay(for: Date())
+        let todayEnd: Date = {
+          let components = DateComponents(day: 1, second: -1)
+          return Calendar.current.date(byAdding: components, to: todayStart)!
+        }()
+        selectedLocationData = locationData![0]
+        timestampData = selectedLocationData?.timestampDataSet.filter("time BETWEEN %@", [todayStart, todayEnd])
+        if( timestampData!.count == 0)
+        {
+            // scan data & store timestamps in RealmDB
+
+            
+            /* START SUN POSITION SYSTEM */
+            if let _ = self.SunAltitudeChange {}
+            else {
+                // for calculation
+                startSunPositionSystem()
+            }
+                        
+        } else {
+            timestampData = timestampData?.sorted(byKeyPath: "time", ascending: true)
+        }
+        
+        
+        
+        
     }
     
 //MARK: - Get
     func isAboveEvent() -> Bool {
-        let sun = currentData.SunAltitude!
+        let sun = self.SunAltitude!
         return isAboveEvent(sun)
     }
     func isAboveEvent(_ sun: Double) -> Bool {
@@ -27,7 +112,7 @@ class SunPositionManager {
     }
     
     func isLowSun() -> Bool {
-        let sun = currentData.SunAltitude!
+        let sun = self.SunAltitude!
         return isLowSun(sun)
     }
     func isLowSun(_ sun: Double) -> Bool {
@@ -36,7 +121,7 @@ class SunPositionManager {
     
     // GoldenHour+
     func isGoldenHourP() -> Bool {
-        let sun = currentData.SunAltitude!
+        let sun = self.SunAltitude!
         return isGoldenHourP(sun)
     }
     func isGoldenHourP(_ sun: Double) -> Bool {
@@ -44,7 +129,7 @@ class SunPositionManager {
     }
     
     func isSetRise() -> Bool {
-        let sun = currentData.SunAltitude!
+        let sun = self.SunAltitude!
         return isSetRise(sun)
     }
     func isSetRise(_ sun: Double) -> Bool {
@@ -53,7 +138,7 @@ class SunPositionManager {
     
     // GoldenHour-
     func isGoldenHourM() -> Bool {
-        let sun = currentData.SunAltitude!
+        let sun = self.SunAltitude!
         return isGoldenHourM(sun)
     }
     func isGoldenHourM(_ sun: Double) -> Bool {
@@ -61,7 +146,7 @@ class SunPositionManager {
     }
     
     func isBlueHour() -> Bool {
-        let sun = currentData.SunAltitude!
+        let sun = self.SunAltitude!
         return isBlueHour(sun)
     }
     func isBlueHour(_ sun: Double) -> Bool {
@@ -69,7 +154,7 @@ class SunPositionManager {
     }
     
     func isBelowEvent() -> Bool {
-        let sun = currentData.SunAltitude!
+        let sun = self.SunAltitude!
         return isBelowEvent(sun)
     }
     func isBelowEvent(_ sun: Double) -> Bool {
@@ -78,7 +163,7 @@ class SunPositionManager {
 
     
     func isAboveHorizon() -> Bool {
-        let sun = currentData.SunAltitude!
+        let sun = self.SunAltitude!
         return isAboveHorizon(sun)
     }
     func isAboveHorizon(_ sun: Double) -> Bool {
@@ -87,19 +172,19 @@ class SunPositionManager {
 
     
     func isSunGoingUp() -> Bool {
-        let change = currentData.SunAltitudeChange!
+        let change = self.SunAltitudeChange!
         return change > 0 ? true : false
     }
     
     func getAltitude() -> Double {
-        if let sun = currentData.SunAltitude { return sun }
+        if let sun = self.SunAltitude { return sun }
         else { return 0 }
     }
 
     
     func getState(_ sunAngle: Double = INVALIDANGLE) -> Int
     {
-        let inputAngle = sunAngle != INVALIDANGLE ? sunAngle : currentData.SunAltitude!
+        let inputAngle = sunAngle != INVALIDANGLE ? sunAngle : self.SunAltitude!
         
         if( isBelowEvent(inputAngle) ) { return NIGHTTIME }
         else if ( isBlueHour(inputAngle) ) { return BLUEHOUR }
@@ -126,21 +211,20 @@ class SunPositionManager {
     {
         // Get current date & time
         let now = Date()
-        let GMT = currentData.GMT
-        if let lon = currentData.Longitude
+        if let lon = self.Longitude
         {
-            let lat = currentData.Latitude!
-            var sun = SunPositionModel(now, GMT, longitude: lon, latitude: lat)
+            let lat = self.Latitude!
+            var sun = SunPositionModel(now, self.GMT, longitude: lon, latitude: lat)
             sun.spa_calculate()
             
-            if let sunAltitude = currentData.SunAltitude //if not first try
+            if let sunAltitude = self.SunAltitude //if not first try
             {
                 // Save Rate of Sun Altitude Change
-                currentData.SunAltitudeChange = sun.declination - sunAltitude
+                self.SunAltitudeChange = sun.declination - sunAltitude
             }
             
             // Save currentSunAltitude
-            currentData.SunAltitude = sun.declination
+            self.SunAltitude = sun.declination
         }
     }
 
@@ -150,19 +234,18 @@ class SunPositionManager {
         // Get current date & time
         let now = Date()
         let now2 = Date() + 10
-        let GMT = currentData.GMT
         
         // First Update Sun Altitude & Change
-        if let lon = currentData.Longitude
+        if let lon = self.Longitude
         {
-            let lat = currentData.Latitude!
-            var sun1 = SunPositionModel(now, GMT, longitude: lon, latitude: lat)
-            var sun2 = SunPositionModel(now2, GMT, longitude: lon, latitude: lat)
+            let lat = self.Latitude!
+            var sun1 = SunPositionModel(now, self.GMT, longitude: lon, latitude: lat)
+            var sun2 = SunPositionModel(now2, self.GMT, longitude: lon, latitude: lat)
             sun1.spa_calculate()
             sun2.spa_calculate()
             
-            currentData.SunAltitude = sun1.declination
-            currentData.SunAltitudeChange = sun2.declination - sun1.declination
+            self.SunAltitude = sun1.declination
+            self.SunAltitudeChange = sun2.declination - sun1.declination
         }
         updateScreen()
     }
@@ -170,7 +253,7 @@ class SunPositionManager {
     func updateScreen()
     {
         // BG & morning/evening
-        self.delegate?.didUpdateCurrentState(currentData.SunAltitude!, isSunGoingUp())
+        self.delegate?.didUpdateCurrentState(self.SunAltitude!, isSunGoingUp())
                 
         // Current Scan -> SkyView1 (Timer & Current State)
         let nowRange: [Date] = currentScan()
@@ -194,15 +277,14 @@ class SunPositionManager {
 
         var result: [Date] = []     // result.count == 2
 
-        let GMT = currentData.GMT
-        let lon = currentData.Longitude!
-        let lat = currentData.Latitude!
+        let lon = self.Longitude!
+        let lat = self.Latitude!
 
         let now = Date()
         let scanForwardLimit = now + 86400 // within 24h
         let scanBackwardLimit = now - 86400 // within 24h
         
-        var sun = SunPositionModel(now, GMT, longitude: lon, latitude: lat)
+        var sun = SunPositionModel(now, self.GMT, longitude: lon, latitude: lat)
         sun.spa_calculate()
         let currentAngle = sun.declination
         let currentState = getState(currentAngle)
@@ -245,9 +327,8 @@ class SunPositionManager {
         
         var result: [SunTimestamp] = []
 
-        let GMT = currentData.GMT
-        let lon = currentData.Longitude!
-        let lat = currentData.Latitude!
+        let lon = self.Longitude!
+        let lat = self.Latitude!
 
         let GMTString = String(format: "%+05d", GMT * 100)
         let inputDateString = year + "-" + month + "-" + day + " 00:00:00  " + GMTString
