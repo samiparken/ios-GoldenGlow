@@ -43,7 +43,7 @@ class ScrollViewPage2: UIView {
         tableView.delegate = self
         tableView.dataSource = self
         setupTableView()
-        
+        refreshTableView()
     }
 
 //MARK: - Init
@@ -54,7 +54,6 @@ class ScrollViewPage2: UIView {
         
         // Register TableViewCell
         tableView.register(UINib(nibName: "TimeTableCell", bundle: nil), forCellReuseIdentifier: "TimeTableCell")
-
     }
     
 //MARK: - For Notification Observers
@@ -68,15 +67,19 @@ class ScrollViewPage2: UIView {
     }
     
     @objc func updateState(notification: NSNotification) {
-        
+        refreshTableView()
+    }
+
+//MARK: - Methods
+    
+    func refreshTableView() {
         if myTabBar.isEvening {
             eveningButtonPressed((Any).self)
         } else {
             morningButtonPressed((Any).self)
         }
     }
-
-//MARK: - Methods
+    
     func setSunsetMode(){
         setRiseIcon.setImage(UIImage(systemName: "sunset"), for: .normal)
     }

@@ -124,10 +124,7 @@ class TabBarController: UITabBarController {
                   _ countryCode: String,
                   long:  CLLocationDegrees,
                   lat:  CLLocationDegrees) {
-        
-        // for calculation
-        sunPositionManager.initLocation(long: long, lat: lat)
-                
+                        
         // Realm, DB Check & Store
         locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName, countryCode)
         if ( locationData!.count == 0 )
@@ -169,9 +166,12 @@ class TabBarController: UITabBarController {
             
             /* START SUN POSITION SYSTEM */
             if let _ = sunPositionManager.currentData.SunAltitudeChange {}
-            else { sunPositionManager.startSunPositionSystem() }
-            
-            
+            else {
+                // for calculation
+                sunPositionManager.initLocation(long: long, lat: lat)
+                sunPositionManager.startSunPositionSystem()
+            }
+                        
         } else {
             timestampData = timestampData?.sorted(byKeyPath: "time", ascending: true)
         }

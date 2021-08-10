@@ -49,7 +49,6 @@ class ScrollViewPage1: UIView {
         upperStateStack.isHidden = true
     }
         
-    
     //MARK: - For Notification Observers
     
     // for Notification Observers

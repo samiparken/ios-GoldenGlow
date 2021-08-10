@@ -11,8 +11,6 @@ class SunPositionManager {
     var delegate: SunPositionManagerDelegate?
     var currentData = CurrentData()
 
-    
-    
 //MARK: - Set
     func initLocation(long: Double, lat: Double) {
         currentData.Longitude = long
@@ -145,7 +143,8 @@ class SunPositionManager {
             currentData.SunAltitude = sun.declination
         }
     }
-    
+
+//MARK: - Calculate
     func startSunPositionSystem()
     {
         // Get current date & time
