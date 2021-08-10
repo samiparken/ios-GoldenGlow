@@ -13,6 +13,11 @@ class SunPositionManager {
 
     let dataManager = DataManager()
     
+    // Realm Object
+    var locationData: Results<LocationData>?
+    var selectedLocationData: LocationData?
+    var timestampData: Results<TimestampData>?
+
     // Location Data
     var cityName: String = ""
     var countryName: String = ""
@@ -75,9 +80,8 @@ class SunPositionManager {
         dataManager.storeLocationData(cityName, countryName, countryCode, long: long, lat: lat)
                                 
         
-        /*
         let today = Date() //temporary
-        let timestampData = dataManager.readTimestampData(locationData, today)
+        timestampData = dataManager.readTimestampData(cityName, countryCode, today)
 
         if( timestampData!.count == 0)
         {
@@ -89,7 +93,6 @@ class SunPositionManager {
         } else {
 
         }
-         */
         
         /* START SUN POSITION SYSTEM */
         startSunPositionSystem()

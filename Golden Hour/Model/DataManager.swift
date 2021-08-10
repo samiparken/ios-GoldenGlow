@@ -43,7 +43,7 @@ class DataManager {
     
     func readTimestampData(_ cityName: String,
                            _ countryCode: String,
-                           _ date: Date) {
+                           _ date: Date) -> Results<TimestampData>? {
         
         locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName, countryCode)
         selectedLocationData = locationData![0]
@@ -58,6 +58,6 @@ class DataManager {
         timestampData = selectedLocationData?.timestampDataSet.filter("time BETWEEN %@", [startOfDay, endOfDay])
         timestampData = timestampData?.sorted(byKeyPath: "time", ascending: true)
 
-//        return Array(timestampData)
+        return timestampData
     }
 }
