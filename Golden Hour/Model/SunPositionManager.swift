@@ -119,7 +119,7 @@ class SunPositionManager {
         if let lon = currentData.Longitude
         {
             let lat = currentData.Latitude!
-            let sun = SunPositionModel(now, GMT, longitude: lon, latitude: lat)
+            var sun = SunPositionModel(now, GMT, longitude: lon, latitude: lat)
             sun.spa_calculate()
             
             if let sunAltitude = currentData.SunAltitude //if not first try
@@ -144,8 +144,8 @@ class SunPositionManager {
         if let lon = currentData.Longitude
         {
             let lat = currentData.Latitude!
-            let sun1 = SunPositionModel(now, GMT, longitude: lon, latitude: lat)
-            let sun2 = SunPositionModel(now2, GMT, longitude: lon, latitude: lat)
+            var sun1 = SunPositionModel(now, GMT, longitude: lon, latitude: lat)
+            var sun2 = SunPositionModel(now2, GMT, longitude: lon, latitude: lat)
             sun1.spa_calculate()
             sun2.spa_calculate()
             
@@ -190,7 +190,7 @@ class SunPositionManager {
         let scanForwardLimit = now + 86400 // within 24h
         let scanBackwardLimit = now - 86400 // within 24h
         
-        let sun = SunPositionModel(now, GMT, longitude: lon, latitude: lat)
+        var sun = SunPositionModel(now, GMT, longitude: lon, latitude: lat)
         sun.spa_calculate()
         let currentAngle = sun.declination
         let currentState = getState(currentAngle)
@@ -244,7 +244,7 @@ class SunPositionManager {
         let inputDate = dateFormatter.date(from: inputDateString)
         let scanLimitDate = inputDate! + 86400 // within 24h
         
-        let sun = SunPositionModel(inputDate!, GMT, longitude: lon, latitude: lat)
+        var sun = SunPositionModel(inputDate!, GMT, longitude: lon, latitude: lat)
         sun.spa_calculate()
         var currentState = getState(sun.declination)
         sun.date += calculateTimeGap(sun.declination)   // increase timestamp for scanning
@@ -287,7 +287,7 @@ class SunPositionManager {
             inputDate! -= DLSOffset*3600
                         
             let scanLimitDate = inputDate! + 86400 // within 24h
-            let sun = SunPositionModel(inputDate!, GMT+DLSOffset, longitude: lon, latitude: lat)
+            var sun = SunPositionModel(inputDate!, GMT+DLSOffset, longitude: lon, latitude: lat)
             sun.spa_calculate()
             var currentState = self.getState(sun.declination)
             sun.date += self.calculateTimeGap(sun.declination)   // increase timestamp for scanning

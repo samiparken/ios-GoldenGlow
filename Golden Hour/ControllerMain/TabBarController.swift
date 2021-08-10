@@ -130,6 +130,7 @@ class TabBarController: UITabBarController {
         sunPositionManager.currentData.Latitude = lat
                 
         // Realm, DB Check & Store
+        /*
         locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName, countryCode)
         if ( locationData!.count == 0 )
         {
@@ -148,6 +149,7 @@ class TabBarController: UITabBarController {
             }
             locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName, countryCode)
         }
+        */
         
         // Braodcast: CityName to Show
         currentLocation = cityName.uppercased()
@@ -171,6 +173,7 @@ class TabBarController: UITabBarController {
             /* START SUN POSITION SYSTEM */
             if let _ = sunPositionManager.currentData.SunAltitudeChange {}
             else { sunPositionManager.startSunPositionSystem() }
+            
             
         } else {
             timestampData = timestampData?.sorted(byKeyPath: "time", ascending: true)

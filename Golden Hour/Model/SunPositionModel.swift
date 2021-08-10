@@ -1,14 +1,6 @@
-//
-//  SunPositionModel.swift
-//  Golden Hour
-//
-//  Created by Sam on 9/1/20.
-//  Copyright © 2020 Sam. All rights reserved.
-//
-
 import Foundation
 
-class SunPositionModel {
+struct SunPositionModel {
     //----------------------INPUT VALUES------------------------
     
     var date: Date
@@ -138,12 +130,12 @@ class SunPositionModel {
         self.latitude = latitude
     }
     
-    func setDate(_ newDate: Date)
+    mutating func setDate(_ newDate: Date)
     {
         self.date = newDate
     }
     
-    func parseDate()
+    mutating func parseDate()
     {
         let calendar = Calendar.current
         self.year = calendar.component(.year, from: self.date)
@@ -400,7 +392,7 @@ class SunPositionModel {
         return sum
     }
     
-    func nutation_longitude_and_obliquity(_ x: [Double])
+    mutating func nutation_longitude_and_obliquity(_ x: [Double])
     {
         var xy_term_sum: Double, sum_psi: Double = 0, sum_epsilon: Double = 0
         
@@ -474,7 +466,7 @@ class SunPositionModel {
         return 8.794 / (3600.0 * self.r)
     }
     
-    func right_ascension_parallax_and_topocentric_dec()
+    mutating func right_ascension_parallax_and_topocentric_dec()
     {
         let lat_rad: Double   = deg2rad(self.latitude)
         let xi_rad: Double    = deg2rad(self.xi)
@@ -559,7 +551,7 @@ class SunPositionModel {
     // Calculate required SPA parameters to get the right ascension (alpha) and declination (delta)
     // Note: JD must be already calculated and in structure
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    func calculate_geocentric_sun_right_ascension_and_declination()
+    mutating func calculate_geocentric_sun_right_ascension_and_declination()
     {
         var x:[Double] = [] //double x[TERM_X_COUNT]
         
@@ -606,7 +598,7 @@ class SunPositionModel {
     // Calculate all SPA parameters and put into structure
     // Note: All inputs values (listed in header file) must already be in structure
     ///////////////////////////////////////////////////////////////////////////////////////////
-    func spa_calculate()
+    mutating func spa_calculate()
     {
         parseDate()
         let result: Int = validate_inputs()
