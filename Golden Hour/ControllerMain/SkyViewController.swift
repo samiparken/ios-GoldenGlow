@@ -209,13 +209,6 @@ class SkyViewController: UIViewController {
         // SunPulse Vertical Position
         self.sunPulse.frame.origin.y = ((0.23 - myTabBar.sunPulsePosition) * (offsetRate) + myTabBar.sunPulsePosition ) * screenHeight
     }
-    
-    
-    //MARK: - UI Actions
-        
-        @IBAction func currentLocationButtonPressed(_ sender: UIButton) {
-            
-        }
 }
 
 //MARK: - UIScrollViewDelegate

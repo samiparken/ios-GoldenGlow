@@ -28,7 +28,6 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="GOTEBORG"/>
                                         <connections>
-                                            <action selector="currentLocationButtonPressed:" destination="NV3-4U-HHo" eventType="touchUpInside" id="oIK-30-3qg"/>
                                             <segue destination="lTi-1s-r3H" kind="presentation" id="7kj-xN-ew6"/>
                                         </connections>
                                     </button>
