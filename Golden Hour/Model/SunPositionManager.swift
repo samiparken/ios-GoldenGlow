@@ -10,8 +10,9 @@ protocol SunPositionManagerDelegate {
 
 class SunPositionManager {
     var delegate: SunPositionManagerDelegate?
-    var currentData = CurrentData()
 
+    let dataManager = DataManager()
+    
     /* Realm Database*/
     // Initialize Realm
     let realm = try! Realm()
@@ -47,59 +48,36 @@ class SunPositionManager {
         self.countryCode = countryCode
         self.Longitude = long
         self.Latitude = lat
-                
-        // Realm, DB Check & Store
-        locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName, countryCode)
-        if ( locationData!.count == 0 )
-        {
-            let newLocationData = LocationData() //Realm Object
-            newLocationData.cityName = cityName
-            newLocationData.countryName = countryName
-            newLocationData.countryCode = countryCode
-            newLocationData.longitude = long
-            newLocationData.latitude = lat
-            do {
-                try realm.write { // Make Realm updated
-                    realm.add(newLocationData)
-                }
-            } catch {
-                print("Error saving newLocationData \(error)")
-            }
-            locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName, countryCode)
-        }
-        
+
         // Braodcast: CityName to Show
         let keyName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
         NotificationCenter.default.post(name: keyName, object: nil)
+
+        let locationData = LocationData() //Realm Object
+        locationData.cityName = cityName
+        locationData.countryName = countryName
+        locationData.countryCode = countryCode
+        locationData.longitude = long
+        locationData.latitude = lat
+
+        dataManager.storeLocationData(locationData)
+                                
+        let today = Date() //temporary
+        timestampData = dataManager.readTimestampData(locationData, today)
         
-        
-        // Realm, check today timestamp
-        let todayStart = Calendar.current.startOfDay(for: Date())
-        let todayEnd: Date = {
-          let components = DateComponents(day: 1, second: -1)
-          return Calendar.current.date(byAdding: components, to: todayStart)!
-        }()
-        selectedLocationData = locationData![0]
-        timestampData = selectedLocationData?.timestampDataSet.filter("time BETWEEN %@", [todayStart, todayEnd])
         if( timestampData!.count == 0)
         {
             // scan data & store timestamps in RealmDB
 
             
+            
             /* START SUN POSITION SYSTEM */
             if let _ = self.SunAltitudeChange {}
-            else {
-                // for calculation
-                startSunPositionSystem()
-            }
+            else { startSunPositionSystem() }
                         
         } else {
             timestampData = timestampData?.sorted(byKeyPath: "time", ascending: true)
         }
-        
-        
-        
-        
     }
     
 //MARK: - Get
@@ -202,9 +180,6 @@ class SunPositionManager {
         else if ( result < NIGHTTIME ) {return BLUEHOUR }
         else { return result }
     }
-
-    
-    
     
 //MARK: - Update
     func updateCurrentAltitude()
