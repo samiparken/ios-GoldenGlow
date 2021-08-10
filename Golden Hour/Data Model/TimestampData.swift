@@ -1,11 +1,3 @@
-//
-//  Timestamp.swift
-//  Golden Hour
-//
-//  Created by Sam on 10/17/20.
-//  Copyright © 2020 Sam. All rights reserved.
-//
-
 import RealmSwift
 
 class TimestampData: Object {

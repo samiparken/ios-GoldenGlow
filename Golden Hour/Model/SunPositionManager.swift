@@ -1,6 +1,6 @@
 import Foundation
-import RealmSwift
 import CoreLocation
+import RealmSwift
 
 protocol SunPositionManagerDelegate {
     func didUpdateCurrentState(_ sunAngle: Double, _ isUp: Bool)
@@ -13,15 +13,6 @@ class SunPositionManager {
 
     let dataManager = DataManager()
     
-    /* Realm Database*/
-    // Initialize Realm
-    let realm = try! Realm()
-    
-    // Realm Object
-    var locationData: Results<LocationData>?
-    var selectedLocationData: LocationData?
-    var timestampData: Results<TimestampData>?
-    
     // Location Data
     var cityName: String = ""
     var countryName: String = ""
@@ -31,8 +22,36 @@ class SunPositionManager {
     var Latitude: Double?
     
     // Sun Position Data
-    var SunAltitude: Double?
-    var SunAltitudeChange: Double?   //Rate of Change
+    var SunAltitude: Double? {
+        get {
+            let now = Date()
+            if let lon = self.Longitude, let lat = self.Latitude {
+                var sun = SunPositionModel(now, self.GMT, longitude: lon, latitude: lat)
+                sun.spa_calculate()
+                return sun.declination
+            } else {
+                return 0
+            }
+        }
+    }
+    var SunAltitudeChange: Double? {
+        get {
+            if let lon = self.Longitude, let lat = self.Latitude
+            {
+                var sun1 = SunPositionModel(Date(), self.GMT, longitude: lon, latitude: lat)
+                var sun2 = SunPositionModel(Date() + 10, self.GMT, longitude: lon, latitude: lat)
+
+                sun1.spa_calculate()
+                sun2.spa_calculate()
+                
+                return sun2.declination - sun1.declination
+
+            } else {
+                return 0
+            }
+
+        }
+    }
     var isMorning: Bool?       // for PlanView
     
     
@@ -53,31 +72,31 @@ class SunPositionManager {
         let keyName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
         NotificationCenter.default.post(name: keyName, object: nil)
 
-        let locationData = LocationData() //Realm Object
-        locationData.cityName = cityName
-        locationData.countryName = countryName
-        locationData.countryCode = countryCode
-        locationData.longitude = long
-        locationData.latitude = lat
-
-        dataManager.storeLocationData(locationData)
+        dataManager.storeLocationData(cityName, countryName, countryCode, long: long, lat: lat)
                                 
-        let today = Date() //temporary
-        timestampData = dataManager.readTimestampData(locationData, today)
         
+        /* START SUN POSITION SYSTEM */
+        startSunPositionSystem()
+        
+//        if let _ = self.SunAltitudeChange {}
+//        else { startSunPositionSystem() }
+
+        
+        /*
+        let today = Date() //temporary
+        let timestampData = dataManager.readTimestampData(locationData, today)
+
         if( timestampData!.count == 0)
         {
             // scan data & store timestamps in RealmDB
 
             
             
-            /* START SUN POSITION SYSTEM */
-            if let _ = self.SunAltitudeChange {}
-            else { startSunPositionSystem() }
                         
         } else {
-            timestampData = timestampData?.sorted(byKeyPath: "time", ascending: true)
+
         }
+         */
     }
     
 //MARK: - Get
@@ -180,48 +199,11 @@ class SunPositionManager {
         else if ( result < NIGHTTIME ) {return BLUEHOUR }
         else { return result }
     }
-    
-//MARK: - Update
-    func updateCurrentAltitude()
-    {
-        // Get current date & time
-        let now = Date()
-        if let lon = self.Longitude
-        {
-            let lat = self.Latitude!
-            var sun = SunPositionModel(now, self.GMT, longitude: lon, latitude: lat)
-            sun.spa_calculate()
-            
-            if let sunAltitude = self.SunAltitude //if not first try
-            {
-                // Save Rate of Sun Altitude Change
-                self.SunAltitudeChange = sun.declination - sunAltitude
-            }
-            
-            // Save currentSunAltitude
-            self.SunAltitude = sun.declination
-        }
-    }
-
+ 
 //MARK: - Calculate
     func startSunPositionSystem()
     {
-        // Get current date & time
-        let now = Date()
-        let now2 = Date() + 10
-        
-        // First Update Sun Altitude & Change
-        if let lon = self.Longitude
-        {
-            let lat = self.Latitude!
-            var sun1 = SunPositionModel(now, self.GMT, longitude: lon, latitude: lat)
-            var sun2 = SunPositionModel(now2, self.GMT, longitude: lon, latitude: lat)
-            sun1.spa_calculate()
-            sun2.spa_calculate()
-            
-            self.SunAltitude = sun1.declination
-            self.SunAltitudeChange = sun2.declination - sun1.declination
-        }
+
         updateScreen()
     }
     

@@ -12,15 +12,24 @@ class DataManager {
     var selectedLocationData: LocationData?
     var timestampData: Results<TimestampData>?
 
-    func storeLocationData(_ newLocationData: LocationData) {
-    
-        let cityName = newLocationData.cityName
-        let countryCode = newLocationData.countryCode
-        
+    func storeLocationData(_ cityName: String,
+                           _ countryName: String,
+                           _ countryCode: String,
+                           long: Double,
+                           lat: Double) {
+            
         // Realm, DB Check & Store
         locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName, countryCode)
+        
         if ( locationData!.count == 0 )
         {
+            let newLocationData = LocationData() //Realm Object
+            newLocationData.cityName = cityName
+            newLocationData.countryName = countryName
+            newLocationData.countryCode = countryCode
+            newLocationData.longitude = long
+            newLocationData.latitude = lat
+            
             do {
                 try realm.write { // Make Realm updated
                     realm.add(newLocationData)
@@ -28,12 +37,16 @@ class DataManager {
             } catch {
                 print("Error saving newLocationData \(error)")
             }
-            locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName, countryCode)
         }
     }
     
     
-    func readTimestampData(_ locationData: LocationData, _ date: Date) -> Results<TimestampData>? {
+    func readTimestampData(_ cityName: String,
+                           _ countryCode: String,
+                           _ date: Date) {
+        
+        locationData = realm.objects(LocationData.self).filter("cityName == %@ AND countryCode == %@", cityName, countryCode)
+        selectedLocationData = locationData![0]
         
         // Realm, check today timestamp
         let startOfDay = Calendar.current.startOfDay(for: date)
@@ -42,11 +55,9 @@ class DataManager {
           return Calendar.current.date(byAdding: components, to: startOfDay)!
         }()
         
-        timestampData = locationData.timestampDataSet.filter("time BETWEEN %@", [startOfDay, endOfDay])
-        
-        return timestampData
+        timestampData = selectedLocationData?.timestampDataSet.filter("time BETWEEN %@", [startOfDay, endOfDay])
+        timestampData = timestampData?.sorted(byKeyPath: "time", ascending: true)
+
+//        return Array(timestampData)
     }
-        
-    
-    
 }

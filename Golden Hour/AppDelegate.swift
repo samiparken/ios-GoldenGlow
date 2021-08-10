@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  Golden Hour
-//
-//  Created by Sam on 8/27/20.
-//  Copyright © 2020 Sam. All rights reserved.
-//
-
 import UIKit
 import RealmSwift
 

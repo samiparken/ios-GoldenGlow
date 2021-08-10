@@ -1,11 +1,3 @@
-//
-//  ScrollViewPage2.swift
-//  Golden Hour
-//
-//  Created by Sam on 9/15/20.
-//  Copyright © 2020 Sam. All rights reserved.
-//
-
 import UIKit
 
 class ScrollViewPage2: UIView {

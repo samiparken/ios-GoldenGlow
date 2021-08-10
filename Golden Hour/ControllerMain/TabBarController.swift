@@ -1,19 +1,14 @@
 import UIKit
-import RealmSwift
 import CoreLocation
 
 class TabBarController: UITabBarController {
     let defaults = UserDefaults.standard
     
-    /* Realm Database*/
-    // Initialize Realm
-    let realm = try! Realm()
+    // Managers
+    var sunPositionManager = SunPositionManager()
+    var locationManager = LocationManager()
+    var timerManager = TimerManager()
     
-    // Realm Object
-    var locationData: Results<LocationData>?
-    var selectedLocationData: LocationData?
-    var timestampData: Results<TimestampData>?
-
     /* for Sharing Data Btw View Controllers */
     static let singletonTabBar = TabBarController()
     
@@ -68,12 +63,7 @@ class TabBarController: UITabBarController {
     // SkyView2 Times
     var morningCellData: [CellData] = []   // 5 x 2 + 1 = 13
     var eveningCellData: [CellData] = []   // 5 x 2 + 1 = 13
-    
-    // Managers
-    var sunPositionManager = SunPositionManager()
-    var locationManager = LocationManager()
-    var timerManager = TimerManager()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -101,8 +91,7 @@ class TabBarController: UITabBarController {
     
 //MARK: - Methods
     func updateSunAngle() {
-        sunPositionManager.updateCurrentAltitude()
-        sunAngle = sunPositionManager.getAltitude()
+        sunAngle = sunPositionManager.SunAltitude ?? 0
     }
     
     func calculateTotalDuration(_ data: [CellData]) -> String {
