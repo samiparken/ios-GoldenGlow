@@ -75,13 +75,6 @@ class SunPositionManager {
         dataManager.storeLocationData(cityName, countryName, countryCode, long: long, lat: lat)
                                 
         
-        /* START SUN POSITION SYSTEM */
-        startSunPositionSystem()
-        
-//        if let _ = self.SunAltitudeChange {}
-//        else { startSunPositionSystem() }
-
-        
         /*
         let today = Date() //temporary
         let timestampData = dataManager.readTimestampData(locationData, today)
@@ -97,6 +90,10 @@ class SunPositionManager {
 
         }
          */
+        
+        /* START SUN POSITION SYSTEM */
+        startSunPositionSystem()
+
     }
     
 //MARK: - Get
