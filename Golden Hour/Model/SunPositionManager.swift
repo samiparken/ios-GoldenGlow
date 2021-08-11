@@ -29,6 +29,12 @@ class SunPositionManager {
             return Double(timezone!.secondsFromGMT()) / 3600
         }
     }
+    var deviceGMT: Double = Double(TimeZone.current.secondsFromGMT()) / 3600
+    var timezoneOffset: Double {
+        get {
+            return (self.GMT - deviceGMT) * 3600
+        }
+    }
     var Longitude: Double?
     var Latitude: Double?
     
@@ -204,13 +210,13 @@ class SunPositionManager {
         
         var result: [SunTimestamp] = []
         
-        let targetDateString = year + "-" + month + "-" + day + " 00:00:00  +0000"
+        let targetDateString = year + "-" + month + "-" + day + " 00:00:00"
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"  //ex) 2020-03-13 00:00:00 +0200
-        let targetDate = dateFormatter.date(from: targetDateString)
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"  //ex) 2020-03-13 00:00:00 +0200
+        let targetDate = dateFormatter.date(from: targetDateString)! - timezoneOffset
                 
-        let scanLimitDate = targetDate! + 86400 // within 24h
-        var sun = SunPositionModel(targetDate!, GMT, longitude: self.Longitude!, latitude: self.Latitude!)
+        let scanLimitDate = targetDate + 86400 // within 24h
+        var sun = SunPositionModel(targetDate, GMT, longitude: self.Longitude!, latitude: self.Latitude!)
         sun.spa_calculate()
         var currentState = self.getState(sun.declination)
         sun.date += self.calculateTimeGap(sun.declination)   // increase timestamp for scanning
@@ -221,7 +227,7 @@ class SunPositionManager {
             let newState = getState(sunAngle)
             if ( currentState != newState )
             {
-                let newTimestamp = SunTimestamp(time: sun.date, from: currentState, to: newState)
+                let newTimestamp = SunTimestamp(time: sun.date + timezoneOffset, from: currentState, to: newState)
                 result.append(newTimestamp)
                 currentState = newState
             }

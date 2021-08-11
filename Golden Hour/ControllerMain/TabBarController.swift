@@ -209,7 +209,7 @@ extension TabBarController: SunPositionManagerDelegate {
         self.eveningCellData = []   // 5 x 2 + 1 = 13
         
         var timestamps: [SunTimestamp] = today
-        var end:Date, start: Date
+        var end: Date, start: Date
         var currentState = timestamps[0].to
         
         // Morning scan

@@ -135,16 +135,26 @@ struct SunPositionModel {
         self.date = newDate
     }
     
+    func timezoneOffset() -> Double {
+        
+        let deviceGMT = Double(TimeZone.current.secondsFromGMT()) / 3600
+        let targetGMT = self.timezone
+        
+        return (targetGMT - deviceGMT) * 3600
+    }
+    
     mutating func parseDate()
     {
         // + fix apply timezone on calendar
         let calendar = Calendar.current
-        self.year = calendar.component(.year, from: self.date)
-        self.month = calendar.component(.month, from: self.date)
-        self.day = calendar.component(.day, from: self.date)
-        self.hour = calendar.component(.hour, from: self.date)
-        self.minute = calendar.component(.minute, from: self.date)
-        self.second = Double(calendar.component(.second, from: self.date))
+        
+        let convertedDate = self.date + timezoneOffset()
+        self.year = calendar.component(.year, from: convertedDate)
+        self.month = calendar.component(.month, from: convertedDate)
+        self.day = calendar.component(.day, from: convertedDate)
+        self.hour = calendar.component(.hour, from: convertedDate)
+        self.minute = calendar.component(.minute, from: convertedDate)
+        self.second = Double(calendar.component(.second, from: convertedDate))
         print("\(year)-\(month)-\(day), \(hour):\(minute):\(second) GMT\(timezone)")
     }
     
