@@ -240,7 +240,6 @@ class SunPositionManager {
     func dailyScan2(_ year: String, _ month: String, _ day: String, lon: Double, lat: Double) -> [SunTimestamp] {
         
         var result: [SunTimestamp] = []
-        var DLSOffset: Double = 0.0
         
         let targetDateString = year + "-" + month + "-" + day + " 00:00:00  +0000"
         let dateFormatter = DateFormatter()
@@ -253,17 +252,12 @@ class SunPositionManager {
             let place = placemarks?.last;
             let GMT = Double((place?.timeZone?.secondsFromGMT(for: targetDate!))!) / 3600  // 2.0
             
-            let GMTString = String(format: "%+05d", Int(GMT*10) * 10)
-     // +0200
+            let GMTString = String(format: "%+05d", Int(GMT*10) * 10) // +0200
             let inputDateString = year + "-" + month + "-" + day + " 00:00:00  " + GMTString
-            var inputDate = dateFormatter.date(from: inputDateString)
-            
-            DLSOffset = Double(((place?.timeZone?.daylightSavingTimeOffset(for: inputDate!))!)) / 3600
-            inputDate! -= DLSOffset*3600
-            
-                        
+            let inputDate = dateFormatter.date(from: inputDateString)
+                                    
             let scanLimitDate = inputDate! + 86400 // within 24h
-            var sun = SunPositionModel(inputDate!, GMT+DLSOffset, longitude: lon, latitude: lat)
+            var sun = SunPositionModel(inputDate!, GMT, longitude: lon, latitude: lat)
             sun.spa_calculate()
             var currentState = self.getState(sun.declination)
             sun.date += self.calculateTimeGap(sun.declination)   // increase timestamp for scanning
