@@ -61,7 +61,7 @@ class SkyViewController: UIViewController {
         print("SkyView: viewWillAppear")
         
         if let cityName = myTabBar.currentLocation {
-            currentLocationButton.setTitle(cityName, for: .normal)
+            currentLocationButton.titleLabel?.text = cityName
             currentLocationButton.addCharacterSpacing()
         }
         
@@ -101,7 +101,7 @@ class SkyViewController: UIViewController {
     
     @objc func updateCityName(notification: NSNotification) {
         let cityName = myTabBar.currentLocation
-        currentLocationButton.setTitle(cityName, for: .normal)
+        currentLocationButton.titleLabel?.text = cityName
         currentLocationButton.addCharacterSpacing()
     }
     
