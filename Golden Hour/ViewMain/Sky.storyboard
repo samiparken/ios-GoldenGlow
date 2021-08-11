@@ -26,7 +26,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="384" height="30"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="GOTEBORG"/>
+                                        <state key="normal" title="-"/>
                                         <connections>
                                             <segue destination="lTi-1s-r3H" kind="presentation" id="7kj-xN-ew6"/>
                                         </connections>
