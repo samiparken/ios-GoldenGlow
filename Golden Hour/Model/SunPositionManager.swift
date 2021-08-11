@@ -35,7 +35,7 @@ class SunPositionManager {
     // Sun Position Data
     var SunAltitude: Double? {
         get {
-            let now = Date() + self.GMT * 3600
+            let now = Date()
             if let lon = self.Longitude,
                let lat = self.Latitude {
                 var sun = SunPositionModel(now, self.GMT, longitude: lon, latitude: lat)
@@ -156,7 +156,7 @@ class SunPositionManager {
         let lon = self.Longitude!
         let lat = self.Latitude!
 
-        let now = Date() + self.GMT * 3600
+        let now = Date()
         let scanForwardLimit = now + 86400 // within 24h
         let scanBackwardLimit = now - 86400 // within 24h
         
@@ -208,9 +208,7 @@ class SunPositionManager {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"  //ex) 2020-03-13 00:00:00 +0200
         let targetDate = dateFormatter.date(from: targetDateString)
-        
-        let GMT = Double(timezone!.secondsFromGMT(for: targetDate!)) / 3600  // 2.0
-        
+                
         let scanLimitDate = targetDate! + 86400 // within 24h
         var sun = SunPositionModel(targetDate!, GMT, longitude: self.Longitude!, latitude: self.Latitude!)
         sun.spa_calculate()

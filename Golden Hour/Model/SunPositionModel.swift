@@ -137,6 +137,7 @@ struct SunPositionModel {
     
     mutating func parseDate()
     {
+        // + fix apply timezone on calendar
         let calendar = Calendar.current
         self.year = calendar.component(.year, from: self.date)
         self.month = calendar.component(.month, from: self.date)
@@ -144,7 +145,7 @@ struct SunPositionModel {
         self.hour = calendar.component(.hour, from: self.date)
         self.minute = calendar.component(.minute, from: self.date)
         self.second = Double(calendar.component(.second, from: self.date))
-        //print("\(year)-\(month)-\(day), \(hour):\(minute):\(second) GMT\(timezone)")
+        print("\(year)-\(month)-\(day), \(hour):\(minute):\(second) GMT\(timezone)")
     }
     
     func rad2deg(_ radians: Double) -> Double {
