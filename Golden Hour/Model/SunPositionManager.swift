@@ -131,21 +131,19 @@ class SunPositionManager {
         // BG & morning/evening
         self.delegate?.didUpdateCurrentState(self.SunAltitude!, isSunGoingUp())
 
-
-        updateScreen()
-        
-        
+        refreshCurrentState()
+        refreshDateState()
     }
     
-    func updateScreen()
-    {
-                
+    func refreshCurrentState() {
         // Current Scan -> SkyView1 (Timer & Current State)
         let nowRange: [Date] = currentScan()
         let nowState = getState()
         let nowNext = getNextState()
         self.delegate?.didUpdateCurrentScan(from: nowRange[0], to: nowRange[1], nowState, nowNext)
-
+    }
+    
+    func refreshDateState() {
         // Today Scan -> SkyView2
         let today = Date()
         let calendar = Calendar.current
@@ -154,9 +152,7 @@ class SunPositionManager {
         let dd = String(calendar.component(.day, from: today))
         let scanResult = dateScan(yyyy, mm, dd)
         self.delegate?.didUpdateTodayScan(scanResult)
-        
     }
-    
     
     func currentScan() -> [Date] {
 

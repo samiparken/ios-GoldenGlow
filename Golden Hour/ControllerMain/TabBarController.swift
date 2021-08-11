@@ -318,6 +318,5 @@ extension TabBarController: TimerManagerDelegate {
     }
     
     func didEndTimer() {
-        sunPositionManager.updateScreen()
-    }
+        sunPositionManager.refreshCurrentState()    }
 }
