@@ -7,12 +7,8 @@ class LocationSearchViewController: UIViewController {
     @IBOutlet weak var selectedCityLabel: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
-
-    //manager
-    let sunPositionManager = SunPositionManager()
     
     var matchingItems: [MKMapItem] = []
-
     
     override func viewDidLoad() {
         super.viewDidLoad()

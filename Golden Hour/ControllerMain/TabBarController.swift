@@ -115,6 +115,16 @@ class TabBarController: UITabBarController {
 //MARK: - SunPositionManagerDelegate
 extension TabBarController: SunPositionManagerDelegate {
     
+    func didUpdateCurrentCity(_ cityName: String) {
+        
+        currentLocation = cityName.uppercased()
+        
+        // Braodcast: CityName to Show
+        let keyName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
+        NotificationCenter.default.post(name: keyName, object: nil)
+    }
+    
+    
     // Set BG & morning/evening
     func didUpdateCurrentState(_ sunAngle: Double, _ isUp: Bool) {
         

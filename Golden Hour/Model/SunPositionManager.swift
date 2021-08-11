@@ -3,6 +3,7 @@ import CoreLocation
 import RealmSwift
 
 protocol SunPositionManagerDelegate {
+    func didUpdateCurrentCity(_ cityName: String)
     func didUpdateCurrentState(_ sunAngle: Double, _ isUp: Bool)
     func didUpdateCurrentScan(from: Date, to: Date, _ nowState: Int, _ nextState: Int)
     func didUpdateTodayScan(_ today: [SunTimestamp])
@@ -79,15 +80,13 @@ class SunPositionManager {
         self.Longitude = long
         self.Latitude = lat
                 
-        // Braodcast: CityName to Show
-        let keyName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
-        NotificationCenter.default.post(name: keyName, object: nil)
 
         let loc = CLLocation.init(latitude: lat, longitude: long);
         let coder = CLGeocoder();
         coder.reverseGeocodeLocation(loc) { [self] (placemarks, error) in
             let place = placemarks?.last;
             self.timezone = place?.timeZone
+                        
             
             let locationData = LocationData() //Realm Object
             locationData.cityName = cityName
@@ -97,12 +96,7 @@ class SunPositionManager {
             locationData.latitude = lat
             
             dataManager.storeLocationData(locationData)
-                                          
-            
-            
-            
-            
-            
+                                                      
             let today = Date() //temporary
             timestampData = dataManager.readTimestampData(locationData, today)
 
@@ -128,6 +122,9 @@ class SunPositionManager {
 //MARK: - Calculate
     func startSunPositionSystem()
     {
+        // Update CityName at the top
+        self.delegate?.didUpdateCurrentCity(self.cityName)
+        
         // BG & morning/evening
         self.delegate?.didUpdateCurrentState(self.SunAltitude!, isSunGoingUp())
 
