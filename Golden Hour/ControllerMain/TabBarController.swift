@@ -191,7 +191,6 @@ extension TabBarController: SunPositionManagerDelegate {
 
         // Start Timer
         timerManager.startTimer(to)
-
         
 //        //TotalDuration
 //        let duration = to.timeIntervalSince1970 - from.timeIntervalSince1970
@@ -206,15 +205,18 @@ extension TabBarController: SunPositionManagerDelegate {
     
     func didUpdateTodayScan(_ today: [SunTimestamp]) {
         
-        var timestamp: [SunTimestamp] = today
+        self.morningCellData = []   // 5 x 2 + 1 = 13
+        self.eveningCellData = []   // 5 x 2 + 1 = 13
+        
+        var timestamps: [SunTimestamp] = today
         var end:Date, start: Date
-        var currentState = timestamp[0].to
+        var currentState = timestamps[0].to
         
         // Morning scan
-        while( (timestamp.count > 0) )
+        while( (timestamps.count > 0) )
         {
-            start = timestamp[0].time
-            if (timestamp[0].to == SETRISE) {
+            start = timestamps[0].time
+            if (timestamps[0].to == SETRISE) {
                 let calendar = Calendar.current
                 let hour = calendar.component(.hour, from: start)
                 let minute = calendar.component(.minute, from: start)
@@ -223,16 +225,16 @@ extension TabBarController: SunPositionManagerDelegate {
             let newTimeCellData = CellData( time: start )
             morningCellData.append(newTimeCellData)
             
-            timestamp.removeFirst(1)
-            if( (timestamp.count == 0) || (currentState == DAYTIME)) { break }
+            timestamps.removeFirst(1)
+            if( (timestamps.count == 0) || (currentState == DAYTIME)) { break }
             else {
-                end = timestamp[0].time
+                end = timestamps[0].time
                 let _duration = Int((end.timeIntervalSince1970 - start.timeIntervalSince1970) / 60)
                 let durationString = String(format: "%dmin", _duration)
                 let newTitleCellData = CellData(state: currentState, duration: durationString, isEvening: false)
                 morningCellData.append(newTitleCellData)
                 
-                currentState = timestamp[0].to
+                currentState = timestamps[0].to
             }
         }
         
@@ -241,11 +243,11 @@ extension TabBarController: SunPositionManagerDelegate {
 
         
         // Evening Scan
-        if( timestamp.count > 0 ) { currentState = timestamp[0].to }
-        while( (timestamp.count > 0) )
+        if( timestamps.count > 0 ) { currentState = timestamps[0].to }
+        while( (timestamps.count > 0) )
         {
-            start = timestamp[0].time
-            if (timestamp[0].to == SETRISE) {
+            start = timestamps[0].time
+            if (timestamps[0].to == SETRISE) {
                 let calendar = Calendar.current
                 let hour = calendar.component(.hour, from: start)
                 let minute = calendar.component(.minute, from: start)
@@ -254,16 +256,16 @@ extension TabBarController: SunPositionManagerDelegate {
             let newTimeCellData = CellData( time: start )
             eveningCellData.append(newTimeCellData)
             
-            timestamp.removeFirst(1)
-            if( (timestamp.count == 0) || (currentState == NIGHTTIME)) { break }
+            timestamps.removeFirst(1)
+            if( (timestamps.count == 0) || (currentState == NIGHTTIME)) { break }
             else {
-                end = timestamp[0].time
+                end = timestamps[0].time
                 let _duration = Int((end.timeIntervalSince1970 - start.timeIntervalSince1970) / 60)
                 let durationString = String(format: "%dmin", _duration)
                 let newTitleCellData = CellData(state: currentState, duration: durationString, isEvening: true)
                 eveningCellData.append(newTitleCellData)
                 
-                currentState = timestamp[0].to
+                currentState = timestamps[0].to
             }
         }
         

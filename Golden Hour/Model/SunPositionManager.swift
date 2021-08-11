@@ -26,7 +26,7 @@ class SunPositionManager {
     var timezone: TimeZone?
     var GMT: Double {
         get{
-            return Double(timezone?.secondsFromGMT() ?? 0) / 3600
+            return Double(timezone!.secondsFromGMT()) / 3600
         }
     }
     var Longitude: Double?
@@ -35,7 +35,7 @@ class SunPositionManager {
     // Sun Position Data
     var SunAltitude: Double? {
         get {
-            let now = Date()
+            let now = Date() + self.GMT * 3600
             if let lon = self.Longitude,
                let lat = self.Latitude {
                 var sun = SunPositionModel(now, self.GMT, longitude: lon, latitude: lat)
@@ -79,15 +79,13 @@ class SunPositionManager {
         self.countryCode = countryCode
         self.Longitude = long
         self.Latitude = lat
-                
 
         let loc = CLLocation.init(latitude: lat, longitude: long);
         let coder = CLGeocoder();
         coder.reverseGeocodeLocation(loc) { [self] (placemarks, error) in
             let place = placemarks?.last;
             self.timezone = place?.timeZone
-                        
-            
+                                    
             let locationData = LocationData() //Realm Object
             locationData.cityName = cityName
             locationData.countryName = countryName
@@ -158,7 +156,7 @@ class SunPositionManager {
         let lon = self.Longitude!
         let lat = self.Latitude!
 
-        let now = Date()
+        let now = Date() + self.GMT * 3600
         let scanForwardLimit = now + 86400 // within 24h
         let scanBackwardLimit = now - 86400 // within 24h
         
@@ -209,10 +207,9 @@ class SunPositionManager {
         let targetDateString = year + "-" + month + "-" + day + " 00:00:00  +0000"
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"  //ex) 2020-03-13 00:00:00 +0200
-        var targetDate = dateFormatter.date(from: targetDateString)
+        let targetDate = dateFormatter.date(from: targetDateString)
         
         let GMT = Double(timezone!.secondsFromGMT(for: targetDate!)) / 3600  // 2.0
-        targetDate! -= GMT * 3600 // adjust timezone
         
         let scanLimitDate = targetDate! + 86400 // within 24h
         var sun = SunPositionModel(targetDate!, GMT, longitude: self.Longitude!, latitude: self.Latitude!)

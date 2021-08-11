@@ -122,10 +122,10 @@ struct SunPositionModel {
     var sunrise: Double = 0      //local sunrise time (+/- 30 seconds) [fractional hour]
     var sunset: Double = 0       //local sunset time (+/- 30 seconds) [fractional hour]
     
-    init(_ date: Date, _ timezone: Double, longitude: Double, latitude: Double)
+    init(_ date: Date, _ GMT: Double, longitude: Double, latitude: Double)
     {
         self.date = date
-        self.timezone = timezone
+        self.timezone = GMT
         self.longitude = longitude
         self.latitude = latitude
     }
