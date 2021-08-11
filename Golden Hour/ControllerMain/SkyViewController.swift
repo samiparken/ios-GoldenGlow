@@ -8,9 +8,7 @@ import UIKit
 
 class SkyViewController: UIViewController {
     let myTabBar = TabBarController.singletonTabBar
-    
-    let sunPositionManager = SunPositionManager()
-    
+        
     @IBOutlet weak var BGImageView: UIImageView!
     @IBOutlet weak var currentLocationButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -92,7 +90,7 @@ class SkyViewController: UIViewController {
         }
 
         @objc func updateCityName(notification: NSNotification) {
-            currentLocationButton.setTitle(sunPositionManager.cityName.uppercased(), for: .normal)
+            currentLocationButton.setTitle(myTabBar.sunPositionManager.cityName.uppercased(), for: .normal)
             currentLocationButton.addCharacterSpacing()
         }
         

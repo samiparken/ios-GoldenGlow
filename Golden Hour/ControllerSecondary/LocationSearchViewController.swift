@@ -7,6 +7,9 @@ class LocationSearchViewController: UIViewController {
     @IBOutlet weak var selectedCityLabel: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+
+    //manager
+    let sunPositionManager = SunPositionManager()
     
     var matchingItems: [MKMapItem] = []
 
@@ -63,8 +66,19 @@ extension LocationSearchViewController: UITableViewDelegate {
         
         // auto-deselect animation
         tableView.deselectRow(at: indexPath, animated: true)
+                
+        let selectedItem = matchingItems[indexPath.row].placemark
         
-        print("Selected at \(indexPath.row)")
+        let cityName = selectedItem.locality ?? ""
+        let countryName = selectedItem.country ?? ""
+        let countryCode = selectedItem.isoCountryCode ?? ""
+        let long = selectedItem.location?.coordinate.longitude
+        let lat = selectedItem.location?.coordinate.latitude
+        print("\(cityName), Longitude: \(long ?? 0), Latitude: \(lat ?? 0)")
+
+        myTabBar.sunPositionManager.initSunPositionSystem(cityName, countryName, countryCode, long: long!, lat: lat!)
+
+        dismiss(animated: true, completion: nil)
     }
 }
 

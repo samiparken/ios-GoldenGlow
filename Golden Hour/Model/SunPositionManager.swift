@@ -10,7 +10,7 @@ protocol SunPositionManagerDelegate {
 
 class SunPositionManager {
     var delegate: SunPositionManagerDelegate?
-
+    
     let dataManager = DataManager()
     
     // Realm Object
@@ -78,7 +78,7 @@ class SunPositionManager {
         self.countryCode = countryCode
         self.Longitude = long
         self.Latitude = lat
-        
+                
         // Braodcast: CityName to Show
         let keyName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
         NotificationCenter.default.post(name: keyName, object: nil)
