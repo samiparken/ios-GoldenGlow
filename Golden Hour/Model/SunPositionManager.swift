@@ -201,7 +201,7 @@ class SunPositionManager {
         let lon = self.Longitude!
         let lat = self.Latitude!
 
-        let GMTString = String(format: "%+05d", GMT * 100)
+        let GMTString = String(format: "%+05d", Int(GMT*10) * 10)
         let inputDateString = year + "-" + month + "-" + day + " 00:00:00  " + GMTString
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"  //ex) 2020-03-13 13:37:00 +0100
@@ -240,23 +240,27 @@ class SunPositionManager {
     func dailyScan2(_ year: String, _ month: String, _ day: String, lon: Double, lat: Double) -> [SunTimestamp] {
         
         var result: [SunTimestamp] = []
-
         var DLSOffset: Double = 0.0
-                
+        
+        let targetDateString = year + "-" + month + "-" + day + " 00:00:00  +0000"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"  //ex) 2020-03-13 00:00:00 +0200
+        let targetDate = dateFormatter.date(from: targetDateString)
+
         let loc = CLLocation.init(latitude: lat, longitude: lon);
         let coder = CLGeocoder();
         coder.reverseGeocodeLocation(loc) { [self] (placemarks, error) in
             let place = placemarks?.last;
-            let GMT = Double((place?.timeZone?.secondsFromGMT())!) / 3600  // 2.0
+            let GMT = Double((place?.timeZone?.secondsFromGMT(for: targetDate!))!) / 3600  // 2.0
             
-            let GMTString = String(format: "%+05d", GMT * 100)     // +0200
+            let GMTString = String(format: "%+05d", Int(GMT*10) * 10)
+     // +0200
             let inputDateString = year + "-" + month + "-" + day + " 00:00:00  " + GMTString
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"  //ex) 2020-03-13 00:00:00 +0200
             var inputDate = dateFormatter.date(from: inputDateString)
             
             DLSOffset = Double(((place?.timeZone?.daylightSavingTimeOffset(for: inputDate!))!)) / 3600
             inputDate! -= DLSOffset*3600
+            
                         
             let scanLimitDate = inputDate! + 86400 // within 24h
             var sun = SunPositionModel(inputDate!, GMT+DLSOffset, longitude: lon, latitude: lat)
