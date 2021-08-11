@@ -244,20 +244,17 @@ class SunPositionManager {
         let targetDateString = year + "-" + month + "-" + day + " 00:00:00  +0000"
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"  //ex) 2020-03-13 00:00:00 +0200
-        let targetDate = dateFormatter.date(from: targetDateString)
+        var targetDate = dateFormatter.date(from: targetDateString)
 
         let loc = CLLocation.init(latitude: lat, longitude: lon);
         let coder = CLGeocoder();
         coder.reverseGeocodeLocation(loc) { [self] (placemarks, error) in
             let place = placemarks?.last;
             let GMT = Double((place?.timeZone?.secondsFromGMT(for: targetDate!))!) / 3600  // 2.0
-            
-            let GMTString = String(format: "%+05d", Int(GMT*10) * 10) // +0200
-            let inputDateString = year + "-" + month + "-" + day + " 00:00:00  " + GMTString
-            let inputDate = dateFormatter.date(from: inputDateString)
-                                    
-            let scanLimitDate = inputDate! + 86400 // within 24h
-            var sun = SunPositionModel(inputDate!, GMT, longitude: lon, latitude: lat)
+            targetDate! -= GMT * 3600
+                                                
+            let scanLimitDate = targetDate! + 86400 // within 24h
+            var sun = SunPositionModel(targetDate!, GMT, longitude: lon, latitude: lat)
             sun.spa_calculate()
             var currentState = self.getState(sun.declination)
             sun.date += self.calculateTimeGap(sun.declination)   // increase timestamp for scanning
