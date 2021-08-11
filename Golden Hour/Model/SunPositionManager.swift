@@ -22,7 +22,12 @@ class SunPositionManager {
     var cityName: String = ""
     var countryName: String = ""
     var countryCode: String = ""
-    var GMT: Double = Double(TimeZone.current.secondsFromGMT()) / 3600
+    var timezone: TimeZone?
+    var GMT: Double {
+        get{
+            return Double(timezone?.secondsFromGMT() ?? 0) / 3600
+        }
+    }
     var Longitude: Double?
     var Latitude: Double?
     
@@ -30,7 +35,8 @@ class SunPositionManager {
     var SunAltitude: Double? {
         get {
             let now = Date()
-            if let lon = self.Longitude, let lat = self.Latitude {
+            if let lon = self.Longitude,
+               let lat = self.Latitude {
                 var sun = SunPositionModel(now, self.GMT, longitude: lon, latitude: lat)
                 sun.spa_calculate()
                 return sun.declination
@@ -72,55 +78,67 @@ class SunPositionManager {
         self.countryCode = countryCode
         self.Longitude = long
         self.Latitude = lat
-
+        
         // Braodcast: CityName to Show
         let keyName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
         NotificationCenter.default.post(name: keyName, object: nil)
 
-        
-        let locationData = LocationData() //Realm Object
-        locationData.cityName = cityName
-        locationData.countryName = countryName
-        locationData.countryCode = countryCode
-        locationData.longitude = long
-        locationData.latitude = lat
-        
-        dataManager.storeLocationData(locationData)
-                                        
-        let today = Date() //temporary
-        timestampData = dataManager.readTimestampData(locationData, today)
-
-        if( timestampData!.count == 0)
-        {
-            // scan data & store timestamps in RealmDB
-
+        let loc = CLLocation.init(latitude: lat, longitude: long);
+        let coder = CLGeocoder();
+        coder.reverseGeocodeLocation(loc) { [self] (placemarks, error) in
+            let place = placemarks?.last;
+            self.timezone = place?.timeZone
             
-            // show data
-                        
-        } else {
+            let locationData = LocationData() //Realm Object
+            locationData.cityName = cityName
+            locationData.countryName = countryName
+            locationData.countryCode = countryCode
+            locationData.longitude = long
+            locationData.latitude = lat
+            
+            dataManager.storeLocationData(locationData)
+                                          
             
             
+            
+            
+            
+            let today = Date() //temporary
+            timestampData = dataManager.readTimestampData(locationData, today)
 
-            // show data
+            if( timestampData!.count == 0)
+            {
+                // scan data & store timestamps in RealmDB
+
+                
+                // show data
+                            
+            } else {
+                
+                
+
+                // show data
+            }
+            
+            /* START SUN POSITION SYSTEM */
+            startSunPositionSystem()
         }
-        
-        /* START SUN POSITION SYSTEM */
-        startSunPositionSystem()
-
     }
 
 //MARK: - Calculate
     func startSunPositionSystem()
     {
+        // BG & morning/evening
+        self.delegate?.didUpdateCurrentState(self.SunAltitude!, isSunGoingUp())
+
 
         updateScreen()
-        print(GMT)
+        
+        
     }
     
     func updateScreen()
     {
-        // BG & morning/evening
-        self.delegate?.didUpdateCurrentState(self.SunAltitude!, isSunGoingUp())
                 
         // Current Scan -> SkyView1 (Timer & Current State)
         let nowRange: [Date] = currentScan()
@@ -134,13 +152,9 @@ class SunPositionManager {
         let yyyy = String(calendar.component(.year, from: today))
         let mm = String(calendar.component(.month, from: today))
         let dd = String(calendar.component(.day, from: today))
-
-        let todayScan: [SunTimestamp] = dailyScan(yyyy,mm,dd)
-        self.delegate?.didUpdateTodayScan(todayScan)
+        let scanResult = dateScan(yyyy, mm, dd)
+        self.delegate?.didUpdateTodayScan(scanResult)
         
-        // test for GMT and DLSOffset
-        // + Get GMT from time & location
-        let daily: [SunTimestamp] = dailyScan2(yyyy, mm, dd, lon: self.Longitude!, lat: self.Latitude!)
     }
     
     
@@ -194,6 +208,42 @@ class SunPositionManager {
     }
     
     
+    // Scan TargetDate & store TimestampData[]
+    func dateScan(_ year: String, _ month: String, _ day: String) -> [SunTimestamp] {
+        
+        var result: [SunTimestamp] = []
+        
+        let targetDateString = year + "-" + month + "-" + day + " 00:00:00  +0000"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"  //ex) 2020-03-13 00:00:00 +0200
+        var targetDate = dateFormatter.date(from: targetDateString)
+        
+        let GMT = Double(timezone!.secondsFromGMT(for: targetDate!)) / 3600  // 2.0
+        targetDate! -= GMT * 3600 // adjust timezone
+        
+        let scanLimitDate = targetDate! + 86400 // within 24h
+        var sun = SunPositionModel(targetDate!, GMT, longitude: self.Longitude!, latitude: self.Latitude!)
+        sun.spa_calculate()
+        var currentState = self.getState(sun.declination)
+        sun.date += self.calculateTimeGap(sun.declination)   // increase timestamp for scanning
+                
+        repeat {
+            sun.spa_calculate()
+            let sunAngle = sun.declination
+            let newState = getState(sunAngle)
+            if ( currentState != newState )
+            {
+                let newTimestamp = SunTimestamp(time: sun.date, from: currentState, to: newState)
+                result.append(newTimestamp)
+                currentState = newState
+            }
+            sun.date += calculateTimeGap(sunAngle)   // increase timestamp for scanning
+            print("\(year)-\(month)-\(day), \(sunAngle)")
+        } while( (sun.date < scanLimitDate) && ( result.count < 12 ) )
+        
+        return result
+    }
+/*
     func dailyScan(_ year: String, _ month: String, _ day: String) -> [SunTimestamp] {
         
         var result: [SunTimestamp] = []
@@ -229,6 +279,7 @@ class SunPositionManager {
 
         return result
     }
+    */
     
     func calculateTimeGap(_ sunAngle: Double) -> Double {
         let absAngle = abs(sunAngle)
@@ -236,46 +287,7 @@ class SunPositionManager {
         return ( temp > 60 ) ? temp : 60
     }
     
-    // Scan TargetDate & return TimestampData[]
-    func dailyScan2(_ year: String, _ month: String, _ day: String, lon: Double, lat: Double) -> [SunTimestamp] {
-        
-        var result: [SunTimestamp] = []
-        
-        let targetDateString = year + "-" + month + "-" + day + " 00:00:00  +0000"
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"  //ex) 2020-03-13 00:00:00 +0200
-        var targetDate = dateFormatter.date(from: targetDateString)
 
-        let loc = CLLocation.init(latitude: lat, longitude: lon);
-        let coder = CLGeocoder();
-        coder.reverseGeocodeLocation(loc) { [self] (placemarks, error) in
-            let place = placemarks?.last;
-            let GMT = Double((place?.timeZone?.secondsFromGMT(for: targetDate!))!) / 3600  // 2.0
-            targetDate! -= GMT * 3600
-                                                
-            let scanLimitDate = targetDate! + 86400 // within 24h
-            var sun = SunPositionModel(targetDate!, GMT, longitude: lon, latitude: lat)
-            sun.spa_calculate()
-            var currentState = self.getState(sun.declination)
-            sun.date += self.calculateTimeGap(sun.declination)   // increase timestamp for scanning
-
-            repeat {
-                sun.spa_calculate()
-                let sunAngle = sun.declination
-                let newState = getState(sunAngle)
-                if ( currentState != newState )
-                {
-                    let newTimestamp = SunTimestamp(time: sun.date, from: currentState, to: newState)
-                    result.append(newTimestamp)
-                    currentState = newState
-                }
-                sun.date += calculateTimeGap(sunAngle)   // increase timestamp for scanning
-                print("\(year)-\(month)-\(day), \(sunAngle)")
-            } while( (sun.date < scanLimitDate) && ( result.count < 12 ) )
-        }
-        
-        return result
-    }
     
 //MARK: - Get
     func isAboveEvent() -> Bool {
