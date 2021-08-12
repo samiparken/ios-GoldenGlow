@@ -16,6 +16,7 @@ class TabBarController: UITabBarController {
     
     // BG & Location
     var BGImageViewName: String?
+    var BGImageColor: String?
     var currentCityName: String?
     var isDifferentTimezone: Bool = false
     var localTime: String?
@@ -140,25 +141,25 @@ extension TabBarController: SunPositionManagerDelegate {
         
         //BG update
         switch sunAngle {
-        case -90 ..< -6 : BGImageViewName = "BG_Night";
+        case -90 ..< -6 : BGImageColor = K.COLOR.nighttime;
             isEvening = false; isToday = isUp ? true : false
             sunPulsePosition = 0.8 ;  wavePosition = 0.5
-        case -6  ..< -4 : BGImageViewName = "BG_Blue";
+        case -6  ..< -4 : BGImageColor = K.COLOR.blueHour;
             isEvening = isUp ? false : true;
             sunPulsePosition = 0.7 ; wavePosition = 0.5
-        case -4  ..< -0.5  : BGImageViewName = "BG_Golden-";
+        case -4  ..< -0.5  : BGImageColor = K.COLOR.goldenHourM;
             isEvening = isUp ? false : true
             sunPulsePosition = 0.6 ; wavePosition = 0.5
-        case -0.5 ..< 0.5 : BGImageViewName = "BG_Golden-";
+        case -0.5 ..< 0.5 : BGImageColor = K.COLOR.setrise;
             isEvening = isUp ? false : true;
             sunPulsePosition = 0.6 ; wavePosition = 0.5
-        case 0.5   ..< 6  : BGImageViewName = "BG_Golden+";
+        case 0.5   ..< 6  : BGImageColor = K.COLOR.goldenHourP;
             isEvening = isUp ? false : true;
             sunPulsePosition = 0.5 ; wavePosition = 0.6
-        case 6   ..< 10 : BGImageViewName = "BG_LowSun";
+        case 6   ..< 10 : BGImageColor = K.COLOR.lowSun;
             isEvening = isUp ? false : true
             sunPulsePosition = 0.3; wavePosition = 0.7
-        default         : BGImageViewName = "BG_Day";
+        default         : BGImageColor = K.COLOR.daytime;
             isEvening = true
             sunPulsePosition = 0.15; wavePosition = 0.8
         }
