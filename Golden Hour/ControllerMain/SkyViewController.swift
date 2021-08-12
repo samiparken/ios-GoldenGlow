@@ -10,7 +10,8 @@ class SkyViewController: UIViewController {
     let myTabBar = TabBarController.singletonTabBar
         
     @IBOutlet weak var BGImageView: UIImageView!
-    @IBOutlet weak var currentLocationButton: UIButton!
+    @IBOutlet weak var currentCityButton: UIButton!
+    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControl: UIPageControl!
     
@@ -216,9 +217,9 @@ class SkyViewController: UIViewController {
     
     func updateCityName() {
         if let cityName = myTabBar.currentLocation {
-            if cityName != currentLocationButton.titleLabel?.text {
-                currentLocationButton.titleLabel?.text = cityName
-                currentLocationButton.addCharacterSpacing()
+            if cityName != currentCityButton.titleLabel?.text {
+                currentCityButton.titleLabel?.text = cityName
+                currentCityButton.addCharacterSpacing()
             }
         }
     }
