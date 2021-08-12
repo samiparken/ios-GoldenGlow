@@ -78,8 +78,7 @@ class ScrollViewPage1: UIView {
     }
     
     @objc func updateTimer(notification: NSNotification) {
-        middleRemainingTime.text =
-            myTabBar.timerHour == "00"
+        middleRemainingTime.text = myTabBar.timerHour == "00"
             ? "\(myTabBar.timerMin):\(myTabBar.timerSec)"
             : "\(myTabBar.timerHour):\(myTabBar.timerMin):\(myTabBar.timerSec)"
         
