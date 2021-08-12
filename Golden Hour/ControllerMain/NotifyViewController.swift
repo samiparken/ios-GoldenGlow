@@ -4,7 +4,6 @@ class NotifyViewController: UIViewController {
     let myTabBar = TabBarController.singletonTabBar
     
     @IBOutlet weak var BGView: UIView!
-    @IBOutlet weak var BGImageView: UIImageView!
     @IBOutlet weak var notificationTitleButton: UIButton!
     
     @IBOutlet weak var sunStackViewBG: UIView!
@@ -60,7 +59,9 @@ class NotifyViewController: UIViewController {
     }
     
     @objc func updateBGImage(notification: NSNotification) {
-        BGImageView.image = UIImage(named: myTabBar.BGImageViewName!)
+        if let color = myTabBar.BGImageColor {
+            BGView.backgroundColor = UIColor(hexString: color)
+        }
     }
     
     

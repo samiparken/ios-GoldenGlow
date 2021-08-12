@@ -21,6 +21,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mhc-dQ-mTp" userLabel="ScrollViewBG">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="EnX-wR-orc" userLabel="Top Bar">
                                 <rect key="frame" x="0.0" y="44" width="414" height="30"/>
                                 <subviews>
@@ -36,10 +40,6 @@
                                     <constraint firstAttribute="height" constant="30" id="6SB-mt-DEB"/>
                                 </constraints>
                             </stackView>
-                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mhc-dQ-mTp" userLabel="ScrollViewBG">
-                                <rect key="frame" x="0.0" y="74" width="414" height="843"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2uy-3P-0bt">
                                 <rect key="frame" x="0.0" y="74" width="414" height="843"/>
                                 <subviews>
@@ -53,7 +53,7 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E3j-7m-Y5Y" userLabel="SunStackBG">
+                                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E3j-7m-Y5Y" userLabel="SunStackBG">
                                                 <rect key="frame" x="20" y="54" width="374" height="291"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
@@ -341,12 +341,12 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FxW-Si-Zo9" userLabel="ReminderTimingTableViewBG">
+                                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FxW-Si-Zo9" userLabel="ReminderTimingTableViewBG">
                                                 <rect key="frame" x="20" y="409" width="374" height="220"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MKV-xV-PNM">
-                                                <rect key="frame" x="40" y="419" width="334" height="210"/>
+                                                <rect key="frame" x="30" y="419" width="354" height="210"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="210" id="OQ9-KG-Eh0"/>
@@ -354,10 +354,10 @@
                                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReminderTimingCell" rowHeight="43" id="pya-Gk-GUA" customClass="ReminderTimingCell" customModule="Golden_Hour" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="24.5" width="334" height="43"/>
+                                                        <rect key="frame" x="0.0" y="24.5" width="354" height="43"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pya-Gk-GUA" id="7mI-6A-W8j">
-                                                            <rect key="frame" x="0.0" y="0.0" width="334" height="43"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="354" height="43"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vkg-0T-v7n">
@@ -394,13 +394,13 @@
                                             <constraint firstAttribute="trailing" secondItem="XLM-Vw-3dq" secondAttribute="trailing" constant="40" id="3sY-DM-ydY"/>
                                             <constraint firstAttribute="trailing" secondItem="Y1e-2F-eyG" secondAttribute="trailing" constant="20" id="767-HF-TV6"/>
                                             <constraint firstItem="XLM-Vw-3dq" firstAttribute="top" secondItem="Qpw-Lb-qoq" secondAttribute="bottom" constant="10" id="Bwa-J8-6oV"/>
-                                            <constraint firstAttribute="trailing" secondItem="MKV-xV-PNM" secondAttribute="trailing" constant="40" id="CXa-qT-eoD"/>
+                                            <constraint firstAttribute="trailing" secondItem="MKV-xV-PNM" secondAttribute="trailing" constant="30" id="CXa-qT-eoD"/>
                                             <constraint firstItem="XLM-Vw-3dq" firstAttribute="bottom" secondItem="E3j-7m-Y5Y" secondAttribute="bottom" id="HDP-cO-Mjr"/>
                                             <constraint firstAttribute="trailing" secondItem="E3j-7m-Y5Y" secondAttribute="trailing" constant="20" id="ITm-XK-zhk"/>
                                             <constraint firstAttribute="trailing" secondItem="Qpw-Lb-qoq" secondAttribute="trailing" constant="20" id="R5B-Qo-DrI"/>
                                             <constraint firstItem="Y1e-2F-eyG" firstAttribute="top" secondItem="E3j-7m-Y5Y" secondAttribute="bottom" constant="30" id="VfT-bZ-zLN"/>
                                             <constraint firstItem="E3j-7m-Y5Y" firstAttribute="leading" secondItem="8Ha-4F-7d5" secondAttribute="leading" constant="20" id="Xkp-aG-BPs"/>
-                                            <constraint firstItem="MKV-xV-PNM" firstAttribute="leading" secondItem="8Ha-4F-7d5" secondAttribute="leading" constant="40" id="Xo5-Tu-MGf"/>
+                                            <constraint firstItem="MKV-xV-PNM" firstAttribute="leading" secondItem="8Ha-4F-7d5" secondAttribute="leading" constant="30" id="Xo5-Tu-MGf"/>
                                             <constraint firstItem="MKV-xV-PNM" firstAttribute="top" secondItem="Y1e-2F-eyG" secondAttribute="bottom" constant="20" id="bwD-sw-kNw"/>
                                             <constraint firstItem="XLM-Vw-3dq" firstAttribute="leading" secondItem="8Ha-4F-7d5" secondAttribute="leading" constant="40" id="dap-ZY-cHa"/>
                                             <constraint firstItem="FxW-Si-Zo9" firstAttribute="top" secondItem="MKV-xV-PNM" secondAttribute="top" constant="-10" id="g5C-S3-9jI"/>
@@ -423,7 +423,7 @@
                         <constraints>
                             <constraint firstItem="2uy-3P-0bt" firstAttribute="trailing" secondItem="NmB-jq-Cpm" secondAttribute="trailing" id="258-7W-XeY"/>
                             <constraint firstItem="2uy-3P-0bt" firstAttribute="leading" secondItem="NmB-jq-Cpm" secondAttribute="leading" id="6Lo-6s-8Rw"/>
-                            <constraint firstItem="mhc-dQ-mTp" firstAttribute="top" secondItem="EnX-wR-orc" secondAttribute="bottom" id="FB9-Fd-0JM"/>
+                            <constraint firstItem="mhc-dQ-mTp" firstAttribute="top" secondItem="U7P-9N-Gb4" secondAttribute="top" id="FB9-Fd-0JM"/>
                             <constraint firstItem="NmB-jq-Cpm" firstAttribute="trailing" secondItem="mhc-dQ-mTp" secondAttribute="trailing" id="If1-7a-R5v"/>
                             <constraint firstItem="61a-zm-fwH" firstAttribute="leading" secondItem="U7P-9N-Gb4" secondAttribute="leading" id="LeF-in-05t"/>
                             <constraint firstItem="mhc-dQ-mTp" firstAttribute="leading" secondItem="NmB-jq-Cpm" secondAttribute="leading" id="Pbs-Ka-jQ7"/>
@@ -436,7 +436,7 @@
                             <constraint firstItem="8Ha-4F-7d5" firstAttribute="width" secondItem="U7P-9N-Gb4" secondAttribute="width" id="gfy-vz-HFP"/>
                             <constraint firstAttribute="bottom" secondItem="61a-zm-fwH" secondAttribute="bottom" id="kPx-Mv-3DQ"/>
                             <constraint firstAttribute="trailing" secondItem="EnX-wR-orc" secondAttribute="trailing" id="nVS-yI-xGX"/>
-                            <constraint firstItem="NmB-jq-Cpm" firstAttribute="bottom" secondItem="mhc-dQ-mTp" secondAttribute="bottom" id="zlw-fj-ya9"/>
+                            <constraint firstItem="EnX-wR-orc" firstAttribute="bottom" secondItem="mhc-dQ-mTp" secondAttribute="bottom" id="zlw-fj-ya9"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="bell" catalog="system" id="tOk-gm-oZZ"/>

@@ -21,7 +21,7 @@
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hXV-hg-yQY" userLabel="ScrollViewBG">
-                                <rect key="frame" x="0.0" y="74" width="414" height="843"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="MzX-lD-abi" userLabel="Top Bar">
@@ -52,8 +52,12 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TFK-94-K3t" userLabel="TimeFormatBG">
+                                                <rect key="frame" x="20" y="54" width="374" height="60"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="k8l-rZ-c2t">
-                                                <rect key="frame" x="30" y="54" width="354" height="41"/>
+                                                <rect key="frame" x="40" y="64" width="334" height="41"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="In9-lx-q68"/>
                                                 </constraints>
@@ -63,18 +67,18 @@
                                                 </segments>
                                             </segmentedControl>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v5r-nQ-l3J">
-                                                <rect key="frame" x="20" y="124" width="374" height="24"/>
+                                                <rect key="frame" x="20" y="134" width="374" height="24"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GGu-Ro-5T7" userLabel="AboutStackViewBG">
-                                                <rect key="frame" x="20" y="158" width="374" height="307"/>
+                                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GGu-Ro-5T7" userLabel="AboutStackViewBG">
+                                                <rect key="frame" x="20" y="168" width="374" height="307"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Z4w-7T-RGN" userLabel="AboutStackView">
-                                                <rect key="frame" x="40" y="158" width="334" height="307"/>
+                                                <rect key="frame" x="40" y="168" width="334" height="307"/>
                                                 <subviews>
                                                     <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMx-dc-Cnd" userLabel="line">
                                                         <rect key="frame" x="0.0" y="0.0" width="334" height="1"/>
@@ -203,20 +207,24 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Z4w-7T-RGN" firstAttribute="bottom" secondItem="GGu-Ro-5T7" secondAttribute="bottom" id="0ON-dq-cu4"/>
+                                            <constraint firstItem="TFK-94-K3t" firstAttribute="leading" secondItem="gbv-xf-EI7" secondAttribute="leading" constant="20" id="4eu-T6-qqR"/>
                                             <constraint firstItem="GGu-Ro-5T7" firstAttribute="trailing" secondItem="Z4w-7T-RGN" secondAttribute="trailing" constant="20" id="5ac-dq-Ahq"/>
-                                            <constraint firstItem="k8l-rZ-c2t" firstAttribute="leading" secondItem="gbv-xf-EI7" secondAttribute="leading" constant="30" id="6TO-Yn-T2K"/>
-                                            <constraint firstAttribute="trailing" secondItem="k8l-rZ-c2t" secondAttribute="trailing" constant="30" id="6bp-52-Y8l"/>
+                                            <constraint firstItem="k8l-rZ-c2t" firstAttribute="leading" secondItem="gbv-xf-EI7" secondAttribute="leading" constant="40" id="6TO-Yn-T2K"/>
+                                            <constraint firstAttribute="trailing" secondItem="k8l-rZ-c2t" secondAttribute="trailing" constant="40" id="6bp-52-Y8l"/>
                                             <constraint firstAttribute="trailing" secondItem="GGu-Ro-5T7" secondAttribute="trailing" constant="20" id="6tj-X9-PIx"/>
                                             <constraint firstItem="GGu-Ro-5T7" firstAttribute="leading" secondItem="gbv-xf-EI7" secondAttribute="leading" constant="20" id="BFh-7t-jvv"/>
                                             <constraint firstItem="M0Q-bA-t4I" firstAttribute="top" secondItem="gbv-xf-EI7" secondAttribute="top" constant="20" id="BWO-ew-krB"/>
                                             <constraint firstItem="Z4w-7T-RGN" firstAttribute="top" secondItem="v5r-nQ-l3J" secondAttribute="bottom" constant="10" id="DF6-xV-8yd"/>
-                                            <constraint firstItem="k8l-rZ-c2t" firstAttribute="top" secondItem="M0Q-bA-t4I" secondAttribute="bottom" constant="10" id="IsJ-Ha-yKD"/>
+                                            <constraint firstItem="k8l-rZ-c2t" firstAttribute="top" secondItem="TFK-94-K3t" secondAttribute="top" constant="10" id="IsJ-Ha-yKD"/>
                                             <constraint firstAttribute="height" constant="500" id="NYg-0L-Za4"/>
                                             <constraint firstItem="v5r-nQ-l3J" firstAttribute="leading" secondItem="gbv-xf-EI7" secondAttribute="leading" constant="20" id="ODm-AV-bh6"/>
+                                            <constraint firstAttribute="trailing" secondItem="TFK-94-K3t" secondAttribute="trailing" constant="20" id="TIZ-pn-yP4"/>
                                             <constraint firstAttribute="trailing" secondItem="M0Q-bA-t4I" secondAttribute="trailing" constant="20" id="Ug2-UL-p6Z"/>
                                             <constraint firstItem="M0Q-bA-t4I" firstAttribute="leading" secondItem="gbv-xf-EI7" secondAttribute="leading" constant="20" id="Y99-rf-gJT"/>
+                                            <constraint firstItem="k8l-rZ-c2t" firstAttribute="bottom" secondItem="TFK-94-K3t" secondAttribute="bottom" constant="-10" id="cyN-Wm-5Om"/>
                                             <constraint firstItem="v5r-nQ-l3J" firstAttribute="top" secondItem="k8l-rZ-c2t" secondAttribute="bottom" constant="30" id="h2S-w0-iNi"/>
                                             <constraint firstAttribute="trailing" secondItem="v5r-nQ-l3J" secondAttribute="trailing" constant="20" id="o2E-8b-AG8"/>
+                                            <constraint firstItem="TFK-94-K3t" firstAttribute="top" secondItem="M0Q-bA-t4I" secondAttribute="bottom" constant="10" id="uPU-Au-4OP"/>
                                             <constraint firstItem="GGu-Ro-5T7" firstAttribute="top" secondItem="Z4w-7T-RGN" secondAttribute="top" id="w76-5X-4VM"/>
                                             <constraint firstItem="Z4w-7T-RGN" firstAttribute="leading" secondItem="GGu-Ro-5T7" secondAttribute="leading" constant="20" id="zbR-y9-QnY"/>
                                         </constraints>
@@ -232,14 +240,14 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="OHn-r2-zbJ"/>
                         <constraints>
-                            <constraint firstItem="hXV-hg-yQY" firstAttribute="top" secondItem="MzX-lD-abi" secondAttribute="bottom" id="3ES-AD-Ay6"/>
+                            <constraint firstItem="hXV-hg-yQY" firstAttribute="top" secondItem="omw-zQ-lep" secondAttribute="top" id="3ES-AD-Ay6"/>
                             <constraint firstItem="OHn-r2-zbJ" firstAttribute="trailing" secondItem="MzX-lD-abi" secondAttribute="trailing" id="3bM-Z6-kax"/>
                             <constraint firstItem="gbv-xf-EI7" firstAttribute="width" secondItem="omw-zQ-lep" secondAttribute="width" id="CKB-xd-Xj0"/>
                             <constraint firstItem="MzX-lD-abi" firstAttribute="top" secondItem="OHn-r2-zbJ" secondAttribute="top" id="Cgg-C2-pHW"/>
                             <constraint firstItem="kdL-vf-hse" firstAttribute="top" secondItem="omw-zQ-lep" secondAttribute="top" id="IcN-vk-6xn"/>
                             <constraint firstItem="88i-sW-T9N" firstAttribute="top" secondItem="MzX-lD-abi" secondAttribute="bottom" id="Mic-yS-cMp"/>
                             <constraint firstAttribute="trailing" secondItem="kdL-vf-hse" secondAttribute="trailing" id="TlP-PD-fn4"/>
-                            <constraint firstItem="OHn-r2-zbJ" firstAttribute="bottom" secondItem="hXV-hg-yQY" secondAttribute="bottom" id="Uz4-R6-kUk"/>
+                            <constraint firstItem="MzX-lD-abi" firstAttribute="bottom" secondItem="hXV-hg-yQY" secondAttribute="bottom" id="Uz4-R6-kUk"/>
                             <constraint firstItem="88i-sW-T9N" firstAttribute="bottom" secondItem="OHn-r2-zbJ" secondAttribute="bottom" id="YpJ-v7-glw"/>
                             <constraint firstItem="kdL-vf-hse" firstAttribute="leading" secondItem="omw-zQ-lep" secondAttribute="leading" id="aTa-6o-ZUz"/>
                             <constraint firstItem="88i-sW-T9N" firstAttribute="trailing" secondItem="OHn-r2-zbJ" secondAttribute="trailing" id="daj-EA-Xrk"/>
@@ -257,6 +265,7 @@
                         <outlet property="BGView" destination="kdL-vf-hse" id="2XN-yw-B7F"/>
                         <outlet property="aboutStackViewBG" destination="GGu-Ro-5T7" id="3HR-gF-GuZ"/>
                         <outlet property="settingTitleButton" destination="v5N-XY-nWf" id="MO8-BT-gSW"/>
+                        <outlet property="timeFormatBG" destination="TFK-94-K3t" id="dSZ-HJ-DO8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zap-ac-ppc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

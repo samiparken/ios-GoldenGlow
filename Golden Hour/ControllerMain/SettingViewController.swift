@@ -5,7 +5,7 @@ class SettingViewController: UIViewController {
     let myTabBar = TabBarController.singletonTabBar
     
     @IBOutlet weak var BGView: UIView!
-    @IBOutlet weak var BGImageView: UIImageView!
+    @IBOutlet weak var timeFormatBG: UIView!
     @IBOutlet weak var aboutStackViewBG: UIView!
     @IBOutlet weak var settingTitleButton: UIButton!
     
@@ -53,7 +53,9 @@ class SettingViewController: UIViewController {
     }
     
     @objc func updateBGImage(notification: NSNotification) {
-        BGImageView.image = UIImage(named: myTabBar.BGImageViewName!)
+        if let color = myTabBar.BGImageColor {
+            BGView.backgroundColor = UIColor(hexString: color)
+        }
     }
     
     
@@ -61,9 +63,8 @@ class SettingViewController: UIViewController {
     
     func initLayout() {
         aboutStackViewBG.layer.cornerRadius = 10
+        timeFormatBG.layer.cornerRadius = 10
         settingTitleButton.addCharacterSpacing()
-        
-        
     }
     
 }
