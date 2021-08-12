@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,6 +17,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kdL-vf-hse" userLabel="BGView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                            </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BG_Day" translatesAutoresizingMaskIntoConstraints="NO" id="bUx-Zi-FOh" userLabel="BG">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                             </imageView>
@@ -236,24 +241,34 @@
                             <constraint firstItem="bUx-Zi-FOh" firstAttribute="trailing" secondItem="OHn-r2-zbJ" secondAttribute="trailing" id="4BB-xS-hMd"/>
                             <constraint firstItem="gbv-xf-EI7" firstAttribute="width" secondItem="omw-zQ-lep" secondAttribute="width" id="CKB-xd-Xj0"/>
                             <constraint firstItem="MzX-lD-abi" firstAttribute="top" secondItem="OHn-r2-zbJ" secondAttribute="top" id="Cgg-C2-pHW"/>
+                            <constraint firstItem="kdL-vf-hse" firstAttribute="top" secondItem="omw-zQ-lep" secondAttribute="top" id="IcN-vk-6xn"/>
                             <constraint firstItem="88i-sW-T9N" firstAttribute="top" secondItem="MzX-lD-abi" secondAttribute="bottom" id="Mic-yS-cMp"/>
                             <constraint firstItem="bUx-Zi-FOh" firstAttribute="leading" secondItem="OHn-r2-zbJ" secondAttribute="leading" id="PF3-Qc-aZ6"/>
+                            <constraint firstAttribute="trailing" secondItem="kdL-vf-hse" secondAttribute="trailing" id="TlP-PD-fn4"/>
                             <constraint firstItem="OHn-r2-zbJ" firstAttribute="bottom" secondItem="hXV-hg-yQY" secondAttribute="bottom" id="Uz4-R6-kUk"/>
                             <constraint firstItem="bUx-Zi-FOh" firstAttribute="top" secondItem="omw-zQ-lep" secondAttribute="top" id="Vyc-KD-zEj"/>
                             <constraint firstItem="88i-sW-T9N" firstAttribute="bottom" secondItem="OHn-r2-zbJ" secondAttribute="bottom" id="YpJ-v7-glw"/>
+                            <constraint firstItem="kdL-vf-hse" firstAttribute="leading" secondItem="omw-zQ-lep" secondAttribute="leading" id="aTa-6o-ZUz"/>
                             <constraint firstAttribute="bottom" secondItem="bUx-Zi-FOh" secondAttribute="bottom" id="c0x-lb-06k"/>
                             <constraint firstItem="88i-sW-T9N" firstAttribute="trailing" secondItem="OHn-r2-zbJ" secondAttribute="trailing" id="daj-EA-Xrk"/>
                             <constraint firstItem="88i-sW-T9N" firstAttribute="leading" secondItem="OHn-r2-zbJ" secondAttribute="leading" id="o5B-6G-Ib7"/>
                             <constraint firstItem="OHn-r2-zbJ" firstAttribute="trailing" secondItem="hXV-hg-yQY" secondAttribute="trailing" id="q38-Un-mdc"/>
                             <constraint firstItem="MzX-lD-abi" firstAttribute="leading" secondItem="OHn-r2-zbJ" secondAttribute="leading" id="qfK-lF-QaP"/>
                             <constraint firstItem="hXV-hg-yQY" firstAttribute="leading" secondItem="OHn-r2-zbJ" secondAttribute="leading" id="tSm-Vi-NVU"/>
+                            <constraint firstAttribute="bottom" secondItem="kdL-vf-hse" secondAttribute="bottom" id="yVD-wf-sNC"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="bUx-Zi-FOh"/>
+                            </mask>
+                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="gearshape" catalog="system" id="JJf-7b-9Lv"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <size key="freeformSize" width="414" height="1000"/>
                     <connections>
                         <outlet property="BGImageView" destination="bUx-Zi-FOh" id="9oa-iX-wc1"/>
+                        <outlet property="BGView" destination="kdL-vf-hse" id="2XN-yw-B7F"/>
                         <outlet property="aboutStackViewBG" destination="GGu-Ro-5T7" id="3HR-gF-GuZ"/>
                         <outlet property="settingTitleButton" destination="v5N-XY-nWf" id="MO8-BT-gSW"/>
                     </connections>
@@ -272,5 +287,8 @@
         <image name="globe" catalog="system" width="128" height="121"/>
         <image name="lock.open.fill" catalog="system" width="128" height="112"/>
         <image name="paperplane" catalog="system" width="128" height="118"/>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

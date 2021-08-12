@@ -3,6 +3,7 @@ import UIKit
 class SettingViewController: UIViewController {
     let myTabBar = TabBarController.singletonTabBar
     
+    @IBOutlet weak var BGView: UIView!
     @IBOutlet weak var BGImageView: UIImageView!
     @IBOutlet weak var aboutStackViewBG: UIView!
     @IBOutlet weak var settingTitleButton: UIButton!
@@ -10,6 +11,8 @@ class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         registerObservers()
+        
+        BGView.backgroundColor = UIColor(hexString: "4E89CB")
         
     }
     
