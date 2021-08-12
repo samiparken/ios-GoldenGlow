@@ -232,7 +232,7 @@ class SunPositionManager {
                 currentState = newState
             }
             sun.date += calculateTimeGap(sunAngle)   // increase timestamp for scanning
-            print("\(year)-\(month)-\(day), \(sunAngle)")
+            print("dateScan: \(year)-\(month)-\(day), \(sunAngle)")
         } while( (sun.date < scanLimitDate) && ( result.count < 12 ) )
         
         return result
