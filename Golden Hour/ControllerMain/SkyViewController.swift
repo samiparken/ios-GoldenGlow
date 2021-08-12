@@ -60,15 +60,10 @@ class SkyViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         print("SkyView: viewWillAppear")
         
-        if let cityName = myTabBar.currentLocation {
-            currentLocationButton.titleLabel?.text = cityName
-            currentLocationButton.addCharacterSpacing()
-        }
+        updateCityName()
         
-        if let imageName = myTabBar.BGImageViewName {
-            BGImageView.image = UIImage(named: imageName)
-        }
-
+        updateBG()
+        
         waveAnimation()
 
     }
@@ -100,13 +95,11 @@ class SkyViewController: UIViewController {
     }
     
     @objc func updateCityName(notification: NSNotification) {
-        let cityName = myTabBar.currentLocation
-        currentLocationButton.titleLabel?.text = cityName
-        currentLocationButton.addCharacterSpacing()
+        updateCityName()
     }
     
     @objc func updateBGImage(notification: NSNotification) {
-        BGImageView.image = UIImage(named: myTabBar.BGImageViewName!)
+        updateBG()
     }
     
     @objc func updateTimer(notification: NSNotification) {
@@ -219,6 +212,21 @@ class SkyViewController: UIViewController {
 
         // SunPulse Vertical Position
         self.sunPulse.frame.origin.y = ((0.23 - myTabBar.sunPulsePosition) * (offsetRate) + myTabBar.sunPulsePosition ) * screenHeight
+    }
+    
+    func updateCityName() {
+        if let cityName = myTabBar.currentLocation {
+            if cityName != currentLocationButton.titleLabel?.text {
+                currentLocationButton.titleLabel?.text = cityName
+                currentLocationButton.addCharacterSpacing()
+            }
+        }
+    }
+    
+    func updateBG() {
+        if let imageName = myTabBar.BGImageViewName {
+            BGImageView.image = UIImage(named: imageName)
+        }
     }
 }
 
