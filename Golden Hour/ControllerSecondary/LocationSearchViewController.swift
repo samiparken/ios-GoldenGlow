@@ -49,7 +49,7 @@ extension LocationSearchViewController: UITableViewDataSource {
             let cell: LocationSearchCell = tableView.dequeueReusableCell(withIdentifier: "LocationSearchCell", for: indexPath) as! LocationSearchCell
 
             let selectedItem = matchingItems[indexPath.row].placemark
-            cell.label?.text = (selectedItem.locality ?? "") + ", " + (selectedItem.country ?? "")
+            cell.label?.text = (selectedItem.locality ?? selectedItem.name ?? "") + ", " + (selectedItem.country ?? "")
             
             return cell
     }
@@ -65,7 +65,7 @@ extension LocationSearchViewController: UITableViewDelegate {
                 
         let selectedItem = matchingItems[indexPath.row].placemark
         
-        let cityName = selectedItem.locality ?? ""
+        let cityName = selectedItem.locality ?? selectedItem.name ?? ""
         let countryName = selectedItem.country ?? ""
         let countryCode = selectedItem.isoCountryCode ?? ""
         let long = selectedItem.location?.coordinate.longitude
@@ -83,6 +83,8 @@ extension LocationSearchViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 
+        print(searchText)
+        
         if searchText == "" {
             self.matchingItems = []
             self.tableView.reloadData()
@@ -94,6 +96,7 @@ extension LocationSearchViewController: UISearchBarDelegate {
             let search = MKLocalSearch(request: request)
             search.start { response, _ in
                 guard let response = response else { return }
+                print(response)
                 self.matchingItems = response.mapItems
                 self.tableView.reloadData()
             }

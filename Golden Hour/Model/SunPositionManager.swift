@@ -126,12 +126,9 @@ class SunPositionManager {
 //MARK: - Calculate
     func startSunPositionSystem()
     {
-        // Update CityName at the top
+        // Update CityName & Localtime at the top
         self.delegate?.didUpdateCurrentCity(self.cityName)
         
-        // BG & morning/evening
-        self.delegate?.didUpdateCurrentState(self.SunAltitude!, isSunGoingUp())
-
         refreshCurrentState()
         refreshDateState()
     }
@@ -142,12 +139,14 @@ class SunPositionManager {
         let nowState = getState()
         let nowNext = getNextState()
         self.delegate?.didUpdateCurrentScan(from: nowRange[0], to: nowRange[1], nowState, nowNext)
+        
+        // BG & morning/evening
+        self.delegate?.didUpdateCurrentState(self.SunAltitude!, isSunGoingUp())
     }
     
     func refreshDateState() {
         // Today Scan -> SkyView2
-        
-        
+                
         let nowState = getState()
         let nowNext = getNextState()
         var targetDate = Date() + timezoneOffset
