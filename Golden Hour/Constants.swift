@@ -31,6 +31,16 @@ struct K {
             static let timeFormat = "settingTimeFormat"
         }
     }
+    
+    struct COLOR {
+        static let daytime = "4E89CB"
+        static let lowSun = "CCA65B"
+        static let goldenHourP = "D88350"
+        static let setrise = "D85050"
+        static let goldenHourM = "8B5AA7"
+        static let blueHour = "1C1E5A"
+        static let nighttime = "0A092B"        
+    }
         
     static let REMINDER_TIMING_MODEL = [
         "On Time",
@@ -39,6 +49,8 @@ struct K {
         "30 Mins Before",
         "1 Hour Before"
     ]
+    
+    
     
 }
 
