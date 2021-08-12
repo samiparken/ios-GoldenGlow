@@ -3,6 +3,7 @@ import UIKit
 class NotifyViewController: UIViewController {
     let myTabBar = TabBarController.singletonTabBar
     
+    @IBOutlet weak var BGView: UIView!
     @IBOutlet weak var BGImageView: UIImageView!
     @IBOutlet weak var notificationTitleButton: UIButton!
     
@@ -27,8 +28,8 @@ class NotifyViewController: UIViewController {
         
     override func viewDidAppear(_ animated: Bool) {
         print("NotifyView: viewDidAppear")
-        if let imageName = myTabBar.BGImageViewName {
-            BGImageView.image = UIImage(named: imageName)
+        if let color = myTabBar.BGImageColor {
+            BGView.backgroundColor = UIColor(hexString: color)
         }
     }
     

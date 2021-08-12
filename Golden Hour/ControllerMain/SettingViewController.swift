@@ -12,9 +12,7 @@ class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         registerObservers()
-        
-        BGView.backgroundColor = UIColor(hexString: "4E89CB")
-        
+                
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -23,8 +21,8 @@ class SettingViewController: UIViewController {
         
     override func viewDidAppear(_ animated: Bool) {
         print("SettingView: viewDidAppear")
-        if let imageName = myTabBar.BGImageViewName {
-            BGImageView.image = UIImage(named: imageName)
+        if let color = myTabBar.BGImageColor {
+            BGView.backgroundColor = UIColor(hexString: color)
         }
     }
     

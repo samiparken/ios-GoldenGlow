@@ -1,14 +1,10 @@
-// Development Process
-// + Timer / Activate
-// + Timer / Apply current time
-// + API : Calculate Sun's altitude based on Location
-// + API : Show City Name based on Location
-
 import UIKit
+import ChameleonFramework
 
 class SkyViewController: UIViewController {
     let myTabBar = TabBarController.singletonTabBar
         
+    @IBOutlet weak var BGView: UIView!
     @IBOutlet weak var BGImageView: UIImageView!
     @IBOutlet weak var currentCityButton: UIButton!
     @IBOutlet weak var currentLocalTimeLabel: UILabel!
@@ -240,8 +236,8 @@ class SkyViewController: UIViewController {
     }
         
     func updateBG() {
-        if let imageName = myTabBar.BGImageViewName {
-            BGImageView.image = UIImage(named: imageName)
+        if let color = myTabBar.BGImageColor {
+            BGView.backgroundColor = UIColor(hexString: color)
         }
     }
 }

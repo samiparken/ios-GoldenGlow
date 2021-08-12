@@ -17,6 +17,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="61a-zm-fwH">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BG_Day" translatesAutoresizingMaskIntoConstraints="NO" id="L1V-vq-F88" userLabel="BG">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                             </imageView>
@@ -425,24 +429,34 @@
                             <constraint firstAttribute="bottom" secondItem="L1V-vq-F88" secondAttribute="bottom" id="Aym-bh-szU"/>
                             <constraint firstItem="mhc-dQ-mTp" firstAttribute="top" secondItem="EnX-wR-orc" secondAttribute="bottom" id="FB9-Fd-0JM"/>
                             <constraint firstItem="NmB-jq-Cpm" firstAttribute="trailing" secondItem="mhc-dQ-mTp" secondAttribute="trailing" id="If1-7a-R5v"/>
+                            <constraint firstItem="61a-zm-fwH" firstAttribute="leading" secondItem="U7P-9N-Gb4" secondAttribute="leading" id="LeF-in-05t"/>
                             <constraint firstItem="L1V-vq-F88" firstAttribute="leading" secondItem="NmB-jq-Cpm" secondAttribute="leading" id="NwT-xI-rHA"/>
                             <constraint firstItem="mhc-dQ-mTp" firstAttribute="leading" secondItem="NmB-jq-Cpm" secondAttribute="leading" id="Pbs-Ka-jQ7"/>
+                            <constraint firstItem="61a-zm-fwH" firstAttribute="top" secondItem="U7P-9N-Gb4" secondAttribute="top" id="Pjh-SP-4Em"/>
                             <constraint firstItem="EnX-wR-orc" firstAttribute="leading" secondItem="U7P-9N-Gb4" secondAttribute="leading" id="SXI-e5-qMd"/>
                             <constraint firstItem="EnX-wR-orc" firstAttribute="top" secondItem="NmB-jq-Cpm" secondAttribute="top" id="Uyv-Yr-s8x"/>
                             <constraint firstItem="L1V-vq-F88" firstAttribute="top" secondItem="U7P-9N-Gb4" secondAttribute="top" id="VuY-oc-0Lu"/>
                             <constraint firstItem="2uy-3P-0bt" firstAttribute="top" secondItem="EnX-wR-orc" secondAttribute="bottom" id="Wqm-yg-Jcb"/>
+                            <constraint firstAttribute="trailing" secondItem="61a-zm-fwH" secondAttribute="trailing" id="XPS-gB-E6G"/>
                             <constraint firstItem="2uy-3P-0bt" firstAttribute="bottom" secondItem="NmB-jq-Cpm" secondAttribute="bottom" id="YSC-Br-1Ci"/>
                             <constraint firstItem="8Ha-4F-7d5" firstAttribute="width" secondItem="U7P-9N-Gb4" secondAttribute="width" id="gfy-vz-HFP"/>
+                            <constraint firstAttribute="bottom" secondItem="61a-zm-fwH" secondAttribute="bottom" id="kPx-Mv-3DQ"/>
                             <constraint firstAttribute="trailing" secondItem="EnX-wR-orc" secondAttribute="trailing" id="nVS-yI-xGX"/>
                             <constraint firstItem="L1V-vq-F88" firstAttribute="trailing" secondItem="NmB-jq-Cpm" secondAttribute="trailing" id="umk-cT-jdh"/>
                             <constraint firstItem="NmB-jq-Cpm" firstAttribute="bottom" secondItem="mhc-dQ-mTp" secondAttribute="bottom" id="zlw-fj-ya9"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="L1V-vq-F88"/>
+                            </mask>
+                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="bell" catalog="system" id="tOk-gm-oZZ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <size key="freeformSize" width="414" height="1000"/>
                     <connections>
                         <outlet property="BGImageView" destination="L1V-vq-F88" id="vbb-zo-1xE"/>
+                        <outlet property="BGView" destination="61a-zm-fwH" id="Ots-0W-Xfk"/>
                         <outlet property="notificationTitleButton" destination="i2f-rS-2eo" id="YbF-3e-gF5"/>
                         <outlet property="reminderTimingTableView" destination="MKV-xV-PNM" id="DQx-eQ-03O"/>
                         <outlet property="reminderTimingTableViewBG" destination="FxW-Si-Zo9" id="zgk-ct-aEj"/>
