@@ -155,7 +155,7 @@ struct SunPositionModel {
         self.hour = calendar.component(.hour, from: convertedDate)
         self.minute = calendar.component(.minute, from: convertedDate)
         self.second = Double(calendar.component(.second, from: convertedDate))
-        print("\(year)-\(month)-\(day), \(hour):\(minute):\(second) GMT\(timezone)")
+        print("SunPositionModel: \(year)-\(month)-\(day), \(hour):\(minute):\(second) GMT\(timezone)")
     }
     
     func rad2deg(_ radians: Double) -> Double {
