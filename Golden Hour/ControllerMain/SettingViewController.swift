@@ -1,4 +1,5 @@
 import UIKit
+import ChameleonFramework
 
 class SettingViewController: UIViewController {
     let myTabBar = TabBarController.singletonTabBar

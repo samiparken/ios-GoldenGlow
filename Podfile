@@ -7,5 +7,6 @@ target 'Golden Hour' do
 
   # Pods for Golden Hour
   pod 'RealmSwift'
+  pod 'ChameleonFramework/Swift', :git => 'https://github.com/wowansm/Chameleon.git', :branch => 'swift5'
 
 end
