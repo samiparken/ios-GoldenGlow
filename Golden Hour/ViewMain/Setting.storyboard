@@ -20,9 +20,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BG_Day" translatesAutoresizingMaskIntoConstraints="NO" id="bUx-Zi-FOh" userLabel="BG">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
-                            </imageView>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hXV-hg-yQY" userLabel="ScrollViewBG">
                                 <rect key="frame" x="0.0" y="74" width="414" height="843"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -237,18 +234,14 @@
                         <constraints>
                             <constraint firstItem="hXV-hg-yQY" firstAttribute="top" secondItem="MzX-lD-abi" secondAttribute="bottom" id="3ES-AD-Ay6"/>
                             <constraint firstItem="OHn-r2-zbJ" firstAttribute="trailing" secondItem="MzX-lD-abi" secondAttribute="trailing" id="3bM-Z6-kax"/>
-                            <constraint firstItem="bUx-Zi-FOh" firstAttribute="trailing" secondItem="OHn-r2-zbJ" secondAttribute="trailing" id="4BB-xS-hMd"/>
                             <constraint firstItem="gbv-xf-EI7" firstAttribute="width" secondItem="omw-zQ-lep" secondAttribute="width" id="CKB-xd-Xj0"/>
                             <constraint firstItem="MzX-lD-abi" firstAttribute="top" secondItem="OHn-r2-zbJ" secondAttribute="top" id="Cgg-C2-pHW"/>
                             <constraint firstItem="kdL-vf-hse" firstAttribute="top" secondItem="omw-zQ-lep" secondAttribute="top" id="IcN-vk-6xn"/>
                             <constraint firstItem="88i-sW-T9N" firstAttribute="top" secondItem="MzX-lD-abi" secondAttribute="bottom" id="Mic-yS-cMp"/>
-                            <constraint firstItem="bUx-Zi-FOh" firstAttribute="leading" secondItem="OHn-r2-zbJ" secondAttribute="leading" id="PF3-Qc-aZ6"/>
                             <constraint firstAttribute="trailing" secondItem="kdL-vf-hse" secondAttribute="trailing" id="TlP-PD-fn4"/>
                             <constraint firstItem="OHn-r2-zbJ" firstAttribute="bottom" secondItem="hXV-hg-yQY" secondAttribute="bottom" id="Uz4-R6-kUk"/>
-                            <constraint firstItem="bUx-Zi-FOh" firstAttribute="top" secondItem="omw-zQ-lep" secondAttribute="top" id="Vyc-KD-zEj"/>
                             <constraint firstItem="88i-sW-T9N" firstAttribute="bottom" secondItem="OHn-r2-zbJ" secondAttribute="bottom" id="YpJ-v7-glw"/>
                             <constraint firstItem="kdL-vf-hse" firstAttribute="leading" secondItem="omw-zQ-lep" secondAttribute="leading" id="aTa-6o-ZUz"/>
-                            <constraint firstAttribute="bottom" secondItem="bUx-Zi-FOh" secondAttribute="bottom" id="c0x-lb-06k"/>
                             <constraint firstItem="88i-sW-T9N" firstAttribute="trailing" secondItem="OHn-r2-zbJ" secondAttribute="trailing" id="daj-EA-Xrk"/>
                             <constraint firstItem="88i-sW-T9N" firstAttribute="leading" secondItem="OHn-r2-zbJ" secondAttribute="leading" id="o5B-6G-Ib7"/>
                             <constraint firstItem="OHn-r2-zbJ" firstAttribute="trailing" secondItem="hXV-hg-yQY" secondAttribute="trailing" id="q38-Un-mdc"/>
@@ -256,17 +249,11 @@
                             <constraint firstItem="hXV-hg-yQY" firstAttribute="leading" secondItem="OHn-r2-zbJ" secondAttribute="leading" id="tSm-Vi-NVU"/>
                             <constraint firstAttribute="bottom" secondItem="kdL-vf-hse" secondAttribute="bottom" id="yVD-wf-sNC"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="bUx-Zi-FOh"/>
-                            </mask>
-                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="gearshape" catalog="system" id="JJf-7b-9Lv"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <size key="freeformSize" width="414" height="1000"/>
                     <connections>
-                        <outlet property="BGImageView" destination="bUx-Zi-FOh" id="9oa-iX-wc1"/>
                         <outlet property="BGView" destination="kdL-vf-hse" id="2XN-yw-B7F"/>
                         <outlet property="aboutStackViewBG" destination="GGu-Ro-5T7" id="3HR-gF-GuZ"/>
                         <outlet property="settingTitleButton" destination="v5N-XY-nWf" id="MO8-BT-gSW"/>
@@ -278,7 +265,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BG_Day" width="375" height="812"/>
         <image name="dial" catalog="system" width="128" height="106"/>
         <image name="doc.text" catalog="system" width="115" height="128"/>
         <image name="folder.fill" catalog="system" width="128" height="97"/>

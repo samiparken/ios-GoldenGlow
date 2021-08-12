@@ -20,9 +20,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BG_Night" translatesAutoresizingMaskIntoConstraints="NO" id="m7n-jY-lav" userLabel="BG">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                            </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="-6" translatesAutoresizingMaskIntoConstraints="NO" id="5PY-AW-rul" userLabel="Top Bar">
                                 <rect key="frame" x="15" y="44" width="384" height="30"/>
                                 <subviews>
@@ -58,7 +55,6 @@
                         <viewLayoutGuide key="safeArea" id="GZo-WS-xhY"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="qeI-HG-y7X" secondAttribute="trailing" id="4Wn-N9-Cdt"/>
-                            <constraint firstAttribute="bottom" secondItem="m7n-jY-lav" secondAttribute="bottom" id="9vG-JP-W9Q"/>
                             <constraint firstItem="GZo-WS-xhY" firstAttribute="bottom" secondItem="f2y-RU-Aj0" secondAttribute="bottom" id="B8d-ZG-j4z"/>
                             <constraint firstAttribute="bottom" secondItem="qeI-HG-y7X" secondAttribute="bottom" id="FDa-if-kbf"/>
                             <constraint firstItem="GZo-WS-xhY" firstAttribute="bottom" secondItem="V2x-3e-LaR" secondAttribute="bottom" id="HWZ-mK-4R6"/>
@@ -66,25 +62,16 @@
                             <constraint firstItem="5PY-AW-rul" firstAttribute="leading" secondItem="GZo-WS-xhY" secondAttribute="leading" constant="15" id="OWL-MR-cKF"/>
                             <constraint firstItem="qeI-HG-y7X" firstAttribute="top" secondItem="XXZ-JR-Y5O" secondAttribute="top" id="SZu-GN-AUS"/>
                             <constraint firstItem="f2y-RU-Aj0" firstAttribute="leading" secondItem="GZo-WS-xhY" secondAttribute="leading" id="Txy-0W-lnv"/>
-                            <constraint firstItem="m7n-jY-lav" firstAttribute="trailing" secondItem="XXZ-JR-Y5O" secondAttribute="trailing" id="WOM-ZG-lgw"/>
                             <constraint firstItem="5PY-AW-rul" firstAttribute="top" secondItem="GZo-WS-xhY" secondAttribute="top" id="avT-Jb-2B2"/>
                             <constraint firstItem="f2y-RU-Aj0" firstAttribute="top" secondItem="5PY-AW-rul" secondAttribute="bottom" id="uJH-es-LUK"/>
-                            <constraint firstItem="m7n-jY-lav" firstAttribute="top" secondItem="XXZ-JR-Y5O" secondAttribute="top" id="usy-Wp-a4n"/>
                             <constraint firstItem="f2y-RU-Aj0" firstAttribute="trailing" secondItem="GZo-WS-xhY" secondAttribute="trailing" id="vQn-RW-9SX"/>
                             <constraint firstItem="qeI-HG-y7X" firstAttribute="leading" secondItem="XXZ-JR-Y5O" secondAttribute="leading" id="yBF-1W-C57"/>
-                            <constraint firstItem="m7n-jY-lav" firstAttribute="leading" secondItem="XXZ-JR-Y5O" secondAttribute="leading" id="zRy-EI-UK9"/>
                             <constraint firstItem="V2x-3e-LaR" firstAttribute="centerX" secondItem="XXZ-JR-Y5O" secondAttribute="centerX" id="zYB-aT-ZZK"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="m7n-jY-lav"/>
-                            </mask>
-                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="sun.haze" catalog="system" id="nFU-IJ-YN9"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="BGImageView" destination="m7n-jY-lav" id="qhr-nn-8F7"/>
                         <outlet property="BGView" destination="qeI-HG-y7X" id="JbG-3R-jUB"/>
                         <outlet property="currentCityButton" destination="J0C-JA-0kO" id="PCK-PY-Cq3"/>
                         <outlet property="currentLocalTimeLabel" destination="Dpb-NO-UTv" id="QPn-Va-z3o"/>
@@ -106,7 +93,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BG_Night" width="375" height="812"/>
         <image name="sun.haze" catalog="system" width="128" height="119"/>
     </resources>
 </document>
