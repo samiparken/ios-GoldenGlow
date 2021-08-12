@@ -73,6 +73,7 @@
                     <connections>
                         <outlet property="BGImageView" destination="m7n-jY-lav" id="qhr-nn-8F7"/>
                         <outlet property="currentCityButton" destination="J0C-JA-0kO" id="PCK-PY-Cq3"/>
+                        <outlet property="currentLocalTimeLabel" destination="Dpb-NO-UTv" id="QPn-Va-z3o"/>
                         <outlet property="pageControl" destination="V2x-3e-LaR" id="bvV-Oj-gTE"/>
                         <outlet property="scrollView" destination="f2y-RU-Aj0" id="lQQ-qH-YGS"/>
                     </connections>

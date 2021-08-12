@@ -11,7 +11,7 @@ class SkyViewController: UIViewController {
         
     @IBOutlet weak var BGImageView: UIImageView!
     @IBOutlet weak var currentCityButton: UIButton!
-    
+    @IBOutlet weak var currentLocalTimeLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControl: UIPageControl!
     
@@ -45,6 +45,7 @@ class SkyViewController: UIViewController {
         setupWave()
         setupScrollView()
         setupPageControl()
+        setupLocalTimeLabel()
         
         // Screen Organize
         view.bringSubviewToFront(scrollView)
@@ -62,9 +63,8 @@ class SkyViewController: UIViewController {
         print("SkyView: viewWillAppear")
         
         updateCityName()
-        
+        setupLocalTimeLabel()
         updateBG()
-        
         waveAnimation()
 
     }
@@ -80,6 +80,7 @@ class SkyViewController: UIViewController {
     
     // for Notification Observers
     let keyForCityName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
+    let keyForLocalTimeUpdate = Notification.Name(rawValue: LocalTimeUpdateNotificationKey)
     let keyForBGImage = Notification.Name(rawValue: BGImageUpdateNotificationKey)
     let keyForTimerUpdate = Notification.Name(rawValue: TimerUpdateNotificationKey)
     let keyForSunPulsePositionUpdate = Notification.Name(rawValue: SunPulsePositionUpdateNotificationKey)
@@ -88,6 +89,8 @@ class SkyViewController: UIViewController {
     // Register Observers for updates
     func registerObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateCityName(notification:)), name: keyForCityName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateLocalTime(notification:)), name: keyForLocalTimeUpdate, object: nil)
+                
         NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateBGImage(notification:)), name: keyForBGImage, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateTimer(notification:)), name: keyForTimerUpdate, object: nil)
         
@@ -97,6 +100,11 @@ class SkyViewController: UIViewController {
     
     @objc func updateCityName(notification: NSNotification) {
         updateCityName()
+        setupLocalTimeLabel()
+    }
+    
+    @objc func updateLocalTime(notification: NSNotification) {
+        currentLocalTimeLabel.text = myTabBar.localTime
     }
     
     @objc func updateBGImage(notification: NSNotification) {
@@ -116,6 +124,14 @@ class SkyViewController: UIViewController {
     
 
 //MARK: - Init
+    
+    func setupLocalTimeLabel() {
+        if myTabBar.isDifferentTimezone {
+            currentLocalTimeLabel.isHidden = false
+        } else {
+            currentLocalTimeLabel.isHidden = true
+        }
+    }
     
     func setupScrollView() {
         // Initialize ScrollView
@@ -195,7 +211,6 @@ class SkyViewController: UIViewController {
             sunPulse.layer.insertSublayer(pulse, below: sunPulse.layer)
         }
     }
-
     
 //MARK: - Methods
     func updateWavePosition() {
@@ -216,14 +231,14 @@ class SkyViewController: UIViewController {
     }
     
     func updateCityName() {
-        if let cityName = myTabBar.currentLocation {
+        if let cityName = myTabBar.currentCityName {
             if cityName != currentCityButton.titleLabel?.text {
                 currentCityButton.titleLabel?.text = cityName
                 currentCityButton.addCharacterSpacing()
             }
         }
     }
-    
+        
     func updateBG() {
         if let imageName = myTabBar.BGImageViewName {
             BGImageView.image = UIImage(named: imageName)

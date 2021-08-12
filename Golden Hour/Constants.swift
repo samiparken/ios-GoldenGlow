@@ -48,6 +48,8 @@ struct K {
 let CityNameUpdateNotificationKey = "co.samiparken.goldenglow.updateCityName"
 let BGImageUpdateNotificationKey = "co.samiparken.goldenglow.updateBGImage"
 let TimerUpdateNotificationKey = "co.samiparken.goldenglow.updateTimer"
+let LocalTimeUpdateNotificationKey = "co.samiparken.goldenglow.updateLocaltime"
+
 let SunAngleUpdateNotificationKey = "co.samiparken.goldenglow.updateSunAngle"
 
 let MorningEveningReadyNotificationKey = "co.samiparken.goldenglow.morningEveningReady"

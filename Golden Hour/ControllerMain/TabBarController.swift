@@ -8,13 +8,17 @@ class TabBarController: UITabBarController {
     var sunPositionManager = SunPositionManager()
     var locationManager = LocationManager()
     var timerManager = TimerManager()
+
+    let calendar = Calendar.current
     
     /* for Sharing Data Btw View Controllers */
     static let singletonTabBar = TabBarController()
     
     // BG & Location
     var BGImageViewName: String?
-    var currentLocation: String?
+    var currentCityName: String?
+    var isDifferentTimezone: Bool = false
+    var localTime: String?
     
     // SkyView1 Timer
     var currentState: String = ""
@@ -86,8 +90,7 @@ class TabBarController: UITabBarController {
         }
         
         // if not, try to get a current location
-
-    }    
+    }
     
 //MARK: - Methods
     func updateSunAngle() {
@@ -117,9 +120,16 @@ extension TabBarController: SunPositionManagerDelegate {
     
     func didUpdateCurrentCity(_ cityName: String) {
         
-        currentLocation = cityName.uppercased()
-        
-        // Braodcast: CityName to Show
+        currentCityName = cityName.uppercased()
+                        
+        isDifferentTimezone = sunPositionManager.timezoneOffset == 0 ? false : true
+        if isDifferentTimezone {
+            timerManager.startLocalTime()
+        } else {
+            timerManager.endLocalTime()
+        }
+
+        // Braodcast: CityName & LocalTime to Show
         let keyName = Notification.Name(rawValue: CityNameUpdateNotificationKey)
         NotificationCenter.default.post(name: keyName, object: nil)
     }
@@ -330,5 +340,18 @@ extension TabBarController: TimerManagerDelegate {
     }
     
     func didEndTimer() {
-        sunPositionManager.refreshCurrentState()    }
+        sunPositionManager.refreshCurrentState()
+    }
+    
+    func didUpdateLocaltime() {
+        let now = Date() + sunPositionManager.timezoneOffset
+        let hh = String(format: "%02d", calendar.component(.hour, from: now))
+        let mm = String(format: "%02d", calendar.component(.minute, from: now))
+        
+        self.localTime = hh + ":" + mm
+        
+        // Braodcast
+        let keyName = Notification.Name(rawValue: LocalTimeUpdateNotificationKey)
+        NotificationCenter.default.post(name: keyName, object: nil)
+    }
 }

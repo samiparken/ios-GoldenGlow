@@ -24,7 +24,7 @@ class LocationSearchViewController: UIViewController {
     
 //MARK: - Init
     func setCurrentLocation() {
-        if let location = myTabBar.currentLocation {
+        if let location = myTabBar.currentCityName {
             selectedCityLabel.text = location
             selectedCityLabel.addCharacterSpacing()
         }
