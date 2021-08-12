@@ -146,11 +146,22 @@ class SunPositionManager {
     
     func refreshDateState() {
         // Today Scan -> SkyView2
-        let today = Date()
+        
+        
+        let nowState = getState()
+        let nowNext = getNextState()
+        var targetDate = Date() + timezoneOffset
+        
+        if ( nowState == NIGHTTIME )
+            && ( nowNext == BLUEHOUR )
+            && ( isSunGoingUp() == false ) {
+            targetDate += 86400
+        }
+                
         let calendar = Calendar.current
-        let yyyy = String(calendar.component(.year, from: today))
-        let mm = String(calendar.component(.month, from: today))
-        let dd = String(calendar.component(.day, from: today))
+        let yyyy = String(calendar.component(.year, from: targetDate))
+        let mm = String(calendar.component(.month, from: targetDate))
+        let dd = String(calendar.component(.day, from: targetDate))
         let scanResult = dateScan(yyyy, mm, dd)
         self.delegate?.didUpdateTodayScan(scanResult)
     }

@@ -55,7 +55,6 @@ class SkyViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         print("SkyView: viewDidAppear")
 
-        waveAnimation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,6 +68,9 @@ class SkyViewController: UIViewController {
         if let imageName = myTabBar.BGImageViewName {
             BGImageView.image = UIImage(named: imageName)
         }
+
+        waveAnimation()
+
     }
 
     override func viewWillDisappear(_ animated: Bool) {
