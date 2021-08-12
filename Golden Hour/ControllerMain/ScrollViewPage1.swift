@@ -81,7 +81,7 @@ class ScrollViewPage1: UIView {
         middleRemainingTime.text =
             myTabBar.timerHour == "00"
             ? "\(myTabBar.timerMin):\(myTabBar.timerSec)"
-            :"\(myTabBar.timerHour):\(myTabBar.timerMin):\(myTabBar.timerSec)"
+            : "\(myTabBar.timerHour):\(myTabBar.timerMin):\(myTabBar.timerSec)"
         
         //update labels
         currentState = myTabBar.currentState
