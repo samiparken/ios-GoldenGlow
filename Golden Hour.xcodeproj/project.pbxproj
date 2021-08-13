@@ -47,6 +47,7 @@
 		22E4FD4424FE83C200C845E1 /* SunPositionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E4FD4324FE83C200C845E1 /* SunPositionModel.swift */; };
 		22E4FD4624FE884F00C845E1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E4FD4524FE884F00C845E1 /* Constants.swift */; };
 		22E4FD4824FE8D3600C845E1 /* SunPositionConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E4FD4724FE8D3600C845E1 /* SunPositionConstants.swift */; };
+		22ED1E9826C65ED70043B866 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ED1E9726C65ED70043B866 /* NotificationManager.swift */; };
 		4927DE60C73F2E2A7FCB89C5 /* Pods_Golden_Hour.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004AC57CDD6150C14DED6694 /* Pods_Golden_Hour.framework */; };
 /* End PBXBuildFile section */
 
@@ -94,6 +95,7 @@
 		22E4FD4324FE83C200C845E1 /* SunPositionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunPositionModel.swift; sourceTree = "<group>"; };
 		22E4FD4524FE884F00C845E1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		22E4FD4724FE8D3600C845E1 /* SunPositionConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunPositionConstants.swift; sourceTree = "<group>"; };
+		22ED1E9726C65ED70043B866 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		457F3F6E785BB1241BBAF48F /* Pods-Golden Hour.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Golden Hour.release.xcconfig"; path = "Target Support Files/Pods-Golden Hour/Pods-Golden Hour.release.xcconfig"; sourceTree = "<group>"; };
 		D9FBAFC4B7E3329295A7E560 /* Pods-Golden Hour.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Golden Hour.debug.xcconfig"; path = "Target Support Files/Pods-Golden Hour/Pods-Golden Hour.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,6 +146,7 @@
 				22321D9F26C2AD9A00CB9354 /* DataManager.swift */,
 				22C5D01A25090A350077F7E2 /* LocationManager.swift */,
 				22C5D01C25091BC10077F7E2 /* TimerManager.swift */,
+				22ED1E9726C65ED70043B866 /* NotificationManager.swift */,
 				226A2EDA253B3D5B00F54439 /* UI Model */,
 			);
 			path = Model;
@@ -409,6 +412,7 @@
 				2260F184252E0C390008B470 /* UIColor+Ext.swift in Sources */,
 				22793BA724F81C2800BEBF8E /* SceneDelegate.swift in Sources */,
 				224FCA3925190E1E00CC4EE4 /* TabBarController.swift in Sources */,
+				22ED1E9826C65ED70043B866 /* NotificationManager.swift in Sources */,
 				2225086726C113FD00BB7078 /* LocationSearchViewController.swift in Sources */,
 				2260F187252E0C770008B470 /* UIButton+Ext.swift in Sources */,
 				22BFA2A7252389C100923D6C /* NotifyViewController.swift in Sources */,

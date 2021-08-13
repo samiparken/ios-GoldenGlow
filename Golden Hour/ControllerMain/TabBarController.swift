@@ -1,6 +1,5 @@
 import UIKit
 import CoreLocation
-import UserNotifications
 
 class TabBarController: UITabBarController {
     let defaults = UserDefaults.standard
@@ -9,6 +8,7 @@ class TabBarController: UITabBarController {
     var sunPositionManager = SunPositionManager()
     var locationManager = LocationManager()
     var timerManager = TimerManager()
+    var notificationManager = NotificationManager()
 
     let calendar = Calendar.current
     
@@ -77,8 +77,8 @@ class TabBarController: UITabBarController {
         sunPositionManager.delegate = self
         locationManager.delegate = self
         timerManager.delegate = self
-        
-        askNotificationPermission()
+                
+        notificationManager.askPermission()
         
         // check UserDefaults for presentLocation
         if let cityName = defaults.string(forKey: K.UserDefaults.PresentLocation.cityName),
@@ -93,12 +93,6 @@ class TabBarController: UITabBarController {
         }
         
         // if not, try to get a current location
-    }
-    
-//MARK: - Init
-    func askNotificationPermission() {
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .sound], completionHandler: {(granted, error) in })
     }
     
 //MARK: - Methods
