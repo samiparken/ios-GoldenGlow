@@ -1,5 +1,6 @@
 import UIKit
 import CoreLocation
+import UserNotifications
 
 class TabBarController: UITabBarController {
     let defaults = UserDefaults.standard
@@ -72,6 +73,10 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound], completionHandler: {(granted, error) in })
+        
+        
         // Delegates
         sunPositionManager.delegate = self
         locationManager.delegate = self
@@ -87,7 +92,6 @@ class TabBarController: UITabBarController {
 
             //Star SunPositionManager()
             sunPositionManager.initSunPositionSystem(cityName, countryName, countryCode, long: long, lat: lat)
-                        
         }
         
         // if not, try to get a current location
