@@ -1,6 +1,7 @@
 import UIKit
 
 class NotifyViewController: UIViewController {
+    let defaults = UserDefaults.standard
     let myTabBar = TabBarController.singletonTabBar
     
     @IBOutlet weak var BGView: UIView!
@@ -9,6 +10,16 @@ class NotifyViewController: UIViewController {
     @IBOutlet weak var sunStackViewBG: UIView!
     @IBOutlet weak var reminderTimingTableView: UITableView!
     @IBOutlet weak var reminderTimingTableViewBG: UIView!
+    
+    // Switches
+    @IBOutlet weak var sunriseSwitch: UISwitch!
+    @IBOutlet weak var sunsetSwitch: UISwitch!
+    @IBOutlet weak var lowsunMorningSwitch: UISwitch!
+    @IBOutlet weak var lowsunEveningSwitch: UISwitch!
+    @IBOutlet weak var goldenhourMorningSwitch: UISwitch!
+    @IBOutlet weak var goldenhourEveningSwitch: UISwitch!
+    @IBOutlet weak var bluehourMorningSwitch: UISwitch!
+    @IBOutlet weak var bluehourEveningSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +34,7 @@ class NotifyViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         initLayout()
         initTableView()
+        initSwitches()
     }
         
     override func viewDidAppear(_ animated: Bool) {
@@ -35,18 +47,6 @@ class NotifyViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         print("NotifyView: viewWillDisappear")
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
     
 //MARK: - For Notification Observers
 
@@ -83,8 +83,48 @@ class NotifyViewController: UIViewController {
         reminderTimingTableView.tableFooterView = v
     }
     
-}
+    func initSwitches() {
+                
+        sunriseSwitch.isOn = defaults.bool(forKey: K.UserDefaults.Notification.sunrise)
+        sunsetSwitch.isOn = defaults.bool(forKey: K.UserDefaults.Notification.sunset)
+        
+        lowsunMorningSwitch.isOn = defaults.bool(forKey: K.UserDefaults.Notification.lowSunMorning)
+        lowsunEveningSwitch.isOn = defaults.bool(forKey: K.UserDefaults.Notification.lowSunEvening)
+        
+        goldenhourMorningSwitch.isOn = defaults.bool(forKey: K.UserDefaults.Notification.goldenHourMorning)
+        goldenhourEveningSwitch.isOn = defaults.bool(forKey: K.UserDefaults.Notification.goldenHourEvening)
+        
+        bluehourMorningSwitch.isOn = defaults.bool(forKey: K.UserDefaults.Notification.blueHourMorning)
+        bluehourEveningSwitch.isOn = defaults.bool(forKey: K.UserDefaults.Notification.blueHourEvening)
 
+    }
+    
+//MARK: - UI Action
+    @IBAction func sunriseSwitched(_ sender: UISwitch) {
+        self.defaults.set(sender.isOn, forKey: K.UserDefaults.Notification.sunrise)
+    }
+    @IBAction func sunsetSwitched(_ sender: UISwitch) {
+        self.defaults.set(sender.isOn, forKey: K.UserDefaults.Notification.sunset)
+    }
+    @IBAction func lowsunMorningSwitched(_ sender: UISwitch) {
+        self.defaults.set(sender.isOn, forKey: K.UserDefaults.Notification.lowSunMorning)
+    }
+    @IBAction func lowsunEveningSwitched(_ sender: UISwitch) {
+        self.defaults.set(sender.isOn, forKey: K.UserDefaults.Notification.lowSunEvening)
+    }
+    @IBAction func goldenhourMorningSwitched(_ sender: UISwitch) {
+        self.defaults.set(sender.isOn, forKey: K.UserDefaults.Notification.goldenHourMorning)
+    }
+    @IBAction func goldenhourEveningSwitched(_ sender: UISwitch) {
+        self.defaults.set(sender.isOn, forKey: K.UserDefaults.Notification.goldenHourEvening)
+    }
+    @IBAction func bluehourMorningSwitched(_ sender: UISwitch) {
+        self.defaults.set(sender.isOn, forKey: K.UserDefaults.Notification.blueHourMorning)
+    }    
+    @IBAction func bluehourEveningSwitched(_ sender: UISwitch) {
+        self.defaults.set(sender.isOn, forKey: K.UserDefaults.Notification.blueHourEvening)
+    }
+}
 //MARK: - UITableViewDelegate
 extension NotifyViewController: UITableViewDelegate {
     

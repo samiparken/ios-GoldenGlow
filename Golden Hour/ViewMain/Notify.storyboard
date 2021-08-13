@@ -79,8 +79,11 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="daV-lc-GRX">
                                                                 <rect key="frame" x="284" y="0.0" width="50" height="40"/>
                                                                 <subviews>
-                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zYB-bw-VF3">
+                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" title="sunrise" translatesAutoresizingMaskIntoConstraints="NO" id="zYB-bw-VF3">
                                                                         <rect key="frame" x="1" y="4.5" width="51" height="31"/>
+                                                                        <connections>
+                                                                            <action selector="sunriseSwitched:" destination="EHY-iJ-SuV" eventType="valueChanged" id="YoK-tk-WAZ"/>
+                                                                        </connections>
                                                                     </switch>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -114,8 +117,11 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4eg-iR-x4T">
                                                                 <rect key="frame" x="284" y="0.0" width="50" height="40"/>
                                                                 <subviews>
-                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3dd-Dk-opV">
+                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" title="sunset" translatesAutoresizingMaskIntoConstraints="NO" id="3dd-Dk-opV">
                                                                         <rect key="frame" x="1" y="4.5" width="51" height="31"/>
+                                                                        <connections>
+                                                                            <action selector="sunsetSwitched:" destination="EHY-iJ-SuV" eventType="valueChanged" id="B49-uC-oAl"/>
+                                                                        </connections>
                                                                     </switch>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -197,8 +203,11 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qkz-GB-niF">
                                                                 <rect key="frame" x="204" y="0.0" width="60" height="40"/>
                                                                 <subviews>
-                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Hf-on-hHD">
+                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" title="lowsunMorning" translatesAutoresizingMaskIntoConstraints="NO" id="0Hf-on-hHD">
                                                                         <rect key="frame" x="11" y="4.5" width="51" height="31"/>
+                                                                        <connections>
+                                                                            <action selector="lowsunMorningSwitched:" destination="EHY-iJ-SuV" eventType="valueChanged" id="SnD-7N-7ec"/>
+                                                                        </connections>
                                                                     </switch>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -211,8 +220,11 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4kT-kd-XVU">
                                                                 <rect key="frame" x="274" y="0.0" width="60" height="40"/>
                                                                 <subviews>
-                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ion-LP-P5W">
+                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" title="lowsunEvening" translatesAutoresizingMaskIntoConstraints="NO" id="ion-LP-P5W">
                                                                         <rect key="frame" x="11" y="4.5" width="51" height="31"/>
+                                                                        <connections>
+                                                                            <action selector="lowsunEveningSwitched:" destination="EHY-iJ-SuV" eventType="valueChanged" id="IYk-cn-r30"/>
+                                                                        </connections>
                                                                     </switch>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -246,8 +258,11 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pew-nH-pxw">
                                                                 <rect key="frame" x="204" y="0.0" width="60" height="40"/>
                                                                 <subviews>
-                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nxi-kH-AGd">
+                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" title="goldenhourMorning" translatesAutoresizingMaskIntoConstraints="NO" id="nxi-kH-AGd">
                                                                         <rect key="frame" x="11" y="4.5" width="51" height="31"/>
+                                                                        <connections>
+                                                                            <action selector="goldenhourMorningSwitched:" destination="EHY-iJ-SuV" eventType="valueChanged" id="eHa-pQ-iYG"/>
+                                                                        </connections>
                                                                     </switch>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -260,8 +275,11 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mom-Pa-PSs">
                                                                 <rect key="frame" x="274" y="0.0" width="60" height="40"/>
                                                                 <subviews>
-                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FuI-Ya-483">
+                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" title="goldenhourEvening" translatesAutoresizingMaskIntoConstraints="NO" id="FuI-Ya-483">
                                                                         <rect key="frame" x="11" y="4.5" width="51" height="31"/>
+                                                                        <connections>
+                                                                            <action selector="goldenhourEveningSwitched:" destination="EHY-iJ-SuV" eventType="valueChanged" id="V3K-TA-zRz"/>
+                                                                        </connections>
                                                                     </switch>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -295,8 +313,11 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B6l-L8-pzY">
                                                                 <rect key="frame" x="204" y="0.0" width="60" height="40"/>
                                                                 <subviews>
-                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yT5-At-8dg">
+                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" title="bluehourMorning" translatesAutoresizingMaskIntoConstraints="NO" id="yT5-At-8dg">
                                                                         <rect key="frame" x="11" y="4.5" width="51" height="31"/>
+                                                                        <connections>
+                                                                            <action selector="bluehourMorningSwitched:" destination="EHY-iJ-SuV" eventType="valueChanged" id="6Ho-E1-ybP"/>
+                                                                        </connections>
                                                                     </switch>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -309,8 +330,11 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOw-7l-Kgu">
                                                                 <rect key="frame" x="274" y="0.0" width="60" height="40"/>
                                                                 <subviews>
-                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BVT-1f-pin">
+                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" title="bluehourEvening" translatesAutoresizingMaskIntoConstraints="NO" id="BVT-1f-pin">
                                                                         <rect key="frame" x="11" y="4.5" width="51" height="31"/>
+                                                                        <connections>
+                                                                            <action selector="bluehourEveningSwitched:" destination="EHY-iJ-SuV" eventType="valueChanged" id="vS3-TL-5Ag"/>
+                                                                        </connections>
                                                                     </switch>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -444,10 +468,18 @@
                     <size key="freeformSize" width="414" height="1000"/>
                     <connections>
                         <outlet property="BGView" destination="61a-zm-fwH" id="Ots-0W-Xfk"/>
+                        <outlet property="bluehourEveningSwitch" destination="BVT-1f-pin" id="K9B-ZR-Ubm"/>
+                        <outlet property="bluehourMorningSwitch" destination="yT5-At-8dg" id="YDk-Mt-oZb"/>
+                        <outlet property="goldenhourEveningSwitch" destination="FuI-Ya-483" id="dJH-GT-IyD"/>
+                        <outlet property="goldenhourMorningSwitch" destination="nxi-kH-AGd" id="fyV-Ff-pv0"/>
+                        <outlet property="lowsunEveningSwitch" destination="ion-LP-P5W" id="yaV-DZ-e0g"/>
+                        <outlet property="lowsunMorningSwitch" destination="0Hf-on-hHD" id="Izd-5O-fvz"/>
                         <outlet property="notificationTitleButton" destination="i2f-rS-2eo" id="YbF-3e-gF5"/>
                         <outlet property="reminderTimingTableView" destination="MKV-xV-PNM" id="DQx-eQ-03O"/>
                         <outlet property="reminderTimingTableViewBG" destination="FxW-Si-Zo9" id="zgk-ct-aEj"/>
                         <outlet property="sunStackViewBG" destination="E3j-7m-Y5Y" id="Ece-XC-LAa"/>
+                        <outlet property="sunriseSwitch" destination="zYB-bw-VF3" id="g4R-gi-96L"/>
+                        <outlet property="sunsetSwitch" destination="3dd-Dk-opV" id="fwP-pO-rfn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SgC-tb-0bV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

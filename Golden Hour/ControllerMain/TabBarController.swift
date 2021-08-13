@@ -72,15 +72,13 @@ class TabBarController: UITabBarController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .sound], completionHandler: {(granted, error) in })
-        
-        
+                
         // Delegates
         sunPositionManager.delegate = self
         locationManager.delegate = self
         timerManager.delegate = self
+        
+        askNotificationPermission()
         
         // check UserDefaults for presentLocation
         if let cityName = defaults.string(forKey: K.UserDefaults.PresentLocation.cityName),
@@ -95,6 +93,12 @@ class TabBarController: UITabBarController {
         }
         
         // if not, try to get a current location
+    }
+    
+//MARK: - Init
+    func askNotificationPermission() {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound], completionHandler: {(granted, error) in })
     }
     
 //MARK: - Methods
