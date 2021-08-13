@@ -123,7 +123,6 @@ class TabBarController: UITabBarController {
     }
 }
 
-
 //MARK: - SunPositionManagerDelegate
 extension TabBarController: SunPositionManagerDelegate {
     
@@ -224,8 +223,8 @@ extension TabBarController: SunPositionManagerDelegate {
     
     func didUpdateTodayScan(_ today: [SunTimestamp]) {
         
-        self.morningCellData = []   // 5 x 2 + 1 = 13
-        self.eveningCellData = []   // 5 x 2 + 1 = 13
+        self.morningCellData = []   // 5 x 2 + 1 = 11
+        self.eveningCellData = []   // 5 x 2 + 1 = 11
         
         var timestamps: [SunTimestamp] = today
         var end: Date, start: Date
