@@ -67,7 +67,7 @@ class SkyViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         print("SkyView: viewWillDisappear")
-
+        
     }
     
 
@@ -209,6 +209,14 @@ class SkyViewController: UIViewController {
     }
     
 //MARK: - Methods
+    
+    func removeWave() {
+        wave1.removeFromSuperview()
+        wave2.removeFromSuperview()
+        wave3.removeFromSuperview()
+        waveView.removeFromSuperview()
+    }
+    
     func updateWavePosition() {
         let offsetRate = scrollView.contentOffset.x/view.frame.width
         let screenHeight = self.view.frame.height
