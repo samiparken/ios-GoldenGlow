@@ -67,8 +67,8 @@ class TabBarController: UITabBarController {
     var eveningTotalTime: String = ""
     
     // SkyView2 Times
-    var morningCellData: [CellData] = []   // 5 x 2 + 1 = 13
-    var eveningCellData: [CellData] = []   // 5 x 2 + 1 = 13
+    var morningCellData: [CellData] = []   // 5 x 2 + 1 = 11
+    var eveningCellData: [CellData] = []   // 5 x 2 + 1 = 11
         
     override func viewDidLoad() {
         super.viewDidLoad()
