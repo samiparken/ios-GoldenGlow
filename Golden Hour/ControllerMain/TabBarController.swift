@@ -50,7 +50,7 @@ class TabBarController: UITabBarController {
         didSet {
             if wavePosition != oldValue {
                 // Braodcast
-                let keyName = Notification.Name(rawValue: wavePositionUpdateNotificationKey)
+                let keyName = Notification.Name(rawValue: WavePositionUpdateNotificationKey)
                 NotificationCenter.default.post(name: keyName, object: nil)
             }
         }

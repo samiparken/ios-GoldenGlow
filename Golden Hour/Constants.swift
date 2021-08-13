@@ -68,6 +68,5 @@ let MorningEveningReadyNotificationKey = "co.samiparken.goldenglow.morningEvenin
 let CurrentStateUpdateNotificationKey = "co.samiparken.goldenglow.currentState"
 
 let SunPulsePositionUpdateNotificationKey = "co.samiparken.goldenglow.SunPulsePositionUpdate"
-let wavePositionUpdateNotificationKey = "co.samiparken.goldenglow.wavePositionUpdate"
-
-
+let WavePositionUpdateNotificationKey = "co.samiparken.goldenglow.WavePositionUpdate"
+let WaveRefreshNotificationKey = "co.samiparken.goldenglow.WaveRedraw"

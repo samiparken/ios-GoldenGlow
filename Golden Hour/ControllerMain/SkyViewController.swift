@@ -45,14 +45,6 @@ class SkyViewController: UIViewController {
         
         // Screen Organize
         view.bringSubviewToFront(scrollView)
-        
-
-    }
-    
-    
-    override func viewDidAppear(_ animated: Bool) {
-        print("SkyView: viewDidAppear")
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,9 +53,14 @@ class SkyViewController: UIViewController {
         updateCityName()
         setupLocalTimeLabel()
         updateBG()
+        
         waveAnimation()
-
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        print("SkyView: viewDidAppear")
+    }
+    
 
     override func viewWillDisappear(_ animated: Bool) {
         print("SkyView: viewWillDisappear")
@@ -80,7 +77,8 @@ class SkyViewController: UIViewController {
     let keyForBGImage = Notification.Name(rawValue: BGImageUpdateNotificationKey)
     let keyForTimerUpdate = Notification.Name(rawValue: TimerUpdateNotificationKey)
     let keyForSunPulsePositionUpdate = Notification.Name(rawValue: SunPulsePositionUpdateNotificationKey)
-    let keyForWavePositionUpdate = Notification.Name(rawValue: wavePositionUpdateNotificationKey)
+    let keyForWavePositionUpdate = Notification.Name(rawValue: WavePositionUpdateNotificationKey)
+    let keyForRefreshWave = Notification.Name(rawValue: WaveRefreshNotificationKey)
     
     // Register Observers for updates
     func registerObservers() {
@@ -92,6 +90,8 @@ class SkyViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateSunPulsePosition(notification:)), name: keyForSunPulsePositionUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.updateWavePosition(notification:)), name: keyForWavePositionUpdate, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(SkyViewController.refreshWave(notification:)), name: keyForRefreshWave, object: nil)
     }
     
     @objc func updateCityName(notification: NSNotification) {
@@ -117,7 +117,10 @@ class SkyViewController: UIViewController {
     @objc func updateWavePosition(notification: NSNotification) {
         updateWavePosition()
     }
-    
+    @objc func refreshWave(notification: NSNotification) {
+        refreshWave()
+    }
+
 
 //MARK: - Init
     
@@ -210,11 +213,20 @@ class SkyViewController: UIViewController {
     
 //MARK: - Methods
     
-    func removeWave() {
+    func refreshWave() {
+        // remove
         wave1.removeFromSuperview()
         wave2.removeFromSuperview()
         wave3.removeFromSuperview()
         waveView.removeFromSuperview()
+                
+        // redraw
+        setupWave()
+        view.bringSubviewToFront(pageControl)
+        view.bringSubviewToFront(scrollView)
+
+        waveAnimation()
+        updateWavePosition()
     }
     
     func updateWavePosition() {
@@ -223,7 +235,6 @@ class SkyViewController: UIViewController {
 
         // Wave Vertical Position
         self.waveView.frame.origin.y = ((0.8 - myTabBar.wavePosition) * (offsetRate) + myTabBar.wavePosition ) * screenHeight
-
     }
     
     func updateSunPulsePosition() {
