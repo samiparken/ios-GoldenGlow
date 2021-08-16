@@ -57,6 +57,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             // refresh Wave Animation, broadcast
             let keyName = Notification.Name(rawValue: WaveRefreshNotificationKey)
             NotificationCenter.default.post(name: keyName, object: nil)
+            
+            // refresh Sun Angle
+            let keyName2 = Notification.Name(rawValue: SunAngleUpdateNotificationKey)
+            NotificationCenter.default.post(name: keyName2, object: nil)
         }
     }
 
