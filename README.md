@@ -23,13 +23,7 @@ This app notifies you when Golden Hour starts and ends at your location. It is t
 
 - Design
   - Inspired by the mesmerizing colors of the sky, the app's design aims to reflect the beauty of nature's palette.
-
-## DEMO
-.              |.|.  
-:-------------------------:|:-------------------------:|:-------------------------:
-![](/README/demo1.GIF)  |  ![](README/demo2.GIF) |  ![](README/demo3.GIF)
-![](/README/demo4.GIF)  |![](/README/demo5.GIF)  |
-
+ 
 ## Skillset
 - UIKit, Swift5
 - MVC Design Pattern
@@ -51,6 +45,8 @@ This project has greatly enhanced my iOS development skills.
 - Realm: Learned local database management using Realm, enhancing data storage and retrieval capabilities.
 - UI/UX: Improved UI/UX design skills, ensuring a more intuitive and engaging user experience.
 
-
-
-
+## DEMO
+.              |.|.  
+:-------------------------:|:-------------------------:|:-------------------------:
+![](/README/demo1.GIF)  |  ![](README/demo2.GIF) |  ![](README/demo3.GIF)
+![](/README/demo4.GIF)  |![](/README/demo5.GIF)  |
