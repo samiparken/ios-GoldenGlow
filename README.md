@@ -5,9 +5,8 @@
 ## Description
 This app notifies you when Golden Hour starts and ends at your location. It is the perfect time for photography or filming people, objects, or any view of a city or nature. It will give you beautiful color grading on your result, and it will also refresh you from your busy day and improve your mental health.
 
-### Change Location and Date
-You can easily adjust your location and date to plan your trips.
-It calculates the golden hour timetable based on your location and date.
+- Change Location and Date
+  - You can easily adjust your location and date to plan your trips. It calculates the golden hour timetable based on your location and date.
 
 ### Weather
 It shows the weather only for the golden hour and predicts the quality of the golden light. You can skip the notification when it's cloudy.
