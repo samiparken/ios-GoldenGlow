@@ -2,6 +2,8 @@
 ## Golden Hour Alarm & Photography Guide - iOS app
 "Don't miss out on the breathtaking beauty of golden skies, whether in the city or nature!"
 
+- What is Golden Hour? [Golden Hour](https://en.wikipedia.org/wiki/Golden_hour_(photography))
+
 ## Description
 This app notifies you when Golden Hour starts and ends at your location. It is the perfect time for photography or filming people, objects, or any view of a city or nature. It will give you beautiful color grading on your result, and it will also refresh you from your busy day and improve your mental health.
 
