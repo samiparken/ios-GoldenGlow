@@ -8,17 +8,17 @@ This app notifies you when Golden Hour starts and ends at your location. It is t
 - Change Location and Date
   - You can easily adjust your location and date to plan your trips. It calculates the golden hour timetable based on your location and date.
 
-### Weather
-It shows the weather only for the golden hour and predicts the quality of the golden light. You can skip the notification when it's cloudy.
+- Weather
+  - It shows the weather only for the golden hour and predicts the quality of the golden light. You can skip the notification when it's cloudy.
 
-### Reminder Option
-You can choose from 5 different notification times (On Time, 5 minutes before, 15 minutes before, 30 minutes before, 1 hour before) to suit your schedule.
+- Reminder Option
+  - You can choose from 5 different notification times (On Time, 5 minutes before, 15 minutes before, 30 minutes before, 1 hour before) to suit your schedule.
 
-### Duration
-It provides how long each phase will last with solar altitude angles within the golden hour.
+- Duration
+  - It provides how long each phase will last with solar altitude angles within the golden hour.
 
-### Design
-Inspired by the mesmerizing colors of the sky, the app's design aims to reflect the beauty of nature's palette.
+- Design
+  - Inspired by the mesmerizing colors of the sky, the app's design aims to reflect the beauty of nature's palette.
 
 ## DEMO
 
