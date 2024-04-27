@@ -1,13 +1,13 @@
 # GoldenGlow
 ## Golden Hour Alarm & Photography Guide - iOS app
-"Don't miss out on the breathtaking beauty of golden skies, whether in the city or nature!"
+"Don't miss out on the breathtaking beauty of the golden hour, no matter where you are."
 
 ![GoldenGlow Example](/README/golden_glow_demo.JPG)
 
 - What is [Golden Hour](https://en.wikipedia.org/wiki/Golden_hour_(photography))?
 
 ## Description
-This app notifies you when Golden Hour starts and ends at your location. It is the perfect time for photography or filming people, objects, or any view of a city or nature. It will give you beautiful color grading on your result, and it will also refresh you from your busy day and improve your mental health.
+This app notifies you when Golden Hour starts and ends at your location. It is the perfect time to take photos or videos of people, objects, or scenery. It enhances your images with beautiful color grading. With this app, you can enjoy the golden hour and get a break from your busy life.
 
 - Change Location and Date
   - You can easily adjust your location and date to plan your trips. It calculates the golden hour timetable based on your location and date.
@@ -41,7 +41,7 @@ This app notifies you when Golden Hour starts and ends at your location. It is t
 - Git Version Control on Xcode 
 - Sketch5 (Design Tool)
 
-## What I've Learned from This Project
+## What I've Learned from this project
 This project has greatly enhanced my iOS development skills.
 
 - Programming Language: Strengthened my Swift 5 skills, enabling me to implement desired features more efficiently.
