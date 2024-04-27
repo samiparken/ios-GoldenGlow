@@ -2,6 +2,8 @@
 ## Golden Hour Alarm & Photography Guide - iOS app
 "Don't miss out on the breathtaking beauty of golden skies, whether in the city or nature!"
 
+![GoldenGlow Example](/README/golden_glow_demo.JPG)
+
 - What is [Golden Hour](https://en.wikipedia.org/wiki/Golden_hour_(photography))?
 
 ## Description
