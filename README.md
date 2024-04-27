@@ -25,7 +25,6 @@ This app notifies you when Golden Hour starts and ends at your location. It is t
   - Inspired by the mesmerizing colors of the sky, the app's design aims to reflect the beauty of nature's palette.
 
 ## DEMO
-.          |  .
 :-------------------------:|:-------------------------:
 ![](/README/demo1.GIF)  |  ![](README/demo2.GIF)
 
