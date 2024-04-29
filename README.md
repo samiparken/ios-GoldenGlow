@@ -25,9 +25,10 @@ This app notifies you when Golden Hour starts and ends at your location. It is t
   - Inspired by the mesmerizing colors of the sky, the app's design aims to reflect the beauty of nature's palette.
  
 ## Skillset
+
 - UIKit, Swift5
 - MVC Design Pattern
-- Core Location
+- Core Data, Core Location
 - UserDefault
 - Realm (local DB)
 - CocoaPods and 3rd party libraries
@@ -36,7 +37,7 @@ This app notifies you when Golden Hour starts and ends at your location. It is t
 - Sketch5 (Design Tool)
 
 ## What I've Learned from this project
-This project has greatly enhanced my iOS development skills.
+This project has greatly enhanced my iOS development skills. It also combines Astronomy, Geography, Mathematics, and Algorithms.
 
 - Programming Language: Strengthened my Swift 5 skills, enabling me to implement desired features more efficiently.
 - Architecture: Applied the MVC design pattern to structure the app's design and scenarios effectively.
@@ -44,6 +45,7 @@ This project has greatly enhanced my iOS development skills.
 - UIKit: Gained proficiency in quickly selecting and implementing appropriate UI components.
 - Realm: Learned local database management using Realm, enhancing data storage and retrieval capabilities.
 - UI/UX: Improved UI/UX design skills, ensuring a more intuitive and engaging user experience.
+- Algorithm: Applied NREL's Solar Position Algorithm (SPA) and Adaptive Step Size Algorithm.
 
 ## DEMO
 .              |.|.  
