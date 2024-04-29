@@ -52,3 +52,6 @@ This project has greatly enhanced my iOS development skills. It also combines As
 :-------------------------:|:-------------------------:|:-------------------------:
 ![](/README/demo1.GIF)  |  ![](README/demo2.GIF) |  ![](README/demo3.GIF)
 ![](/README/demo4.GIF)  |![](/README/demo5.GIF)  |
+
+## About Golden Hour
+![golden hour](/README/about_golden_hour.png)
