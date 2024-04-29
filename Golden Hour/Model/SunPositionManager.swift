@@ -287,9 +287,11 @@ class SunPositionManager {
     
     func calculateTimeGap(_ sunAngle: Double) -> Double {
         let absAngle = abs(sunAngle)
-        let temp = (absAngle - 10) * 240   // divide 15, multiply 3600
+        let temp = (absAngle - 10) * 240   // most fastest case 4min/deg, it covers all the cases
+                                           // OLD comment: divide 15, multiply 3600
         return ( temp > 60 ) ? temp : 60
     }
+
     
 
     

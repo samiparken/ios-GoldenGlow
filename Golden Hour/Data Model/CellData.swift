@@ -54,6 +54,5 @@ struct CellData {
         case NIGHTTIME: stateString =  "NIGHTTIME";         symbol = ""
         default: stateString = "ERROR";                     symbol = ""
         }
-    }
-    
+    }    
 }
