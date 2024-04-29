@@ -285,6 +285,7 @@ class SunPositionManager {
     }
     */
     
+    // Applied 'Adaptive Step Size Algorithm(Method)'
     func calculateTimeGapInSecond(_ sunAngle: Double) -> Double {
         let absAngle = abs(sunAngle)
         let temp = (absAngle - 10) * 240   // most fastest case 4min/deg, it covers all the cases
