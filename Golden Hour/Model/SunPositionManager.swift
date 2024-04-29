@@ -191,7 +191,7 @@ class SunPositionManager {
                 result.append(sun.date)
             }
             else {
-                sun.date -= calculateTimeGap(sunAngle)   // decrease timestamp for scanning
+                sun.date -= calculateTimeGapInSecond(sunAngle)   // decrease timestamp for scanning
             }
         }
         
@@ -207,7 +207,7 @@ class SunPositionManager {
                 result.append(sun.date)
             }
             else {
-                sun.date += calculateTimeGap(sunAngle)   // increase timestamp for scanning
+                sun.date += calculateTimeGapInSecond(sunAngle)   // increase timestamp for scanning
             }
         }
                 
@@ -229,7 +229,7 @@ class SunPositionManager {
         var sun = SunPositionModel(targetDate, GMT, longitude: self.Longitude!, latitude: self.Latitude!)
         sun.spa_calculate()
         var currentState = self.getState(sun.declination)
-        sun.date += self.calculateTimeGap(sun.declination)   // increase timestamp for scanning
+        sun.date += self.calculateTimeGapInSecond(sun.declination)   // increase timestamp for scanning
                 
         repeat {
             sun.spa_calculate()
@@ -241,7 +241,7 @@ class SunPositionManager {
                 result.append(newTimestamp)
                 currentState = newState
             }
-            sun.date += calculateTimeGap(sunAngle)   // increase timestamp for scanning
+            sun.date += calculateTimeGapInSecond(sunAngle)   // increase timestamp for scanning
             print("dateScan: \(year)-\(month)-\(day), \(sunAngle)")
         } while( (sun.date < scanLimitDate) && ( result.count < 12 ) )
         
@@ -285,7 +285,7 @@ class SunPositionManager {
     }
     */
     
-    func calculateTimeGap(_ sunAngle: Double) -> Double {
+    func calculateTimeGapInSecond(_ sunAngle: Double) -> Double {
         let absAngle = abs(sunAngle)
         let temp = (absAngle - 10) * 240   // most fastest case 4min/deg, it covers all the cases
                                            // OLD comment: divide 15, multiply 3600
